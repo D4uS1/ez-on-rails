@@ -1,0 +1,26 @@
+version: '3.4'
+services:
+  db:
+    image: postgres:13
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/EzOnRailsTest
+    ports:
+      - "3000:3000"
+    environment:
+      - SELENIUM_URL=http://chrome:4444/wd/hub
+    depends_on:
+      - db
+     # - webpack
+  chrome:
+    image: selenium/standalone-chrome:latest
+    volumes:
+      - /dev/shm:/dev/shm

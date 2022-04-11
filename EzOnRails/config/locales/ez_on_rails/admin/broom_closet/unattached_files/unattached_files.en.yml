@@ -1,0 +1,10 @@
+en:
+  ez_on_rails:
+    unattached_files: "Unattached files"
+    unattached_files_subtitle: "Uploaded files which are not assigned to any record."
+    unattached_files_success: "Unattached files removed successfully."
+    unattached_files_failed: "%{count} unattached files could not be removed."
+    unattached_files_description: "Uploaded files that are not assigned to any resource"
+    content_type: "Content type"
+    filename: "Filename"
+    byte_size: "Byte size"

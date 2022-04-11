@@ -1,0 +1,8 @@
+= render partial: 'ez_on_rails/shared/model_form', locals: {\
+           obj: resource,
+           post_url: users_omniauth_sign_up_path,
+           render_info: render_info_omniauth_sign_up,
+           save_label: t(:register),
+           hide_save_icon: true,
+           behind_submit: proc { hidden_field_tag('redirect_route', redirect_route) }\
+        }

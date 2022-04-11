@@ -1,0 +1,8 @@
+# frozen_string_literal: true
+
+{
+  id: parent_form_test.id,
+  test: parent_form_test.test,
+  created_at: parent_form_test.created_at,
+  updated_at: parent_form_test.updated_at
+}

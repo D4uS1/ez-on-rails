@@ -1,0 +1,10 @@
+= render partial: 'ez_on_rails/shared/model_form', locals: {\
+           obj: resource,
+           post_url: registration_path(resource_name),
+           render_info: render_info_users_registrations,
+           save_label: t(:'ez_on_rails.save'),
+           print_back: true,
+           behind_submit: proc do |form| \
+             form.submit t(:remove_account), class: 'btn btn-danger mt-2 mb-2 mr-2', data: confirm_data\
+           end\
+         }

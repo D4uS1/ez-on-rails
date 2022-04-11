@@ -1,0 +1,10 @@
+en:
+  activerecord:
+    models:
+      assoc_test:
+        one:  "Assoc test"
+        other: "Assoc tests"
+    attributes:
+      assoc_test:
+        bearer_token_access_test: "Bearer token access test"
+        parent_form_test: "Parent form test"

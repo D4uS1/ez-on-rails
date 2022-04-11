@@ -1,0 +1,123 @@
+require:
+  - rubocop-rspec
+  - rubocop-rails
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'lib/generators/ez_on_rails/**/*/*_generator.rb' # not interested in checking the generators
+    - bin/*
+    - node_modules/**/*
+    - db/migrate/**/*
+    - db/schema.rb
+    - test/**/*
+    - tmp/**/*
+    - vendor/**/*
+    - config/initializers/**/* # most of the files here are auto generated, we do not want to check this
+Metrics/MethodLength:
+  Max: 20
+  Exclude:
+    - '**/*/*_helper.rb' # render_info and dash_info can be very large, hence we need to exclude helpers
+    - app/models/ez_on_rails/ability.rb # Ability class can get very large, because cancan does check all abilities in one method
+    - lib/generators/ez_on_rails/ezapp/templates/db/migrate/*.rb # Migration files should not be checked
+Metrics/ModuleLength:
+  Exclude:
+    - '**/*/*_helper.rb' # render_info and dash_info can be very large, hence we need to exclude helpers
+Metrics/ParameterLists:
+  CountKeywordArgs: false # using keyword args is used to avoid unreadable maximum parameter counts
+Naming/InclusiveLanguage:
+  Enabled: false # i am sorry, but i am not a bad human because i want to use terms like "whitelist"...
+Style/DocumentationMethod:
+  Enabled: true
+Style/Documentation:
+  Exclude:
+    - app/helpers/application_helper.rb # Rails base application helper does not need to be commented
+    - app/controllers/application_controller.rb # Rails base application controller does not need to be commented
+    - app/models/application_record.rb # Rails base record does not need to be commented
+    - config/application.rb # rails application config needs not to be commented
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+  Exclude:
+    - config/application.rb # for some reason the module is needed here, if it does not exists some generators may crash
+    - lib/ez_on_rails/engine.rb # for some reason the module is needed here, because servers do not start with an unitialized constant error if the shorthand variant is used
+Style/SymbolLiteral:
+  Exclude:
+    - spec/integration/**/*_spec.rb # integration specs need the :'Accept' header to check for http status 406 errors
+Metrics/CyclomaticComplexity:
+  Max: 15
+Metrics/PerceivedComplexity:
+  Max: 15
+Metrics/AbcSize:
+  Enabled: false
+Metrics/ClassLength:
+  Max: 200
+Rails/EnvironmentVariableAccess:
+  Enabled: false # docker needs sometimes environment variables
+Rails/Exit:
+  Exclude:
+    - '**/*/spec/rails_helper.rb' # rspec:install inserts exit, dont want to remove it because it is auto generated
+Rails/InverseOf:
+  Exclude:
+    - 'app/models/user.rb' # the doorkeeper relations for resource_owner can not be inversed, because it does not have the inverse of relation on the doorkeeper classes
+Rails/HelperInstanceVariable:
+  Exclude:
+    - app/helpers/ez_on_rails/ez_app_helper.rb # uses @title and @subtitle to make it reachable to title and subtitle partial, this would be possible without instance variable but would result in massive code duplication
+    - app/helpers/ez_on_rails/ez_paginator_renderer.rb # this is a paginator for will_paginate. html_options has to be passed in an instance method here. To be able to configure html_options from outside, they can be passed via constructor. Hence the instance variable is used to pass the html options to the method described before.
+    - app/helpers/users_helper.rb # @minimum_password_length is used by devise
+Rails/LexicallyScopedActionFilter:
+  Exclude:
+    - app/controllers/ez_on_rails/admin/user_management/users_controller.rb # user confirmation skip on update is defined in parent class
+Rails/Output:
+  Exclude:
+    - '**/*/spec/rails_helper.rb' # inserts put, dont want to remove it because it is auto generated
+Metrics/BlockLength:
+  Exclude:
+    - config/routes.rb # namespaces are grouped in blocks, hence thosw can be very large
+    - '**/*/*_spec.rb' # RSpec.describe is recognized as block...
+    - '**/*/factories/**/*/' # Factory is recognized as block...
+    - '**/*.gemspec' # dependency block can be very large
+    - spec/swagger_helper.rb # swagger configuration is very large.
+Style/MixinUsage:
+  Exclude:
+    - '**/*/active_storage_attachments_factory.rb'
+Layout/EmptyLinesAroundAccessModifier:
+  Exclude:
+    - '**/*_helper.rb' # we use module function in dash helpers and menu structure helper because the generator needs to access the helper method, too. But the modules contain only one method. Hence surrounding module_function with spaces would collide with the rubocop detecting empty lines beyond module declarations.
+Layout/LineLength:
+  Max: 120 # i really use more than 640x480 display resultion...
+  Exclude:
+    - '**/*/initializers/devise.rb' # line length exceeds because of keys
+Style/StringConcatenation:
+  Exclude:
+    - app/helpers/ez_on_rails/ez_scaff/model_form_helper.rb # we need to concat with + here because the tag helpers do not sanatize the content with interpolation
+RSpec/ExampleLength:
+  Max: 30
+RSpec/MultipleExpectations:
+  Enabled: false # if you test some functionality that has multiple expections, you should not duplicate the whole test having all of its before hooks...
+RSpec/LetSetup:
+  Exclude:
+    - '**/*/restricted_area_with_controller_and_action_spec.rb' # let! is used here to predefine the restricted areas
+    - '**/*/ownership_info_access_spec.rb' # let! is used here to predefine the restricted resources
+    - '**/*/nil_owners_spec.rb' # let! is used here to predefine the restricted resources
+RSpec/EmptyExampleGroup:
+  Exclude:
+    - 'spec/integration/api/**/*_spec.rb' # integration tests of api use rswag, which uses a special dsl
+    - 'lib/generators/ez_on_rails/ezapi/templates/spec/integration/api/**/*_spec.rb' # integration tests of api use rswag, which uses a special dsl
+RSpec/DescribedClass:
+  Exclude:
+    - 'spec/models/user_spec.rb' # cop  overwrites EzOnRails::Group with described_class for some reason...
+RSpec/DescribeClass:
+  Exclude:
+    - 'spec/integration/api/**/*_spec.rb' # integration tests of api use rswag, which uses a special dsl
+    - 'lib/generators/ez_on_rails/ezapi/templates/spec/integration/api/**/*_spec.rb' # integration tests of api use rswag, which uses a special dsl
+RSpec/BeforeAfterAll:
+  Exclude:
+    - '**/*/unattached_files_spec.rb' # atfer :all is used here to delete uploaded files
+RSpec/InstanceVariable:
+  Exclude:
+    - '**/*/registrations_controller_spec.rb' # devise requires using @request instance variable here
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false # If mutliple memoized helper causes the code to be more readable, it is ok
+RSpec/VariableName:
+  Exclude:
+    - 'spec/integration/**/*_spec.rb' # api-version is passed in generated api integration specs. Using underscore for http headers is uncommon and needs extra configuration by some web servers.
+    - 'lib/generators/ez_on_rails/ezapi/templates/spec/integration/api/**/*_spec.rb' # integration tests of api use rswag, which uses a special dsl

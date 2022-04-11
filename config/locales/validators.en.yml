@@ -1,0 +1,5 @@
+de:
+errors:
+  messages:
+    blank: "Can't be empty."
+    invalid: "Invalid input."

@@ -1,0 +1,24 @@
+{
+  "entrypoints": {
+    "ez_on_rails": {
+      "js": [
+        "/packs-test/js/ez_on_rails-74f7ba1ca98057f6eedc.js"
+      ],
+      "js.map": [
+        "/packs-test/js/ez_on_rails-74f7ba1ca98057f6eedc.js.map"
+      ]
+    },
+    "server_rendering": {
+      "js": [
+        "/packs-test/js/server_rendering-52742f8338bb480cc37d.js"
+      ],
+      "js.map": [
+        "/packs-test/js/server_rendering-52742f8338bb480cc37d.js.map"
+      ]
+    }
+  },
+  "ez_on_rails.js": "/packs-test/js/ez_on_rails-74f7ba1ca98057f6eedc.js",
+  "ez_on_rails.js.map": "/packs-test/js/ez_on_rails-74f7ba1ca98057f6eedc.js.map",
+  "server_rendering.js": "/packs-test/js/server_rendering-52742f8338bb480cc37d.js",
+  "server_rendering.js.map": "/packs-test/js/server_rendering-52742f8338bb480cc37d.js.map"
+}

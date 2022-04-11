@@ -1,0 +1,62 @@
+name: ez-on-rails linting and testing
+on: [push]
+env:
+  DOCKER_BUILDKIT: 1
+jobs:
+  rubocop:
+    runs-on: ubuntu-latest
+    steps:
+      # before_script
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+      - run: bundle config set without 'development production'
+      - run: bundle install
+      # script
+      - name: run rubocop
+        working-directory: ./EzOnRails/
+        run: rubocop
+  rspec:
+    runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+      POSTGRES_DB: ez_on_rails_test_test
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      SELENIUM_URL: http://localhost:4444/wd/hub
+    services:
+      postgres:
+        env:
+          POSTGRES_DB: ez_on_rails_test_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        image: postgres:latest
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+      firefox:
+        image: selenium/standalone-firefox:latest
+        ports:
+          - 4444:4444
+          - 5900:5900
+        volumes:
+          - /dev/shm:/dev/shm
+    steps:
+      # before_script
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+      - run: bundle config set without 'development production'
+      - run: bundle install
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+      - run: npm install --global yarn
+      - run: cp config/database.github-actions.yml config/database.yml
+      - run: cp EzOnRails/github-actions.rspec EzOnRails/.rspec
+      - run: cp EzOnRails/spec/support/ez_on_rails/capybara_config.rb.github-actions EzOnRails/spec/support/ez_on_rails/capybara_config.rb
+      - run: bundle exec rails assets:precompile
+      - run: rails db:create db:schema:load
+      # script
+      - name: run rspec
+        working-directory: ./EzOnRails/
+        run: rspec

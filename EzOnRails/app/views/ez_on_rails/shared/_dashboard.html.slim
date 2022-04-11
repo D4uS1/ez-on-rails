@@ -1,0 +1,37 @@
+/Read dashboard data given from the controller
+- dash_info = get_dash_info dash_info
+
+/filter unaccessible tiles
+- filter_unaccessible_tiles! dash_info
+
+/Render each category
+- dash_info.each do |category|
+
+  /if this category is named, print the heading of it as summary tag
+  = enclose_with_details_if(-> { return category[:label] },
+                            category[:label],
+                            class_details: 'text-center mb-4',
+                            open: true) do
+
+    /Build dashboard tile by tile
+    .d-flex.justify-content-center.align-items-start.flex-wrap.gap-2.dashboard-tiles-group
+      - category[:tiles].each do |tile|
+        a [
+          class="card border-secondary dashboard-tile text-decoration-none #{'border-0' if get_borderless(local_assigns[:borderless])}"
+          style="background-color: #{tile[:background_color]}; color: #{tile[:text_color]};"
+          href=(tile_link tile)
+          ]
+          = tile_image tile if tile.key? :image
+          div class="#{tile.key?(:image) ? 'card-img-overlay' : 'card-body d-flex flex-column justify-content-start' }"
+            - if tile.key? :label
+              h5.card-title
+                = tile[:label]
+            - if tile.key? :text
+              p.card-text.text-start
+                = tile_text tile
+            - if tile.key? :icon
+              p.card-text.flex-grow-1.d-flex.flex-column.justify-content-end.align-items-end
+                = tile_icon tile
+          - if tile.key? :footer
+            .card-footer
+              = tile[:footer]

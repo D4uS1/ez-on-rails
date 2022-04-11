@@ -1,0 +1,6 @@
+Description:
+    Generates development files for working with rubymine and docker and gitlab in an  EzOnRails
+    application.
+
+Example:
+    rails generate ezdev [APP_NAME]

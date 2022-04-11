@@ -1,0 +1,30 @@
+# frozen_string_literal: true
+
+# Migration class for creating the database table for a <% class_name %> model.
+class Create<%= plural_file_name.camelize %> < ActiveRecord::Migration[<%= ActiveRecord::Migration.current_version %>]
+
+  # Applies the changes to the database.
+  def change
+    create_table :<%= plural_file_name %><%= primary_key_type %> do |t|
+      <%- attributes.each do |attribute| -%>
+      <%- if attribute.password_digest? -%>
+      t.string :password_digest<%= attribute.inject_options %>
+      <%- elsif attribute.token? -%>
+      t.string :<%= attribute.name %><%= attribute.inject_options %>
+      <%- else -%>
+      t.<%= attribute.type %> :<%= attribute.name %><%= attribute.inject_options %>
+      <%- end -%>
+      <%- end -%>
+      t.belongs_to :owner, index: true, null: true, foreign_key: { to_table: :users }
+
+      t.timestamps
+    end
+
+    <%- attributes.select(&:token?).each do |attribute| -%>
+    add_index :<%= table_name %>, :<%= attribute.index_name %><%= attribute.inject_index_options %>, unique: true
+    <%- end -%>
+    <%- attributes_with_index.each do |attribute| -%>
+    add_index :<%= table_name %>, :<%= attribute.index_name %><%= attribute.inject_index_options %>
+    <%- end -%>
+  end
+end

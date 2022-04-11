@@ -1,0 +1,9 @@
+en:
+  ez_on_rails:
+    user_management: "User management"
+    user_management_description: "Manage users and its access rights"
+    users_and_groups: "Users and groups"
+    permissions: "Permissions"
+    ownership_accesses: "Accesses for user owned resources"
+    user_group_assignments_description: "Assigning groups to users."
+    group_accesses_description: "Assigning groups to access rights"

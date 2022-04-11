@@ -1,0 +1,39 @@
+# frozen_string_literal: true
+<% module_namespacing do -%>
+
+# Model class defining a <%= class_name %>.
+class <%= class_name %> < EzOnRails::ApplicationRecord
+  self.table_name = :<%= plural_file_name %>
+
+  scoped_search on: self::search_keys
+
+  <%- attributes.select(&:reference?).each do |attribute| -%>
+  belongs_to :<%= attribute.name %><%= ', polymorphic: true' if attribute.polymorphic? %><%= ', required: true' if attribute.required? %>
+  <%- end -%>
+  belongs_to :owner, class_name: 'User', optional: true
+  <%- if @sharable -%>
+
+  has_many :read_accesses, class_name: 'EzOnRails::ResourceReadAccess', dependent: :destroy, as: :resource
+  has_many :read_accessible_groups,
+           through: :read_accesses,
+           source: :group,
+           class_name: 'EzOnRails::Group'
+  has_many :write_accesses, class_name: 'EzOnRails::ResourceWriteAccess', dependent: :destroy, as: :resource
+  has_many :write_accessible_groups,
+           through: :write_accesses,
+           source: :group,
+           class_name: 'EzOnRails::Group'
+  has_many :destroy_accesses, class_name: 'EzOnRails::ResourceDestroyAccess', dependent: :destroy,  as: :resource
+  has_many :destroy_accessible_groups,
+           through: :destroy_accesses,
+           source: :group,
+           class_name: 'EzOnRails::Group'
+  <%- end -%>
+  <%- attributes.select(&:token?).each do |attribute| -%>
+  has_secure_token<% if attribute.name != "token" %> :<%= attribute.name %><% end %>
+  <%- end -%>
+  <%- if attributes.any?(&:password_digest?) -%>
+  has_secure_password
+  <%- end -%>
+end
+<% end -%>

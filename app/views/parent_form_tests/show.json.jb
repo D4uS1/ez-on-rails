@@ -1,0 +1,4 @@
+# frozen_string_literal: true
+
+render partial: 'parent_form_tests/parent_form_test',
+       locals: { parent_form_test: @resource_obj }

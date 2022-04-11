@@ -1,0 +1,2 @@
+module Namespaced::MixedActionAccessTestHelper
+end

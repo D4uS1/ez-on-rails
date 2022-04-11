@@ -1,0 +1,20 @@
+= render partial: 'ez_on_rails/shared/modals/modal', locals: {\
+   id: id,
+   content: content,
+   title: title || 'Question',
+   size: :small,
+   buttons: [\
+     {\
+       label: label_yes || t(:'ez_on_rails.button_yes'),
+       type: 'primary',
+       id: "#{id}_button_yes",
+       target: target_yes\
+     },
+     {\
+       label: label_no || t(:'ez_on_rails.button_no'),
+       type: 'secondary',
+       id: "#{id}_button_no",
+       target: nil\
+     }\
+   ]\
+ }

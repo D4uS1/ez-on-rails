@@ -1,0 +1,7 @@
+= render partial: 'ez_on_rails/shared/model_form', locals: {\
+           obj: resource,
+           render_info: render_info_users_confirmations,
+           post_url: confirmation_path(resource_name),
+           save_label: t(:resend_confirmation_email),
+           hide_save_icon: true\
+         }

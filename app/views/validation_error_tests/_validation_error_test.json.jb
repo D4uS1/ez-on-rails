@@ -1,0 +1,9 @@
+# frozen_string_literal: true
+
+{
+  id: validation_error_test.id,
+  name: validation_error_test.name,
+  number: validation_error_test.number,
+  created_at: validation_error_test.created_at,
+  updated_at: validation_error_test.updated_at
+}

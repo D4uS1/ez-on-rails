@@ -1,0 +1,15 @@
+de:
+  activerecord:
+    models:
+      ez_on_rails/user_group_assignment:
+        one: "Benutzer-Gruppen Zuweisung"
+        other: "Benutzer-Gruppen Zuweisungen"
+    attributes:
+      ez_on_rails/user_group_assignment:
+        user: "Benutzer"
+        group: "Gruppe"
+  ez_on_rails:
+    admin_assignment_not_destroyable: "Dem Administrator kann die Admin-Gruppe nicht entzogen werden."
+    member_assignment_not_destroyable: "Der Status des Mitglieds kann einem Nutzer nicht entzogen werden."
+    admin_assignment_not_updatable: "Die Zuweisung des Administrators zur Admingruppe kann nicht bearbeitet werden."
+    member_assignment_not_updatable: "Die Zuweisung eines Benutzers zur Mitglieds-Gruppe kann nicht bearbeitet werden."

@@ -1,0 +1,5 @@
+# frozen_string_literal: true
+
+render partial: 'nested_form_tests/nested_form_test',
+       collection: nested_form_tests,
+       as: :nested_form_test

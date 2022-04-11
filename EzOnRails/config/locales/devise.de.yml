@@ -1,0 +1,79 @@
+de:
+  devise:
+    confirmations:
+      confirmed: "Ihre E-Mail Adresse wurde erfolgreich bestätigt."
+      send_instructions: "Sie erhalten in Kürze eine E-Mail mit Instruktionen zur Bestätigung."
+      send_paranoid_instructions: "Wenn diese E-Mail Adresse bei uns registriert ist, erhalten Sie in Kürze eine E-Mail mit Instruktionen zur Bestätigung."
+    failure:
+      already_authenticated: "Sie sind bereits eingeloggt."
+      inactive: "Ihr Konto wurde noch nicht aktiviert."
+      invalid: "Ungültige %{authentication_keys} oder Passwort."
+      locked: "Ihr Konto ist gesperrt."
+      last_attempt: "Sie haben einen weiteren Versuch bevor Ihr Konto gesperrt wird."
+      not_found_in_database: "Ungültige %{authentication_keys} oder Passwort."
+      timeout: "Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an um fortzufahren.."
+      unauthenticated: "Sie müssen sich einloggen oder registrieren um fortzufahren."
+      unconfirmed: "Sie müssen Ihre E-Mail Adresse bestätigen um fortzufahren."
+    mailer:
+      confirmation_instructions:
+        subject: "Bestätigungs-Instruktionen"
+        greeting: "Willkommen %{username}"
+        message_part_1: "Durch klick auf den folgenden Link, kannst du dei Konto bestätigen:"
+        message_part_2: "Bestätige mein Konto"
+      reset_password_instructions:
+        subject: "Passwort-Reset Instruktionen"
+        greeting: "Hallo %{username}"
+        message_part_1: "Jemand hat das Zurücksetzen Ihres Passworts beantragt. Sie können dies durch klicken auf den folgenden Link tun:"
+        message_part_2: "Mein Passwort Ändern."
+        message_part_3: "Wenn Sie die Änderung nicht beantragt haben, ignorieren Sie diese E-Mail."
+      unlock_instructions:
+        subject: "Entsperrungs-Instruktionen"
+        greeting: "Hallo %{username}"
+        message_part_1: "Ihr Konto wurde aufgrund zu vieler fehlgeschlagener Anmeldeversuche gesperrt."
+        message_part_2: "Klicken sie auf den folgenden Link um Ihr Konto wieder zu entsperren:"
+        message_part_3: "Konto entsperren"
+      email_changed:
+        subject: "E-Mail wurde geändert"
+        greeting: "Hallo %{username}"
+        message_part_1: "Wir kontaktieren Sie um Ihnen mitzuteilen, dass ihre E-Mail Adresse auf %{new_email} geändert wurde."
+      password_change:
+        subject: "Passwort wurde geändert"
+        greeting: "Hallo %{username}"
+        message_part_1: "Wir kontaktieren Sie um Ihnen mitzuteilen, dass ihr Passwort geändert wurde."
+    omniauth_callbacks:
+      failure: "Konnte nicht für %{kind} authentifizieren weil \"%{reason}\"."
+      success: "Konto erfolgreich für %{kind} authentifiziert."
+    passwords:
+      no_token: "Sie können diese Seite nur von einer Passwort-Reset E-Mail heraus betreten. Falls Sie diese Seite von einer Passwort-Reset E-Mail heraus aufgerufen haben, gehen Sie sicher, dass die vollständige URL aufgerufen wurde."
+      send_instructions: "Sie erhalten in Kürze eine E-Mail mit Instruktionen zum Zurücksetzen Ihres Passworts."
+      send_paranoid_instructions: "Wenn Sie bei uns registriert sind, erhaöten Sie in Kürze eine E-Mail mit Instruktionen zum Zurücksetzen Ihres Passworts."
+      updated: "Ihr Passwort wurde erfolgreich geändert. Sie wurden erfolgreich angemeldet."
+      updated_not_active: "Ihr Passwort wurde erfolgreich geändert."
+    registrations:
+      destroyed: "Auf Wiedersehen! Ihr Konto wurde erfolgreich entfernt. Wir hoffen Sie bald wieder bei uns begrüßen zu dürfen."
+      signed_up: "Herzlich Willkommen! Sie wurden erfolgreich angemeldet."
+      signed_up_but_inactive: "Sie haben sich erfolgreich registriert. Sie müssen ihr Konto aber zunächst Aktivieren, bevor Sie sich einloggen können."
+      signed_up_but_locked: "Sie haben sich erfolgreich registriert. Sie können sich aber noch nicht anmelden, solange ihr Konto gesperrt ist."
+      signed_up_but_unconfirmed: "Eine Nachricht mit einem Bestätigungs-Link wurde an ihre E-Mail Adresse gesendet. Bitte bestätigen Sie ihr Konto indem sie dem Link folgen."
+      update_needs_confirmation: "Ihr Konto wurde erfolgreich bearbeitet. Eine Nachricht mit einem Bestätigungs-Link wurde an ihre E-Mail Adresse gesendet. Bitte bestätigen Sie ihr Konto indem sie dem Link folgen."
+      updated: "Ihr Konto wurde erfolgreich bearbeitet."
+      updated_but_not_signed_in: "Ihr Konto wurde erfolgreich bearbeitet. Sie müssen sich nun erneut anmelden, weil Ihr Passwort geändert wurde."
+    sessions:
+      signed_in: "Sie wurden erfolgreich angemeldet."
+      signed_out: "Sie wurden erfolgreich abgemeldet."
+      already_signed_out: "Sie wurden erfolgreich abgemeldet."
+    unlocks:
+      send_instructions: "Sie erhalten in Kürze eine E-Mail mit Instruktionen um Ihren Account zu entsperren."
+      send_paranoid_instructions: "Wenn Sie bei uns registriert sind, erhalten Sie in Kürze eine E-Mail mit Instruktionen um Ihren Account zu entsperren."
+      unlocked: "Ihr Konto wurde erfolgreich entsperrt. Bitte melden Sie sich an um fortzufahren."
+  errors:
+    messages:
+      already_confirmed: "Ihr Konto wurde bereits aktiviert. Bitte melden Sie sich an um fortzufahren."
+      confirmation_period_expired: "Bestätigungszeitraum von %{period} abgelaufen. Bitte fordern sie eine neue Bestätigung an"
+      expired: "abgelaufen, bitte fordern Sie eine neue an."
+      not_found: "nicht gefunden"
+      not_locked: "war nicht gesperrt"
+      not_saved:
+        one: "Der folgende Fehler verhinderte das Speichern des  %{resource_obj}:"
+        other: "%{count} Fehler verhinderte das Speichern des %{resource_obj}:"
+      omniauth_error: "Something went wrong."

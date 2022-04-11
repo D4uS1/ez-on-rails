@@ -1,0 +1,15 @@
+en:
+  activerecord:
+    models:
+      properties_test:
+        one:  "Properties test"
+        other: "Properties tests"
+    attributes:
+      properties_test:
+        string_value: "String value"
+        integer_value: "Integer value"
+        float_value: "Float value"
+        date_value: "Date value"
+        datetime_value: "Datetime value"
+        boolean_value: "Boolean value"
+        assoc_test: "Assoc test"

@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    meta http-equiv='Content-Type' content='text/html; charset=utf-8'
+  body
+    p = "You send a message using the contact form of  #{Rails.application.class.module_parent}."
+    p We will answer as soon as possible ;).
+    p From:
+      = @name
+    p Email:
+      = @email
+    p Subject:
+      = @subject
+    p Message:
+      = @message

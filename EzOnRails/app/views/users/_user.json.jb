@@ -1,0 +1,8 @@
+# frozen_string_literal: true
+
+{
+  email: user.email,
+  unconfirmed_email: user.unconfirmed_email,
+  username: user.username,
+  avatar: attachment_blob_json(user.avatar)
+}

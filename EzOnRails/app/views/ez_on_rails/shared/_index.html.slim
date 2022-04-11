@@ -1,0 +1,37 @@
+.container-fluid.p-0
+  .row
+    .col-10
+      / Search form
+      - if local_assigns[:print_search_form]
+        = render partial: 'ez_on_rails/shared/search_form',
+                 locals: {\
+                   queue_obj: queue_obj,
+                   obj_class: obj_class,
+                   render_info: render_info.clone,
+                   search_url: local_assigns[:search_url],
+                   print_details_tag: (action_name == 'search' ? :open : true)\
+                  }
+
+  .row
+    .col-2.d-flex.flex-row.align-items-end
+      / Number of objects
+      span.mr-1 = "#{t(:'ez_on_rails.objects_count')}: #{@objects_count}"
+
+    .col
+      / Paginator
+      = will_paginate resources, params: { q: @search_params }, renderer: EzOnRails::EzPaginatorRenderer.new({ class: 'justify-content-end' })
+
+    .col-2.d-flex.justify-content-end.align-items-start
+      / New button
+      - if render_new_link? local_assigns
+        = render_new_button local_assigns
+
+  / Table
+  .row
+    .col
+      = render partial: 'ez_on_rails/shared/enhanced_table', locals: {\
+               table_header: get_table_headers(obj_class, render_info, local_assigns),
+               # search params are used in destroy links of table_rows, to keep search results after destroying an object\
+               table_rows: get_table_rows(resources, render_info, local_assigns.merge({ search_params: @search_params })),
+               selectable: local_assigns[:selectable]\
+        }

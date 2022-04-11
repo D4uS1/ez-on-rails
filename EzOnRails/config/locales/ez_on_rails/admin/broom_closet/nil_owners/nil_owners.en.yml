@@ -1,0 +1,7 @@
+en:
+  ez_on_rails:
+    nil_owners: "No owners"
+    nil_owners_subtitle: "Not existent references to owners."
+    nil_owners_success: "Successfully removed non existent references to owners."
+    nil_owners_failed: "%{count} non existent references could not be removed."
+    nil_owners_description: "Ownership resources without an assigned owner"

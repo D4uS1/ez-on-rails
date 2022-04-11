@@ -1,0 +1,8 @@
+de:
+  ez_on_rails:
+    show: "Anzeigen"
+    add: "Hinzufügen"
+    edit: "Bearbeiten"
+    destroy: "Löschen"
+    destroy_all: "Alle löschen"
+    objects_count: "Anzahl Einträge"

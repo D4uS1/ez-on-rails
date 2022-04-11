@@ -1,0 +1,5 @@
+# frozen_string_literal: true
+
+render partial: 'bearer_token_access_tests/bearer_token_access_test',
+       collection: bearer_token_access_tests,
+       as: :bearer_token_access_test

@@ -1,0 +1,9 @@
+# frozen_string_literal: true
+
+{
+  id: assoc_test.id,
+  bearer_token_access_test_id: assoc_test.bearer_token_access_test_id,
+  parent_form_test_id: assoc_test.parent_form_test_id,
+  created_at: assoc_test.created_at,
+  updated_at: assoc_test.updated_at
+}

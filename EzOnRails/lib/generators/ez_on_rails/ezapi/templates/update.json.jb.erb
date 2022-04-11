@@ -1,0 +1,4 @@
+# frozen_string_literal: true
+
+render partial: '<%= @resource_underscored.pluralize %>/<%= @resource_underscored %>',
+       locals: { <%= @resource_underscored %>: @resource_obj }

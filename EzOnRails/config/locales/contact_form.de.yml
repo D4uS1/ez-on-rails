@@ -1,0 +1,25 @@
+de:
+  activemodel:
+    models:
+      contact_form:
+        one: "Kontakt"
+        other: "Kontakt"
+    attributes:
+      contact_form:
+        name: "Name"
+        subject: "Betreff"
+        message: "Nachricht"
+        email: "E-Mail"
+        privacy_policy_accepted: "Datenschutzerklärung akzeptiert"
+    errors:
+      models:
+        contact_form:
+          attributes:
+            privacy_policy_accepted:
+              accepted: "Die Datenschutzerklärung muss akzeptiert werden."
+  contact_form: "Kontakt"
+  contact_form_subtitle: "Kontaktieren Sie uns"
+  message_sent_success: "Ihr Nachricht wurde erfolgreich übermittelt."
+  contact_form_submit_message: "Wir haben Ihre Nachricht erhalten. Sie erhalten eine Bestätigung per E-Mail. Wir werden sobald wie möglich antworten."
+  message_sent_fail: "Ihre Nachricht konnte nicht übermittelt werden. Bitte versuchen Sie es später erneut."
+  message_received_subject: "Sie haben eine Nachricht über das Kontaktformular erhalten"

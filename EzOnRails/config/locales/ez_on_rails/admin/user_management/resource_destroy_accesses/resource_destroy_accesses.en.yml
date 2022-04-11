@@ -1,0 +1,13 @@
+en:
+  activerecord:
+    models:
+      ez_on_rails/resource_destroy_access:
+        one: "Destroy access"
+        other: "Destroy accesses"
+    attributes:
+      ez_on_rails/resource_destroy_access:
+        group: "Group"
+        resource_id: "Resource id"
+        resource_type: "Resource type"
+  ez_on_rails:
+    resource_destroy_accesses_description: "Granting destruction of resources with owners to groups"

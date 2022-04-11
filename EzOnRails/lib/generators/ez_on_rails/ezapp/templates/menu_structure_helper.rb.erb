@@ -1,0 +1,47 @@
+# frozen_string_literal: true
+
+# Model class defining the EzNav Navigation menu.
+module EzOnRails::MenuStructureHelper
+  # Needed by the EzNav generator to identify existing entries.
+  module_function
+
+  # Returns the menu structure of the application.
+  # Information about the possible entries and structure can be read
+  # in thr README file of ez_on_rails.
+  def menu_structure
+    {
+      main_menus: [
+        {
+          controller: 'ez_on_rails/welcome',
+          action: 'index',
+          label: t(:welcome_title),
+          invisible: true
+        },
+        {
+          label: t(:'ez_on_rails.administration'),
+          namespace: 'ez_on_rails/admin',
+          sub_menus: [
+            {
+              controller: 'ez_on_rails/admin/dashboard',
+              action: 'index',
+              label: t(:'ez_on_rails.dashboard'),
+              invisible: false
+            },
+            {
+              controller: 'ez_on_rails/admin/user_management/dashboard',
+              action: 'index',
+              label: t(:'ez_on_rails.user_management'),
+              invisible: false
+            },
+            {
+              controller: 'ez_on_rails/admin/broom_closet/dashboard',
+              action: 'index',
+              label: t(:'ez_on_rails.broom_closet'),
+              invisible: false
+            }
+          ]
+        }
+      ]
+    }
+  end
+end

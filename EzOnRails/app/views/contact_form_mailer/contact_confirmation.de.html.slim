@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    meta http-equiv='Content-Type' content='text/html; charset=utf-8'
+  body
+    p = "Sie haben die folgende Nachricht über das Kontaktformular von #{Rails.application.class.module_parent} gesendet."
+    p Wir bemühen uns Ihnen mit bestem Wissen und Gewissen so schnell wie möglich zu antworten ;).
+    p Von:
+      = @name
+    p E-Mail:
+      = @email
+    p Betreff:
+      = @subject
+    p Nachricht:
+      = @message

@@ -1,0 +1,14 @@
+# frozen_string_literal: true
+
+# Model class defining the EzNav Navigation menu.
+module EzOnRails::MenuStructureHelper
+  # Needed by the EzNav generator to identify existing entries.
+  module_function
+
+  # Returns the menu structure of the application.
+  # Information about the possible entries and structure can be read
+  # in thr README file of ez_on_rails.
+  def menu_structure
+<%= pretty_print @new_menu_structure %>
+  end
+end

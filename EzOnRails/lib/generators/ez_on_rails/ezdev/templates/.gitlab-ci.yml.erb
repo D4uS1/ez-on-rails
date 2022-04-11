@@ -1,0 +1,75 @@
+# Defines the stages for the CI. Every stage will run after all.
+# If one stage fails, the other stages wont execute.
+# For example, if testing does fail, linting and deployng will not be executed.
+stages:
+  - lint
+  - test
+
+# Environment Variables
+variables:
+  DOCKER_BUILDKIT: 1
+
+# The following defines the Scripts that should be run.
+# Every script should be assigned to a stage and a couple of branches they are
+# assigned to.
+
+# Testing via rubocop
+rubocop:
+  stage: lint
+  image: 'ruby:3.0.2'
+  # Executed before every script
+  before_script:
+    - apt-get update -qq
+    - gem install bundler --no-document
+    - bundle config set path vendor
+    - bundle config set without development production
+    - bundle install --jobs $(nproc)
+  script:
+    - bundle exec rubocop
+  # Defines the Pathes to cache for furthermore CI Runs, to prevent the CI from
+  # Building all again and again and taking a long time to proceed
+  cache:
+    key: ${CI_PROJECT_PATH_SLUG}
+    paths:
+      - vendor/ruby
+
+# Testing via rspec
+rspec:
+  stage: test
+  image: 'ruby:3.0.2'
+  # Defines additional Services used in this ci
+  services:
+    - postgres:12
+    - selenium/standalone-firefox:latest
+  # Executed before every script
+  before_script:
+    - apt-get update -qq
+    - gem install bundler --no-document
+    - bundle config set path vendor
+    - bundle config set without development production
+    - bundle install --jobs $(nproc)
+    - apt-get install nodejs -qq
+    - curl -o- -L https://yarnpkg.com/install.sh | bash
+    - export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+    - cp config/database.gitlab-ci.yml config/database.yml
+    - cp spec/support/capybara_config.rb.gitlab-ci spec/support/capybara_config.rb
+    - cp .rspec.gitlab-ci .rspec
+    - bundle exec rails assets:precompile
+  script:
+    - bundle exec rspec
+  # Environment Variables
+  variables:
+    RAILS_ENV: test
+    POSTGRES_DB: <%= plural_name.singularize %>_test
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: postgres
+    SELENIUM_URL: http://selenium__standalone-firefox:4444/wd/hub
+  # Defines the Pathes to cache for furthermore CI Runs, to prevent the CI from
+  # Building all again and again and taking a long time to proceed
+  cache:
+    key: ${CI_PROJECT_PATH_SLUG}
+    paths:
+      - vendor/ruby
+      - node_modules
+      - tmp/cache/assets
+      - public/assets

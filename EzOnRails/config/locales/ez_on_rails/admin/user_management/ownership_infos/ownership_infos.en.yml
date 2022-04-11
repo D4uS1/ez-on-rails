@@ -1,0 +1,23 @@
+en:
+  activerecord:
+    models:
+      ez_on_rails/ownership_info:
+        one: "ownership info"
+        other: "ownership infos"
+    attributes:
+      ez_on_rails/ownership_info:
+        resource: "Resource"
+        sharable: "Shareble"
+        on_owner_destroy: "Action on resource on user destroy"
+    enums:
+      ez_on_rails/ownership_info:
+        on_owner_destroy:
+          resource_nullify: "Nullify"
+          resource_destroy: "Destroy"
+          resource_delete: "Delete"
+  ez_on_rails:
+    ownership_infos_description: "Defining resources having owners"
+    ownership_info:
+      read_accessible: "Read accessible"
+      write_accessible: "Write accessible"
+      destroy_accessible: "Destroy accessible"

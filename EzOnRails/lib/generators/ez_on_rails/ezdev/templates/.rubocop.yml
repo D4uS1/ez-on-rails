@@ -1,0 +1,104 @@
+require:
+  - rubocop-rspec
+  - rubocop-rails
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'lib/generators/**/*/*_generator.rb' # not interested in checking the generators
+    - bin/*
+    - node_modules/**/*
+    - db/migrate/**/*
+    - db/schema.rb
+    - test/**/*
+    - tmp/**/*
+    - vendor/**/*
+    - config/initializers/**/* # most of the files here are auto generated, we do not want to check this
+Layout/LineLength:
+  Max: 120
+  Exclude:
+    - 'config/initializers/devise.rb' # line length exceeds because of keys
+    - db/seeds.rb # some description parameters in example data seeds can be very long
+Lint/ReturnInVoidContext:
+  Enabled: false # sometimes you have to return from void context if you want to use guard clauses
+Metrics/AbcSize:
+  Enabled: false
+Metrics/BlockLength:
+  Exclude:
+    - config/routes.rb # namespaces are grouped in blocks, hence thosw can be very large
+    - config/environments/development.rb # configuration block of environment are implicit large
+    - config/environments/staging.rb  # configuration block of environment are implicit large
+    - config/environments/production.rb  # configuration block of environment are implicit large
+    - '**/*_spec.rb' # RSpec.describe is recognized as block...
+    - db/seeds.rb # Blocks with find_or_create_by in seeds can be very large
+    - spec/swagger_helper.rb # schema definitions are large
+    - Guardfile
+Metrics/ClassLength:
+  Max: 200
+Metrics/CyclomaticComplexity:
+  Max: 15
+Metrics/MethodLength:
+  Max: 20
+  Exclude:
+    - 'spec/integration/**/*_spec.rb' # Any bug in rswag does not allow to use let for some contexts. Hence EzOnRails uses methods to define the parameters. This can exceed the method length property.
+    - app/helpers/ez_on_rails/menu_structure_helper.rb # EzOnRails menu structure is defined in a method that easily exceeds the method length
+Metrics/ModuleLength:
+  Max: 200
+  Exclude:
+    - app/helpers/ez_on_rails/menu_structure_helper.rb # The menu structure of EzOnRails is saved in this module and easily exceeds that length
+Metrics/PerceivedComplexity:
+  Max: 15
+Naming/VariableNumber:
+  EnforcedStyle: snake_case
+Rails/Exit:
+  Exclude:
+    - 'spec/rails_helper.rb' # rspec:install inserts exit, dont want to remove it because it is auto generated
+Rails/InverseOf:
+  Exclude:
+    - 'app/models/user.rb' # the doorkeeper relations for resource_owner can not be inversed, because it does not have the inverse of relation on the doorkeeper classes
+Rails/Output:
+  Exclude:
+    - 'spec/rails_helper.rb' # inserts put, dont want to remove it because it is auto generated
+Rails/LexicallyScopedActionFilter:
+  Enabled: false # EzOnRails uses default actions for resources, this cop seems not to check inherited actions
+Rails/UnknownEnv:
+  Environments:
+    - production
+    - development
+    - test
+    - staging
+RSpec/DescribeClass:
+  Exclude:
+    - 'spec/integration/**/*_spec.rb' # EzOnRails names integration specs like "Feature API"
+RSpec/EmptyExampleGroup:
+  Exclude:
+    - 'spec/integration/**/*_spec.rb' # This cop seems not to be compatible with the rswag syntax
+RSpec/ExampleLength:
+  Max: 20
+RSpec/MultipleExpectations:
+  Enabled: false # if you test some functionality that has multiple expections, you should not duplicate the whole test having all of its before hooks...
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false # this is dependning on the complexity of the features to be tested
+RSpec/NestedGroups:
+  Max: 6 # example too shallow require big chunks of code duplication
+RSpec/VariableName:
+  IgnoredPatterns:
+    - api-version # ez_on_rails api version http header
+    - Accept # Accept http header
+    - access-token # ez_on_rails access-token http header
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+  Exclude:
+    - config/application.rb # for some reason the module is needed here, if it does not exists some generators may crash
+Style/Documentation:
+  Exclude:
+    - app/helpers/application_helper.rb # Rails base application helper does not need to be commented
+    - app/controllers/application_controller.rb # Rails base application controller does not need to be commented
+    - app/mailers/application_mailer.rb # Rails base application mailee does not need to be commented
+    - app/models/application_record.rb # Rails base record does not need to be commented
+    - config/application.rb # rails application config needs not to be commented
+Style/DocumentationMethod:
+  Enabled: true
+Style/FormatStringToken:
+  EnforcedStyle: template
+Style/MultilineBlockChain:
+  Enabled: false # Better chaining blocks than declaring variables having potential side effects

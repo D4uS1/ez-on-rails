@@ -1,0 +1,10 @@
+de:
+  activerecord:
+    models:
+      validation_error_test:
+        one:  "Validation error test"
+        other: "Validation error tests"
+    attributes:
+      validation_error_test:
+        name: "Name"
+        number: "Number"

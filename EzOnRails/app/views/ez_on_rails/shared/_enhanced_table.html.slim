@@ -1,0 +1,48 @@
+- selectable = local_assigns[:selectable] # to prevent if defined? ...
+- table_id = local_assigns[:table_id] || 'enhanced_table'
+
+/ Add Selection checkboxes, if set
+- if selectable
+  - table_header.unshift content: check_box('enhanced_table_select_all',
+                                            table_id,
+                                            'data-table-id': table_id,
+                                            class: 'enhanced-table-select-all'),
+                         col_class: 'table-mini-col'
+  - table_rows.each do |row|
+    - row[:cols].unshift content: check_box('enhanced_table_select_row', table_id), col_class: 'table-mini-col'
+
+/Table
+.row.mt-2
+  .col
+    table.table.table-hover.table-bordered id="#{table_id}"
+      thead.table-light
+        tr
+          - table_header.each do |header|
+            th scope="col" class="#{header[:col_class]}"
+              = header[:content]
+      tbody
+        - table_rows.each do |row|
+          tr id=(row[:id] || '') *(row[:data]&.map { |key, value| { "data-#{key}": value } }&.inject(:update))
+            - row[:cols].each do |col|
+              td class="#{col[:col_class]}"
+                = col[:content]
+
+/ Buttons for selection
+- if selectable
+  .row
+    .col
+      - selectable[:actions]&.each do |action|
+        / get confirm data if available, depending on given type
+        - if action[:confirm]
+          - confirm = confirm_data.merge(confirm: action[:confirm]) if action[:confirm].is_a?(String)
+          - confirm = confirm_data.merge(action[:confirm]) if action[:confirm].is_a?(Hash)
+          - confirm ||= confirm_data
+
+        / render the button
+        = tag.button action[:label],
+                class: "enhanced-table-action mr-1 btn btn-#{action[:type] || 'secondary'}",
+                'data-table-id': table_id,
+                'data-target': search_url_for(action[:target], @search_params),
+                'data-method': action[:method] || 'POST',
+                'data-onclick': action[:onclick],
+                'data-confirm-message': ActiveSupport::JSON.encode(confirm)

@@ -1,0 +1,5 @@
+de:
+  errors:
+    messages:
+      blank: "Fehlende Angabe."
+      invalid: "Ungültige Eingabe"

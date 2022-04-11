@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    title
+      = Rails.application.class.module_parent
+    = csrf_meta_tags
+    = csp_meta_tag
+    = javascript_pack_tag 'ez_on_rails', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag 'ez_on_rails', media: 'all', 'data-turbolinks-track': 'reload'
+  body
+    .container-fluid
+      - unless Rails.env.production?
+        = render 'ez_on_rails/shared/environment'
+      = render 'ez_on_rails/shared/flash_messages'
+      = render 'ez_on_rails/shared/header'
+      = render 'ez_on_rails/shared/title'
+      = render 'ez_on_rails/shared/main_content'
+      = render 'ez_on_rails/shared/footer'

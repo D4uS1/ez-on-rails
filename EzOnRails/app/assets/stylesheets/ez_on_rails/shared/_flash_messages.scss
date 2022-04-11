@@ -1,0 +1,6 @@
+/* Prevents the flash-message from moving the content down */
+#flash-message-container {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+}

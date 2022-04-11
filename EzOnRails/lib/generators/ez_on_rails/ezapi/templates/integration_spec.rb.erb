@@ -1,0 +1,743 @@
+# frozen_string_literal: true
+
+require 'swagger_helper'
+
+describe '<%= class_name %> API' do
+<%-  if @authenticable -%>
+  let(:andrew) { create(:andrew) }
+  let(:auth_header_info) { authorization_header_info(andrew) }
+<%- end -%>
+<%- if @resource  -%>
+  <%- association_attrs = association_attributes(@resource, nil) -%>
+  <%- if association_attrs.length > 0 -%>
+  let(:<%= @resource_underscored %>_attributes) do
+    attributes_for(
+      :<%= @resource_underscored %>,
+      <%-association_attrs.each_with_index do |attribute, index| -%>
+      <%= attribute %>_id: create(:<%= attribute %>).id<%= index < association_attrs.length - 1 ? ',' : '' %>
+      <%- end -%>
+    )
+  end
+  <%- else -%>
+  let(:<%= @resource_underscored %>_attributes) { attributes_for(:<%= @resource_underscored %>) }
+  <%- end -%>
+  let(:<%= @resource_path_underscored %>_obj) { create(:<%= @resource_underscored %>) }
+  let(:<%= @resource_path_underscored %>_param) { { <%= @resource_path_underscored %>: <%= @resource_path_underscored %>_attributes } }
+<%- end -%>
+
+<%- if @resource  -%>
+  # GET index action
+  path '/api/<%= file_path.pluralize %>' do
+    get 'Retrieves all <%= @resource_path_underscored.pluralize %>' do
+      tags '<%= @resource.pluralize %>'
+      <%- if @authenticable -%>
+      security [{ access_token: [], client: [], uid: [] }]
+      <%- end -%>
+      produces 'application/json'
+      parameter name: :'api-version', in: :header, type: :string, default: API_VERSION
+
+      response '200', '<%= @resource_path_underscored.pluralize %> found' do
+        schema type: :array,
+               items: { '$ref' => '#/components/schemas/<%= @resource %>' }
+
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { auth_header_info[:token] }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { API_VERSION }
+
+        run_test!
+      end
+
+      response '406', 'unsupported accept header' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { auth_header_info[:token] }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { API_VERSION }
+        let(:'Accept') { 'application/html' }
+
+        run_test!
+      end
+
+      response '410', 'invalid api version' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { auth_header_info[:token] }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { 'invalid' }
+
+        run_test!
+      end
+
+      response '410', 'no api version' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { auth_header_info[:token] }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { nil }
+
+        run_test!
+      end
+      <%- if @authenticable -%>
+
+      response '401', 'invalid auth token' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { 'invalid'}
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { API_VERSION }
+
+        run_test!
+      end
+
+      response '401', 'no auth token' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { nil }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { API_VERSION }
+
+        run_test!
+      end
+      <%- end -%>
+    end
+  end
+
+  # POST search action
+  path '/api/<%= file_path.pluralize %>/search' do
+    post 'Searches for <%= @resource_path_underscored.pluralize %>' do
+      tags '<%= @resource.pluralize %>'
+      <%- if @authenticable -%>
+      security [{ access_token: [], client: [], uid: [] }]
+      <%- end -%>
+      produces 'application/json'
+      consumes 'application/json'
+      parameter name: :'api-version', in: :header, type: :string, default: API_VERSION
+      parameter name: :params, in: :body, schema: {
+        type: :object,
+        properties: {
+          filter: {
+            oneOf: [
+              { '$ref' => '#/components/schemas/SearchFilter' },
+              { '$ref' => '#/components/schemas/SearchFilterComposition' },
+              { type: 'null' },
+            ]
+          },
+          page: { type: :integer, nullable: true },
+          page_size: { type: :integer, nullable: true },
+          order: { type: :string, nullable: true },
+          order_direction: { type: :string, enum: ['asc', 'desc'], nullable: true }
+        }
+      }
+
+      response '200', '<%= @resource_path_underscored.pluralize %> found' do
+        schema type: :object,
+               properties: {
+                 results: {
+                   type: :array,
+                   items: { '$ref' => '#/components/schemas/<%= @resource %>' }
+                 },
+                 pages_count: { type: :integer, nullable: true  }
+               }
+
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { auth_header_info[:token] }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { API_VERSION }
+        let(:params) {
+          {
+            filter: { field: 'id', operator: 'eq', value: <%= @resource_path_underscored %>_obj.id },
+            page: 0,
+            page_size: 10,
+            order: 'created_at',
+            order_direction: 'desc'
+          }
+        }
+
+        run_test!
+      end
+
+      response '406', 'unsupported accept header' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { auth_header_info[:token] }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { API_VERSION }
+        let(:'Accept') { 'application/html' }
+        let(:params) {
+          {
+            filter: { field: 'id', operator: 'eq', value: <%= @resource_path_underscored %>_obj.id },
+            page: 0,
+            page_size: 10,
+            order: 'created_at',
+            order_direction: 'desc'
+          }
+        }
+
+        run_test!
+      end
+
+      response '410', 'invalid api version' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { auth_header_info[:token] }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { 'invalid' }
+        let(:params) {
+          {
+            filter: { field: 'id', operator: 'eq', value: <%= @resource_path_underscored %>_obj.id },
+            page: 0,
+            page_size: 10,
+            order: 'created_at',
+            order_direction: 'desc'
+          }
+        }
+
+        run_test!
+      end
+
+      response '410', 'no api version' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { auth_header_info[:token] }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { nil }
+        let(:params) {
+          {
+            filter: { field: 'id', operator: 'eq', value: <%= @resource_path_underscored %>_obj.id },
+            page: 0,
+            page_size: 10,
+            order: 'created_at',
+            order_direction: 'desc'
+          }
+        }
+
+        run_test!
+      end
+      <%- if @authenticable -%>
+
+      response '401', 'invalid auth token' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { 'invalid'}
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { API_VERSION }
+        let(:params) {
+          {
+            filter: { field: 'id', operator: 'eq', value: <%= @resource_path_underscored %>_obj.id },
+            page: 0,
+            page_size: 10,
+            order: 'created_at',
+            order_direction: 'desc'
+          }
+        }
+
+        run_test!
+      end
+
+      response '401', 'no auth token' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { nil }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { API_VERSION }
+        let(:params) {
+          {
+            filter: { field: 'id', operator: 'eq', value: <%= @resource_path_underscored %>_obj.id },
+            page: 0,
+            page_size: 10,
+            order: 'created_at',
+            order_direction: 'desc'
+          }
+        }
+
+        run_test!
+      end
+      <%- end -%>
+    end
+  end
+
+  # GET show action
+  path '/api/<%= file_path.pluralize %>/{id}' do
+    get 'Retrieves a <%= @resource_path_underscored %>' do
+      tags '<%= @resource.pluralize %>'
+      <%- if @authenticable -%>
+      security [{ access_token: [], client: [], uid: [] }]
+      <%- end -%>
+      produces 'application/json'
+      parameter name: :'api-version', in: :header, type: :string, default: API_VERSION
+      parameter name: :id, in: :path, type: :integer
+
+      response '200', '<%= @resource_path_underscored %> found' do
+        schema '$ref' => '#/components/schemas/<%= @resource %>'
+
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { auth_header_info[:token] }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { API_VERSION }
+        let(:id) { <%= @resource_path_underscored %>_obj.id }
+
+        run_test!
+      end
+
+      response '404', '<%= @resource_underscored %> not found' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { auth_header_info[:token] }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { API_VERSION }
+        let(:id) { 'invalid' }
+
+        run_test!
+      end
+
+      response '406', 'unsupported accept header' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { auth_header_info[:token] }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { API_VERSION }
+        let(:id) { <%= @resource_path_underscored %>_obj.id }
+        let(:'Accept') { 'application/html' }
+
+        run_test!
+      end
+
+      response '410', 'invalid api version' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { auth_header_info[:token] }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { 'invalid' }
+        let(:id) { <%= @resource_path_underscored %>_obj.id }
+
+        run_test!
+      end
+
+      response '410', 'no api version' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { auth_header_info[:token] }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { nil }
+        let(:id) { <%= @resource_path_underscored %>_obj.id }
+
+        run_test!
+      end
+      <%- if @authenticable -%>
+
+      response '401', 'invalid auth token' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { 'invalid'}
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { API_VERSION }
+        let(:id) { <%= @resource_path_underscored %>_obj.id }
+
+        run_test!
+      end
+
+      response '401', 'no auth token' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { nil }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { API_VERSION }
+        let(:id) { <%= @resource_path_underscored %>_obj.id }
+
+        run_test!
+      end
+      <%- end -%>
+    end
+  end
+
+  # POST create action
+  path '/api/<%= file_path.pluralize %>' do
+    post 'Creates a <%= @resource_path_underscored %>' do
+      tags '<%= @resource.pluralize %>'
+      <%- if @authenticable -%>
+      security [{ access_token: [], client: [], uid: [] }]
+      <%- end -%>
+      consumes 'application/json'
+      produces 'application/json'
+      parameter name: :'api-version', in: :header, type: :string, default: API_VERSION
+      parameter name: :<%= @resource_path_underscored %>,
+                in: :body,
+                schema: { '$ref' => '#/components/schemas/<%= @resource %>Properties' }
+
+      response '201', '<%= @resource_path_underscored %> created' do
+        schema '$ref' => '#/components/schemas/<%= @resource %>'
+
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { auth_header_info[:token] }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { API_VERSION }
+        let(:<%= @resource_path_underscored %>) { <%= @resource_path_underscored %>_param }
+
+        run_test!
+      end
+
+      response '406', 'unsupported accept header' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { auth_header_info[:token] }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { API_VERSION }
+        let(:'Accept') { 'application/html' }
+        let(:<%= @resource_path_underscored %>) { <%= @resource_path_underscored %>_param }
+
+        run_test!
+      end
+
+      response '410', 'invalid api version' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { auth_header_info[:token] }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { 'invalid' }
+        let(:<%= @resource_path_underscored %>) { <%= @resource_path_underscored %>_param }
+
+        run_test!
+      end
+
+      response '410', 'no api version' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { auth_header_info[:token] }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { nil }
+        let(:<%= @resource_path_underscored %>) { <%= @resource_path_underscored %>_param }
+
+        run_test!
+      end
+      <%- if @authenticable -%>
+
+      response '401', 'invalid auth token' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { 'invalid'}
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { API_VERSION }
+        let(:<%= @resource_path_underscored %>) { <%= @resource_path_underscored %>_param }
+
+        run_test!
+      end
+
+      response '401', 'no auth token' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { nil }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { API_VERSION }
+        let(:<%= @resource_path_underscored %>) { <%= @resource_path_underscored %>_param }
+
+        run_test!
+      end
+      <%- end -%>
+    end
+  end
+
+  # PATCH update action
+  path '/api/<%= file_path.pluralize %>/{id}' do
+    patch 'Updates a <%= @resource_path_underscored %>' do
+      tags '<%= @resource.pluralize %>'
+      <%- if @authenticable -%>
+      security [{ access_token: [], client: [], uid: [] }]
+      <%- end -%>
+      consumes 'application/json'
+      produces 'application/json'
+      parameter name: :'api-version', in: :header, type: :string, default: API_VERSION
+      parameter name: :id, in: :path, type: :integer
+      parameter name: :<%= @resource_path_underscored %>,
+                in: :body,
+                schema: { '$ref' => '#/components/schemas/<%= @resource %>Properties' }
+
+      response '200', '<%= @resource_path_underscored %> updated' do
+        schema '$ref' => '#/components/schemas/<%= @resource %>'
+
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { auth_header_info[:token] }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { API_VERSION }
+        let(:id) { <%= @resource_path_underscored %>_obj.id }
+        let(:<%= @resource_path_underscored %>) { <%= @resource_path_underscored %>_param }
+
+        run_test!
+      end
+
+      response '406', 'unsupported accept header' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { auth_header_info[:token] }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { API_VERSION }
+        let(:id) { <%= @resource_path_underscored %>_obj.id }
+        let(:<%= @resource_path_underscored %>) { <%= @resource_path_underscored %>_param }
+        let(:'Accept') { 'application/html' }
+
+        run_test!
+      end
+
+      response '410', 'invalid api version' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { auth_header_info[:token] }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { 'invalid' }
+        let(:id) { <%= @resource_path_underscored %>_obj.id }
+        let(:<%= @resource_path_underscored %>) { <%= @resource_path_underscored %>_param }
+
+        run_test!
+      end
+
+      response '410', 'no api version' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { auth_header_info[:token] }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { nil }
+        let(:id) { <%= @resource_path_underscored %>_obj.id }
+        let(:<%= @resource_path_underscored %>) { <%= @resource_path_underscored %>_param }
+
+        run_test!
+      end
+      <%- if @authenticable -%>
+
+      response '401', 'invalid auth token' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { 'invalid'}
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { API_VERSION }
+        let(:id) { <%= @resource_path_underscored %>_obj.id }
+        let(:<%= @resource_path_underscored %>) { <%= @resource_path_underscored %>_param }
+
+        run_test!
+      end
+
+      response '401', 'no auth token' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { nil }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { API_VERSION }
+        let(:id) { <%= @resource_path_underscored %>_obj.id }
+        let(:<%= @resource_path_underscored %>) { <%= @resource_path_underscored %>_param }
+
+        run_test!
+      end
+      <%- end -%>
+    end
+  end
+
+  # DELETE destroy action
+  path '/api/<%= file_path.pluralize %>/{id}' do
+    delete 'Destroys a <%= @resource %>' do
+      tags '<%= @resource.pluralize %>'
+      <%- if @authenticable -%>
+      security [{ access_token: [], client: [], uid: [] }]
+      <%- end -%>
+      consumes 'application/json'
+      produces 'application/json'
+      parameter name: :'api-version', in: :header, type: :string, default: API_VERSION
+      parameter name: :id, in: :path, type: :integer
+
+      response '204', '<%= @resource_path_underscored %> destroyed' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { auth_header_info[:token] }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { API_VERSION }
+        let(:id) { <%= @resource_path_underscored %>_obj.id }
+
+        run_test!
+      end
+
+      response '406', 'unsupported accept header' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { auth_header_info[:token] }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { API_VERSION }
+        let(:'Accept') { 'application/html' }
+        let(:id) { <%= @resource_path_underscored %>_obj.id }
+
+        run_test!
+      end
+
+      response '410', 'invalid api version' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { auth_header_info[:token] }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { 'invalid' }
+        let(:id) { <%= @resource_path_underscored %>_obj.id }
+
+        run_test!
+      end
+
+      response '410', 'no api version' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { auth_header_info[:token] }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { nil }
+        let(:id) { <%= @resource_path_underscored %>_obj.id }
+
+        run_test!
+      end
+      <%- if @authenticable -%>
+
+      response '401', 'invalid auth token' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { 'invalid'}
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { API_VERSION }
+        let(:id) { <%= @resource_path_underscored %>_obj.id }
+
+        run_test!
+      end
+
+      response '401', 'no auth token' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { nil }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { API_VERSION }
+        let(:id) { <%= @resource_path_underscored %>_obj.id }
+
+        run_test!
+      end
+      <%- end -%>
+    end
+  end
+<%- end -%>
+<% actions.each do |action| -%>
+  # GET <%= action %>
+  path '/api/<%= file_path %>/<%= action %>' do
+    get 'receive <%= action %>' do
+      tags '<%= class_name.pluralize %>'
+      <%- if @authenticable -%>
+      security [{ access_token: [], client: [], uid: [] }]
+      <%- end -%>
+      produces 'application/json'
+      parameter name: :'api-version', in: :header, type: :string, default: API_VERSION
+
+      response '200', '<%= action %> done' do
+        schema type: :object,
+               properties: { result: { type: :string } }
+
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { auth_header_info[:token] }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { API_VERSION }
+
+        run_test!
+      end
+
+      response '406', 'unsupported accept header' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { auth_header_info[:token] }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'Accept') { 'application/html' }
+        let(:'api-version') { API_VERSION }
+
+        run_test!
+      end
+
+      response '410', 'invalid api version' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { auth_header_info[:token] }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { 'invalid' }
+
+        run_test!
+      end
+
+      response '410', 'no api version' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { auth_header_info[:token] }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { nil }
+
+        run_test!
+      end
+      <%- if @authenticable -%>
+
+      response '401', 'invalid auth token' do
+        <%- if @authenticable  -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { 'invalid'}
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { API_VERSION }
+
+        run_test!
+      end
+
+      response '401', 'no auth token' do
+        <%- if @authenticable -%>
+        let(:'uid') { auth_header_info[:uid] }
+        let(:'access-token')  { nil }
+        let(:'client') { auth_header_info[:client] }
+        <%- end -%>
+        let(:'api-version') { API_VERSION }
+
+        run_test!
+      end
+      <%- end -%>
+    end
+  end
+<%- end -%>
+end

@@ -1,0 +1,5 @@
+# frozen_string_literal: true
+
+render partial: 'properties_tests/properties_test',
+       collection: properties_tests,
+       as: :properties_test

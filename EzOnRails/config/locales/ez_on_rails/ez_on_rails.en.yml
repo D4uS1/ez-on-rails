@@ -1,0 +1,52 @@
+en:
+  ez_on_rails:
+    are_you_sure: "Are you sure?"
+    back: "Back"
+    cancel: "Cancel"
+    dashboard: "Dashboard"
+    category: "Category"
+    overview: "Overview"
+    new: "New"
+    destroy_selection: "Delete selection"
+    create_success_message: "%{resource_obj} was successfully created"
+    destroy_success_message: "%{resource_obj} was successfully destroyed."
+    destroy_success_message_multiple: "%{resource_obj} were successfully destroyed."
+    update_success_message: "%{resource_obj} was successfully updated."
+    not_destroyable: "%{resource_obj} not destroyable."
+    not_destroyable_multiple: "%{count} %{resource_obj} could not be destroyed."
+    not_updateable: "%{resource_obj} not updateable."
+    show_all: "Show all"
+    yes_or_no: "Yes or no"
+    files: "Files"
+    id: "ID"
+    created_at: "Created at"
+  years: "Years"
+  months: "Months"
+  weeks: "Weeks"
+  days: "Days"
+  hours: "Hours"
+  minutes: "Minutes"
+  seconds: "Seconds"
+  datetime:
+    distance_in_words:
+      x_years:
+        one: 'One year'
+        other: '%{count} years'
+      x_months:
+        one: 'One month'
+        other: '%{count} months'
+      x_weeks:
+        one: 'One week'
+        other: '%{count} weeks'
+      x_days:
+        one: 'One day'
+        other: '%{count} days'
+      x_hours:
+        one: 'One hour'
+        other: '%{count} hours'
+      x_minutes:
+        one: 'One minute'
+        other: '%{count} minutes'
+      x_seconds:
+        one: 'One second'
+        other: '%{count} seconds'

@@ -1,0 +1,5 @@
+/* fix data-confirm-modal x button, because it is not the bootstrap-5 button */
+button.close {
+  background-color: transparent;
+  border-color: transparent;
+}

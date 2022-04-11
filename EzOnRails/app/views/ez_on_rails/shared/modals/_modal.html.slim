@@ -1,0 +1,15 @@
+.modal.fade id=id tabindex='-1'
+  - modal_size_class = 'modal-lg' if defined?(size) && size == :medium
+  - modal_size_class = 'modal-xl' if defined?(size) && size == :large
+  div class="modal-dialog modal-dialog-centered #{modal_size_class || '' }"
+    .modal-content
+      - if defined?(title) && title
+        .modal-header
+          h5.modal-title = title
+          button.btn-close aria-label='Close' data-dismiss='modal' type='button'
+      .modal-body
+        = content
+      - if defined?(buttons) && buttons && !buttons.empty?
+        .modal-footer
+          - buttons.each do |button|
+            = modal_button button

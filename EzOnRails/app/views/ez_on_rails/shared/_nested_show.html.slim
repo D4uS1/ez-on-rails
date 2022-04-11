@@ -1,0 +1,14 @@
+div
+  /Filter attributes we should / can not see
+  - filter_attributes! :show, obj.class, render_info
+
+  /Render each attribute
+  - render_info.each do |attribute_key, attribute_render_info|
+    .row
+      - label = render_attribute_label attribute_render_info
+      - if label
+        .col-lg-3
+          = label
+      div class="#{label ? 'col-lg-9' : 'col-12'}"
+        = render_attribute :show, obj, attribute_key, attribute_render_info
+

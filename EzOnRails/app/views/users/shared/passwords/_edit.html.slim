@@ -1,0 +1,7 @@
+= render partial: 'ez_on_rails/shared/model_form', locals: {\
+           obj: resource,
+           render_info: render_info_users_passwords,
+           post_url: password_path(resource_name),
+           post_method: :put,
+           save_label: t(:change_password)\
+         }

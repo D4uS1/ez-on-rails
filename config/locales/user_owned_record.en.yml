@@ -1,0 +1,9 @@
+en:
+  activerecord:
+    models:
+      user_owned_record:
+        one:  "User owned record"
+        other: "User owned records"
+    attributes:
+      user_owned_record:
+        test: "Test"

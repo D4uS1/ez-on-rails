@@ -1,0 +1,4 @@
+# frozen_string_literal: true
+
+render partial: 'nested_form_tests/nested_form_test',
+       locals: { nested_form_test: @resource_obj }

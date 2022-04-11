@@ -1,0 +1,5 @@
+# frozen_string_literal: true
+
+render partial: 'assoc_tests/assoc_test',
+       collection: assoc_tests,
+       as: :assoc_test

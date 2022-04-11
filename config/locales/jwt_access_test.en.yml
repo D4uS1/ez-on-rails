@@ -1,0 +1,9 @@
+en:
+  activerecord:
+    models:
+      jwt_access_test:
+        one:  "Jwt access test"
+        other: "Jwt access tests"
+    attributes:
+      jwt_access_test:
+        test: "Test"

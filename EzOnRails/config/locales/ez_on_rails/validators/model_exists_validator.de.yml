@@ -1,0 +1,5 @@
+de:
+  ez_on_rails:
+    validators:
+      model_exists:
+        error: Dieses Model existiert nicht.

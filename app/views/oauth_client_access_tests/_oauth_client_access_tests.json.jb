@@ -1,0 +1,5 @@
+# frozen_string_literal: true
+
+render partial: 'oauth_client_access_tests/oauth_client_access_test',
+       collection: oauth_client_access_tests,
+       as: :oauth_client_access_test

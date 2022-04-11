@@ -1,0 +1,6 @@
+en:
+  ez_on_rails:
+    validators:
+      path_correctness:
+        action_error: The action shall not contain namespaces.
+        controller_error: The controller shall not contain namespaces.

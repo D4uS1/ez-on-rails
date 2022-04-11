@@ -1,0 +1,8 @@
+.d-flex.flex-row.justify-content-start.ps-2
+  span.pe-2.opacity-50
+    | /
+  nav aria-label='breadcrumb'
+    .ol.breadcrumb
+      - breadcrumb_trail do |crumb|
+        li class="breadcrumb-item"
+          = breadcrumb_item crumb

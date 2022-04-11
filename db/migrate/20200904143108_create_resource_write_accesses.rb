@@ -1,0 +1,13 @@
+class CreateResourceWriteAccesses < ActiveRecord::Migration[6.0]
+  def change
+    create_table :eor_resource_write_accesses do |t|
+      t.belongs_to :resource,
+                   polymorphic: true,
+                   null: false,
+                   index: { name: :index_eor_resource_write_accesses_on_resource }
+      t.belongs_to :group, index: true, null: false, foreign_key: { to_table: :eor_groups }
+
+      t.timestamps
+    end
+  end
+end

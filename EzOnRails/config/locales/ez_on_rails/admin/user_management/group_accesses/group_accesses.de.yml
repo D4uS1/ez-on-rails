@@ -1,0 +1,17 @@
+de:
+  activerecord:
+    models:
+      ez_on_rails/group_access:
+        one: "Gruppen-Zugriff"
+        other: "Gruppen-Zugriffe"
+    attributes:
+      ez_on_rails/group_access:
+        group: "Gruppe"
+        namespace: "Namespace"
+        controller: "Controller"
+        action: "Action"
+  ez_on_rails:
+    admin_group_access_not_destroyable: "Der Zugriff auf den Admin Bereich kann nicht entfernt werden."
+    admin_group_access_not_updatable: "Der Zugriff auf den Admin Bereich kann nicht bearbeitet werden."
+    group_access_already_exists: "Dieser Zugriff existiert für diesen Benutuer bereits."
+

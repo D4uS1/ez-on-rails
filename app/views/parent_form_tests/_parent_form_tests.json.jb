@@ -1,0 +1,5 @@
+# frozen_string_literal: true
+
+render partial: 'parent_form_tests/parent_form_test',
+       collection: parent_form_tests,
+       as: :parent_form_test

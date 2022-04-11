@@ -1,0 +1,12 @@
+= render partial: 'ez_on_rails/shared/model_form', locals: {\
+    render_info: render_info_user,
+    print_index: true,
+    post_url: ez_on_rails_user_path(@resource_obj),
+    index_url: ez_on_rails_users_path,
+    obj: @resource_obj                                   \
+  }
+.row
+  .col
+    = link_to 'Passwort zurücksetzen',
+              password_reset_ez_on_rails_user_path(@resource_obj),
+              class: 'btn btn-secondary'

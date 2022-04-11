@@ -1,0 +1,18 @@
+# frozen_string_literal: true
+
+<% module_namespacing do -%>
+# Helper module for <%= class_name %> form.
+module <%= class_name %>Helper
+  # Returns the render information for the <%= class_name %> form.
+  def render_info_<%= singular_table_name %>
+    {
+    <%- attributes.each_with_index do |attr, i| -%>
+      <%= attr.name %>: {
+        label: <%= class_name%>.human_attribute_name(:<%= attr.name %>),
+        type: :<%= attr.type %>
+      }<%= (i == attributes.length - 1 ? '' : ',') %>
+    <%- end -%>
+    }
+  end
+end
+<% end -%>

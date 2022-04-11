@@ -1,0 +1,16 @@
+# frozen_string_literal: true
+
+# Controller class for a <%= class_name %> dashboard.
+class <%= class_name %>::DashboardController < EzOnRails::ApplicationController
+  # Action for showing the dashboard.
+  def index
+    @subtitle = t(:'ez_on_rails.dashboard')
+  end
+
+  protected
+
+  # See description of set_title in ApplicationController class.
+  def set_title
+    @title = t(:<%= file_name %>)
+  end
+end

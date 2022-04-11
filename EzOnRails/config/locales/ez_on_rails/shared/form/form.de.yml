@@ -1,0 +1,5 @@
+de:
+  ez_on_rails:
+    user_input_valid: "Die Aktion war erfolgreich"
+    user_input_invalid: "Ihre Eingaben waren ungültig. Bitte überprüfen Sie ihre Eingaben"
+    submit: "Abschicken"

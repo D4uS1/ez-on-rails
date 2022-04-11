@@ -1,0 +1,14 @@
+= render partial: 'ez_on_rails/shared/index', locals: {\
+    render_info:  render_info_user,
+    resources: @resource_objs,
+    queue_obj: @queue_obj,
+    obj_class: @obj_class,
+    selectable: default_selectable_info,
+    print_controls: true,
+    print_new: true,
+    print_search_form: true,
+    search_url: search_ez_on_rails_users_path,
+    show_url: proc {|obj| ez_on_rails_user_path(obj) },
+    edit_url: proc {|obj| edit_ez_on_rails_user_path(obj) },
+    destroy_url: proc {|obj| ez_on_rails_user_path(obj) }\
+  }

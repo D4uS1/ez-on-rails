@@ -1,0 +1,4 @@
+# frozen_string_literal: true
+
+render partial: '<%= controller_file_path %>/<%= plural_file_name %>',
+       locals: { <%= plural_file_name %>: @resource_objs }

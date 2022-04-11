@@ -1,0 +1,19 @@
+Description:
+    Scaffold generator for creating the mvc-template like standard-scaffolds, but using
+    some shared abstract partials for rendering. Hence, changing the partials behavior will
+    effect the whole project having minimalized overhead. The syntax of usage is the same like
+    the standard scaffold generator of rails.
+
+Usage:
+    rails generate ezscaff NAME [FIELD_NAME:FIELD_TYPE]
+
+Example:
+    rails generate ezscaff Thing field1:string field2:integer
+
+    This will create:
+        scaffold files of standard scaffold generator + if not exists:
+        view/shared/_edit.html.erb
+        view/shared/_form.html.erb
+        view/shared/_new.html.erb
+        view/shared/_show.html.erb
+        view/shared/_table.html.erb

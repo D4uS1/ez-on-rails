@@ -1,0 +1,9 @@
+en:
+  activerecord:
+    models:
+      sharable_resource:
+        one:  "Sharable resource"
+        other: "Sharable resources"
+    attributes:
+      sharable_resource:
+        test: "Test"

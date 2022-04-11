@@ -1,0 +1,30 @@
+# frozen_string_literal: true
+
+<%- module_namespacing do -%>
+# Helper module for <%= class_name %> resource.
+module <%= class_name.pluralize %>Helper
+  # Returns the render information for the <%= class_name %> resource.
+  def render_info_<%= singular_table_name %>
+    {
+    <%- attributes.each_with_index do |attr, i| -%>
+      <%= attr.name %>: {
+        label: <%= class_name%>.human_attribute_name(:<%= attr.name %>)
+      }<%= (i == attributes.length - 1 && !@sharable ? '' : ',') %>
+    <%- end -%>
+    <%- if @sharable -%>      read_accessible_groups: {
+        label: t(:'ez_on_rails.ownership_info.read_accessible'),
+        label_method: :name
+      },
+      write_accessible_groups: {
+        label: t(:'ez_on_rails.ownership_info.write_accessible'),
+        label_method: :name
+      },
+      destroy_accessible_groups: {
+        label: t(:'ez_on_rails.ownership_info.destroy_accessible'),
+        label_method: :name
+      }
+    <%- end -%>
+    }
+  end
+end
+<% end -%>

@@ -1,0 +1,6 @@
+en:
+  ez_on_rails:
+    validators:
+      sharable_resource:
+        no_ownership_info_error: "This resource is no ownership info."
+        not_sharable_error: "This resource is not sharable."

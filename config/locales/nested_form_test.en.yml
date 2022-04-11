@@ -1,0 +1,13 @@
+en:
+  activerecord:
+    models:
+      nested_form_test:
+        one:  "Nested form test"
+        other: "Nested form tests"
+    attributes:
+      nested_form_test:
+        test_string: "Test string"
+        test_int: "Test int"
+        test_bool: "Test bool"
+        parent_form_test: "Parent form test"
+        image: "Image"

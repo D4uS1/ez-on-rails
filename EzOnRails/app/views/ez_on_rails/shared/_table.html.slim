@@ -1,0 +1,10 @@
+table.table.table.table-hover.table-bordered
+  thead.table-light
+    tr
+      - table_header.each do |header|
+        th scope='col' = header
+  tbody
+    - table_rows.each do |row|
+      tr
+        - row.each do |col|
+          td = col

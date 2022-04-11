@@ -1,0 +1,39 @@
+{
+  "name": "EzOnRails",
+  "private": true,
+  "dependencies": {
+    "@babel/preset-react": "^7.10.4",
+    "@fortawesome/fontawesome-free": "^5.15.4",
+    "@rails/actioncable": "^6.0.0",
+    "@rails/activestorage": "^6.0.0",
+    "@rails/ujs": "^6.0.0",
+    "@rails/webpacker": "4.3.0",
+    "axios": "^0.20.0",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "bootstrap": "5.1.3",
+    "cocoon": "github:nathanvda/cocoon#c24ba53",
+    "coffee-loader": "^1.0.0",
+    "coffeescript": "1.12.7",
+    "data-confirm-modal": "^1.6.2",
+    "expose-loader": "^1.0.0",
+    "flag-icon-css": "^3.5.0",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-activestorage-provider": "^0.8.0",
+    "react-dom": "^16.13.1",
+    "react-dropzone": "^11.0.3",
+    "react_ujs": "^2.6.1",
+    "select2": "^4.0.13",
+    "select2-bootstrap-5-theme": "^1.2.0",
+    "through2": "^4.0.2",
+    "ts-loader": "^8.0.3",
+    "turbolinks": "^5.2.0",
+    "typescript": "^4.0.2"
+  },
+  "version": "0.1.0",
+  "devDependencies": {
+    "webpack-dev-server": "^3.11.0"
+  }
+}

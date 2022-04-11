@@ -1,0 +1,13 @@
+de:
+  activerecord:
+    models:
+      ez_on_rails/resource_write_access:
+        one: "Schreibzugriff"
+        other: "Schreibzugriffe"
+    attributes:
+      ez_on_rails/resource_write_access:
+        group: "Gruppe"
+        resource_id: "Resource ID"
+        resource_type: "Resource Typ"
+  ez_on_rails:
+    resource_write_accesses_description: "Freigaben zum Schreiben Resourcen mit Eigentümer an Gruppen"

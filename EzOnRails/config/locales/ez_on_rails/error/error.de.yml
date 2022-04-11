@@ -1,0 +1,7 @@
+de:
+  ez_on_rails:
+    access_denied: "Zugriff verweigert."
+    access_denied_message: "Sie sind nicht berechtigt diese Seite zu betrachten."
+    not_authenticated: "Nicht authentifiziert."
+    page_not_found: "Seite wurde nicht gefunden."
+    internal_server_error: "Interner Server Fehler."

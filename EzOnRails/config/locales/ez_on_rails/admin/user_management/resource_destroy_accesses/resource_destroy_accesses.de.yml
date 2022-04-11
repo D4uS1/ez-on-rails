@@ -1,0 +1,13 @@
+de:
+  activerecord:
+    models:
+      ez_on_rails/resource_destroy_access:
+        one: "Löschzugriff"
+        other: "Löschzugriffe"
+    attributes:
+      ez_on_rails/resource_destroy_access:
+        group: "Gruppe"
+        resource_id: "Resource ID"
+        resource_type: "Resource Typ"
+  ez_on_rails:
+    resource_destroy_accesses_description: "Freigaben zum Löschen Resourcen mit Eigentümer an Gruppen"

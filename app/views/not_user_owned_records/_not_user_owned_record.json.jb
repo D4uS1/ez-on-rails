@@ -1,0 +1,6 @@
+{
+  id: not_user_owned_record.id,
+  test: not_user_owned_record.test,
+  created_at: not_user_owned_record.created_at,
+  updated_at: not_user_owned_record.updated_at,
+}

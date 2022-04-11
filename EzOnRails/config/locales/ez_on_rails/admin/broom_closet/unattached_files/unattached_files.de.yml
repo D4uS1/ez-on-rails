@@ -1,0 +1,10 @@
+de:
+  ez_on_rails:
+    unattached_files: "Ungenutzte Dateien"
+    unattached_files_subtitle: "Dateien, die hochgeladen wurden, aber keinem Datensatz angehören."
+    unattached_files_success: "Nicht zugewiesene Dateien erfolgreich entfernt."
+    unattached_files_failed: "%{count} nicht zugewiesene Dateien konnten nicht entfernt werden."
+    unattached_files_description: "Hochgeladene Dateien ohne zugeordneter Resource"
+    content_type: "Dateityp"
+    filename: "Dateiname"
+    byte_size: "Größe in Bytes"

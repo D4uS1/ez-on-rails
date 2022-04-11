@@ -1,0 +1,16 @@
+/* needed for attachment previews */
+.table-thumbnail {
+  max-height: 4rem;
+}
+
+/* fix to large border above tbody in bootstrap */
+.table > :not(:first-child) {
+  border-top: none !important;
+}
+
+/* used for the th and td elements holding only a icon */
+.table-mini-col {
+  vertical-align: middle;
+  text-align: center;
+  width: 2rem;
+}

@@ -1,0 +1,14 @@
+# frozen_string_literal: true
+
+{
+  id: properties_test.id,
+  string_value: properties_test.string_value,
+  integer_value: properties_test.integer_value,
+  float_value: properties_test.float_value,
+  date_value: properties_test.date_value,
+  datetime_value: properties_test.datetime_value,
+  boolean_value: properties_test.boolean_value,
+  assoc_test_id: properties_test.assoc_test_id,
+  created_at: properties_test.created_at,
+  updated_at: properties_test.updated_at
+}

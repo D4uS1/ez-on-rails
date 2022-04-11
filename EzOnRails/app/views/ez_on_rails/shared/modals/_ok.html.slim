@@ -1,0 +1,14 @@
+= render partial: 'ez_on_rails/shared/modals/modal', locals: {\
+   id: id,
+   title: title || 'Hint',
+   content: content,
+   size: :small,
+   buttons: [\
+     {\
+       label: label_ok || t(:'ez_on_rails.ok'),
+       type: 'primary',
+       id: "#{id}_button_ok",
+       target: target_ok || nil\
+     }\
+   ]\
+ }

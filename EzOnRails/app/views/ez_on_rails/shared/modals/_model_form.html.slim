@@ -1,0 +1,7 @@
+= render partial: 'ez_on_rails/shared/modals/modal', locals: {\
+    id: id,
+    title: title || t(:'ez_on_rails.form'),
+    size: :large,
+    content: render(partial: 'ez_on_rails/shared/model_form', locals: local_assigns),
+    buttons: []\
+  }

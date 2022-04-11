@@ -1,0 +1,37 @@
+div
+  .row
+    .col
+      = render partial: 'ez_on_rails/shared/index',
+              locals: {\
+                 render_info: render_info_unattached_files,
+                 resources: @unattached_files,
+                 print_show: true,
+                 selectable: {\
+                   actions: [\
+                     {\
+                       label: t(:'ez_on_rails.destroy_selection'),
+                        type: 'danger',
+                        method: :delete,
+                        target: {\
+                          controller: 'admin/broom_closet/unattached_files',
+                          action: 'destroy_selections'\
+                        },
+                        confirm: true\
+                     }\
+                   ]\
+                },
+                print_search_form: true,
+                queue_obj: @queue_obj,
+                obj_class: @obj_class,
+                search_url: { controller: controller_path, action: :search }\
+             }
+  .row.mt-3
+    .col
+      = link_to t(:'ez_on_rails.destroy_all'),
+              {\
+                controller: 'admin/broom_closet/unattached_files',
+                      action: 'destroy_all' \
+              },
+              class: 'btn btn-danger',
+              method: :delete,
+              data: confirm_data

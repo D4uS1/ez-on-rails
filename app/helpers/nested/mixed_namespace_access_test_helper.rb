@@ -1,0 +1,2 @@
+module Nested::MixedNamespaceAccessTestHelper
+end

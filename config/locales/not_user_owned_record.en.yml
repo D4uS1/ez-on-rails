@@ -1,0 +1,9 @@
+en:
+  activerecord:
+    models:
+      not_user_owned_record:
+        one:  "Not user owned record"
+        other: "Not user owned records"
+    attributes:
+      not_user_owned_record:
+        test: "Test"

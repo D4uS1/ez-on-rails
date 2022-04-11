@@ -1,0 +1,10 @@
+en:
+  ez_on_rails:
+    save: "Save"
+    add_nested_form: "Add %{nested_model}"
+    dropzone_default_text: "Drag'n drop some files here, or click to select files"
+    dropzone_default_max_size_error: "You can not upload files having a size more than %{max_size_mb} MB."
+    dropzone_default_max_files_error: "You can not upload more than %{max_files} files."
+    dropzone_default_invalid_format_error: "Invalid file format."
+    pastezone_default_text: "Copy and paste some files here"
+    invalid_inputs_message: "Your inputs were invalid. Please check your inputs."

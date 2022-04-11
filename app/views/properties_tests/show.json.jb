@@ -1,0 +1,4 @@
+# frozen_string_literal: true
+
+render partial: 'properties_tests/properties_test',
+       locals: { properties_test: @resource_obj }

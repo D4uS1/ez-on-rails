@@ -1,0 +1,15 @@
+.nested-fields
+  - filter_attributes! :model_form, form.object.class, render_info
+  - render_info.each do |attribute_key, attribute_render_info|
+    = render_attribute_container_model_form(form, attribute_key, attribute_render_info) do
+      - field_type = attribute_type form.object.class, attribute_key, attribute_render_info
+      /Boolean labels are behind the checkbox field
+      - unless field_type == :boolean
+        = render_attribute_label attribute_render_info.merge({ label_class: 'form-label' })
+      = render_attribute :model_form, form, attribute_key, attribute_render_info
+      = render_attribute_errors form, attribute_key
+      = render_attribute_help form, attribute_render_info
+      - if field_type == :boolean
+        = render_attribute_label attribute_render_info.merge({ label_class: 'form-check-label' })
+  - unless hide_remove
+    = link_to_remove_association t(:'ez_on_rails.destroy'), form

@@ -1,0 +1,5 @@
+en:
+  ez_on_rails:
+    user_input_valid: "This action was successfull"
+    user_input_invalid: "Your inputs were invalid. Please check your inputs"
+    submit: "Submit"

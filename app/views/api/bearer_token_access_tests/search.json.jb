@@ -1,0 +1,4 @@
+# frozen_string_literal: true
+
+render partial: 'bearer_token_access_tests/bearer_token_access_tests',
+       locals: { bearer_token_access_tests: @resource_objs }

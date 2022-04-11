@@ -1,0 +1,27 @@
+/* Animation for opening an category details tag in a dashboard */
+details[open] > div.dashboard-tiles-group {
+  animation: admin_open_dash_category 1s;
+  margin-top: 0.5rem;
+}
+@keyframes admin_open_dash_category {
+  from {
+    opacity: 0;
+  }
+  to   {
+    opacity: 1;
+  }
+}
+
+/* fix width and height to get suqared tile */
+.dashboard-tile {
+  width: 14rem;
+}
+.dashboard-tile > .card-body {
+  height: 14rem;
+}
+
+/* fixed size for icon of a tile */
+.dashboard-tile-icon {
+  font-size: 4rem;
+  overflow: hidden;
+}

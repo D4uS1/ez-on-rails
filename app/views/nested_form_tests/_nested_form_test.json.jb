@@ -1,0 +1,11 @@
+# frozen_string_literal: true
+
+{
+  id: nested_form_test.id,
+  test_string: nested_form_test.test_string,
+  test_int: nested_form_test.test_int,
+  test_bool: nested_form_test.test_bool,
+  parent_form_test: nested_form_test.parent_form_test,
+  created_at: nested_form_test.created_at,
+  updated_at: nested_form_test.updated_at
+}

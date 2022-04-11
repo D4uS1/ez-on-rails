@@ -1,0 +1,5 @@
+en:
+  ez_on_rails:
+    search: "Search"
+    association_exists: "Exists"
+    association_exists_not: "Exists not"

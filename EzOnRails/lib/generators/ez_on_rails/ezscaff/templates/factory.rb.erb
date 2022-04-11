@@ -1,0 +1,18 @@
+# frozen_string_literal: true
+<%- association_attrs = association_attributes(class_name, attributes) -%>
+<%- attrs_with_values = attributes_with_values(class_name, attributes) -%>
+
+FactoryBot.define do
+  factory :<%= file_name %>, class: '<%= class_name %>' do
+    <%- attrs_with_values.each do |key, value| -%>
+    <%- next if association_attrs.include? key.to_s -%>
+    <%= key %> { <%= value.is_a?(String) ? "'#{value}'": value %> }
+    <%- end -%>
+    <%- if  association_attrs.length > 0 && attrs_with_values.length > association_attrs.length -%>
+
+    <%- end -%>
+    <%- if association_attrs.length > 0 -%>
+    <%= association_attributes(class_name, attributes).join("\n    ") %>
+    <%- end -%>
+  end
+end

@@ -1,0 +1,16 @@
+.row.mb-3
+  / Get sidebars contents, if available
+  - sidebar_left = yield :sidebar_left
+  - sidebar_right = yield :sidebar_right
+
+  / Print sidebar left if available
+  - unless sidebar_left.empty?
+    .col-2=sidebar_left
+
+  / Print main content
+  .col
+    = yield
+
+  / Print sidebar right if available
+  - unless sidebar_right.empty?
+    .col-2= sidebar_right

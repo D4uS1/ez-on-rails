@@ -1,0 +1,13 @@
+en:
+  activerecord:
+    models:
+      ez_on_rails/resource_read_access:
+        one: "Read access"
+        other: "Read accesses"
+    attributes:
+      ez_on_rails/resource_read_access:
+        group: "Group"
+        resource_id: "Resource id"
+        resource_type: "Resource type"
+  ez_on_rails:
+    resource_destroy_accesses_description: "Granting reading of resources with owners to groups"

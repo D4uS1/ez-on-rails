@@ -1,0 +1,20 @@
+.d-flex.flex-row.justify-content-end
+  - if show_locale_switch?
+    = render 'ez_on_rails/shared/locale_switch'
+  .dropdown
+    .dropdown-toggle type='button' id='dropdown_userbar_user' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'
+      - if user_signed_in?
+        span.me-2 style="color: #{header_text_color};"
+          = current_user.username || current_user.email
+      = ez_icon "user", style: "color: #{header_text_color};"
+    .dropdown-menu.end-0.pt-0.pb-0 aria-labelledby="dropdown_userbar_user"
+      button.dropdown-item type='button'
+        - if user_signed_in?
+          = link_to(t(:'ez_on_rails.profile', user: current_user.username), edit_user_registration_path, class: 'nav-link text-dark')
+        - else
+          = link_to(t(:log_in), new_user_session_path, class: 'nav-link text-dark')
+      button.dropdown-item type='button'
+        - if user_signed_in?
+          = link_to(t(:'ez_on_rails.log_out'), destroy_user_session_path, method: :delete, name: 'logout', class: 'nav-link text-dark')
+        - else
+          = link_to(t(:register), new_user_registration_path, class: 'nav-link text-dark')

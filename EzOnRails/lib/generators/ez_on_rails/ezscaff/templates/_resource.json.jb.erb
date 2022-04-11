@@ -1,0 +1,15 @@
+# frozen_string_literal: true
+<%- association_attrs = association_attributes(class_name, attributes) -%>
+<%- non_association_attrs = attributes.reject { |attribute| association_attrs.include? attribute.name }.map(&:name) -%>
+
+{
+  id: <%= file_name %>.id,
+<%- if non_association_attrs.length > 0 -%>
+<%= non_association_attrs.map { |attr| "  #{attr}: #{file_name}.#{attr}"}.join(",\n") %>,
+<%- end -%>
+<%- if association_attrs.length > 0 -%>
+<%= association_attrs.map { |attr| "  #{attr}_id: #{file_name}.#{attr}_id"}.join(",\n") %>,
+<%- end -%>
+  created_at: <%= file_name %>.created_at,
+  updated_at: <%= file_name %>.updated_at
+}

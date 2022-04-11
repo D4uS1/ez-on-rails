@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "properties": {
+    "nullable_string": {
+      "type": ["null", "string"]
+    },
+    "not_nullable_integer": {
+      "type": "integer"
+    }
+  },
+  "required": ["not_nullable_integer"]
+}

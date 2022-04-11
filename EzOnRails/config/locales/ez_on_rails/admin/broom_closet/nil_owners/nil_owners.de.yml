@@ -1,0 +1,7 @@
+de:
+  ez_on_rails:
+    nil_owners: "Keine Benutzer"
+    nil_owners_subtitle: "Inexistente Verweise zu Benutzer-Eigentümern"
+    nil_owners_success: "Inexistente Verweise erfolgreich entfernt."
+    nil_owners_failed: "%{count} inexistente Verweise konnten nicht entfernt werden."
+    nil_owners_description: "Ownership Resources ohne zugewiesenen Besitzer"

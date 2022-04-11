@@ -1,0 +1,4 @@
+p = t(:'devise.mailer.confirmation_instructions.greeting', username: @resource.username)
+p = t(:'devise.mailer.confirmation_instructions.message_part_1')
+p = link_to t(:'devise.mailer.confirmation_instructions.message_part_2'),
+            confirmation_url(@resource, confirmation_token: @token)

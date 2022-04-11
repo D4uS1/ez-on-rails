@@ -1,0 +1,2 @@
+module Namespaced::MixedControllerTwoAccessTestHelper
+end

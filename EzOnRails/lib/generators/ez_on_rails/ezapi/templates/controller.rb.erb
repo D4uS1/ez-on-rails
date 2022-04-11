@@ -1,0 +1,31 @@
+# frozen_string_literal: true
+<% if namespaced? -%>
+require_dependency '<%= namespaced_path %>/application_controller'
+<% end -%>
+
+<%- module_namespacing do -%>
+# Controller class for a <%= class_name %> resource.
+class Api::<%= @resource ? class_name.pluralize : class_name %>Controller < EzOnRails::Api::<%= @resource ? 'ResourceController' : 'BaseController' %>
+<%- if @resource -%>
+  include ::<%= @resource.pluralize %>Helper
+  load_and_authorize_resource class: <%= @resource %>
+
+  self.model_class = <%= @resource %>
+<%- end -%>
+<% actions.each do |action| -%>
+  # GET <%= action %> action
+  def <%= action %>
+    # TODO: some interesting <%= action %> stuff here
+  end
+
+<%- end -%>
+<%- unless @resource -%>
+  protected
+
+  # Returns permitted parameters for the actions of this api class.
+  def <%= file_name %>_params
+    params.require(:<%= file_name %>).permit
+  end
+<%- end -%>
+end
+<% end -%>

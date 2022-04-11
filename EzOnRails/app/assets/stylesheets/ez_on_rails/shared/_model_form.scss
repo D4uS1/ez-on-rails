@@ -1,0 +1,14 @@
+/* disable extra labels of simple_form assocication fields */
+label.select.optional {
+  display: none;
+}
+
+/* fix width for dropdown select2 fields */
+.select2-container--bootstrap5 {
+  width: 100% !important;
+}
+
+/* fix wrong border color for select2 fields */
+.select2-selection {
+  border-color: #ced4da !important;
+}

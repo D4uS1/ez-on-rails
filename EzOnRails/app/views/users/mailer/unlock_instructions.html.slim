@@ -1,0 +1,4 @@
+p = t(:'devise.mailer.unlock_instructions.greeting', username: @resource.username)
+p = t(:'devise.mailer.unlock_instructions.message_part_1')
+p = t(:'devise.mailer.unlock_instructions.message_part_2')
+p = link_to t(:'devise.mailer.unlock_instructions.message_part_3'), unlock_url(@resource, unlock_token: @token)

@@ -1,0 +1,16 @@
+en:
+  activerecord:
+    models:
+      ez_on_rails/group_access:
+        one: "group access"
+        other: "group accesses"
+    attributes:
+      ez_on_rails/group_access:
+        group: "Group"
+        namespace: "Namespace"
+        controller: "Controller"
+        action: "Action"
+  ez_on_rails:
+    admin_group_access_not_destroyable: "The admin area restriction can not be destroyed."
+    admin_group_access_not_updatable: "The admin area restriction can not be changed."
+    group_access_already_exists: "This user is already assigned to that combination of attributes."

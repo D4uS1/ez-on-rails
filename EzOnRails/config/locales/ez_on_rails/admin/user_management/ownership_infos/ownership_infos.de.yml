@@ -1,0 +1,23 @@
+de:
+  activerecord:
+    models:
+      ez_on_rails/ownership_info:
+        one: "Ownership Info"
+        other: "Ownership Infos"
+    attributes:
+      ez_on_rails/ownership_info:
+        resource: "Resource"
+        sharable: "Freigebbar"
+        on_owner_destroy: "Aktion für Resourcen beim löschen des Benutzers"
+    enums:
+      ez_on_rails/ownership_info:
+        on_owner_destroy:
+          resource_nullify: "Verweis entfernen"
+          resource_destroy: "Resource geprüft entfernen"
+          resource_delete: "Resource ungeprüft entfernen"
+  ez_on_rails:
+    ownership_infos_description: "Definieren von Resourcen mit Besitzern"
+    ownership_info:
+      read_accessible: "Leseberechtigt"
+      write_accessible: "Schreibberechtigt"
+      destroy_accessible: "Löschberechtigt"

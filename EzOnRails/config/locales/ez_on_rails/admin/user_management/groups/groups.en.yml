@@ -1,0 +1,22 @@
+en:
+  activerecord:
+    models:
+      ez_on_rails/group:
+        one: "group"
+        other: "groups"
+    attributes:
+      ez_on_rails/group:
+        name: "Name"
+        users: "Users"
+        user: "Usergroup of"
+  ez_on_rails:
+    groups_description: "User groups to define access rights"
+    super_admin_group_not_destroyable: "The admin group can not be destroyed."
+    super_admin_group_not_updatable: "The admin group can not be changed."
+    member_group_not_destroyable: "The member group can not be destroyed."
+    member_group_not_updatable: "The member group can not be changed."
+    user_group_not_destroyable: "User groups can not be destroyed."
+    user_does_not_exist: "There is no user having this name"
+    username_does_not_match: "The username must match the name."
+    user_not_unassignable: "The user cannot be unassigned from an usergroup."
+    group_already_assigned: "This user is already assigned to that group."

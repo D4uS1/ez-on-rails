@@ -1,0 +1,9 @@
+en:
+  activerecord:
+    models:
+      oauth_client_access_test:
+        one:  "Oauth client access test"
+        other: "Oauth client access tests"
+    attributes:
+      oauth_client_access_test:
+        test: "Test"

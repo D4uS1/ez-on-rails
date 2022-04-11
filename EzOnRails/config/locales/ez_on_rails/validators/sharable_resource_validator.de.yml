@@ -1,0 +1,6 @@
+de:
+  ez_on_rails:
+    validators:
+      sharable_resource:
+        no_ownership_info_error: "Dies ist keine Benutzer-Eigentums Resource"
+        not_sharable_error: "Diese Resource ist nicht freigebbar"

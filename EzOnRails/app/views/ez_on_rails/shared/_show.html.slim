@@ -1,0 +1,36 @@
+div
+  p#notice = notice
+
+  /Filter attributes we should / can not see
+  - filter_attributes! :show, obj.class, render_info
+
+  /Render each attribute
+  - render_info.each do |attribute_key, attribute_render_info|
+    .row.my-3
+      - label = render_attribute_label attribute_render_info
+      - if label
+        .col-lg-3
+          = label
+      div class="#{label ? 'col-lg-9' : 'col-12'}"
+        = render_attribute :show, obj, attribute_key, attribute_render_info
+
+  /print controls
+  .row.mt-5
+    - if render_edit_link? obj, local_assigns
+      .col-6
+        = render_edit_button obj, local_assigns
+    - if render_destroy_link? obj, local_assigns
+      .col-6
+        = render_destroy_button obj, local_assigns
+  - if render_index_link? obj, local_assigns
+    .row.mt-2.mb-2
+      .col-12
+        = render_index_button obj, local_assigns
+  - if render_new_link? local_assigns
+    .row.mt-2.mb-2
+      .col-12
+        = render_new_button local_assigns
+  - if render_back_link? local_assigns
+    .row.mt-2.mb-2
+      .col-12
+        = render_back_button local_assigns

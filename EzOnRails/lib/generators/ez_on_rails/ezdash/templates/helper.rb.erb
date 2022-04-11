@@ -1,0 +1,15 @@
+# frozen_string_literal: true
+
+<% module_namespacing do -%>
+# Helper module for the dashboard of <%= class_name %>.
+module <%= class_name %>::DashboardHelper
+  # Needed by the EzDash Generator to identify existing tiles.
+  module_function
+
+  # Returns the dashboard information for the dashboard
+  # in <%= class_name %>.
+  def dash_info_<%= singular_table_name %>
+<%= pretty_print @dash_info %>
+  end
+end
+<% end -%>

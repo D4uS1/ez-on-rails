@@ -1,0 +1,3 @@
+render partial: 'not_user_owned_records/not_user_owned_record',
+       collection: not_user_owned_records,
+       as: :not_user_owned_record

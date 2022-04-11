@@ -1,0 +1,19 @@
+# frozen_string_literal: true
+
+require 'rails_helper'
+
+RSpec.describe <%= class_name %>, type: :model do
+  let(:valid_attributes) do
+    {
+    <%- attributes_with_values(class_name, attributes).each do |key, value| -%>
+      <%= key %>: <%= value.is_a?(String) ? "'#{value}'": value %>
+    <%- end -%>
+    }
+  end
+
+  context 'when validating' do
+    it 'accepts a valid model' do
+      expect(described_class.new(valid_attributes)).to be_valid
+    end
+  end
+end

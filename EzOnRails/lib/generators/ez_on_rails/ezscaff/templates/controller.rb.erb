@@ -1,0 +1,25 @@
+# frozen_string_literal: true
+<% if namespaced? -%>
+require_dependency '<%= namespaced_path %>/application_controller'
+<% end -%>
+
+<%- module_namespacing do -%>
+# Controller class for a <% class_name %> resource.
+class <%= controller_class_name %>Controller < EzOnRails::ResourceController
+  include <%= class_name.pluralize %>Helper
+
+  load_and_authorize_resource class: <%= class_name %>
+
+  before_action :breadcrumb_<%= file_name %>
+  self.model_class = <%= class_name %>
+
+  protected
+
+  # Sets the breadcrumb to the index action of the controllers resource.
+  def breadcrumb_<%= file_name %>
+    breadcrumb <%= class_name %>.model_name.human(count: 2),
+               controller: '<%= '/' + ((!controller_class_path.empty?) ? "#{controller_class_path.join('/')}/" : '') + controller_file_name %>',
+               action: 'index'
+  end
+end
+<% end -%>

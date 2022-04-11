@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    meta http-equiv='Content-Type' content='text/html; charset=utf-8'
+  body
+    p = "Sie haben eine Nachricht von #{Rails.application.class.module_parent} erhalten."
+    p Von:
+      = @name
+    p E-Mail:
+      = @email
+    p Betreff:
+      = @subject
+    p Nachricht:
+      = @message

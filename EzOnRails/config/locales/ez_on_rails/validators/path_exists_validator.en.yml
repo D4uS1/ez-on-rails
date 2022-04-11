@@ -1,0 +1,9 @@
+en:
+  ez_on_rails:
+    validators:
+      path_exists:
+        namespace_not_existent: The namespace does not exist.
+        controller_not_existent: The controller does not exist.
+        route_not_existent: The route you specified does not exist.
+        action_without_controller: You need to specify any controller if an action is used.
+        no_namespace_and_controller: You need to specify at least one namespace or controller.

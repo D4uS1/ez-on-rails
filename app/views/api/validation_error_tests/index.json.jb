@@ -1,0 +1,4 @@
+# frozen_string_literal: true
+
+render partial: 'validation_error_tests/validation_error_tests',
+       locals: { validation_error_tests: @resource_objs }

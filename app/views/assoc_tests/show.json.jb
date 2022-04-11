@@ -1,0 +1,4 @@
+# frozen_string_literal: true
+
+render partial: 'assoc_tests/assoc_test',
+       locals: { assoc_test: @resource_obj }

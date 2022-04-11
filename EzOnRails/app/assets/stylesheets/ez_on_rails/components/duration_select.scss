@@ -1,0 +1,27 @@
+.duration-select-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.duration-select-selection-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-right: 2em;
+}
+
+.duration-select-selection-label {
+
+}
+
+.duration-select-selection-select {
+  min-width: 3em;
+}
+
+.duration-select-selection-option {
+
+}
+

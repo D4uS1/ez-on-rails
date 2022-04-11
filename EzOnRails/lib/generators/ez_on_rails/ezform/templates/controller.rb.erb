@@ -1,0 +1,54 @@
+# frozen_string_literal: true
+
+<% module_namespacing do -%>
+# Controller class for a <%= class_name %> form which has no ActiveRecord.
+class <%= class_name %>Controller < EzOnRails::ApplicationController
+  include <%= class_name %>Helper
+
+  before_action :breadcrumb_<%=file_name %>
+
+  # Action for showing the form.
+  def index
+    @<%= singular_table_name %> = <%= class_name %>.new
+  end
+
+  # Action for submitting the form.
+  def submit
+    @<%= singular_table_name %> = <%= class_name %>.new(<%= singular_table_name %>_params)
+
+    if @<%= singular_table_name %>.valid?
+      # Do Some Stuff here
+
+      flash[:success] = t(:'ez_on_rails.user_input_valid')
+      redirect_to action: :success
+    else
+      flash[:danger] = t(:'ez_on_rails.user_input_invalid')
+      render :index
+    end
+  end
+
+  # Action for showing the user some success page.
+  def success; end
+
+  protected
+
+  # Sets the breadcrumb to this controllers index action.
+  def breadcrumb_<%=file_name %>
+    breadcrumb <%= class_name %>.model_name.human,
+               controller: '<%= '/' + ((!class_path.empty?) ? "#{class_path.join('/')}/" : '') + file_name %>',
+               action: 'index'
+  end
+
+  # See description of set_title in ApplicationController class.
+  def set_title
+    @title = <%= class_name %>.model_name.human
+  end
+
+  private
+
+  # Only allow a trusted parameter "white list" through.
+  def <%= "#{singular_table_name}_params" %>
+    params.require(:<%= singular_table_name %>).permit(render_info_<%= singular_table_name %>.keys)
+  end
+end
+<% end -%>

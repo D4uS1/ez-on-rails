@@ -1,0 +1,22 @@
+de:
+  activerecord:
+    models:
+      ez_on_rails/group:
+        one: "Gruppe"
+        other: "Gruppen"
+    attributes:
+      ez_on_rails/group:
+        name: "Name"
+        users: "Benutzer"
+        user: "Benutzergruppe von"
+  ez_on_rails:
+    groups_description: "Benutzergruppen zur Vergabe von Zugriffsrechten"
+    super_admin_group_not_destroyable: "Die Admin-Gruppe kann nicht entfernt werden."
+    super_admin_group_not_updatable: "Die Admin-Gruppe kann bearbeitet werden."
+    member_group_not_destroyable: "Die Mitglieds-Gruppe kann nicht entfernt werden."
+    member_group_not_updatable: "Die Mitglieds-Gruppe kann bearbeitet werden."
+    user_group_not_destroyable: "Benutzergruppen können nicht gelöscht werden."
+    user_does_not_exist: "Es existiert kein Benutzer mit diesem Namen."
+    username_does_not_match: "Der Benutzername muss dem Namen der Gruppe entsprechen."
+    user_not_unassignable: "Einer Benutergruppe kann der Benutzer nicht entzogen werden."
+    group_already_assigned: "Dieser Benutzer ist bereits in dieser Gruppe."

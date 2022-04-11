@@ -1,0 +1,52 @@
+de:
+  ez_on_rails:
+    are_you_sure: "Sind sie sicher?"
+    back: "Zurück"
+    cancel: "Abbrechen"
+    dashboard: "Dashboard"
+    category: "Kategorie"
+    overview: "Übersicht"
+    new: "Neu"
+    destroy_selection: "Auswahl löschen"
+    create_success_message: "%{resource_obj} wurde erfolgreich erstellt."
+    destroy_success_message: "%{resource_obj} wurde erfolgreich entfernt."
+    destroy_success_message_multiple: "%{resource_obj} wurden erfolgreich entfernt."
+    update_success_message: "%{resource_obj} wurde erfolgreich bearbeitet."
+    not_destroyable: "%{resource_obj} kann nicht entfernt werden."
+    not_destroyable_multiple: "%{count} %{resource_obj} kann nicht entfernt werden."
+    not_updatable: "%{resource_obj} kann nicht bearbeitet werden."
+    show_all: "Alle anzeigen"
+    yes_or_no: "Ja oder nein"
+    files: "Dateien"
+    id: "ID"
+    created_at: "Erstellt am"
+  years: "Jahre"
+  months: "Monate"
+  weeks: "Wochen"
+  days: "Tage"
+  hours: "Stunden"
+  minutes: "Minuten"
+  seconds: "Sekunden"
+  datetime:
+    distance_in_words:
+      x_years:
+        one: 'Eine Jahr'
+        other: '%{count} Jahre'
+      x_months:
+        one: 'Einen Monat'
+        other: '%{count} Monate'
+      x_weeks:
+        one: 'Eine Woche'
+        other: '%{count} Wochen'
+      x_days:
+        one: 'Einen Tag'
+        other: '%{count} Tage'
+      x_hours:
+        one: 'Eine Stunde'
+        other: '%{count} Stunden'
+      x_minutes:
+        one: 'Eine Minute'
+        other: '%{count} Minuten'
+      x_seconds:
+        one: 'Eine Sekunde'
+        other: '%{count} Sekunden'

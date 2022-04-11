@@ -1,0 +1,11 @@
+en:
+  activerecord:
+    models:
+      <%= (class_path + [file_name]).join('/') %>:
+        one:  "<%= human_name %>"
+        other: "<%= human_name.pluralize %>"
+    attributes:
+      <%= (class_path + [file_name]).join('/') %>:
+        <%- attributes.each do |attr| -%>
+        <%= attr.name %>: "<%= attr.name.humanize %>"
+  <%- end -%>

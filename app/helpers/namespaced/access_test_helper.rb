@@ -1,0 +1,2 @@
+module Namespaced::AccessTestHelper
+end

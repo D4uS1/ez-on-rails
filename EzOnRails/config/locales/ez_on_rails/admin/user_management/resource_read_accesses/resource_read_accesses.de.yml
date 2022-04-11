@@ -1,0 +1,13 @@
+de:
+  activerecord:
+    models:
+      ez_on_rails/resource_read_access:
+        one: "Lesezugriff"
+        other: "Lesezugriffe"
+    attributes:
+      ez_on_rails/resource_read_access:
+        group: "Gruppe"
+        resource_id: "Resource ID"
+        resource_type: "Resource Typ"
+  ez_on_rails:
+    resource_read_accesses_description: "Freigaben zum Lesen Resourcen mit Eigentümer an Gruppen"

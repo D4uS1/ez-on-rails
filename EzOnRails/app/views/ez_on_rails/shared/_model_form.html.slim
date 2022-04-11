@@ -1,0 +1,51 @@
+/ building the form options is needed because of the :post_method parameter, if this would resolve to nil
+/ the :method key in the options is nil, but it seems that somewhere in simple_form_for there is a check
+/ whether the method is defined. Hence passing nil as option will resolve in the wrong method.
+- form_options = { url: get_post_url(obj, local_assigns) }
+- form_options[:method] = local_assigns[:post_method] if local_assigns[:post_method]
+
+= simple_form_for obj, form_options do |form|
+
+  /Filter attributes we should / can not see
+  - filter_attributes! :model_form, form.object.class, render_info
+
+  /Render base errors
+  - if form.object.errors[:base].length > 0
+    p
+      - form.object.errors[:base].each do |error|
+        div.invalid-feedback.d-flex= error
+
+  /Render each field
+  - render_info.each do |attribute_key, attribute_render_info|
+    = render_attribute_container_model_form(form, attribute_key, attribute_render_info) do
+      - field_type = attribute_type form.object.class, attribute_key, attribute_render_info
+      /Boolean labels are behind the checkbox field
+      - unless field_type == :boolean
+        = render_attribute_label attribute_render_info.merge({ label_class: 'form-label' })
+      = render_attribute :model_form, form, attribute_key, attribute_render_info
+      = render_attribute_errors form, attribute_key
+      = render_attribute_help form, attribute_render_info
+      - if field_type == :boolean
+        = render_attribute_label attribute_render_info.merge({ label_class: 'form-check-label' })
+  .row
+    .col-12
+      = form.button :button, type: 'submit', class: 'btn btn-success' do
+        = ez_icon('save', class: 'me-2') unless local_assigns[:hide_save_icon]
+        = label_save_link(local_assigns)
+
+  / render additional parts to form, if given
+  - if defined? behind_submit
+    - if behind_submit.is_a? Proc
+      = behind_submit.call(form)
+    - else
+      = behind_submit
+
+  /Render control buttons
+  - if render_index_link? obj, local_assigns
+    .row.mt-2.mb-2
+      .col-12
+        = render_index_button obj, local_assigns
+  - if render_back_link? local_assigns
+    .row.mt-2.mb-2
+      .col-12
+        = render_back_button local_assigns

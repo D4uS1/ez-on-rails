@@ -1,0 +1,10 @@
+# frozen_string_literal: true
+
+<% module_namespacing do -%>
+# Model class for a <%= class_name %> Form having no Active Record.
+class <%= class_name %>
+  include ActiveModel::Model
+
+  attr_accessor <%= attributes.map{|attr| ":#{attr.name}"}.join(', ') %>
+end
+<% end -%>

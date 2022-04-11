@@ -1,0 +1,5 @@
+# frozen_string_literal: true
+
+render partial: 'validation_error_tests/validation_error_test',
+       collection: validation_error_tests,
+       as: :validation_error_test

@@ -1,0 +1,4 @@
+# frozen_string_literal: true
+
+render partial: 'oauth_client_access_tests/oauth_client_access_tests',
+       locals: { oauth_client_access_tests: @resource_objs }

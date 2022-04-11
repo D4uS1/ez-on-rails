@@ -1,0 +1,19 @@
+Description:
+    Generates an EzOnRails application. Has to be executed on a fresh rails application.
+    Can also be used to update an EzOnRails application, by passing the --update flag.
+
+Example:
+    rails generate ezapp [APP_NAME]
+
+    This will create:
+        app/views/layouts/application.html.erb
+        app/assets/stylesheets/application.scss
+        app/views/shared/_breadcrumbs.html.erb
+        app/views/shared/_dashboard.html.erb
+        app/views/shared/_header.html.erb
+        app/views/shared/_navigation.html.erb
+        app/views/shared/_title.html.erb
+        app/assets/images/logos/logo_left.png
+        app/assets/images/logos/logo_right.png
+        config/initializers/menu_structure_loader.rb
+        config/menu_structure.json

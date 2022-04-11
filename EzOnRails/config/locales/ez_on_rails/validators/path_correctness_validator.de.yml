@@ -1,0 +1,6 @@
+de:
+  ez_on_rails:
+    validators:
+      path_correctness:
+        action_error: Die Action darf keine Namespaces enthalten.
+        controller_error: Der Controller darf keine Namespaces enthalten.

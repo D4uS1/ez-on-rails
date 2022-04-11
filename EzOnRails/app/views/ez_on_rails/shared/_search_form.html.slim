@@ -1,0 +1,37 @@
+- fields_per_row ||= EzOnRails::EzScaff::SearchFormHelper::FIELDS_PER_ROW
+- print_details_tag = false unless defined?(print_details_tag)
+
+- if print_details_tag
+  = enclose_with_details_if(proc { true },
+                            t(:'ez_on_rails.search'),
+                            class_details: '',
+                            open: (print_details_tag == :open)) do
+    .mb-2.mt-2
+      = search_form_for queue_obj, url: get_search_url(obj_class, local_assigns), html: { method: :post } do |form|
+
+        /Filter attributes we should / can not see
+        - filter_attributes! :search_form, obj_class, render_info
+
+        /Render each field
+        - render_info.each_slice(fields_per_row) do |row|
+          = tag.div class: 'row' do
+            - row.each do |attribute_key, attribute_render_info|
+              / Render the field
+              div class="col-#{12 / fields_per_row}"
+                = render_attribute_container_search_form({ form: form, obj_class: obj_class },
+                      attribute_key,
+                      attribute_render_info) do
+                  = render_attribute_search_label attribute_render_info.merge({ label_class: 'form-label' })
+                  = render_attribute :search_form,
+                                     { form: form, obj_class: obj_class },
+                                     attribute_key,
+                                     attribute_render_info
+
+        .row
+          .col-12
+            = form.button :button, type: 'submit', class:'btn btn-secondary' do
+              = ez_icon('search', class: 'me-2')
+              = label_search_link(local_assigns)
+
+
+

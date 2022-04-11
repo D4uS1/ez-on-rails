@@ -1,0 +1,8 @@
+.row.mt-auto
+  .col-12.p-0
+    footer.py-1.d-flex.flex-row.justify-content-center style="background-color: #{footer_background_color};"
+      = link_to t(:imprint), imprint_path, class: 'mx-2 text-decoration-none', style: "color: #{footer_text_color};"
+      - if show_privacy_policy?
+        = link_to t(:privacy_policy), privacy_policy_path, class: 'mx-2 text-decoration-none', style: "color: #{footer_text_color};"
+      - if show_contact_form?
+        = link_to t(:contact_form), contact_form_path, class: 'mx-2 text-decoration-none', style: "color: #{footer_text_color};"

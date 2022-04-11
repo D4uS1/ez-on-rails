@@ -1,0 +1,11 @@
+en:
+  activerecord:
+    models:
+      parent_form_test:
+        one:  "Parent form test"
+        other: "Parent form tests"
+    attributes:
+      parent_form_test:
+        test: "Test"
+        nested_form_tests: "Nested Form Tests"
+        test_bool: "Test bool"

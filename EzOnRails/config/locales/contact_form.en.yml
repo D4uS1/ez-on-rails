@@ -1,0 +1,25 @@
+en:
+  activemodel:
+    models:
+      contact_form:
+        one: "Contact"
+        other: "Contact"
+    attributes:
+      contact_form:
+        name: "Name"
+        subject: "Subject"
+        message: "Message"
+        email: "Email"
+        privacy_policy_accepted: "Privacy policy accepted"
+    errors:
+      models:
+        contact_form:
+          attributes:
+            privacy_policy_accepted:
+              accepted: "The privacy policy must be accepted."
+  contact_form: "Contact us"
+  contact_form_subtitle: "Contact us"
+  message_sent_success: "Your message has been sent successfully."
+  contact_form_submit_message: "We received your message. You will receive a confirmation via email. We will answer as soon as possible."
+  message_sent_fail: "An error occured while sending. Please try again later."
+  message_received_subject: "You received a message from the contact form."

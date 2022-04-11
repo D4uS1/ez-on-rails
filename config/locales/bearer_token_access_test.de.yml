@@ -1,0 +1,9 @@
+de:
+  activerecord:
+    models:
+      bearer_token_access_test:
+        one:  "Bearer token access test"
+        other: "Bearer token access tests"
+    attributes:
+      bearer_token_access_test:
+        test: "Test"

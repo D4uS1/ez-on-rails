@@ -1,0 +1,7 @@
+# frozen_string_literal: true
+{
+  id: bearer_token_access_test.id,
+  test: bearer_token_access_test.test,
+  created_at: bearer_token_access_test.created_at,
+  updated_at: bearer_token_access_test.updated_at
+}
