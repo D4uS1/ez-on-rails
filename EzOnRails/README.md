@@ -29,7 +29,11 @@ Für die Installation wird von einer komplett frischen Rails-Applikation ausgega
 
 1. Im Gemfile folgendes eintragen:
 ```
-gem 'ez_on_rails'
+gem 'ez_on_rails',
+    '=0.7.3',
+    git: 'https://github.com/D4uS1/ez-on-rails',
+    glob: 'EzOnRails/ez_on_rails.gemspec',
+    branch: 'main'
 ```
 
 2. Bundler ausführen oder Docker-Container bauen
