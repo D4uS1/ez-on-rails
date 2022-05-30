@@ -1,0 +1,14 @@
+# exclude from github language stats
+- vendor/
+- bin/
+- tmp/
+- log/
+- node_modules/
+- public/
+- storage/
+- tmp/
+- vendor/
+- EzOnRails/public/
+- EzOnRails/bin/
+- EzOnRails/node_modules/
+- EzOnRails/tmp
