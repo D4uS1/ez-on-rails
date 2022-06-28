@@ -24,7 +24,7 @@ module EzOnRails
     # Copies the views that should not be inside the EzOnRails namespace.
     def generate_views
       directory 'app/views/users', 'app/views/users'
-      directory 'app/views/api/users', 'app/views/users'
+      directory 'app/views/api/users', 'app/views/api/users'
     end
 
     # Copies the models to the app directory.
@@ -43,6 +43,7 @@ module EzOnRails
     def generate_specs
       copy_file 'spec/models/user_spec.rb', 'spec/models/user_spec.rb'
       directory 'spec/requests/users', 'spec/requests/users'
+      directory 'spec/requests/api/users_spec.rb', 'spec/requests/api/users_spec.rb'
     end
 
     # Generate Navigation

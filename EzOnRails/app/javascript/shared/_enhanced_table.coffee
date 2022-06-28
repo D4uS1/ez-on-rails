@@ -63,7 +63,7 @@ onDocumentReady = ->
           data: tr.data()
         })
 
-    # If this is a button to call some javasciprt function, call it
+    # If this is a button to call some javascript function, call it
     return $[actionData.onclick](selections) if actionData.onclick
 
     # Otherwise call the ajax request given by url and method

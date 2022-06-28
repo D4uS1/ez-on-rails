@@ -30,14 +30,6 @@ module EzOnRails
                File.join('app/helpers', class_path, "#{file_name}_helper.rb")
     end
 
-    # Creates the asset files.
-    def generate_assets
-      copy_file 'stylesheet.scss',
-                File.join('app/assets/stylesheets', class_path, "#{file_name}.scss")
-      copy_file 'javascript.coffee',
-                File.join('app/assets/javascripts', class_path, "#{file_name}.coffee")
-    end
-
     # Creates the View of the Active Model.
     def generate_view
       template 'index.html.slim.erb',
