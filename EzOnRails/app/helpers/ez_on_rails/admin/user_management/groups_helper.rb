@@ -12,6 +12,18 @@ module EzOnRails::Admin::UserManagement::GroupsHelper
         label: EzOnRails::Group.human_attribute_name(:user),
         label_method: :email
       },
+      resource_group: {
+        label: EzOnRails::Group.human_attribute_name(:resource_group),
+      },
+      resource_read: {
+        label: EzOnRails::Group.human_attribute_name(:resource_read),
+      },
+      resource_write: {
+        label: EzOnRails::Group.human_attribute_name(:resource_write),
+      },
+      resource_destroy: {
+        label: EzOnRails::Group.human_attribute_name(:resource_destroy),
+      },
       users: {
         label: EzOnRails::Group.human_attribute_name(:users),
         label_method: :email,

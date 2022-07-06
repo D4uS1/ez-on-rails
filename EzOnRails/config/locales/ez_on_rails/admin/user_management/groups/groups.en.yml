@@ -9,6 +9,10 @@ en:
         name: "Name"
         users: "Users"
         user: "Usergroup of"
+        resource_group: "Is resource group"
+        resource_read: "Resource read access"
+        resource_write: "Resource write access"
+        resource_destroy: "Resource destroy access "
   ez_on_rails:
     groups_description: "User groups to define access rights"
     super_admin_group_not_destroyable: "The admin group can not be destroyed."

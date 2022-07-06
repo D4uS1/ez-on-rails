@@ -62,15 +62,6 @@ ActiveRecord::Schema.define(version: 2021_12_17_114421) do
     t.index ["owner_id"], name: "index_bearer_token_access_tests_on_owner_id"
   end
 
-  create_table "date_tests", force: :cascade do |t|
-    t.date "date"
-    t.datetime "datetime"
-    t.bigint "owner_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["owner_id"], name: "index_date_tests_on_owner_id"
-  end
-
   create_table "eor_group_accesses", force: :cascade do |t|
     t.string "namespace"
     t.string "controller"
@@ -87,6 +78,10 @@ ActiveRecord::Schema.define(version: 2021_12_17_114421) do
   create_table "eor_groups", force: :cascade do |t|
     t.string "name"
     t.bigint "user_id"
+    t.boolean "resource_group", default: false
+    t.boolean "resource_read", default: false
+    t.boolean "resource_write", default: false
+    t.boolean "resource_destroy", default: false
     t.bigint "owner_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -140,11 +135,14 @@ ActiveRecord::Schema.define(version: 2021_12_17_114421) do
   create_table "eor_user_group_assignments", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "group_id", null: false
+    t.string "resource_type"
+    t.bigint "resource_id"
     t.bigint "owner_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["group_id"], name: "index_eor_user_group_assignments_on_group_id"
     t.index ["owner_id"], name: "index_eor_user_group_assignments_on_owner_id"
+    t.index ["resource_type", "resource_id"], name: "index_eor_user_group_assignments_on_resource"
     t.index ["user_id", "group_id"], name: "eor_user_group_assignments_index", unique: true
     t.index ["user_id"], name: "index_eor_user_group_assignments_on_user_id"
   end
@@ -306,7 +304,6 @@ ActiveRecord::Schema.define(version: 2021_12_17_114421) do
   add_foreign_key "assoc_tests", "parent_form_tests"
   add_foreign_key "assoc_tests", "users", column: "owner_id"
   add_foreign_key "bearer_token_access_tests", "users", column: "owner_id"
-  add_foreign_key "date_tests", "users", column: "owner_id"
   add_foreign_key "eor_group_accesses", "eor_groups", column: "group_id"
   add_foreign_key "eor_group_accesses", "users", column: "owner_id"
   add_foreign_key "eor_groups", "users"

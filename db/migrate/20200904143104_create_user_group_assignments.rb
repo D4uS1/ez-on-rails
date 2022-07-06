@@ -7,6 +7,7 @@ class CreateUserGroupAssignments < ActiveRecord::Migration[5.2]
     create_table :eor_user_group_assignments do |t|
       t.belongs_to :user, index: true, null: false, foreign_key: true
       t.belongs_to :group, index: true, null: false, foreign_key: { to_table: :eor_groups }
+      t.belongs_to :resource, index: true, null: true, polymorphic: true
 
       t.belongs_to :owner, index: true, null: true, foreign_key: { to_table: :users }
 

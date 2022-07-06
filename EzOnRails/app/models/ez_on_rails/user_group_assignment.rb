@@ -6,6 +6,8 @@ class EzOnRails::UserGroupAssignment < EzOnRails::AdminRecord
 
   belongs_to :user
   belongs_to :group, class_name: 'EzOnRails::Group'
+  belongs_to :resource, polymorphic: true, optional: true
+
   belongs_to :owner, class_name: 'User', optional: true
 
   validates :user, uniqueness: {
