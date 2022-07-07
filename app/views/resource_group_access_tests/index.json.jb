@@ -1,0 +1,4 @@
+# frozen_string_literal: true
+
+render partial: 'resource_group_access_tests/resource_group_access_tests',
+       locals: { resource_group_access_tests: @resource_objs }

@@ -22,7 +22,9 @@ class EzOnRails::Ability
     ownership_infos = EzOnRails::OwnershipInfo.all
 
     # Restrict first everything if the resource is marked as restricted
-    cannot :manage, Class.const_get(ownership_info.resource)
+    ownership_infos.each do |ownership_info|
+      cannot :manage, Class.const_get(ownership_info.resource)
+    end
 
     # allow the things the user has access to
     ownership_abilities user, ownership_infos
@@ -43,6 +45,9 @@ class EzOnRails::Ability
   def ownership_abilities(user, ownership_infos)
     # For each of them
     ownership_infos.each do |ownership_info|
+      # We only want to check ownerships here
+      next unless ownership_info.ownerships
+
       # identify the resource class
       resource_clazz = Class.const_get(ownership_info.resource)
 
@@ -76,24 +81,31 @@ class EzOnRails::Ability
   # This method is expected to be called after some other method that already restricted the access to all
   # ownership_info objects.
   def resource_groups_abilities(user, ownership_infos)
+    # not logged in user has no access if resource group flag is set
+    return if user.nil?
+
     ownership_infos.each do |ownership_info|
-      # This resource is not defined to use the resource_groups permission system
+      # We only want to check the resource_groups system
       next unless ownership_info.resource_groups
 
       # identify the resource class
       resource_clazz = Class.const_get(ownership_info.resource)
 
       # get resource_groups of the user with read access set
-      read_access_groups = user.groups.where(resource_group: true, resource_read: true)
-      can :show, resource_clazz, groups: { id: read_access_groups }
+      read_access_assignment_ids = user.user_group_assignments.joins(:group)
+                                       .where('group.resource_group': true, 'group.resource_read': true).pluck(:id)
+      can :show, resource_clazz, user_group_assignments: { id: read_access_assignment_ids }
 
       # get resource_groups of the user with read access set
-      write_access_groups = user.groups.where(resource_group: true, resource_write: true)
-      can :update, resource_clazz, groups: { id: write_access_groups }
+      write_access_assignment_ids = user.user_group_assignments.joins(:group)
+                                        .where('group.resource_group': true, 'group.resource_write': true).pluck(:id)
+      can :update, resource_clazz, user_group_assignments: { id: write_access_assignment_ids }
 
       # get resource_groups of the user with read access set
-      destroy_access_groups = user.groups.where(resource_group: true, resource_destroy: true)
-      can :destroy, resource_clazz, groups: { id: destroy_access_groups }
+      destroy_access_assignment_ids = user.user_group_assignments.joins(:group)
+                                          .where('group.resource_group': true, 'group.resource_destroy': true)
+                                          .pluck(:id)
+      can :destroy, resource_clazz, user_group_assignments: { id: destroy_access_assignment_ids }
     end
   end
 end

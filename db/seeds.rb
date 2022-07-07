@@ -96,3 +96,11 @@ EzOnRails::GroupAccess.find_or_create_by! group: super_admin_group, controller: 
   access.owner = super_admin_user
 end
 
+
+# Restrict access to manage ResourceGroupAccessTests
+EzOnRails::GroupAccess.find_or_create_by! group: super_admin_group, controller: 'resource_group_access_tests' do |access|
+  access.group = super_admin_group
+  access.controller = 'resource_group_access_tests'
+  access.owner = super_admin_user
+end
+

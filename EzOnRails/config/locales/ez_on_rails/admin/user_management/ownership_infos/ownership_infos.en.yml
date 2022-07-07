@@ -7,6 +7,7 @@ en:
     attributes:
       ez_on_rails/ownership_info:
         resource: "Resource"
+        ownerships: "Has ownerships"
         sharable: "Shareble"
         on_owner_destroy: "Action on resource on user destroy"
     enums:

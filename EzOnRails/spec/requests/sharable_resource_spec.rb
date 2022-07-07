@@ -49,7 +49,7 @@ describe 'Sharable resource spec', type: :request do
   end
 
   before do
-    create(:eor_ownership_info, resource: 'SharableResource', sharable: true)
+    create(:eor_ownership_info, resource: 'SharableResource', ownerships: true, sharable: true)
   end
 
   context 'when not logged in' do

@@ -6,7 +6,8 @@ class CreateOwnershipInfos < ActiveRecord::Migration[5.2]
   def change
     create_table :eor_ownership_infos do |t|
       t.string :resource
-      t.boolean :sharable
+      t.boolean :ownerships, default: false
+      t.boolean :sharable, default: false
       t.integer :on_owner_destroy, :integer, default: 0
       t.boolean :resource_groups, default: false
 

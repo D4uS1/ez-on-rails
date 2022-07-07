@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_17_114421) do
+ActiveRecord::Schema.define(version: 2022_07_07_121422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,7 +92,8 @@ ActiveRecord::Schema.define(version: 2021_12_17_114421) do
 
   create_table "eor_ownership_infos", force: :cascade do |t|
     t.string "resource"
-    t.boolean "sharable"
+    t.boolean "ownerships", default: false
+    t.boolean "sharable", default: false
     t.integer "on_owner_destroy", default: 0
     t.integer "integer", default: 0
     t.boolean "resource_groups", default: false
@@ -250,6 +251,14 @@ ActiveRecord::Schema.define(version: 2021_12_17_114421) do
     t.index ["owner_id"], name: "index_properties_tests_on_owner_id"
   end
 
+  create_table "resource_group_access_tests", force: :cascade do |t|
+    t.string "test"
+    t.bigint "owner_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["owner_id"], name: "index_resource_group_access_tests_on_owner_id"
+  end
+
   create_table "sharable_resources", force: :cascade do |t|
     t.string "test"
     t.bigint "owner_id"
@@ -328,6 +337,7 @@ ActiveRecord::Schema.define(version: 2021_12_17_114421) do
   add_foreign_key "parent_form_tests", "users", column: "owner_id"
   add_foreign_key "properties_tests", "assoc_tests"
   add_foreign_key "properties_tests", "users", column: "owner_id"
+  add_foreign_key "resource_group_access_tests", "users", column: "owner_id"
   add_foreign_key "sharable_resources", "users", column: "owner_id"
   add_foreign_key "user_owned_records", "users", column: "owner_id"
   add_foreign_key "validation_error_tests", "users", column: "owner_id"

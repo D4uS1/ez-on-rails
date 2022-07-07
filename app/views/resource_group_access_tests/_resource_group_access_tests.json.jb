@@ -1,0 +1,5 @@
+# frozen_string_literal: true
+
+render partial: 'resource_group_access_tests/resource_group_access_test',
+       collection: resource_group_access_tests,
+       as: :resource_group_access_test
