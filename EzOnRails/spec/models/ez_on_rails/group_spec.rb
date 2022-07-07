@@ -36,6 +36,25 @@ RSpec.describe EzOnRails::Group, type: :model do
 
       expect(andrew.user_group.update(user: nil)).to be(false)
     end
+
+    it 'does not create if resource_read is set but resource_group is not set' do
+      expect(described_class.create(group_attributes.merge({ resource_group: false,
+                                                             resource_read: true }))).to be_invalid
+    end
+
+    it 'does not create if resource_write is set but resource_group is not set' do
+      expect(described_class.create(group_attributes.merge({ resource_group: false,
+                                                             resource_write: true }))).to be_invalid
+    end
+
+    it 'does not create if resource_destroy is set but resource_group is not set' do
+      expect(described_class.create(group_attributes.merge({ resource_group: false,
+                                                             resource_destroy: true }))).to be_invalid
+    end
+
+    it 'creates if resource access flag is set and resource_group is set' do
+      expect(described_class.create(group_attributes.merge({ resource_group: true, resource_read: true }))).to be_valid
+    end
   end
 
   context 'when using hooks' do

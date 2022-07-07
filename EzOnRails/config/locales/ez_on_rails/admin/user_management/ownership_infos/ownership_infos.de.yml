@@ -7,6 +7,7 @@ de:
     attributes:
       ez_on_rails/ownership_info:
         resource: "Resource"
+        ownerships: "Hat Eigentümer"
         sharable: "Freigebbar"
         on_owner_destroy: "Aktion für Resourcen beim löschen des Benutzers"
     enums:

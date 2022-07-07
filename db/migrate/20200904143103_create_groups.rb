@@ -7,6 +7,10 @@ class CreateGroups < ActiveRecord::Migration[5.2]
     create_table :eor_groups do |t|
       t.string :name
       t.belongs_to :user, index: true, null: true, foreign_key: true
+      t.boolean :resource_group, default: false
+      t.boolean :resource_read, default: false
+      t.boolean :resource_write, default: false
+      t.boolean :resource_destroy, default: false
 
       t.belongs_to :owner, index: true, null: true, foreign_key: { to_table: :users }
 

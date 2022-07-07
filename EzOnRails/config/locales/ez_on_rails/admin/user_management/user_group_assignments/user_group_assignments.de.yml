@@ -8,6 +8,8 @@ de:
       ez_on_rails/user_group_assignment:
         user: "Benutzer"
         group: "Gruppe"
+        resource_type: "Resource"
+        resource_id: "Resource ID"
   ez_on_rails:
     admin_assignment_not_destroyable: "Dem Administrator kann die Admin-Gruppe nicht entzogen werden."
     member_assignment_not_destroyable: "Der Status des Mitglieds kann einem Nutzer nicht entzogen werden."

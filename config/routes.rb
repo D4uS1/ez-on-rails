@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
 
   scope '(:locale)', locale: /en|de/ do
+    resources :resource_group_access_tests do
+      collection do
+        match 'search' => 'resource_group_access_tests#search', via: %i[get post], as: :search
+        delete :destroy_selections
+      end
+    end
+  end
+  scope '(:locale)', locale: /en|de/ do
     resources :properties_tests do
       collection do
         match 'search' => 'properties_tests#search', via: %i[get post], as: :search

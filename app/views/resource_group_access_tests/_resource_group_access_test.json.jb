@@ -1,0 +1,8 @@
+# frozen_string_literal: true
+
+{
+  id: resource_group_access_test.id,
+  test: resource_group_access_test.test,
+  created_at: resource_group_access_test.created_at,
+  updated_at: resource_group_access_test.updated_at
+}

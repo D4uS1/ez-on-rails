@@ -6,12 +6,15 @@ class EzOnRails::UserGroupAssignment < EzOnRails::AdminRecord
 
   belongs_to :user
   belongs_to :group, class_name: 'EzOnRails::Group'
+  belongs_to :resource, polymorphic: true, optional: true
+
   belongs_to :owner, class_name: 'User', optional: true
 
   validates :user, uniqueness: {
     scope: :group,
     message: I18n.t(:'ez_on_rails.group_already_assigned')
   }
+  validates_with EzOnRails::UserGroupAssignmentValidator
 
   before_update :validate_update
   before_destroy :validate_destroy, prepend: true

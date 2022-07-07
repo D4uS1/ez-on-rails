@@ -15,6 +15,8 @@ class EzOnRails::Group < EzOnRails::AdminRecord
   has_many :group_accesses,
            class_name: 'EzOnRails::GroupAccess',
            dependent: :destroy
+
+  # relations for the sharing and ownership system
   has_many :resource_read_accesses,
            class_name: 'EzOnRails::ResourceReadAccess',
            dependent: :destroy
@@ -24,7 +26,10 @@ class EzOnRails::Group < EzOnRails::AdminRecord
   has_many :resource_destroy_accesses,
            class_name: 'EzOnRails::ResourceDestroyAccess',
            dependent: :destroy
+
+  # defined if this is a user_group
   belongs_to :user, optional: true
+
   belongs_to :owner, class_name: 'User', optional: true
 
   validates :name, presence: true

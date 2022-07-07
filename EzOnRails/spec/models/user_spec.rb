@@ -152,5 +152,57 @@ RSpec.describe User, type: :model do
       user_two = described_class.create(valid_attributes.merge({ email: 'test.dat@othermail.com' }))
       expect(user_two.user_group_name).to eq('test.dat@othermail.com')
     end
+
+    context 'when using in_group?' do
+      let(:andrew) { create(:andrew) }
+      let(:group) { create(:eor_group) }
+      let(:resource) { create(:sharable_resource) }
+
+      it 'returns false if user is not assigned to the group' do
+        expect(andrew.in_group?(group.name)).to be(false)
+      end
+
+      context 'when user assigned to group' do
+        before do
+          andrew.groups << group
+        end
+
+        it 'returns true if the group is no resource group' do
+          expect(andrew.in_group?(group.name)).to be(true)
+        end
+
+        context 'when group is resource_group' do
+          before do
+            group.update(resource_group: true)
+          end
+
+          it 'returns true if user is assigned to the resource with the group' do
+            andrew.user_group_assignments.find_by(group: group).update(resource: resource)
+
+            expect(andrew.in_group?(group.name, resource)).to be(true)
+          end
+
+          it 'returns true if user is not assigned to the resource with the group and any was passed' do
+            expect(andrew.in_group?(group.name, :any)).to be(true)
+          end
+
+          it 'returns true if user is assigned to the resource with the group and any was passed' do
+            andrew.user_group_assignments.find_by(group: group).update(resource: resource)
+
+            expect(andrew.in_group?(group.name, :any)).to be(true)
+          end
+
+          it 'returns false if nil was passed as resource' do
+            andrew.user_group_assignments.find_by(group: group).update(resource: resource)
+
+            expect(andrew.in_group?(group.name)).to be(false)
+          end
+
+          it 'returns false if the user is not assigned to the resource with the group' do
+            expect(andrew.in_group?(group.name, resource)).to be(false)
+          end
+        end
+      end
+    end
   end
 end

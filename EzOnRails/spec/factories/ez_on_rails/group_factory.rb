@@ -2,6 +2,8 @@
 
 FactoryBot.define do
   factory :eor_group, class: 'EzOnRails::Group' do
+    name { Faker::Name.unique.name }
+
     # factory for non validated groups
     factory :eor_group_without_validation do
       to_create { |instance| instance.save(validate: false) }

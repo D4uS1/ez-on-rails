@@ -12,6 +12,12 @@ module EzOnRails::Admin::UserManagement::UserGroupAssignmentsHelper
       group: {
         label: EzOnRails::UserGroupAssignment.human_attribute_name(:group),
         label_method: :name
+      },
+      resource_type: {
+        label: EzOnRails::UserGroupAssignment.human_attribute_name(:resource_type)
+      },
+      resource_id: {
+        label: EzOnRails::UserGroupAssignment.human_attribute_name(:resource_id)
       }
     }
   end

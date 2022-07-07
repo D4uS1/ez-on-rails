@@ -2,12 +2,14 @@ en:
   activerecord:
     models:
       ez_on_rails/user_group_assignment:
-        one: "group assignment"
-        other: "group assignments"
+        one: "Group assignment"
+        other: "Group assignments"
     attributes:
       ez_on_rails/user_group_assignment:
         user: "User"
-        group: "group"
+        group: "Group"
+        resource_type: "Resource type"
+        resource_id: "Resource id"
   ez_on_rails:
     admin_assignment_not_destroyable: "The assignment of the admin user to the admin group can not be destroyed."
     member_assignment_not_destroyable: "The member group assignment to a user can not be destroyed."

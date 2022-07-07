@@ -1,0 +1,9 @@
+en:
+  activerecord:
+    models:
+      resource_group_access_test:
+        one:  "Resource group access test"
+        other: "Resource group access tests"
+    attributes:
+      resource_group_access_test:
+        test: "Test"

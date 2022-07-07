@@ -8,6 +8,9 @@ module EzOnRails::Admin::UserManagement::OwnershipInfosHelper
       resource: {
         label: EzOnRails::OwnershipInfo.human_attribute_name(:resource)
       },
+      ownerships: {
+        label: EzOnRails::OwnershipInfo.human_attribute_name(:ownerships)
+      },
       sharable: {
         label: EzOnRails::OwnershipInfo.human_attribute_name(:sharable)
       },

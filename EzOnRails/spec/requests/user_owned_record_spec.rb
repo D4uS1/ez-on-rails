@@ -21,7 +21,7 @@ describe 'User owned record access', type: :request do
   end
 
   before do
-    create(:eor_ownership_info, resource: 'UserOwnedRecord')
+    create(:eor_ownership_info, resource: 'UserOwnedRecord', ownerships: true)
   end
 
   context 'when not logged in' do

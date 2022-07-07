@@ -9,6 +9,10 @@ en:
         name: "Name"
         users: "Users"
         user: "Usergroup of"
+        resource_group: "Is resource group"
+        resource_read: "Resource read access"
+        resource_write: "Resource write access"
+        resource_destroy: "Resource destroy access "
   ez_on_rails:
     groups_description: "User groups to define access rights"
     super_admin_group_not_destroyable: "The admin group can not be destroyed."
@@ -20,3 +24,4 @@ en:
     username_does_not_match: "The username must match the name."
     user_not_unassignable: "The user cannot be unassigned from an usergroup."
     group_already_assigned: "This user is already assigned to that group."
+    group_no_resource_group: "This group is not flagged as resource group."
