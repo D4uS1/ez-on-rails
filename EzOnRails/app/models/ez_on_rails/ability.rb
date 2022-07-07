@@ -9,13 +9,6 @@ class EzOnRails::Ability
   # Constructor takes the current user and defines the abilities for
   # that user.
   def initialize(user)
-    ownership_infos_abilities user
-  end
-
-  private
-
-  # Adds the user owned Model Abilities to the specified user.
-  def ownership_infos_abilities(user)
     # This is necessary because cancancan does not deliver the type of the resource
     # from where the ability class is called. hence we have to allow all first
     # and then lookup which resources are marked as restricted.
@@ -24,16 +17,34 @@ class EzOnRails::Ability
     # if this user is admin, skip the abilities, because he should can do anything
     return if user&.super_admin?
 
-    # get all user owned models
+    # define ownership_info related abilities, by first allowing nothing if the class is defined
+    # and the allowing the things the user has access to
     ownership_infos = EzOnRails::OwnershipInfo.all
 
+    # Restrict first everything if the resource is marked as restricted
+    cannot :manage, Class.const_get(ownership_info.resource)
+
+    # allow the things the user has access to
+    ownership_abilities user, ownership_infos
+    resource_groups_abilities user, ownership_infos
+  end
+
+  private
+
+  # Adds the user Abilities related to the ownership and sharing system..
+  # If the user is super_admin, he has access to read, write and destroy everything.
+  # If the user is assigned as owner to some record, he has access to read, write and destroy.
+  # If the user is in a group that is assigned to a resources read-, write- or destroy_accessible_groups
+  # the user has access to read, write or destroy the resource.
+  # The ownership_infos parameter is expected to be a set of EzOnRails::OwnershipInfos for that the abilities are
+  # defined. This is used for performance reasons, because we consider to use this in multiple methods.
+  # This method is expected to be called after some other method that already restricted the access to all
+  # ownership_info objects.
+  def ownership_abilities(user, ownership_infos)
     # For each of them
     ownership_infos.each do |ownership_info|
-      # Identify class
+      # identify the resource class
       resource_clazz = Class.const_get(ownership_info.resource)
-
-      # Restrict first everything if the resource is marked as restricted
-      cannot :manage, resource_clazz
 
       # user can manage if it is noones resource
       can :manage, resource_clazz, owner: nil
@@ -53,6 +64,36 @@ class EzOnRails::Ability
 
       # user can destroy if he is in the groups that have destroy access to the resource
       can :destroy, resource_clazz, destroy_accessible_groups: { id: user.group_ids }
+    end
+  end
+
+  # Adds the abilities to the user related to the resource groups system.
+  # If a user is assigned to a group that is flagged as resource_group and the resource is flagged
+  # to check the accesses against resource_groups, the user has access to read, write or destroy the resource
+  # if the flag is set to the group and the user is assigned to the group and resource.
+  # The ownership_infos parameter is expected to be a set of EzOnRails::OwnershipInfos for that the abilities are
+  # defined. This is used for performance reasons, because we consider to use this in multiple methods.
+  # This method is expected to be called after some other method that already restricted the access to all
+  # ownership_info objects.
+  def resource_groups_abilities(user, ownership_infos)
+    ownership_infos.each do |ownership_info|
+      # This resource is not defined to use the resource_groups permission system
+      next unless ownership_info.resource_groups
+
+      # identify the resource class
+      resource_clazz = Class.const_get(ownership_info.resource)
+
+      # get resource_groups of the user with read access set
+      read_access_groups = user.groups.where(resource_group: true, resource_read: true)
+      can :show, resource_clazz, groups: { id: read_access_groups }
+
+      # get resource_groups of the user with read access set
+      write_access_groups = user.groups.where(resource_group: true, resource_write: true)
+      can :update, resource_clazz, groups: { id: write_access_groups }
+
+      # get resource_groups of the user with read access set
+      destroy_access_groups = user.groups.where(resource_group: true, resource_destroy: true)
+      can :destroy, resource_clazz, groups: { id: destroy_access_groups }
     end
   end
 end

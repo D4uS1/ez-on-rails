@@ -8,6 +8,7 @@ class CreateOwnershipInfos < ActiveRecord::Migration[5.2]
       t.string :resource
       t.boolean :sharable
       t.integer :on_owner_destroy, :integer, default: 0
+      t.boolean :resource_groups, default: false
 
       t.belongs_to :owner, index: true, null: true, foreign_key: { to_table: :users }
 

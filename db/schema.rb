@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 2021_12_17_114421) do
     t.boolean "sharable"
     t.integer "on_owner_destroy", default: 0
     t.integer "integer", default: 0
+    t.boolean "resource_groups", default: false
     t.bigint "owner_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
