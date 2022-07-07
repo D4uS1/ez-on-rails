@@ -13,6 +13,7 @@ class <%= class_name %> < EzOnRails::ApplicationRecord
   belongs_to :owner, class_name: 'User', optional: true
   <%- if @sharable -%>
 
+  # associations for the ownership and sharing system
   has_many :read_accesses, class_name: 'EzOnRails::ResourceReadAccess', dependent: :destroy, as: :resource
   has_many :read_accessible_groups,
            through: :read_accesses,
@@ -29,6 +30,11 @@ class <%= class_name %> < EzOnRails::ApplicationRecord
            source: :group,
            class_name: 'EzOnRails::Group'
   <%- end -%>
+
+  # associations for the resource_groups access system
+  has_many :user_group_assignments, as: :resource, class_name: 'EzOnRails::UserGroupAssignment'
+  has_many :groups, through: :user_group_assignments, class_name: 'EzOnRails::Group'
+
   <%- attributes.select(&:token?).each do |attribute| -%>
   has_secure_token<% if attribute.name != "token" %> :<%= attribute.name %><% end %>
   <%- end -%>
