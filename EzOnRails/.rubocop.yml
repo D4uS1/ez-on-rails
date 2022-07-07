@@ -117,6 +117,8 @@ RSpec/InstanceVariable:
     - '**/*/registrations_controller_spec.rb' # devise requires using @request instance variable here
 RSpec/MultipleMemoizedHelpers:
   Enabled: false # If mutliple memoized helper causes the code to be more readable, it is ok
+RSpec/NestedGroups:
+  Enabled: false # Sometimes it is better to have nested group rather than too large example names
 RSpec/VariableName:
   Exclude:
     - 'spec/integration/**/*_spec.rb' # api-version is passed in generated api integration specs. Using underscore for http headers is uncommon and needs extra configuration by some web servers.

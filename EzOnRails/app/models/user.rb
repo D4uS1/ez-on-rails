@@ -112,6 +112,26 @@ class User < ApplicationRecord
                          })
   end
 
+  # Returns whether the user is assigned to the group having the specified group_name or not.
+  # If a resource is passed it is assumed that the group behind the group_name is flagged as resource_group.
+  # In this case it will be checked whether the user is assigned to the group for the specified resource.
+  # If you pass :any as resource and the group is a resource_group, true will be returned if if the user
+  # is assigned to that group, independent of the resource.
+  def in_group?(group_name, resource = nil)
+    # find the group
+    group = groups.find_by(name: group_name)
+    return false unless group
+
+    # group was found and group is no resource group, or group is resource group and any was passed
+    return true if !group.resource_group || resource == :any
+
+    # group was found and group is resource group, but no resource is given
+    return false unless resource
+
+    # group was found and group is resource group but user is not in that group for the resource
+    !user_group_assignments.find_by(group: group, resource: resource).nil?
+  end
+
   private
 
   # Performs an cascading action on the owned resource of the user if the user is destroyed.
