@@ -12,7 +12,7 @@ RSpec.configure do |config|
     Capybara::Selenium::Driver.new(
       app,
       browser: :remote,
-      url: ENV['SELENIUM_URL'],
+      url: ENV.fetch('SELENIUM_URL', nil),
       desired_capabilities: :chrome,
       http_client: client
     )

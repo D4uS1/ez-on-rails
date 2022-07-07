@@ -24,3 +24,4 @@ de:
     username_does_not_match: "Der Benutzername muss dem Namen der Gruppe entsprechen."
     user_not_unassignable: "Einer Benutergruppe kann der Benutzer nicht entzogen werden."
     group_already_assigned: "Dieser Benutzer ist bereits in dieser Gruppe."
+    group_no_resource_group: "Die Gruppe ist nicht als Resourcen-Gruppe gekennzeichnet."

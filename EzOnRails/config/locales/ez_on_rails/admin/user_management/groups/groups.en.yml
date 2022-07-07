@@ -24,3 +24,4 @@ en:
     username_does_not_match: "The username must match the name."
     user_not_unassignable: "The user cannot be unassigned from an usergroup."
     group_already_assigned: "This user is already assigned to that group."
+    group_no_resource_group: "This group is not flagged as resource group."

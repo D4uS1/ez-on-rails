@@ -15,6 +15,7 @@ RSpec.describe EzOnRails::UserGroupAssignment, type: :model do
       user_id: user.id
     }
   end
+  let(:resource) { create(:sharable_resource) }
 
   context 'when validating' do
     it 'creates valid record' do
@@ -37,6 +38,18 @@ RSpec.describe EzOnRails::UserGroupAssignment, type: :model do
       described_class.create(user_group_assignment_attributes)
 
       expect(described_class.create(user_group_assignment_attributes)).to be_invalid
+    end
+
+    it 'does not create if resource is assigned but group is not flagged as resource group' do
+      testgroup.update(resource_group: false)
+
+      expect(described_class.create(user_group_assignment_attributes.merge({ resource: resource }))).to be_invalid
+    end
+
+    it 'creates if resource is assigned and group is flagged as resource group' do
+      testgroup.update(resource_group: true)
+
+      expect(described_class.create(user_group_assignment_attributes.merge({ resource: resource }))).to be_valid
     end
   end
 

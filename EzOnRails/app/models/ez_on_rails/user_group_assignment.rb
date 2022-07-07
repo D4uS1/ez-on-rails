@@ -14,6 +14,7 @@ class EzOnRails::UserGroupAssignment < EzOnRails::AdminRecord
     scope: :group,
     message: I18n.t(:'ez_on_rails.group_already_assigned')
   }
+  validates_with EzOnRails::UserGroupAssignmentValidator
 
   before_update :validate_update
   before_destroy :validate_destroy, prepend: true
