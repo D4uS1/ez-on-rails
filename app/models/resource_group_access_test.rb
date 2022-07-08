@@ -9,6 +9,6 @@ class ResourceGroupAccessTest < EzOnRails::ApplicationRecord
   belongs_to :owner, class_name: 'User', optional: true
 
   # associations for the resource_groups access system
-  has_many :user_group_assignments, as: :resource, class_name: 'EzOnRails::UserGroupAssignment'
+  has_many :user_group_assignments, as: :resource, class_name: 'EzOnRails::UserGroupAssignment', dependent: :destroy
   has_many :groups, through: :user_group_assignments, class_name: 'EzOnRails::Group'
 end
