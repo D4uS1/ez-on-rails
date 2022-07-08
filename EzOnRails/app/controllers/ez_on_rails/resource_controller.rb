@@ -147,7 +147,7 @@ class EzOnRails::ResourceController < EzOnRails::ApplicationController
     @queue_obj = model_class.ransack(@search_params)
 
     # add default sorting, because default seems to be updated_at asc
-    @queue_obj.sorts = 'id asc' if @queue_obj.sorts.empty?
+    @queue_obj.sorts = "#{default_order.keys.first} #{default_order.values.first}" if @queue_obj.sorts.empty?
 
     # construct query with access restrictions
     # NASTY HACK: Only fetch the different ids, to simulate a distinct, this is needed
@@ -231,5 +231,11 @@ class EzOnRails::ResourceController < EzOnRails::ApplicationController
   # Sets the owner of the given resource to the current user.
   def owner(resource)
     resource.owner = current_user if resource.respond_to?(:owner) && resource.owner.nil?
+  end
+
+  # The default order list actions order its results by.
+  # expects a hash having the key to order by and the order direction (:asc, :desc) as value.
+  def default_order
+    { id: :asc }
   end
 end

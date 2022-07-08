@@ -138,6 +138,23 @@ RSpec.describe 'api/validation_error_tests', type: :request do
                        })
       )
     end
+
+    it 'orders by overwritten default order' do
+      record_b = create(:validation_error_test, name: 'B')
+      record_c = create(:validation_error_test, name: 'C')
+      record_a = create(:validation_error_test, name: 'A')
+
+      get api_validation_error_tests_path,
+          headers: auth_headers_admin
+
+      response_body = JSON.parse(response.body)
+
+      expect(response).to have_http_status(:success)
+      expect(response_body.length).to eq(3)
+      expect(response_body[0]['id']).to eq(record_c.id)
+      expect(response_body[1]['id']).to eq(record_b.id)
+      expect(response_body[2]['id']).to eq(record_a.id)
+    end
   end
 
   context 'when requesting search' do
@@ -159,6 +176,23 @@ RSpec.describe 'api/validation_error_tests', type: :request do
                          validation_error_test: ValidationErrorTest.last
                        })
       )
+    end
+
+    it 'orders by overwritten default_order if no order is specified' do
+      record_b = create(:validation_error_test, name: 'B')
+      record_c = create(:validation_error_test, name: 'C')
+      record_a = create(:validation_error_test, name: 'A')
+
+      post search_api_validation_error_tests_path,
+           headers: auth_headers_admin
+
+      response_body = JSON.parse(response.body)
+
+      expect(response).to have_http_status(:success)
+      expect(response_body['results'].length).to eq(3)
+      expect(response_body['results'][0]['id']).to eq(record_c.id)
+      expect(response_body['results'][1]['id']).to eq(record_b.id)
+      expect(response_body['results'][2]['id']).to eq(record_a.id)
     end
   end
 

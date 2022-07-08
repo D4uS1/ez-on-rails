@@ -17,4 +17,9 @@ class ValidationErrorTestsController < EzOnRails::ResourceController
                controller: '/validation_error_tests',
                action: 'index'
   end
+
+  # Overwrites the default order.
+  def default_order
+    { name: :desc }
+  end
 end

@@ -24,7 +24,7 @@ class EzOnRails::Api::ResourceController < EzOnRails::Api::BaseController
     @resource_objs = model_class.accessible_by(
       current_ability,
       :show
-    )
+    ).order(default_order)
   end
 
   # GET search action to search for existing resourcey by matching attributes.
@@ -37,8 +37,8 @@ class EzOnRails::Api::ResourceController < EzOnRails::Api::BaseController
     )
 
     # append order query
-    order = params[:order] || 'id'
-    order_direction = params[:order_direction] || 'asc'
+    order = params[:order] || default_order.keys.first
+    order_direction = params[:order_direction] || default_order.values.first
     @resource_objs = @resource_objs.order("#{order} #{order_direction}")
 
     # append pagination, if given
@@ -140,5 +140,11 @@ class EzOnRails::Api::ResourceController < EzOnRails::Api::BaseController
   # engines ability class.
   def current_ability
     @current_ability ||= EzOnRails::Ability.new(current_user)
+  end
+
+  # The default order list actions order its results by.
+  # expects a hash having the key to order by and the order direction (:asc, :desc) as value.
+  def default_order
+    { id: :asc }
   end
 end
