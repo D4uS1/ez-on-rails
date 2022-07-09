@@ -20,8 +20,8 @@ RSpec.describe 'api/resource_controller', type: :request do
   end
 
   context 'when requesting search' do
-    let(:record_one) { create(:validation_error_test, name: 'One', number: 1) }
-    let(:record_two) { create(:validation_error_test, name: 'Two', number: 1) }
+    let(:record_one) { create(:validation_error_test, name: 'B', number: 1) }
+    let(:record_two) { create(:validation_error_test, name: 'A', number: 1) }
 
     before do
       record_one
