@@ -145,7 +145,7 @@ ActiveRecord::Schema.define(version: 2022_07_07_121422) do
     t.index ["group_id"], name: "index_eor_user_group_assignments_on_group_id"
     t.index ["owner_id"], name: "index_eor_user_group_assignments_on_owner_id"
     t.index ["resource_type", "resource_id"], name: "index_eor_user_group_assignments_on_resource"
-    t.index ["user_id", "group_id"], name: "eor_user_group_assignments_index", unique: true
+    t.index ["user_id", "group_id", "resource_type", "resource_id"], name: "eor_user_group_assignments_index", unique: true
     t.index ["user_id"], name: "index_eor_user_group_assignments_on_user_id"
   end
 

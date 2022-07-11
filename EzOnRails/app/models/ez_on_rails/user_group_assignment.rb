@@ -11,7 +11,7 @@ class EzOnRails::UserGroupAssignment < EzOnRails::AdminRecord
   belongs_to :owner, class_name: 'User', optional: true
 
   validates :user, uniqueness: {
-    scope: :group,
+    scope: %i[group resource],
     message: I18n.t(:'ez_on_rails.group_already_assigned')
   }
   validates_with EzOnRails::UserGroupAssignmentValidator

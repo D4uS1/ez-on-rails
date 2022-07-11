@@ -15,7 +15,7 @@ class CreateUserGroupAssignments < ActiveRecord::Migration[5.2]
     end
 
     add_index :eor_user_group_assignments,
-              %i[user_id group_id],
+              %i[user_id group_id resource_type resource_id],
               unique: true,
               name: 'eor_user_group_assignments_index'
   end

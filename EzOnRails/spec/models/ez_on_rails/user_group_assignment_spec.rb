@@ -34,10 +34,39 @@ RSpec.describe EzOnRails::UserGroupAssignment, type: :model do
              )).to be_invalid
     end
 
-    it 'user and group is unique' do
+    it 'does not create if group was already assigned to the user without resource' do
       described_class.create(user_group_assignment_attributes)
 
       expect(described_class.create(user_group_assignment_attributes)).to be_invalid
+    end
+
+    it 'does not create if group was already assigned to the user with resource' do
+      testgroup.update(resource_group: true)
+
+      described_class.create(user_group_assignment_attributes.merge({
+                                                                      resource_type: resource.class.to_s,
+                                                                      resource_id: resource.id
+                                                                    }))
+
+      expect(described_class.create(user_group_assignment_attributes.merge({
+                                                                             resource_type: resource.class.to_s,
+                                                                             resource_id: resource.id
+                                                                           }))).to be_invalid
+    end
+
+    it 'creates if user was already assigned to the group with other resource' do
+      testgroup.update(resource_group: true)
+      resource_two = create(:sharable_resource)
+
+      described_class.create(user_group_assignment_attributes.merge({
+                                                                      resource_type: resource.class.to_s,
+                                                                      resource_id: resource.id
+                                                                    }))
+
+      expect(described_class.create(user_group_assignment_attributes.merge({
+                                                                             resource_type: resource_two.class.to_s,
+                                                                             resource_id: resource_two.id
+                                                                           }))).to be_valid
     end
 
     it 'does not create if resource is assigned but group is not flagged as resource group' do
