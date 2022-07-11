@@ -204,5 +204,57 @@ RSpec.describe User, type: :model do
         end
       end
     end
+
+    context 'when using add_group' do
+      let(:andrew) { create(:andrew) }
+      let(:group) { create(:eor_group) }
+      let(:resource) { create(:sharable_resource) }
+
+      it 'returns true after adding group without resource' do
+        result = andrew.add_group group.name
+
+        andrew.reload
+        expect(result).to be(true)
+        expect(andrew.in_group?(group.name)).to be(true)
+      end
+
+      it 'returns true after adding group with resource' do
+        group.update(resource_group: true)
+        result = andrew.add_group group.name, resource
+
+        andrew.reload
+        expect(result).to be(true)
+        expect(andrew.in_group?(group.name, resource)).to be(true)
+      end
+
+      it 'returns false for adding existing group assignment without resource' do
+        andrew.add_group group.name
+
+        result = andrew.add_group group.name
+
+        andrew.reload
+        expect(result).to be(false)
+        expect(andrew.user_group_assignments.where(group: group).count).to eq(1)
+      end
+
+      it 'returns false for adding existing group assignment with resource' do
+        group.update(resource_group: true)
+        andrew.add_group group.name, resource
+
+        result = andrew.add_group group.name, resource
+
+        andrew.reload
+        expect(result).to be(false)
+        expect(andrew.user_group_assignments.where(group: group).count).to eq(1)
+      end
+
+      it 'returns false for non existing group' do
+        andrew.add_group group.name
+
+        result = andrew.add_group 'Not existent'
+
+        expect(result).to be(false)
+      end
+    end
   end
 end

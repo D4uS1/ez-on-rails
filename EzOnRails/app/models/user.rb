@@ -132,6 +132,19 @@ class User < ApplicationRecord
     !user_group_assignments.find_by(group: group, resource: resource).nil?
   end
 
+  # Assigns the user to the group having the specified group_name.
+  # If a resource is defined the assignment is also associated to the specified resource.
+  # This can be eg. used to create something like "manager for resource".
+  def add_group(group_name, resource = nil)
+    # find the group
+    group = EzOnRails::Group.find_by(name: group_name)
+    return false unless group
+
+    # try to assign
+    user_group_assignment = EzOnRails::UserGroupAssignment.create(user: self, group: group, resource: resource)
+    user_group_assignment.valid?
+  end
+
   private
 
   # Performs an cascading action on the owned resource of the user if the user is destroyed.
