@@ -100,6 +100,14 @@ module EzOnRails
     # Appends the seeds fo the user management.
     def generate_seeds
       append_to_file 'db/seeds.rb', "
+# initial admin and member group
+super_admin_group = EzOnRails::Group.find_or_create_by! name: EzOnRails::Group::SUPER_ADMIN_GROUP_NAME do |group|
+  group.name = EzOnRails::Group::SUPER_ADMIN_GROUP_NAME
+end
+member_group = EzOnRails::Group.find_or_create_by! name: EzOnRails::Group::MEMBER_GROUP_NAME do |group|
+  group.name = EzOnRails::Group::MEMBER_GROUP_NAME
+end
+
 # initial admin user
 super_admin_user = User.find_or_create_by! username: User::SUPER_ADMIN_USERNAME do |user|
   user.username = User::SUPER_ADMIN_USERNAME
@@ -109,31 +117,18 @@ super_admin_user = User.find_or_create_by! username: User::SUPER_ADMIN_USERNAME 
   user.privacy_policy_accepted = true
 end
 
-# initial admin and member group
-super_admin_group = EzOnRails::Group.find_or_create_by! name: EzOnRails::Group::SUPER_ADMIN_GROUP_NAME do |group|
-  group.name = EzOnRails::Group::SUPER_ADMIN_GROUP_NAME
-  group.owner = super_admin_user
-end
-member_group = EzOnRails::Group.find_or_create_by! name: EzOnRails::Group::MEMBER_GROUP_NAME do |group|
-  group.name = EzOnRails::Group::MEMBER_GROUP_NAME
-  group.owner = super_admin_user
-end
-
 # initial admin group assignment and access
 EzOnRails::UserGroupAssignment.find_or_create_by! user: super_admin_user, group: super_admin_group do |group_assignment|
   group_assignment.user = super_admin_user
   group_assignment.group = super_admin_group
-  group_assignment.owner = super_admin_user
 end
 EzOnRails::UserGroupAssignment.find_or_create_by! user: super_admin_user, group: member_group do |group_assignment|
   group_assignment.user = super_admin_user
   group_assignment.group = member_group
-  group_assignment.owner = super_admin_user
 end
 EzOnRails::GroupAccess.find_or_create_by! group: super_admin_group, namespace: EzOnRails::GroupAccess::ADMIN_AREA_NAMESPACE do |group_access|
   group_access.group = super_admin_group
   group_access.namespace = EzOnRails::GroupAccess::ADMIN_AREA_NAMESPACE
-  group_access.owner = super_admin_user
 end
 
 # initial active storage rights
@@ -141,13 +136,11 @@ EzOnRails::GroupAccess.find_or_create_by! group: member_group, namespace: 'api/a
   group_access.group = member_group
   group_access.namespace = 'api/active_storage'
   group_access.controller = 'blobs'
-  group_access.owner = super_admin_user
 end
 EzOnRails::GroupAccess.find_or_create_by! group: member_group, namespace: 'ez_on_rails/active_storage', controller: 'blobs' do |group_access|
   group_access.group = member_group
   group_access.namespace = 'ez_on_rails/active_storage'
   group_access.controller = 'blobs'
-  group_access.owner = super_admin_user
 end
 
 # Restrict access to users API
@@ -155,7 +148,6 @@ EzOnRails::GroupAccess.find_or_create_by! group: member_group, namespace: 'api',
   access.group = member_group
   access.namespace = 'api'
   access.controller = 'users'
-  access.owner = super_admin_user
 end
 "
     end

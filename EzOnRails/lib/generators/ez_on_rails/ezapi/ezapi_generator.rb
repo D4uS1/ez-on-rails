@@ -282,7 +282,6 @@ EzOnRails::GroupAccess.find_or_create_by! group: member_group, namespace: '#{ cl
   access.group = member_group
   access.namespace = '#{ class_path.length > 0 ? (['api'] + class_path).join('/') : 'api' }'
   access.controller = '#{@resource ? plural_file_name : file_name}'
-  access.owner = super_admin_user
 end
 
 "

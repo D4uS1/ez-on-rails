@@ -152,7 +152,6 @@ EzOnRails::GroupAccess.find_or_create_by! group: super_admin_group#{ class_path.
   access.group = super_admin_group#{ class_path.length > 0 ? '
   access.namespace = \'' + class_path.join('/') + '\'' : '' }
   access.controller = '#{plural_file_name}'
-  access.owner = super_admin_user
 end
 
 "
