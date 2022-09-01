@@ -28,6 +28,7 @@ module EzOnRails
     # Extracts the given options from the command lien arguments and saves them to instance variables.
     def set_options
       @sharable = options['sharable']
+      @namespace_prefix = class_path.length > 0 ? "#{class_path.join('_')}_" : ''
     end
 
 

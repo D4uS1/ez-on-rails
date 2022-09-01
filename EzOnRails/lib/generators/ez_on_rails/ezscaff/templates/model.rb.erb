@@ -3,7 +3,7 @@
 
 # Model class defining a <%= class_name %>.
 class <%= class_name %> < EzOnRails::ApplicationRecord
-  self.table_name = :<%= plural_file_name %>
+  self.table_name = :<%= @namespace_prefix %><%= plural_file_name %>
 
   scoped_search on: self::search_keys
 

@@ -3,7 +3,7 @@
 <%- attrs_with_values = attributes_with_values(class_name, attributes) -%>
 
 FactoryBot.define do
-  factory :<%= file_name %>, class: '<%= class_name %>' do
+  factory :<%= @namespace_prefix %><%= file_name %>, class: '<%= class_name %>' do
     <%- attrs_with_values.each do |key, value| -%>
     <%- next if association_attrs.include? key.to_s -%>
     <%= key %> { <%= value.is_a?(String) ? "'#{value}'": value %> }

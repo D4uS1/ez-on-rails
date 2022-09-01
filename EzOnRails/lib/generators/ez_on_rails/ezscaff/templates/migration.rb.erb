@@ -5,7 +5,7 @@ class Create<%= plural_file_name.camelize %> < ActiveRecord::Migration[<%= Activ
 
   # Applies the changes to the database.
   def change
-    create_table :<%= plural_file_name %><%= primary_key_type %> do |t|
+    create_table :<%= @namespace_prefix %><%= plural_file_name %><%= primary_key_type %> do |t|
       <%- attributes.each do |attribute| -%>
       <%- if attribute.password_digest? -%>
       t.string :password_digest<%= attribute.inject_options %>

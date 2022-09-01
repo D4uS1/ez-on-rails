@@ -1,4 +1,3 @@
-<%- namespace_prefix = class_path.length > 0 ? "#{class_path.join('_')}_" : '' -%>
 <%- association_attrs = association_attributes(class_name, attributes) -%>
 # frozen_string_literal: true
 
@@ -19,70 +18,70 @@ RSpec.describe '<%= class_path.length > 0 ? "#{class_path.join('/')}/" : '' %><%
   <%- if association_attrs.length > 0 -%>
   let(:<%= file_name %>_params) do
     attributes_for(
-      :<%= namespace_prefix %><%= file_name %>,
+      :<%= @namespace_prefix %><%= file_name %>,
       <%-association_attrs.each_with_index do |attribute, index| -%>
       <%= attribute %>_id: create(:<%= attribute %>).id<%= index < association_attrs.length - 1 ? ',' : '' %>
       <%- end -%>
     )
   end
   <%- else -%>
-  let(:<%= file_name %>_params) { attributes_for(:<%= namespace_prefix %><%= file_name %>) }
+  let(:<%= file_name %>_params) { attributes_for(:<%= @namespace_prefix %><%= file_name %>) }
   <%- end -%>
 
   # for test of update, destroy and show actions
   context 'when not logged in' do
     it 'can not get index' do
-      get <%= namespace_prefix %><%= plural_file_name %>_url
+      get <%= @namespace_prefix %><%= plural_file_name %>_url
 
       expect(response).to redirect_to(new_user_session_path)
     end
 
     it 'can not get search' do
-      get search_<%= namespace_prefix %><%= plural_file_name %>_url
+      get search_<%= @namespace_prefix %><%= plural_file_name %>_url
 
       expect(response).to redirect_to(new_user_session_path)
     end
 
     it 'can not search' do
-      post search_<%= namespace_prefix %><%= plural_file_name %>_url
+      post search_<%= @namespace_prefix %><%= plural_file_name %>_url
 
       expect(response).to redirect_to(new_user_session_path)
     end
 
     it 'can not show <%= file_name %>' do
-      get <%= namespace_prefix %><%= file_name %>_url(id: <%= file_name %>.id)
+      get <%= @namespace_prefix %><%= file_name %>_url(id: <%= file_name %>.id)
 
       expect(response).to redirect_to(new_user_session_path)
     end
 
     it 'can not get new' do
-      get new_<%= namespace_prefix %><%= file_name %>_url
+      get new_<%= @namespace_prefix %><%= file_name %>_url
 
       expect(response).to redirect_to(new_user_session_path)
     end
 
     it 'can not create' do
-      post <%= namespace_prefix %><%= plural_file_name %>_url, params: { <%= file_name %>: <%= file_name %>_params }
+      post <%= @namespace_prefix %><%= plural_file_name %>_url, params: { <%= file_name %>: <%= file_name %>_params }
 
       expect(<%= class_name %>.count).to eq(0)
       expect(response).to redirect_to(new_user_session_path)
     end
 
     it 'can not get edit' do
-      get edit_<%= namespace_prefix %><%= file_name %>_url(id: <%= file_name %>.id)
+      get edit_<%= @namespace_prefix %><%= file_name %>_url(id: <%= file_name %>.id)
 
       expect(response).to redirect_to(new_user_session_path)
     end
 
     it 'can not update <%= file_name %>' do
-      patch <%= namespace_prefix %><%= file_name %>_url(id: <%= file_name %>.id), params: { <%= file_name %>: <%= file_name %>_params }
+      patch <%= @namespace_prefix %><%= file_name %>_url(id: <%= file_name %>.id), params: { <%= file_name %>: <%= file_name %>_params }
 
       expect(response).to redirect_to(new_user_session_path)
     end
 
     it 'can not destroy <%= file_name %>' do
       objects_count = <%= file_name %>.class.count
-      delete <%= namespace_prefix %><%= file_name %>_url(id: <%= file_name %>.id)
+      delete <%= @namespace_prefix %><%= file_name %>_url(id: <%= file_name %>.id)
 
       expect(<%= class_name %>.count).to eql(objects_count)
       expect(response).to redirect_to(new_user_session_path)
@@ -92,7 +91,7 @@ RSpec.describe '<%= class_path.length > 0 ? "#{class_path.join('/')}/" : '' %><%
       create(:<%= file_name %>, <%= file_name %>_params)
       objects_count = <%= file_name %>.class.count
 
-      delete destroy_selections_<%= namespace_prefix %><%= plural_file_name %>_url, params: {
+      delete destroy_selections_<%= @namespace_prefix %><%= plural_file_name %>_url, params: {
         selections: ActiveSupport::JSON.encode([{ data: { id: <%= file_name %>.id }}])
       }
 
@@ -107,57 +106,57 @@ RSpec.describe '<%= class_path.length > 0 ? "#{class_path.join('/')}/" : '' %><%
     end
 
     it 'can not get index' do
-      get <%= namespace_prefix %><%= plural_file_name %>_url
+      get <%= @namespace_prefix %><%= plural_file_name %>_url
 
       expect(response).to have_http_status(:forbidden)
     end
 
     it 'can not get search' do
-      get search_<%= namespace_prefix %><%= plural_file_name %>_url
+      get search_<%= @namespace_prefix %><%= plural_file_name %>_url
 
       expect(response).to have_http_status(:forbidden)
     end
 
     it 'can not search' do
-      post search_<%= namespace_prefix %><%= plural_file_name %>_url
+      post search_<%= @namespace_prefix %><%= plural_file_name %>_url
 
       expect(response).to have_http_status(:forbidden)
     end
 
     it 'can not show <%= file_name %>' do
-      get <%= namespace_prefix %><%= file_name %>_url(id: <%= file_name %>.id)
+      get <%= @namespace_prefix %><%= file_name %>_url(id: <%= file_name %>.id)
 
       expect(response).to have_http_status(:forbidden)
     end
 
     it 'can not get new' do
-      get new_<%= namespace_prefix %><%= file_name %>_url
+      get new_<%= @namespace_prefix %><%= file_name %>_url
 
       expect(response).to have_http_status(:forbidden)
     end
 
     it 'can not create' do
-      post <%= namespace_prefix %><%= plural_file_name %>_url, params: { <%= file_name %>: <%= file_name %>_params }
+      post <%= @namespace_prefix %><%= plural_file_name %>_url, params: { <%= file_name %>: <%= file_name %>_params }
 
       expect(<%= class_name %>.count).to eq(0)
       expect(response).to have_http_status(:forbidden)
     end
 
     it 'can not get edit' do
-      get edit_<%= namespace_prefix %><%= file_name %>_url(id: <%= file_name %>.id)
+      get edit_<%= @namespace_prefix %><%= file_name %>_url(id: <%= file_name %>.id)
 
       expect(response).to have_http_status(:forbidden)
     end
 
     it 'can not update <%= file_name %>' do
-      patch <%= namespace_prefix %><%= file_name %>_url(id: <%= file_name %>.id), params: { <%= file_name %>: <%= file_name %>_params }
+      patch <%= @namespace_prefix %><%= file_name %>_url(id: <%= file_name %>.id), params: { <%= file_name %>: <%= file_name %>_params }
 
       expect(response).to have_http_status(:forbidden)
     end
 
     it 'can not destroy <%= file_name %>' do
       objects_count = <%= file_name %>.class.count
-      delete <%= namespace_prefix %><%= file_name %>_url(id: <%= file_name %>.id)
+      delete <%= @namespace_prefix %><%= file_name %>_url(id: <%= file_name %>.id)
 
       expect(<%= class_name %>.count).to eql(objects_count)
       expect(response).to have_http_status(:forbidden)
@@ -167,7 +166,7 @@ RSpec.describe '<%= class_path.length > 0 ? "#{class_path.join('/')}/" : '' %><%
       create(:<%= file_name %>, <%= file_name %>_params)
       objects_count = <%= file_name %>.class.count
 
-      delete destroy_selections_<%= namespace_prefix %><%= plural_file_name %>_url, params: {
+      delete destroy_selections_<%= @namespace_prefix %><%= plural_file_name %>_url, params: {
         selections: ActiveSupport::JSON.encode([{ data: { id: <%= file_name %>.id }}])
       }
 
@@ -182,74 +181,74 @@ RSpec.describe '<%= class_path.length > 0 ? "#{class_path.join('/')}/" : '' %><%
     end
 
     it 'can get index' do
-      get <%= namespace_prefix %><%= plural_file_name %>_url
+      get <%= @namespace_prefix %><%= plural_file_name %>_url
 
       expect(response).to have_http_status(:success)
     end
 
     it 'can get search' do
-      get search_<%= namespace_prefix %><%= plural_file_name %>_url
+      get search_<%= @namespace_prefix %><%= plural_file_name %>_url
 
       expect(response).to have_http_status(:success)
     end
 
     it 'can search' do
-      post search_<%= namespace_prefix %><%= plural_file_name %>_url
+      post search_<%= @namespace_prefix %><%= plural_file_name %>_url
 
       expect(response).to have_http_status(:success)
     end
 
     it 'can show <%= file_name %>' do
-      get <%= namespace_prefix %><%= file_name %>_url(id: <%= file_name %>.id)
+      get <%= @namespace_prefix %><%= file_name %>_url(id: <%= file_name %>.id)
 
       expect(response).to have_http_status(:success)
     end
 
     it 'can get new' do
-      get new_<%= namespace_prefix %><%= file_name %>_url
+      get new_<%= @namespace_prefix %><%= file_name %>_url
 
       expect(response).to have_http_status(:success)
     end
 
     it 'can create <%= file_name %>' do
-      post <%= namespace_prefix %><%= plural_file_name %>_url, params: { <%= file_name %>: <%= file_name %>_params }
+      post <%= @namespace_prefix %><%= plural_file_name %>_url, params: { <%= file_name %>: <%= file_name %>_params }
       created_object = <%= class_name %>.last
 
       expect(<%= class_name %>.count).to eq(1)
-      expect(response).to redirect_to(<%= namespace_prefix %><%= file_name %>_path(created_object))
+      expect(response).to redirect_to(<%= @namespace_prefix %><%= file_name %>_path(created_object))
     end
 
     it 'can get edit' do
-      get edit_<%= namespace_prefix %><%= file_name %>_url(id: <%= file_name %>.id)
+      get edit_<%= @namespace_prefix %><%= file_name %>_url(id: <%= file_name %>.id)
 
       expect(response).to have_http_status(:success)
     end
 
     it 'can update <%= file_name %>' do
-      patch <%= namespace_prefix %><%= file_name %>_url(id: <%= file_name %>.id), params: { <%= file_name %>: <%= file_name %>_params }
+      patch <%= @namespace_prefix %><%= file_name %>_url(id: <%= file_name %>.id), params: { <%= file_name %>: <%= file_name %>_params }
 
-      expect(response).to redirect_to(<%= namespace_prefix %><%= file_name %>_path(<%= file_name %>))
+      expect(response).to redirect_to(<%= @namespace_prefix %><%= file_name %>_path(<%= file_name %>))
     end
 
     it 'can destroy <%= file_name %>' do
       objects_count = <%= file_name %>.class.count
 
-      delete <%= namespace_prefix %><%= file_name %>_url(id: <%= file_name %>.id)
+      delete <%= @namespace_prefix %><%= file_name %>_url(id: <%= file_name %>.id)
 
       expect(<%= class_name %>.count).to eql(objects_count - 1)
-      expect(response).to redirect_to(<%= namespace_prefix %><%= plural_file_name %>_url)
+      expect(response).to redirect_to(<%= @namespace_prefix %><%= plural_file_name %>_url)
     end
 
     it 'can destroy selections' do
       create(:<%= file_name %>, <%= file_name %>_params)
       objects_count = <%= file_name %>.class.count
 
-      delete destroy_selections_<%= namespace_prefix %><%= plural_file_name %>_url, params: {
+      delete destroy_selections_<%= @namespace_prefix %><%= plural_file_name %>_url, params: {
         selections: ActiveSupport::JSON.encode([{ data: { id: <%= file_name %>.id }}])
       }
 
       expect(<%= class_name %>.count).to eq(objects_count - 1)
-      expect(response).to redirect_to(<%= namespace_prefix %><%= plural_file_name %>_url)
+      expect(response).to redirect_to(<%= @namespace_prefix %><%= plural_file_name %>_url)
     end
   end
 end

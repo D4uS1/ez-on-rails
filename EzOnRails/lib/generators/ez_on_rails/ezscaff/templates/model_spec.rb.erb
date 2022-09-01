@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-<%- namespace_prefix = class_path.length > 0 ? "#{class_path.join('_')}_" : '' -%>
 <%- association_attrs = association_attributes(class_name, attributes) -%>
 
 require 'rails_helper'
@@ -8,14 +7,14 @@ RSpec.describe <%= class_name %>, type: :model do
   <%- if association_attrs.length > 0 -%>
   let(:valid_attributes) do
     attributes_for(
-      :<%= namespace_prefix %><%= file_name %>,
+      :<%= @namespace_prefix %><%= file_name %>,
       <%-association_attrs.each_with_index do |attribute, index| -%>
       <%= attribute %>_id: create(:<%= attribute %>).id<%= index < association_attrs.length - 1 ? ',' : '' %>
       <%- end -%>
     )
   end
   <%- else -%>
-  let(:valid_attributes) { attributes_for(:<%= namespace_prefix %><%= file_name %>) }
+  let(:valid_attributes) { attributes_for(:<%= @namespace_prefix %><%= file_name %>) }
   <%- end -%>
 
   context 'when validating' do
