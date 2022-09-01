@@ -114,16 +114,22 @@ class EzOnRails::Api::ResourceController < EzOnRails::Api::BaseController
   protected
 
   # Only allow a trusted parameter "white list" through.
+  # This method allows parameters passed with or without namespace prefixes.
   def resource_params
-    # with namespaces
-    resource_name_sym = resource_symbol
-    if params[resource_name_sym]
-      params.require(resource_name_sym).permit(default_permit_params(send("render_info_#{resource_name_sym}")))
-    end
-
-    # without namespaces
+    namespaced_resource_name_sym = resource_symbol
     resource_name_sym = resource_symbol(without_namespace: true)
-    params.require(resource_name_sym).permit(default_permit_params(send("render_info_#{resource_name_sym}")))
+
+    # find the parameter, can be passed with or without namespaces
+    params_name_sym = params[resource_name_sym] ? resource_name_sym : namespaced_resource_name_sym
+
+    # find render_info name
+    render_info_name = if respond_to? "render_info_#{resource_name_sym}"
+                         "render_info_#{resource_name_sym}"
+                       else
+                         "render_info_#{namespaced_resource_name_sym}"
+                       end
+
+    params.require(params_name_sym).permit(default_permit_params(send(render_info_name)))
   end
 
   # Returns the parameters to filter records for the search action.
