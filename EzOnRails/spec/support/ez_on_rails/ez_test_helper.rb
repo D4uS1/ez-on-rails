@@ -5,7 +5,8 @@ module EzTestHelper
   # Returns the json content from the specified view file in the file_path.
   # The file_path must be relative to the views directory.
   def json_from_view(view_file_path, locals = {})
-    JSON.parse(ApplicationController.render(view_file_path, locals: locals))
+    # use resource controller here to get helpers like the current_ability in test views
+    JSON.parse(EzOnRails::Api::ResourceController.render(view_file_path, locals: locals))
   end
 
   # Visits the login page and executes the login form by using the specified credentials.
