@@ -98,7 +98,7 @@ RSpec.describe '<%= class_path.length > 0 ? "#{([ 'api'] + class_path).join('/')
       response_body = JSON.parse(response.body)
 
       expect(response).to have_http_status(:success)
-      expect(response_body).to eq(json_from_view('<%= @resource_underscored.pluralize %>/_<%= @resource_underscored.pluralize %>', {
+      expect(response_body).to eq(json_from_view('<% @resource_namespace_path %><%= @resource_underscored.pluralize %>/_<%= @resource_underscored.pluralize %>', {
         <%= @resource_underscored.pluralize %>: [<%= @resource_underscored %>]
       }))
     end
@@ -116,7 +116,7 @@ RSpec.describe '<%= class_path.length > 0 ? "#{([ 'api'] + class_path).join('/')
 
         expect(response).to have_http_status(:success)
         expect(response_body['results']).to eq(
-          json_from_view('<%= @resource_underscored.pluralize %>/_<%= @resource_underscored.pluralize %>', {
+          json_from_view('<% @resource_namespace_path %><%= @resource_underscored.pluralize %>/_<%= @resource_underscored.pluralize %>', {
             <%= @resource_underscored.pluralize %>: [<%= @resource_underscored %>]
           })
         )
@@ -134,7 +134,7 @@ RSpec.describe '<%= class_path.length > 0 ? "#{([ 'api'] + class_path).join('/')
 
         expect(response).to have_http_status(:success)
         expect(response_body['results']).to eq(
-          json_from_view('<%= @resource_underscored.pluralize %>/_<%= @resource_underscored.pluralize %>', {
+          json_from_view('<% @resource_namespace_path %><%= @resource_underscored.pluralize %>/_<%= @resource_underscored.pluralize %>', {
             <%= @resource_underscored.pluralize %>: [<%= @resource_underscored %>]
           })
         )
@@ -153,7 +153,7 @@ RSpec.describe '<%= class_path.length > 0 ? "#{([ 'api'] + class_path).join('/')
 
         expect(response).to have_http_status(:success)
         expect(response_body['results']).to eq(
-          json_from_view('<%= @resource_underscored.pluralize %>/_<%= @resource_underscored.pluralize %>', {
+          json_from_view('<% @resource_namespace_path %><%= @resource_underscored.pluralize %>/_<%= @resource_underscored.pluralize %>', {
             <%= @resource_underscored.pluralize %>: [<%= @resource_underscored %>, second_record]
           })
         )
@@ -166,7 +166,7 @@ RSpec.describe '<%= class_path.length > 0 ? "#{([ 'api'] + class_path).join('/')
       response_body = JSON.parse(response.body)
 
       expect(response).to have_http_status(:success)
-      expect(response_body).to eq(json_from_view('<%= @resource_underscored.pluralize %>/_<%= @resource_underscored %>', {
+      expect(response_body).to eq(json_from_view('<% @resource_namespace_path %><%= @resource_underscored.pluralize %>/_<%= @resource_underscored %>', {
         <%= @resource_underscored %>: <%= @resource_underscored %>
       }))
     end
@@ -183,7 +183,7 @@ RSpec.describe '<%= class_path.length > 0 ? "#{([ 'api'] + class_path).join('/')
 
       expect(response).to have_http_status(:success)
       expect(<%= @resource %>.count).to eq(records_count + 1)
-      expect(response_body).to eq(json_from_view('<%= @resource_underscored.pluralize %>/_<%= @resource_underscored %>', {
+      expect(response_body).to eq(json_from_view('<% @resource_namespace_path %><%= @resource_underscored.pluralize %>/_<%= @resource_underscored %>', {
         <%= @resource_underscored %>: created_object
       }))
     end
@@ -197,7 +197,7 @@ RSpec.describe '<%= class_path.length > 0 ? "#{([ 'api'] + class_path).join('/')
       <%= @resource_underscored %>.reload
 
       expect(response).to have_http_status(:success)
-      expect(response_body).to eq(json_from_view('<%= @resource_underscored.pluralize %>/_<%= @resource_underscored %>', {
+      expect(response_body).to eq(json_from_view('<% @resource_namespace_path %><%= @resource_underscored.pluralize %>/_<%= @resource_underscored %>', {
         <%= @resource_underscored %>: <%= @resource_underscored %>
       }))
     end
@@ -222,7 +222,7 @@ RSpec.describe '<%= class_path.length > 0 ? "#{([ 'api'] + class_path).join('/')
       response_body = JSON.parse(response.body)
 
       expect(response).to have_http_status(:success)
-      expect(response_body).to eq(json_from_view('<%= @resource_underscored.pluralize %>/_<%= @resource_underscored.pluralize %>', {
+      expect(response_body).to eq(json_from_view('<% @resource_namespace_path %><%= @resource_underscored.pluralize %>/_<%= @resource_underscored.pluralize %>', {
         <%= @resource_underscored.pluralize %>: [<%= @resource_underscored %>]
       }))
     end
@@ -239,7 +239,7 @@ RSpec.describe '<%= class_path.length > 0 ? "#{([ 'api'] + class_path).join('/')
         response_body = JSON.parse(response.body)
 
         expect(response).to have_http_status(:success)
-        expect(response_body['results']).to eq(json_from_view('<%= @resource_underscored.pluralize %>/_<%= @resource_underscored.pluralize %>', {
+        expect(response_body['results']).to eq(json_from_view('<% @resource_namespace_path %><%= @resource_underscored.pluralize %>/_<%= @resource_underscored.pluralize %>', {
           <%= @resource_underscored.pluralize %>: [<%= @resource_underscored %>]
         }))
       end
@@ -255,7 +255,7 @@ RSpec.describe '<%= class_path.length > 0 ? "#{([ 'api'] + class_path).join('/')
         response_body = JSON.parse(response.body)
 
         expect(response).to have_http_status(:success)
-        expect(response_body['results']).to eq(json_from_view('<%= @resource_underscored.pluralize %>/_<%= @resource_underscored.pluralize %>', {
+        expect(response_body['results']).to eq(json_from_view('<% @resource_namespace_path %><%= @resource_underscored.pluralize %>/_<%= @resource_underscored.pluralize %>', {
           <%= @resource_underscored.pluralize %>: [<%= @resource_underscored %>]
         }))
         expect(response_body['pages_count']).to eq(2)
@@ -272,7 +272,7 @@ RSpec.describe '<%= class_path.length > 0 ? "#{([ 'api'] + class_path).join('/')
         response_body = JSON.parse(response.body)
 
         expect(response).to have_http_status(:success)
-        expect(response_body['results']).to eq(json_from_view('<%= @resource_underscored.pluralize %>/_<%= @resource_underscored.pluralize %>', {
+        expect(response_body['results']).to eq(json_from_view('<% @resource_namespace_path %><%= @resource_underscored.pluralize %>/_<%= @resource_underscored.pluralize %>', {
           <%= @resource_underscored.pluralize %>: [<%= @resource_underscored %>, second_record]
         }))
       end
@@ -285,7 +285,7 @@ RSpec.describe '<%= class_path.length > 0 ? "#{([ 'api'] + class_path).join('/')
       response_body = JSON.parse(response.body)
 
       expect(response).to have_http_status(:success)
-      expect(response_body).to eq(json_from_view('<%= @resource_underscored.pluralize %>/_<%= @resource_underscored %>', {
+      expect(response_body).to eq(json_from_view('<% @resource_namespace_path %><%= @resource_underscored.pluralize %>/_<%= @resource_underscored %>', {
         <%= @resource_underscored %>: <%= @resource_underscored %>
       }))
     end
@@ -302,7 +302,7 @@ RSpec.describe '<%= class_path.length > 0 ? "#{([ 'api'] + class_path).join('/')
 
       expect(response).to have_http_status(:success)
       expect(<%= @resource %>.count).to eq(records_count + 1)
-      expect(response_body).to eq(json_from_view('<%= @resource_underscored.pluralize %>/_<%= @resource_underscored %>', {
+      expect(response_body).to eq(json_from_view('<% @resource_namespace_path %><%= @resource_underscored.pluralize %>/_<%= @resource_underscored %>', {
         <%= @resource_underscored %>: created_object
       }))
     end
@@ -316,7 +316,7 @@ RSpec.describe '<%= class_path.length > 0 ? "#{([ 'api'] + class_path).join('/')
         <%= @resource_underscored %>.reload
 
       expect(response).to have_http_status(:success)
-      expect(response_body).to eq(json_from_view('<%= @resource_underscored.pluralize %>/_<%= @resource_underscored %>', {
+      expect(response_body).to eq(json_from_view('<% @resource_namespace_path %><%= @resource_underscored.pluralize %>/_<%= @resource_underscored %>', {
         <%= @resource_underscored %>: <%= @resource_underscored %>
       }))
     end

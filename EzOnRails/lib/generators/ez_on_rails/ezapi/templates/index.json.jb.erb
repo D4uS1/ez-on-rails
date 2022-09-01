@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 
-render partial: '<%= @resource_underscored.pluralize %>/<%= @resource_underscored.pluralize %>',
+render partial: '<%= @resource_namespace_path %><%= @resource_underscored.pluralize %>/<%= @resource_underscored.pluralize %>',
        locals: { <%= @resource_underscored.pluralize %>: @resource_objs }

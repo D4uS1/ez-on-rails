@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 {
-  results: render(partial: '<%= @resource_underscored.pluralize %>/<%= @resource_underscored.pluralize %>',
+  results: render(partial: '<%= @resource_namespace_path %><%= @resource_underscored.pluralize %>/<%= @resource_underscored.pluralize %>',
                   locals: { <%= @resource_underscored.pluralize %>: @resource_objs }),
   pages_count: @pages_count
 }
