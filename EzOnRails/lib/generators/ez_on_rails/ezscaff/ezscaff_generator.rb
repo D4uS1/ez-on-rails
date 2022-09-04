@@ -86,7 +86,7 @@ module EzOnRails
 
       # create own migration file
       migration_template 'migration.rb.erb',
-                         File.join(db_migrate_path, "create_#{plural_file_name}.rb"), force: true
+                         File.join(db_migrate_path, "create_#{@namespace_prefix}#{plural_file_name}.rb"), force: true
     end
 
     # Generates the locale files for this scaffold.

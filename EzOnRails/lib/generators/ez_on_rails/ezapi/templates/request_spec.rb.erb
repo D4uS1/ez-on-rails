@@ -11,19 +11,19 @@ RSpec.describe '<%= class_path.length > 0 ? "#{([ 'api'] + class_path).join('/')
 
   # Test data
 <%- if @resource -%>
-  let(:<%= @resource_underscored %>) { create(:<%= @resource_underscored %>) }
+  let(:<%= @resource_underscored %>) { create(:<%= @resource_namespace_prefix %><%= @resource_underscored %>) }
   <%- association_attrs = association_attributes(@resource, nil) -%>
   <%- if association_attrs.length > 0 -%>
   let(:<%= @resource_underscored %>_params) do
     attributes_for(
-      :<%= @resource_underscored %>,
+      :<%= @resource_namespace_prefix %><%= @resource_underscored %>,
       <%-association_attrs.each_with_index do |attribute, index| -%>
       <%= attribute %>_id: create(:<%= attribute %>).id<%= index < association_attrs.length - 1 ? ',' : '' %>
       <%- end -%>
     )
   end
   <%- else -%>
-  let(:<%= @resource_underscored %>_params) { attributes_for(:<%= @resource_underscored %>) }
+  let(:<%= @resource_underscored %>_params) { attributes_for(:<%= @resource_namespace_prefix %><%= @resource_underscored %>) }
   <%- end -%>
 <%- end -%>
 

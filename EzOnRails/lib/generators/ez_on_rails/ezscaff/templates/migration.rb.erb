@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Migration class for creating the database table for a <% class_name %> model.
-class Create<%= plural_file_name.camelize %> < ActiveRecord::Migration[<%= ActiveRecord::Migration.current_version %>]
+class Create<%= "#{@namespace_prefix}#{plural_file_name}".camelize %> < ActiveRecord::Migration[<%= ActiveRecord::Migration.current_version %>]
 
   # Applies the changes to the database.
   def change
