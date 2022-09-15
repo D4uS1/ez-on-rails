@@ -89,11 +89,6 @@ class EzOnRails::Api::ResourceController < EzOnRails::Api::BaseController
     self.class.model_class
   end
 
-  # Wrapper for class to class instance variable for permitted_params to keep the code readable.
-  def permitted_params
-    self.class.permitted_params
-  end
-
   private
 
   # Finds the resource by the id param and stores it to the resource instance variable.
@@ -116,20 +111,28 @@ class EzOnRails::Api::ResourceController < EzOnRails::Api::BaseController
   # Only allow a trusted parameter "white list" through.
   # This method allows parameters passed with or without namespace prefixes.
   def resource_params
-    namespaced_resource_name_sym = resource_symbol
+    params.require(resource_params_name).permit(default_permit_params(send(render_info_name)))
+  end
+
+  # Returns the name of the render info this resource_controller belongs to.
+  # The name is searched without and with namespace.
+  def render_info_name
     resource_name_sym = resource_symbol(without_namespace: true)
 
-    # find the parameter, can be passed with or without namespaces
-    params_name_sym = params[resource_name_sym] ? resource_name_sym : namespaced_resource_name_sym
+    return "render_info_#{resource_name_sym}" if respond_to? "render_info_#{resource_name_sym}"
 
-    # find render_info name
-    render_info_name = if respond_to? "render_info_#{resource_name_sym}"
-                         "render_info_#{resource_name_sym}"
-                       else
-                         "render_info_#{namespaced_resource_name_sym}"
-                       end
+    namespaced_resource_name_sym = resource_symbol
+    "render_info_#{namespaced_resource_name_sym}"
+  end
 
-    params.require(params_name_sym).permit(default_permit_params(send(render_info_name)))
+  # Returns the name of the parameter to create or update a resource this controller belongs to.
+  # The name is searched without and with namespace.
+  def resource_params_name
+    resource_name_sym = resource_symbol(without_namespace: true)
+
+    return resource_name_sym if params[resource_name_sym]
+
+    resource_symbol
   end
 
   # Returns the parameters to filter records for the search action.
