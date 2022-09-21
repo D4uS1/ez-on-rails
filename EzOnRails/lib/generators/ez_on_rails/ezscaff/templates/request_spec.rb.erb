@@ -14,7 +14,7 @@ RSpec.describe '<%= class_path.length > 0 ? "#{class_path.join('/')}/" : '' %><%
   let(:super_admin) { User.super_admin } # super administrator user
 
   # Test data
-  let(:<%= file_name %>) { create(:<%= namespace_prefix %><%= file_name %>) }
+  let(:<%= file_name %>) { create(:<%= @namespace_prefix %><%= file_name %>) }
   <%- if association_attrs.length > 0 -%>
   let(:<%= file_name %>_params) do
     attributes_for(
