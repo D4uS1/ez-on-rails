@@ -25,7 +25,7 @@ module EzOnRails
       @resource = options['resource']&.gsub('/', '::')
       @resource_namespace = @resource.split('::')[0...-1].join('::') if @resource
       @resource_namespace_path = "#{@resource_namespace.underscore}/"  if @resource_namespace
-      @resource_namespace_prefix = "#{@resource_namespace.gsub('::', '_')}_"   if @resource_namespace
+      @resource_namespace_prefix = "#{@resource_namespace.gsub('::', '_').underscore}_"   if @resource_namespace
       @resource_underscored = @resource.split('::')[-1].underscore if @resource
       @resource_path = @resource.gsub('::', '/').underscore if @resource
       @resource_path_underscored = @resource_path.gsub('/', '_') if @resource
