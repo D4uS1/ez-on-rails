@@ -237,7 +237,7 @@ module EzOnRails
             type: :object,
             allOf: [
               { '$ref' => '#/components/schemas/EzOnRailsRecord' },
-              { '$ref' => '#/components/schemas/#{@resource}Properties' }
+              { '$ref' => '#/components/schemas/#{@resource.gsub('::', '')}Properties' }
             ]
           },"
       end
