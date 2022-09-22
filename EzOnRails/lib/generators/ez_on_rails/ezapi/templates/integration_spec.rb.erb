@@ -22,7 +22,7 @@ describe '<%= class_name %> API' do
   let(:<%= @resource_underscored %>_attributes) { attributes_for(:<%= @resource_namespace_prefix %><%= @resource_underscored %>) }
   <%- end -%>
   let(:<%= @resource_path_underscored %>_obj) { create(:<%= @resource_namespace_prefix %><%= @resource_underscored %>) }
-  let(:<%= @resource_path_underscored %>_param) { { <%= @resource_path_underscored %>: <%= @resource_underscored %>_attributes } }
+  let(:<%= @resource_path_underscored %>_param) { <%= @resource_underscored %>_attributes }
 <%- end -%>
 
 <%- if @resource  -%>
