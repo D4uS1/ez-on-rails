@@ -38,7 +38,7 @@ describe '<%= class_name %> API' do
 
       response '200', '<%= @resource_path_underscored.pluralize %> found' do
         schema type: :array,
-               items: { '$ref' => '#/components/schemas/<%= @resource_namespace&.gsub('::', '') %><%= @resource %>' }
+               items: { '$ref' => '#/components/schemas/<%= @resource.gsub('::', '') %>' }
 
         <%- if @authenticable -%>
         let(:'uid') { auth_header_info[:uid] }
@@ -142,7 +142,7 @@ describe '<%= class_name %> API' do
                properties: {
                  results: {
                    type: :array,
-                   items: { '$ref' => '#/components/schemas/<%= @resource_namespace&.gsub('::', '') %><%= @resource %>' }
+                   items: { '$ref' => '#/components/schemas/<%= @resource.gsub('::', '') %>' }
                  },
                  pages_count: { type: :integer, nullable: true  }
                }
@@ -283,7 +283,7 @@ describe '<%= class_name %> API' do
       parameter name: :id, in: :path, type: :integer
 
       response '200', '<%= @resource_path_underscored %> found' do
-        schema '$ref' => '#/components/schemas/<%= @resource_namespace&.gsub('::', '') %><%= @resource %>'
+        schema '$ref' => '#/components/schemas/<%= @resource.gsub('::', '') %>'
 
         <%- if @authenticable -%>
         let(:'uid') { auth_header_info[:uid] }
@@ -385,10 +385,10 @@ describe '<%= class_name %> API' do
       parameter name: :'api-version', in: :header, type: :string, default: API_VERSION
       parameter name: :<%= @resource_path_underscored %>,
                 in: :body,
-                schema: { '$ref' => '#/components/schemas/<%= @resource_namespace&.gsub('::', '') %><%= @resource %>Properties' }
+                schema: { '$ref' => '#/components/schemas/<%= @resource.gsub('::', '') %>Properties' }
 
       response '201', '<%= @resource_path_underscored %> created' do
-        schema '$ref' => '#/components/schemas/<%= @resource_namespace&.gsub('::', '') %><%= @resource %>'
+        schema '$ref' => '#/components/schemas/<%= @resource.gsub('::', '') %>'
 
         <%- if @authenticable -%>
         let(:'uid') { auth_header_info[:uid] }
@@ -479,10 +479,10 @@ describe '<%= class_name %> API' do
       parameter name: :id, in: :path, type: :integer
       parameter name: :<%= @resource_path_underscored %>,
                 in: :body,
-                schema: { '$ref' => '#/components/schemas/<%= @resource_namespace&.gsub('::', '') %><%= @resource %>Properties' }
+                schema: { '$ref' => '#/components/schemas/<%= @resource.gsub('::', '') %>Properties' }
 
       response '200', '<%= @resource_path_underscored %> updated' do
-        schema '$ref' => '#/components/schemas/<%= @resource_namespace&.gsub('::', '') %><%= @resource %>'
+        schema '$ref' => '#/components/schemas/<%= @resource.gsub('::', '') %>'
 
         <%- if @authenticable -%>
         let(:'uid') { auth_header_info[:uid] }
