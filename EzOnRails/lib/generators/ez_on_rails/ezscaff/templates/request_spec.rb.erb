@@ -4,7 +4,7 @@
 require 'rails_helper'
 
 # Spec for testing the access for the actions in <%= controller_class_name %>.
-# Testing whether a non looged in user can not get any action, because the access should be denied.
+# Testing whether a non logged in user can not get any action, because the access should be denied.
 # Testing whether some non super admin logged in user (called andrew here) can not get any action,
 # because the access should be denied.
 # Testing whether some super_admin can get the actions, because the access is granted.
@@ -88,7 +88,7 @@ RSpec.describe '<%= class_path.length > 0 ? "#{class_path.join('/')}/" : '' %><%
     end
 
     it 'can not destroy selections' do
-      create(:<%= file_name %>, <%= file_name %>_params)
+      create(:<%= @namespace_prefix %><%= file_name %>, <%= file_name %>_params)
       objects_count = <%= file_name %>.class.count
 
       delete destroy_selections_<%= @namespace_prefix %><%= plural_file_name %>_url, params: {
@@ -163,7 +163,7 @@ RSpec.describe '<%= class_path.length > 0 ? "#{class_path.join('/')}/" : '' %><%
     end
 
     it 'can not destroy selections' do
-      create(:<%= file_name %>, <%= file_name %>_params)
+      create(:<%= @namespace_prefix %><%= file_name %>, <%= file_name %>_params)
       objects_count = <%= file_name %>.class.count
 
       delete destroy_selections_<%= @namespace_prefix %><%= plural_file_name %>_url, params: {
@@ -240,7 +240,7 @@ RSpec.describe '<%= class_path.length > 0 ? "#{class_path.join('/')}/" : '' %><%
     end
 
     it 'can destroy selections' do
-      create(:<%= file_name %>, <%= file_name %>_params)
+      create(:<%= @namespace_prefix %><%= file_name %>, <%= file_name %>_params)
       objects_count = <%= file_name %>.class.count
 
       delete destroy_selections_<%= @namespace_prefix %><%= plural_file_name %>_url, params: {
