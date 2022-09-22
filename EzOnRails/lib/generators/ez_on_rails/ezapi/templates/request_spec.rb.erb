@@ -109,7 +109,7 @@ RSpec.describe '<%= class_path.length > 0 ? "#{([ 'api'] + class_path).join('/')
           <%= @resource_underscored %>
 
         post search_api_<%= namespace_prefix %><%= @resource_underscored.pluralize %>_url,
-             params: { filter: { field: 'id', operator: 'eq', value: <%= @resource_path_underscored %>.id } },
+             params: { filter: { field: 'id', operator: 'eq', value: <%= @resource_underscored %>.id } },
              headers: auth_headers
 
         response_body = JSON.parse(response.body)
