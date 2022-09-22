@@ -229,11 +229,11 @@ module EzOnRails
       inject_into_file 'spec/swagger_helper.rb',
                        after: '      schemas: {' do
         "
-          #{@resource_namespace&.gsub('::', '')}#{@resource}Properties: {
+          #{@resource.gsub('::', '')}Properties: {
             type: :object,
             properties: #{pretty_print(attrs_with_swagger_types, 12, ignore_first_indent: true, symbolize_all: true)}
           },
-          #{@resource_namespace&.gsub('::', '')}#{@resource}: {
+          #{@resource.gsub('::', '')}: {
             type: :object,
             allOf: [
               { '$ref' => '#/components/schemas/EzOnRailsRecord' },
