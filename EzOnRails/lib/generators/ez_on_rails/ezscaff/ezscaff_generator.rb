@@ -112,10 +112,6 @@ module EzOnRails
       if class_path.length > 0
         File.delete "#{File.join('app/models', class_path)}.rb"
       end
-
-      # remove assets
-      File.delete File.join('app/assets/stylesheets', class_path, "#{plural_file_name}.scss")
-      File.delete File.join('app/assets/javascripts', class_path, "#{plural_file_name}.coffee")
     end
 
     # Adds the route to the resource

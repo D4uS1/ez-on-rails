@@ -3,7 +3,6 @@
     - flash.each do |key, message|
       .alert.alert-dismissible.fade.show[
       class="alert-#{flash_message_type(key)}"
-      name='flash-message'
       role='alert' ]
         = message
         button.btn-close type='button' data-dismiss='alert' aria-label='Close'

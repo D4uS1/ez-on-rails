@@ -1,18 +1,17 @@
-.nav.navbar.navbar-expand-lg
-  button.navbar-toggler[ aria-controls='navbar_main_menu'
-  aria-expanded='false' aria-label='Menü anzeigen'  data-target='#navbar_main_menu'
-  data-toggle='collapse' type='button' ]
-    = ez_icon 'bars', style: "color: #{header_text_color};"
-  #navbar_main_menu.collapse.navbar-collapse
-    ul.navbar-nav
-      - main_menus = visible_nav_menus
-      - main_menus.each do |main_menu|
-        - if submenus? main_menu
-          li.nav-item.dropdown
-            = render_submenu_dropdown main_menu
-            .dropdown-menu aria-labelledby=(submenu_id main_menu)
-              - main_menu[:sub_menus].each do |sub_menu|
-                = render_sub_menu_item sub_menu
-        - else
-          li.nav-item
-            = render_main_menu_item main_menu
+nav.navbar.navbar-expand-lg
+  .container-fluid
+    button.navbar-toggler type="button" data-bs-toggle="collapse"  data-bs-target="#navbar_main_menu" aria-controls="navbar_main_menu" aria-expanded="false" aria-label="Menü anzeigen"
+      = ez_icon 'bars', style: "color: #{header_text_color};"
+    #navbar_main_menu.collapse.navbar-collapse
+      ul.navbar-nav
+        - main_menus = visible_nav_menus
+        - main_menus.each do |main_menu|
+          - if submenus? main_menu
+            li.nav-item.dropdown
+              = render_submenu_dropdown main_menu
+              .dropdown-menu aria-labelledby=(submenu_id main_menu)
+                - main_menu[:sub_menus].each do |sub_menu|
+                  = render_sub_menu_item sub_menu
+          - else
+            li.nav-item
+              = render_main_menu_item main_menu

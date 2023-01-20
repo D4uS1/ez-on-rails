@@ -276,8 +276,7 @@ module EzOnRails::EzScaff::UrlHelper
   def render_destroy_link(obj, locals, only_icon: false)
     link_to only_icon ? ez_icon('trash', class: 'text-danger') : label_destroy_link(locals),
             get_destroy_url(obj, locals),
-            method: :delete,
-            data: confirm_data,
+            data: { turbo_method: :delete }.merge(confirm_data),
             class: 'text-secondary'
   end
 
@@ -287,8 +286,7 @@ module EzOnRails::EzScaff::UrlHelper
   def render_destroy_button(obj, locals)
     link_to icon_with_text('trash', label_destroy_link(locals)),
             get_destroy_url(obj, locals),
-            method: :delete,
-            data: confirm_data,
+            data: { turbo_method: :delete }.merge(confirm_data),
             class: 'btn btn-danger'
   end
 
@@ -296,17 +294,11 @@ module EzOnRails::EzScaff::UrlHelper
   # The result of this function can be passed to some rails helpers data option to get some confirmation dialog.
   # The given options hash can contain the following values:
   # :message - the shown message of the cofnirmation dialog
-  # :title - the shown title of the confirmation dialog
-  # :label_yes - the label of the confirmation button
-  # :label_no - the label of the no confirmation button
   # If some of that data is not passed, the default values will be taken.
   # Hence this method is also callable without any parameters to get some reasonable default confirm message.
   def confirm_data(options = {})
     {
-      confirm: options[:message] || t(:'ez_on_rails.are_you_sure'),
-      title: options[:title] || t(:'ez_on_rails.question'),
-      commit: options[:label_yes] || t(:'ez_on_rails.button_yes'),
-      cancel: options[:label_no] || t(:'ez_on_rails.cancel')
+      message: options[:message] || t(:'ez_on_rails.are_you_sure')
     }
   end
 

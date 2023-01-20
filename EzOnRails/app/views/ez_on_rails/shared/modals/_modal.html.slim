@@ -6,7 +6,7 @@
       - if defined?(title) && title
         .modal-header
           h5.modal-title = title
-          button.btn-close aria-label='Close' data-dismiss='modal' type='button'
+          button.btn-close aria-label='Close' data-bs-dismiss='modal' type='button'
       .modal-body
         = content
       - if defined?(buttons) && buttons && !buttons.empty?

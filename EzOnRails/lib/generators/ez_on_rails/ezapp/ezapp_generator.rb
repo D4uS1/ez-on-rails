@@ -21,53 +21,6 @@ module EzOnRails
       rake 'active_storage:install'
     end
 
-    # installs yarn and webpacker dependencies.
-    def install_js_deps
-      # needed because some generators complain of no integrity file exists if this is not done before
-      `yarn install --check-files`
-
-      # javascript file types
-      rake 'webpacker:install:typescript'
-      rake 'webpacker:install:coffee'
-
-      # react
-      rake 'webpacker:install:react'
-      generate 'react:install'
-
-      `yarn add jquery \
-               popper.js \
-               bootstrap@5.1.3 \
-               select2 \
-               select2-bootstrap-5-theme \
-               react-dropzone \
-               react_ujs \
-               react-activestorage-provider \
-               through2 \
-               axios \
-               flag-icon-css \
-               @fortawesome/fontawesome-free \
-               github:nathanvda/cocoon#c24ba53 \
-               babel-plugin-transform-react-remove-prop-types \
-               @babel/preset-react \
-               data-confirm-modal \
-               expose-loader`
-    end
-
-    # Removes the application.css file and copies the assets to the app directory.
-    def generate_assets
-      directory 'assets', 'app/assets'
-
-      # remove unnessecary files
-      assets_to_remove = [
-          'app/javascript/packs/hello_coffee.coffee',
-          'app/javascript/packs/hello_react.jsx',
-          'app/javascript/packs/hello_typescript.ts'
-      ]
-      assets_to_remove.each do |asset_to_remove|
-        remove_file asset_to_remove if File.exist? asset_to_remove
-      end
-    end
-
     # Generates the migrations for the user management.
     def generate_migrations
       now = DateTime.now

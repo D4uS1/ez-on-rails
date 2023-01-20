@@ -19,7 +19,6 @@ services:
       - SELENIUM_URL=http://chrome:4444/wd/hub
     depends_on:
       - db
-     # - webpack
   chrome:
     image: selenium/standalone-chrome:latest
     volumes:

@@ -33,5 +33,4 @@ div
                       action: 'destroy_all' \
               },
               class: 'btn btn-danger',
-              method: :delete,
-              data: confirm_data
+              data: { turbo_method: :delete }.merge(confirm_data)

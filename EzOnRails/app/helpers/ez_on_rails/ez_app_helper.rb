@@ -67,15 +67,17 @@ module EzOnRails::EzAppHelper
       return button_tag options[:label],
                         id: options[:id],
                         class: "btn btn-#{options[:type] || 'secondary'}",
-                        'data-dismiss': 'modal'
+                        'data-bs-dismiss': 'modal'
     end
 
     link_to options[:label],
             options[:target],
-            method: (options[:method] || :get),
+            data: {
+              turbo_method: (options[:method] || :get),
+              'bs-dismiss': 'modal'
+            },
             class: "btn btn-#{options[:type] || 'secondary'}",
-            id: options[:id],
-            'data-dismiss': 'modal'
+            id: options[:id]
   end
 
   # Renders an yes no modal having the specified title and content.
@@ -213,5 +215,10 @@ module EzOnRails::EzAppHelper
       class: options[:class_details],
       open: options[:open]
     )
+  end
+
+  # Returns a tag that shows a flag-icon for the specified lang code.
+  def flag_icon(lang_code)
+    tag.span '', class:"fi fi-#{lang_code}"
   end
 end

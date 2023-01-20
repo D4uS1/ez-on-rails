@@ -59,8 +59,7 @@ module EzOnRails::EzNavHelper
     link_to(main_menu[:label], '#',
             class: 'nav-link dropdown-toggle',
             id: submenu_id(main_menu),
-            'data-toggle' => 'dropdown',
-            'aria-haspopup' => 'true',
+            'data-bs-toggle' => 'dropdown',
             'aria-expanded' => 'false',
             style: "color: #{header_text_color};")
   end
