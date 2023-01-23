@@ -9,8 +9,8 @@ import * as bootstrap from 'bootstrap'
 const onDocumentReady = () => {
   const timeout = $('#flash-message-container').data('auto-dismiss')
   setTimeout(() => {
-      $(".alert").each((alertNode) => {
-          const alert = new bootstrap.Alert(alertNode);
+      $(".alert").each(function () {
+          const alert = new bootstrap.Alert(this);
           alert.close();
       })
   }, timeout);

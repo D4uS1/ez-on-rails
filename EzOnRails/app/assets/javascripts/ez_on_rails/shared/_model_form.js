@@ -9,7 +9,7 @@ const onDocumentReady = () => {
   /**
    * select2 class binding
    */
-  $('.combobox').each((i) => {
+  $('.combobox').each(function () {
     // Should this select2 field be able to add options dynamically?
     const hasTags = $(this).hasClass('taggable');
 

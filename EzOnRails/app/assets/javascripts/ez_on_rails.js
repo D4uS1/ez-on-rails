@@ -17,6 +17,7 @@ import "@hotwired/turbo-rails"
 import "bootstrap"
 import "select2"
 import "cocoon"
+import "@fortawesome/fontawesome-free"
 import * as ActiveStorage from "@rails/activestorage"
 
 // from own scripts

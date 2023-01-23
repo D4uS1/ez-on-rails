@@ -136,7 +136,7 @@ export default class extends Controller {
 
             // if some error occurs, just print it to the console and do nothing else
             if (error) {
-                console.log("Image Error:", error);
+                console.log("Upload Error:", error);
             } else {
                 let fileInfo = { signed_id: blob.signed_id, preview_image: null, preview_text: null }
 

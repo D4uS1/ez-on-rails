@@ -9,10 +9,10 @@ const onDocumentReady = () => {
    * Will check or uncheck (depending of the state of the checkbox itself) all selection
    * checkboxes of its table.
    */
-  $('.enhanced-table-select-all').click((e) => {
+  $('.enhanced-table-select-all').click(function () {
     const tableId = $(this).data('table-id');
     const checked = $(this).prop('checked');
-    $("[name='enhanced_table_select_row[" + tableId + "]']").each((checkbox) => {
+    $("[name='enhanced_table_select_row[" + tableId + "]']").each(function () {
       $(this).prop('checked', checked);
     });
   });
@@ -26,7 +26,7 @@ const onDocumentReady = () => {
   const  enhancedTableAction = (actionData) => {
     // Catch selections
     const selections = [];
-    $("[name='enhanced_table_select_row[" + actionData.tableId + "]']").each((checkbox) => {
+    $("[name='enhanced_table_select_row[" + actionData.tableId + "]']").each(function () {
       // needed because rails form helper adds some hidden field checkbox for some reason
       if ($(this).prop('type') === "hidden")  return;
 
@@ -63,7 +63,7 @@ const onDocumentReady = () => {
    * called selections. It contains a json array of all selected row ids.
    * If a onclick listener is called, the json array will be passed as function parameter.
    */
-  $('button.enhanced-table-action').click((e) => {
+  $('button.enhanced-table-action').click(function () {
     //Catch the data of the action defined by the button
     const actionData = {
       onclick: $(this).data('onclick'),
