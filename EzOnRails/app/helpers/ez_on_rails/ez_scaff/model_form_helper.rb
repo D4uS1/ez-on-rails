@@ -192,13 +192,13 @@ module EzOnRails::EzScaff::ModelFormHelper
   def render_attachment_model_form(form, attribute_key, attribute_render_info)
     data = attribute_render_info[:data] || {}
 
-    render_dropzone_component(form,
-                              attribute_key,
-                              attribute_render_info,
-                              multiple: false,
-                              max_files: 1,
-                              max_size: data[:max_size] || FILE_UPLOAD_MAX_SIZE,
-                              accept: data[:accept])
+    render_active_storage_upload_field(form,
+                                       attribute_key,
+                                       attribute_render_info,
+                                       multiple: false,
+                                       max_files: 1,
+                                       max_size: data[:max_size] || FILE_UPLOAD_MAX_SIZE,
+                                       accept: data[:accept])
   end
 
   # renders the attachments attribute of the specified form builder using the specified
@@ -206,13 +206,13 @@ module EzOnRails::EzScaff::ModelFormHelper
   def render_attachments_model_form(form, attribute_key, attribute_render_info)
     data = attribute_render_info[:data] || {}
 
-    render_dropzone_component(form,
-                              attribute_key,
-                              attribute_render_info,
-                              multiple: true,
-                              max_files: data[:max_files] || MAX_FILES_COUNT,
-                              max_size: data[:max_size] || FILE_UPLOAD_MAX_SIZE,
-                              accept: data[:accept])
+    render_active_storage_upload_field(form,
+                                       attribute_key,
+                                       attribute_render_info,
+                                       multiple: true,
+                                       max_files: data[:max_files] || MAX_FILES_COUNT,
+                                       max_size: data[:max_size] || FILE_UPLOAD_MAX_SIZE,
+                                       accept: data[:accept])
   end
 
   # Renders an image attribute in the specified form builder, holding an active record attachment using
@@ -301,7 +301,7 @@ module EzOnRails::EzScaff::ModelFormHelper
   # will show a selection of three items, for 1 minute, 2 minute and 3 minute.
   # They will be resolved to 60 seconds, 120 seconds and 180 seconds.
   def render_duration_model_form(form, attribute_key, attribute_render_info)
-    render_duration_select_component(form, attribute_key, attribute_render_info)
+    render_duration_field(form, attribute_key, attribute_render_info)
   end
 
   private
@@ -369,13 +369,16 @@ module EzOnRails::EzScaff::ModelFormHelper
   #   the constant FILE_UPLOAD_MAX_SIZE will be taken as default
   # accept - string (format of accepted file types, for instance image/png) or nil
   #
-  def render_dropzone_component(form, attribute_key, attribute_render_info, options)
+  def render_active_storage_upload_field(form, attribute_key, attribute_render_info, options)
     # catch nessecary info for dropzone component to render existing files in edit action
     begin
+      # get array for attachment objects, even if only one is attached
       existing_files = form.object.send(attribute_key)
       if existing_files.is_a?(ActiveStorage::Attached::One)
         existing_files = existing_files.attached? ? [existing_files] : []
       end
+
+      # convert each file to data the field needs
       existing_files = existing_files.map do |file|
         res_hash = {
           signed_id: file.signed_id
@@ -391,25 +394,23 @@ module EzOnRails::EzScaff::ModelFormHelper
     # determine max size in bytes for rendering
     max_size = options[:max_size] || FILE_UPLOAD_MAX_SIZE
 
-    # Render the dropzone component
-    react_component('ActiveStorageDropzone',
-                    text_pastezone: t(:'ez_on_rails.pastezone_default_text'),
-                    text_dropzone: t(:'ez_on_rails.dropzone_default_text'),
-                    max_size_error: t(:'ez_on_rails.dropzone_default_max_size_error',
-                                      max_size_mb: max_size / 1_048_576),
-                    max_files_error: t(:'ez_on_rails.dropzone_default_max_files_error', max_files: options[:max_files]),
-                    invalid_format_error: t(:'ez_on_rails.dropzone_default_invalid_format_error'),
-                    multiple: options[:multiple],
-                    max_files: options[:max_files],
-                    max_size: max_size,
-                    accept: options[:accept],
-                    input_name: name_for(form, attribute_key, attribute_render_info),
-                    input_id: id_for(form, attribute_key, attribute_render_info),
-                    existing_files: existing_files)
+    render partial: 'ez_on_rails/shared/fields/active_storage_upload_field', locals: {
+      max_size_error: t(:'ez_on_rails.fields.active_storage_upload_field.default_max_size_error',
+                        max_size_mb: max_size / 1_048_576),
+      max_files_error: t(:'ez_on_rails.fields.active_storage_upload_field.default_max_files_error', max_files: options[:max_files]),
+      invalid_format_error: t(:'ez_on_rails.fields.active_storage_upload_field.default_invalid_format_error'),
+      multiple: options[:multiple],
+      max_files: options[:max_files],
+      max_size: max_size,
+      accept: options[:accept],
+      input_name: name_for(form, attribute_key, attribute_render_info),
+      input_id: id_for(form, attribute_key, attribute_render_info),
+      existing_files: existing_files
+    }
   end
 
   # Renders the DurationSelect component.
-  def render_duration_select_component(form, attribute_key, attribute_render_info)
+  def render_duration_field(form, attribute_key, attribute_render_info)
     default_value = form.object.send(attribute_key)
     default_value = default_value.iso8601 if default_value.is_a?(ActiveSupport::Duration)
 
@@ -418,17 +419,18 @@ module EzOnRails::EzScaff::ModelFormHelper
       max_years = attribute_render_info[:data][:max_years]
     end
 
-    react_component('DurationSelect',
-                    id: id_for(form, attribute_key, attribute_render_info),
-                    name: name_for(form, attribute_key, attribute_render_info),
-                    default_value: default_value,
-                    max_years: max_years,
-                    label_years: t(:years),
-                    label_months: t(:months),
-                    label_weeks: t(:weeks),
-                    label_days: t(:days),
-                    label_hours: t(:hours),
-                    label_minutes: t(:minutes),
-                    label_seconds: t(:seconds))
+    render partial: 'ez_on_rails/shared/fields/duration_field', locals: {
+      id: id_for(form, attribute_key, attribute_render_info),
+      name: name_for(form, attribute_key, attribute_render_info),
+      default_value: default_value,
+      max_years: max_years,
+      label_years: t(:years),
+      label_months: t(:months),
+      label_weeks: t(:weeks),
+      label_days: t(:days),
+      label_hours: t(:hours),
+      label_minutes: t(:minutes),
+      label_seconds: t(:seconds)
+    }
   end
 end

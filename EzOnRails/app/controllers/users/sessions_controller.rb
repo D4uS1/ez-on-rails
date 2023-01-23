@@ -2,6 +2,9 @@
 
 # Controller for sessions managed by devise.
 class Users::SessionsController < Devise::SessionsController
+  # TODO delete after devise update for Rails 7
+  include DeviseTurboConcern
+
   respond_to :json
 
   protected

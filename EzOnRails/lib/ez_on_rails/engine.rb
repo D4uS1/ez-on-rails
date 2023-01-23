@@ -13,7 +13,6 @@ require 'scoped_search'
 require 'simple_form'
 require 'cocoon'
 require 'mini_magick'
-require 'react-rails'
 require 'omniauth-gitlab'
 require 'omniauth-oauth2'
 require 'devise_token_auth'
@@ -23,6 +22,7 @@ require 'rswag'
 require 'factory_bot_rails'
 require 'faker'
 require 'nilify_blanks'
+require 'stimulus-rails'
 
 # Base Engine module.
 module EzOnRails

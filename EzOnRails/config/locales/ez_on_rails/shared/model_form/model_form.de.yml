@@ -2,9 +2,4 @@ de:
   ez_on_rails:
     save: "Speichern"
     add_nested_form: "%{nested_model} hinzufügen"
-    dropzone_default_text: "Hier Dateien hereinziehen oder nach Klicken auswählen"
-    dropzone_default_max_size_error: "Sie können keine Dateien hochladen, die größer sind als %{max_size_mb} MB."
-    dropzone_default_max_files_error: "Sie können maximal %{max_files} Dateien hochladen."
-    dropzone_default_invalid_format_error: "Ungültiges Dateiformat."
-    pastezone_default_text: "Hier Dateien einfügen"
     invalid_inputs_message: "Ihre Eingaben waren ungültig. Bitte überprüfen Sie Ihre eingaben."

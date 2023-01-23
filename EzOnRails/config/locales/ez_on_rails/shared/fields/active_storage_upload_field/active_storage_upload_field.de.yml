@@ -1,0 +1,7 @@
+de:
+  ez_on_rails:
+    fields:
+      active_storage_upload_field:
+        default_max_size_error: "Sie können keine Dateien hochladen, die größer sind als %{max_size_mb} MB."
+        default_max_files_error: "Sie können maximal %{max_files} Dateien hochladen."
+        default_invalid_format_error: "Ungültiges Dateiformat."

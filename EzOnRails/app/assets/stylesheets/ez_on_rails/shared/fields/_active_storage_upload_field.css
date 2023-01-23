@@ -1,0 +1,9 @@
+.active-storage-upload-field-file-container {
+    min-height: 10rem;
+    min-width: 7rem;
+    padding: 0;
+}
+
+.active-storage-upload-field-delete-button {
+    border: none;
+}

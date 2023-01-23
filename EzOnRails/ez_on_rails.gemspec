@@ -46,7 +46,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'omniauth-oauth2'
   spec.add_dependency 'rails', '~> 7.0.4', '>= 7.0.4'
   spec.add_dependency 'ransack'
-  spec.add_dependency 'react-rails'
   spec.add_dependency 'rspec-rails'
   spec.add_dependency 'rswag'
   spec.add_dependency 'rubocop'
@@ -57,6 +56,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'selenium-webdriver'
   spec.add_dependency 'simple_form'
   spec.add_dependency 'slim'
+  spec.add_dependency 'stimulus-rails'
   spec.add_dependency 'turbo-rails'
   spec.add_dependency 'will_paginate'
   spec.metadata = {

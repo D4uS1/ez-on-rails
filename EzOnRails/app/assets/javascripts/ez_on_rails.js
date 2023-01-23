@@ -1,8 +1,7 @@
 //= link ez_on_rails/shared/_enhanced_table.js
 //= link ez_on_rails/shared/_flash_messages.js
 //= link ez_on_rails/shared/_model_form.js
-//= link ez_on_rails/components/ActiveStorageDropzone.tsx
-//= link ez_on_rails/components/DurationSelect.tsx
+//= link_directory ./ez_on_rails/controllers
 
 // This is a nasty hack because popper (dependency of bootstrap) tries to access a process variable,
 // but since we are not in a node environment (because rails 7 provides importmaps), we dont have a process variable.
@@ -25,15 +24,11 @@ import "ez_on_rails/shared/_enhanced_table"
 import "ez_on_rails/shared/_flash_messages"
 import "ez_on_rails/shared/_model_form"
 
+// javascript to own field components
+import "ez_on_rails/controllers"
+
 // initializers
 ActiveStorage.start();
-
-// Support component names relative to this directory:
-/*
-const componentRequireContext = require.context('components', true);
-const ReactRailsUJS = require('react_ujs');
-ReactRailsUJS.useContext(componentRequireContext);
-*/
 
 /**
  * set an indicator if some ajax request is running, especially used for capybara tests wo wait for
