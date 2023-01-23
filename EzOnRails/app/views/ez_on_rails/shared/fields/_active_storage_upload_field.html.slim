@@ -2,14 +2,14 @@ div [data-controller="active-storage-upload-field"
      data-active-storage-upload-field-max-size-error=(max_size_error)
      data-active-storage-upload-field-max-files-error=(max_files_error)
      data-active-storage-upload-field-invalid-format-error=(invalid_format_error)
-     data-active-storage-upload-field-multiple=(defined?(multiple) ? multiple : false)
+     data-active-storage-upload-field-multiple="#{(defined?(multiple) ? multiple : false)}"
      data-active-storage-upload-field-max-files=(defined?(max_files) ? max_files : nil)
      data-active-storage-upload-field-max-size=(defined?(max_size) ? max_size : nil)
      data-active-storage-upload-field-accept=(defined?(accept) ? accept : nil)
      data-active-storage-upload-field-input-name=(input_name)
      data-active-storage-upload-field-input-id=(input_id)
      data-active-storage-upload-field-existing-files=(existing_files.to_json)]
-  .container
+  .container-fluid
     .row data-active-storage-upload-field-target="filesContainer"
     .row
       .col
@@ -21,4 +21,4 @@ div [data-controller="active-storage-upload-field"
           data-action="active-storage-upload-field#onFileSelect"]
     .row
       .col
-        span.hidden data-active-storage-upload-field-target="errorContainer"
+        span.hidden.active-storage-upload-field-error data-active-storage-upload-field-target="errorContainer"

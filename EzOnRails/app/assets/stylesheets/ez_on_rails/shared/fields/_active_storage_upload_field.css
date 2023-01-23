@@ -7,3 +7,9 @@
 .active-storage-upload-field-delete-button {
     border: none;
 }
+
+.active-storage-upload-field-error {
+    margin-top: 0.25rem;
+    font-size: .875em;
+    color: #dc3545;
+}

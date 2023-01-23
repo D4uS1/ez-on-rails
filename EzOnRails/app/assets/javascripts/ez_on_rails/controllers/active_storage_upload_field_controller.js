@@ -44,7 +44,7 @@ export default class extends Controller {
         this.maxSizeError = this.data.get("maxSizeError")
         this.maxFilesError = this.data.get("maxFilesError")
         this.invalidFormatError = this.data.get("invalidFormatError")
-        this.multiple = this.data.get("multiple")
+        this.multiple = this.data.get("multiple") === "true"
         this.maxFiles = this.data.get("maxFiles")
         this.maxSize = this.data.get("maxSize")
         this.accept = this.data.get("accept")
@@ -63,13 +63,16 @@ export default class extends Controller {
      * @param event
      */
     onFileSelect(event) {
+        // hide previous errors
+        this.showError(null)
+
+        // get selected files
         const selectedFiles = this.fileInputTarget.files;
 
         // check files count
-        if (!this.multiple && selectedFiles.length > 1) {
-            return this.showError(this.maxFilesError)
-        }
-        if (this.maxFiles && selectedFiles.length > this.maxFiles) {
+        const filesCount = this.existingFiles.length + this.currentUploadsCount + selectedFiles.length;
+        const maxFilesCount = !this.multiple ? 1 : (this.maxFiles || null);
+        if (maxFilesCount && filesCount > maxFilesCount) {
             return this.showError(this.maxFilesError)
         }
 
@@ -186,6 +189,7 @@ export default class extends Controller {
             this.errorContainerTarget.innerHTML = errorText
         } else {
             this.errorContainerTarget.classList.add("hidden")
+            this.errorContainerTarget.innerHTML = ''
         }
     }
 
@@ -277,8 +281,8 @@ export default class extends Controller {
      */
     updateFilesContainer() {
         let html = `
-            <div class="container">
-                <div class="row">
+            <div class="container-fluid">
+                <div class="row gap-3">
                     ${this.existingFiles.map((fileInfo) => this.fileViewTemplate(fileInfo)).join(' ')}
                     ${new Array(this.currentUploadsCount).map(() => this.fileUploadTemplate()).join(' ')}
                 </div>
