@@ -57,14 +57,6 @@ const onDocumentReady = () => {
       'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
     }
   });
-
-  //react components need to be mounted in nested forms
-  $(document).on('cocoon:after-insert', (e, insertedItem, originalEvent) => {
-    const itemNode = insertedItem.get()[0];
-    if (!itemNode) return;
-
-    ReactRailsUJS.mountComponents(itemNode);
-  });
 };
 
 // The turbolinks ready handler for page load.
