@@ -29,6 +29,6 @@ module EzOnRails::EzAjaxHelper
     selections_action.call selected_ids, selected_data
 
     # redirect after successfull operation
-    redirect_to search_url_for(redirect_target, search_params)
+    render js: "window.location = '#{search_url_for(redirect_target, search_params)}'"
   end
 end
