@@ -1,2 +1,65 @@
 div data-controller="duration_field"
-  span Upoload
+  input type="hidden" data-duration-field-target="valueField" id="#{id}" name="#{name}" value="#{default_value}"
+
+  /years
+  .duration-field-select-container
+    label.duration-field-select-label
+      = "#{label_years}:"
+    select.duration-field-select data-action="duration-field#onChangeYears"
+      - (0...max_years).each do |years|
+        option.duration-field-select-option value="#{years}"
+          = years
+
+  /months
+  .duration-field-select-container
+    label.duration-field-select-label
+      = "#{label_months}:"
+    select.duration-field-select data-action="duration-field#onChangeMonths"
+      - (0...12).each do |months|
+        option.duration-field-select-option value="#{months}"
+          = months
+
+  /weeks
+  .duration-field-select-container
+    label.duration-field-select-label
+      = "#{label_weeks}:"
+    select.duration-field-select data-action="duration-field#onChangeWeeks"
+      - (0...5).each do |weeks|
+        option.duration-field-select-option value="#{weeks}"
+          = weeks
+
+  /days
+  .duration-field-select-container
+    label.duration-field-select-label
+      = "#{label_days}:"
+    select.duration-field-select data-action="duration-field#onChangeDays"
+      - (0...7).each do |days|
+        option.duration-field-select-option value="#{days}"
+          = days
+
+  /hours
+  .duration-field-select-container
+    label.duration-field-select-label
+      = "#{label_hours}:"
+    select.duration-field-select data-action="duration-field#onChangeHours"
+      - (0...24).each do |hours|
+        option.duration-field-select-option value="#{hours}"
+          = hours
+
+  /minutes
+  .duration-field-select-container
+    label.duration-field-select-label
+      = "#{label_minutes}:"
+    select.duration-field-select data-action="duration-field#onChangeMinutes"
+      - (0...60).each do |minutes|
+        option.duration-field-select-option value="#{minutes}"
+          = minutes
+
+    /seconds
+    .duration-field-select-container
+      label.duration-field-select-label
+        = "#{label_seconds}:"
+      select.duration-field-select data-action="duration-field#onChangeSeconds"
+        - (0...60).each do |seconds|
+          option.duration-field-select-option value="#{seconds}"
+            = seconds
