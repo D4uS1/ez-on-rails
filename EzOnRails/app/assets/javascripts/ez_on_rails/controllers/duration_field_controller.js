@@ -4,7 +4,7 @@ import { Controller } from "@hotwired/stimulus"
  * Stimulus controller for a duration field.
  */
 export default class extends Controller {
-    static targets = ["valueField"]
+    static targets = ["valueField", "yearsField", "monthsField", "weeksField", "daysField", "hoursField", "minutesField", "secondsField" ]
 
     /**
      * Constructor reads all value parts from the valueFields value and saves it into instance variables.
@@ -27,7 +27,7 @@ export default class extends Controller {
         }
 
         // Remove the initializing P
-        const withoutP = props.default_value.replace("P", "");
+        const withoutP = initialValue.replace("P", "");
 
         // split into date and time part
         const parts = withoutP.split('T');
@@ -37,15 +37,22 @@ export default class extends Controller {
         // parse date values with regex
         const dateMatches = datePart.match(/((\d)+Y)?((\d+)M)?((\d)+W)?((\d)+D)?/)
         this.years = dateMatches[2] ? dateMatches[2] : 0;
+        this.yearsFieldTarget.value = this.years;
         this.months = dateMatches[4] ? dateMatches[4] : 0;
+        this.monthsFieldTarget.value = this.months;
         this.weeks = dateMatches[6] ? dateMatches[6] : 0;
+        this.weeksFieldTarget.value = this.weeks;
         this.days = dateMatches[8] ? dateMatches[8] : 0;
+        this.daysFieldTarget.value = this.days;
 
         // parse time values with regex
         const timeMatches = timePart.match(/((\d)+H)?((\d+)M)?((\d)+S)?/)
         this.hours = timeMatches[2] ? timeMatches[2] : 0;
+        this.hoursFieldTarget.value = this.hours;
         this.minutes = timeMatches[4] ? timeMatches[4] : 0;
+        this.minutesFieldTarget.value = this.minutes;
         this.seconds = timeMatches[6] ? timeMatches[6] : 0;
+        this.secondsFieldTarget.value = this.seconds;
     }
 
 

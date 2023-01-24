@@ -1,5 +1,16 @@
-.duration-field-select-container {
+.duration-field-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
 
+.duration-field-select-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-right: 2em;
 }
 
 .duration-field-select-label {
@@ -7,7 +18,7 @@
 }
 
 .duration-field-select {
-
+    min-width: 3em;
 }
 
 .duration-field-select-option {
