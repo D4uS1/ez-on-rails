@@ -4,7 +4,7 @@ require 'rails_helper'
 
 # Spec for testing the behavior of the broom closets unattached files capabilities.
 # Testing if the admin is able to see and delete file blobs, which are not attached to any record.
-RSpec.describe 'Unattached files user view', type: :system do
+RSpec.describe 'Unattached files user view' do
   before do
     stub_const('EzOnRails::Admin::BroomClosetService::UNATTACHED_FILES_MIN_AGE_MINUTES', 0)
   end
@@ -38,7 +38,7 @@ RSpec.describe 'Unattached files user view', type: :system do
 
   after :all do
     FileUtils.rm_rf Rails.root.join('tmp/storage')
-    FileUtils.mkdir Rails.root.join('tmp/storage')
+    Rails.root.join('tmp/storage').mkdir
   end
 
   context 'when logged in as admin' do
@@ -64,9 +64,10 @@ RSpec.describe 'Unattached files user view', type: :system do
     it 'deletes one unattached file' do
       visit 'ez_on_rails/admin/broom_closet/unattached_files/'
 
-      first('#enhanced_table_select_row_enhanced_table').check
-      click_on t(:'ez_on_rails.destroy_selection')
-      system_confirm_modal
+      handle_confirm do
+        first('#enhanced_table_select_row_enhanced_table').check
+        click_on t(:'ez_on_rails.destroy_selection')
+      end
 
       expect(page).to have_text t(:'ez_on_rails.unattached_files_success')
       expect(page).not_to have_text invalid_blob_one.filename
@@ -77,8 +78,9 @@ RSpec.describe 'Unattached files user view', type: :system do
     it 'deletes all unattached files' do
       visit 'ez_on_rails/admin/broom_closet/unattached_files/'
 
-      click_on t(:'ez_on_rails.destroy_all')
-      system_confirm_modal
+      handle_confirm do
+        click_on t(:'ez_on_rails.destroy_all')
+      end
 
       expect(page).to have_text t(:'ez_on_rails.unattached_files_success')
       expect(page).not_to have_text invalid_blob_one.filename

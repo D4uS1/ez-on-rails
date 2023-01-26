@@ -34,9 +34,9 @@
       - selectable[:actions]&.each do |action|
         / get confirm data if available, depending on given type
         - if action[:confirm]
-          - confirm = confirm_data.merge(confirm: action[:confirm]) if action[:confirm].is_a?(String)
+          - confirm = confirm_data.merge(message: action[:confirm]) if action[:confirm].is_a?(String)
           - confirm = confirm_data.merge(action[:confirm]) if action[:confirm].is_a?(Hash)
-          - confirm ||= confirm_data
+          - confirm ||= { message: confirm_data[:turbo_confirm] } # default value, if no confirm was passed
 
         / render the button
         = tag.button action[:label],

@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 # Spec for testing the access for protected namespaces.
-RSpec.describe 'namespaced/access_test', type: :request do
+RSpec.describe 'Namespaced::AccessTestController' do
   let(:testgroup) { create(:testgroup) }
   let(:andrew) { create(:andrew) }
   let(:john) { create(:john) }

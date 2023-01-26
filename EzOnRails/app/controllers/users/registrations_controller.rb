@@ -2,7 +2,7 @@
 
 # Controller for registrations managed by devise.
 class Users::RegistrationsController < Devise::RegistrationsController
-  # TODO delete after devise update for Rails 7
+  # TODO: delete after devise update for Rails 7
   include DeviseTurboConcern
 
   respond_to :json

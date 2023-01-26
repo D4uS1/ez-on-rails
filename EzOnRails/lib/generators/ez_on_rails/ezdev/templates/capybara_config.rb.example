@@ -6,21 +6,20 @@ Capybara.default_max_wait_time = 15
 RSpec.configure do |config|
   Capybara.register_driver :selenium_remote do |app|
     client = Selenium::WebDriver::Remote::Http::Default.new
-    client.read_timeout = 120 # because the asset compiling tooks much time on first server request after startup
-    client.open_timeout = 120 # because the asset compiling tooks much time on first server request after startup
 
     Capybara::Selenium::Driver.new(
-        app,
-        browser: :remote,
-        url: ENV['SELENIUM_URL'],
-        desired_capabilities: :chrome,
-        http_client: client
+      app,
+      browser: :remote,
+      url: ENV['SELENIUM_URL'],
+      capabilities: [:firefox],
+      http_client: client
     )
   end
 
   config.before(:each, type: :system) do
-    Capybara.server_port = '3001'
-    Capybara.server_host = 'web'
+    Capybara.server_host = '0.0.0.0'
     driven_by :selenium_remote, using: :remote, screen_size: [1440, 900]
+    ip = Socket.ip_address_list.detect { |addr| addr.ipv4_private? }.ip_address
+    Capybara.app_host = "http://#{ip}:#{Capybara.server_port}"
   end
 end

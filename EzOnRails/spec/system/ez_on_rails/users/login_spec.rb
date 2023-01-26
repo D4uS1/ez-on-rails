@@ -4,7 +4,7 @@ require 'rails_helper'
 
 # Spec for testing the login behavior.
 # Testing that some user can not login without password or wrong password.
-RSpec.describe 'User login', type: :system do
+RSpec.describe 'User login' do
   let(:john) { create(:john) }
 
   context 'when user logs in' do

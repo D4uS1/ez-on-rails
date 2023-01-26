@@ -5,7 +5,7 @@ require 'rails_helper'
 # Spec for testing account behaviors.
 # Testing that some user (called andrew here) can edit and destroy its account.
 # Also Testing that the admin user can not destroy its account, but update its account.
-RSpec.describe 'User Account', type: :system do
+RSpec.describe 'User Account' do
   let(:admin) { User.super_admin }
   let!(:andrew) { create(:andrew) }
 
@@ -53,9 +53,10 @@ RSpec.describe 'User Account', type: :system do
     it 'can not delete its account using the wrong password' do
       visit '/users/edit'
 
-      fill_in 'user_current_password', with: 'totallyWrongPassword'
-      click_on t(:remove_account)
-      system_confirm_modal
+      handle_confirm do
+        fill_in 'user_current_password', with: 'totallyWrongPassword'
+        click_on t(:remove_account)
+      end
 
       expect(page).not_to have_text t('devise.registrations.destroyed')
       expect(User.find_by(id: andrew.id)).not_to be_nil
@@ -64,9 +65,10 @@ RSpec.describe 'User Account', type: :system do
     it 'can delete its account using the correct password' do
       visit '/users/edit'
 
-      fill_in 'user_current_password', with: 'andrewandrew'
-      click_on t(:remove_account)
-      system_confirm_modal
+      handle_confirm do
+        fill_in 'user_current_password', with: 'andrewandrew'
+        click_on t(:remove_account)
+      end
 
       expect(page).to have_text t(:'devise.registrations.destroyed')
       expect(User.find_by(id: andrew.id)).to be_nil
@@ -117,9 +119,10 @@ RSpec.describe 'User Account', type: :system do
     it 'can not delete its account' do
       visit '/users/edit'
 
-      fill_in 'user_current_password', with: '1replace_me3_after3_install7'
-      click_on t(:remove_account)
-      system_confirm_modal
+      handle_confirm do
+        fill_in 'user_current_password', with: '1replace_me3_after3_install7'
+        click_on t(:remove_account)
+      end
 
       expect(page).not_to have_text t('devise.registrations.destroyed')
       expect(page).to have_text t(:admin_user_not_destroyable)

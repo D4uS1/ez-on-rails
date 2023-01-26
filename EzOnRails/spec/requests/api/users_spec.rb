@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 # Spec for testing the access for the actions in Api::UsersController.
-RSpec.describe 'api/users', type: :request do
+RSpec.describe 'Api::UsersController' do
   # users
   let(:andrew) { create(:andrew) }
   let(:default_headers) { { ACCEPT: 'application/json', 'api-version': API_VERSION } }

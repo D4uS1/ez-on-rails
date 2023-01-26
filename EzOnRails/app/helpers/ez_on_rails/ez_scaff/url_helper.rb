@@ -298,7 +298,7 @@ module EzOnRails::EzScaff::UrlHelper
   # Hence this method is also callable without any parameters to get some reasonable default confirm message.
   def confirm_data(options = {})
     {
-      message: options[:message] || t(:'ez_on_rails.are_you_sure')
+      turbo_confirm: options[:message] || t(:'ez_on_rails.are_you_sure')
     }
   end
 

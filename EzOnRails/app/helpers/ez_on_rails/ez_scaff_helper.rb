@@ -207,7 +207,6 @@ module EzOnRails::EzScaffHelper
                   sort_link locals[:queue_obj],
                             get_sort_link_target(obj_class, attribute_key, attribute_render_info),
                             render_attribute_label(attribute_render_info),
-                            {},
                             class: 'text-decoration-none text-dark'
                 end
 

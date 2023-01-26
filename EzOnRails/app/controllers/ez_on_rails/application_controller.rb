@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Base Controller class of EzOnRails Engine.
-class EzOnRails::ApplicationController < ::ApplicationController
+class EzOnRails::ApplicationController < ApplicationController
   include ActionView::Helpers::TranslationHelper
   include EzOnRails::UserAccessHelper
   include ActionView::Context # needed for some reason, because _seach_form throws missing output_buffer

@@ -397,7 +397,8 @@ module EzOnRails::EzScaff::ModelFormHelper
     render partial: 'ez_on_rails/shared/fields/active_storage_upload_field', locals: {
       max_size_error: t(:'ez_on_rails.fields.active_storage_upload_field.default_max_size_error',
                         max_size_mb: max_size / 1_048_576),
-      max_files_error: t(:'ez_on_rails.fields.active_storage_upload_field.default_max_files_error', max_files: options[:max_files]),
+      max_files_error: t(:'ez_on_rails.fields.active_storage_upload_field.default_max_files_error',
+                         max_files: options[:max_files]),
       invalid_format_error: t(:'ez_on_rails.fields.active_storage_upload_field.default_invalid_format_error'),
       multiple: options[:multiple],
       max_files: options[:max_files],

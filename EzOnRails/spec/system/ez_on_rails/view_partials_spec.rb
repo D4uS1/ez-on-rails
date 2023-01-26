@@ -12,7 +12,7 @@ require 'rails_helper'
 # * modals/_ok
 # * modals/_yes_no
 # * modals/preview
-RSpec.describe 'View partials', type: :system do
+RSpec.describe 'View partials' do
   # users
   let(:admin) { User.super_admin }
 
@@ -214,7 +214,7 @@ RSpec.describe 'View partials', type: :system do
     it 'can logout using userbar' do
       visit '/'
 
-      find('#dropdown_userbar_user').click
+      find_by_id('dropdown_userbar_user').click
       find('a[name=logout]').click
       expect(page).to have_text(t(:'devise.sessions.signed_out'))
       expect(page).not_to have_text(admin.username)

@@ -427,7 +427,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
-  capybara (>= 2.15)
+  capybara
   debase
   devise
   ez_on_rails!

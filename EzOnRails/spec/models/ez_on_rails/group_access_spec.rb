@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe EzOnRails::GroupAccess, type: :model do
+RSpec.describe EzOnRails::GroupAccess do
   let(:group_access_attributes) do
     {
       namespace: 'ez_on_rails/admin/user_management',

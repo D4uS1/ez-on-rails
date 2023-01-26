@@ -82,7 +82,7 @@ class EzOnRails::Admin::BroomCloset::NilOwnersController < EzOnRails::Admin::Bro
     end
 
     # redirect
-    redirect_to action: 'index'
+    render js: "window.location = '#{ez_on_rails_nil_owners_path}'"
   end
 
   protected

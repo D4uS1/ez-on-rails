@@ -9,7 +9,7 @@ require 'rails_helper'
 # Also testing whether a non logged in user (called anonymus here) is not able to see any resources
 # but those who are not assigned to anyone.
 # Also testing whether the admin can see al resources.
-RSpec.describe 'ownership info access user view', type: :system do
+RSpec.describe 'ownership info access user view' do
   let(:andrew) { create(:andrew) }
   let!(:anonymous_first_record) do
     create(:user_owned_record,

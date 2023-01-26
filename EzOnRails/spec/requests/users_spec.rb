@@ -10,7 +10,7 @@ require 'rails_helper'
 # Testing whether admin can get the actions, because the access is granted.
 # This spec also tests the basic CRUD functionality of the actions which should Create, Update or Destroy
 # ActiveRecord instance.
-RSpec.describe 'users', type: :request do
+RSpec.describe 'users' do
   # users
   let(:andrew) { create(:andrew) }
   let(:admin) { User.super_admin }

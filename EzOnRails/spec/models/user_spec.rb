@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
+RSpec.describe User do
   let(:valid_attributes) { attributes_for(:andrew).merge({ password: 'testpassword' }) }
 
   context 'when validating' do

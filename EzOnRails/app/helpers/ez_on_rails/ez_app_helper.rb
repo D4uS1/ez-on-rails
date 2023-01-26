@@ -219,6 +219,6 @@ module EzOnRails::EzAppHelper
 
   # Returns a tag that shows a flag-icon for the specified lang code.
   def flag_icon(lang_code)
-    tag.span '', class:"fi fi-#{lang_code}"
+    tag.span '', class: "fi fi-#{lang_code}"
   end
 end

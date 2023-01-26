@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 # Spec for testing that some validation error occurs on update or create or destroy actions.
-RSpec.describe 'api/validation_error_tests', type: :request do
+RSpec.describe 'Api::ValidationErrorTestsController' do
   # users
   let(:admin) { User.super_admin }
   let(:default_headers) { { ACCEPT: 'application/json', 'api-version': API_VERSION } }

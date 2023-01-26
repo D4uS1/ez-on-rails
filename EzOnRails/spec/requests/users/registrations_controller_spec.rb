@@ -7,7 +7,7 @@ require 'rails_helper'
 # (called andrew here).
 # Contains tests wether some logged in user (called john here) cannot edit or destroy another user (called andrew here)
 # Also tests whether some user is able to update or detsroy itself.
-RSpec.describe Users::RegistrationsController, type: :request do
+RSpec.describe 'Users::RegistrationsController' do
   # users
   let(:john) { create(:john) }
   let(:andrew) { create(:andrew) }

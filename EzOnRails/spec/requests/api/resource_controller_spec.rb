@@ -4,7 +4,7 @@ require 'rails_helper'
 
 # Spec for testing some actions of the resource controller.
 # Exemplarily done with ValidationErrorTestController.
-RSpec.describe 'api/resource_controller', type: :request do
+RSpec.describe 'EzOnRails::ResourceController' do
   # users
   let(:admin) { User.super_admin }
   let(:default_headers) { { ACCEPT: 'application/json', 'api-version': API_VERSION } }

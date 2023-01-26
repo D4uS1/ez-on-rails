@@ -2,20 +2,20 @@
 
 # Controller for unlocks managed by devise.
 class Users::UnlocksController < Devise::UnlocksController
-  # TODO delete after devise update for Rails 7
+  # TODO: delete after devise update for Rails 7
   include DeviseTurboConcern
 
   respond_to :json
 
-  # GET /resource/unlock/new
-  def new
-    @subtitle = t(:'ez_on_rails.new')
-    super
-  end
-
   # GET /resource/unlock?unlock_token=abcdef
   def show
     @subtitle = t(:'ez_on_rails.show')
+    super
+  end
+
+  # GET /resource/unlock/new
+  def new
+    @subtitle = t(:'ez_on_rails.new')
     super
   end
 

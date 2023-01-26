@@ -5,7 +5,7 @@ require 'rails_helper'
 # Spec for testing the behavior of the broom closets nil owners capabilities.
 # Testing if the admin is able to see and delete ownership infos, which are assigned to
 # no user.
-RSpec.describe 'Nil Owners user view', type: :system do
+RSpec.describe 'Nil Owners user view' do
   before do
     create(:eor_ownership_info,
            resource: 'UserOwnedRecord')
@@ -81,9 +81,10 @@ RSpec.describe 'Nil Owners user view', type: :system do
       visit 'ez_on_rails/admin/broom_closet/nil_owners/'
 
       first('#enhanced_table_select_row_enhanced_table').check
-      click_on t(:'ez_on_rails.destroy_selection')
-      system_confirm_modal
-      system_wait_for_flash_message
+      handle_confirm do
+        click_on t(:'ez_on_rails.destroy_selection')
+        system_wait_for_flash_message
+      end
 
       expect(page).to have_text t(:'ez_on_rails.nil_owners_success')
       expect(page).not_to have_css 'td', text: /\A#{anonymous_first_record.id}\z/
@@ -94,9 +95,10 @@ RSpec.describe 'Nil Owners user view', type: :system do
     it 'deletes all nil owned resources' do
       visit 'ez_on_rails/admin/broom_closet/nil_owners/'
 
-      click_on t(:'ez_on_rails.destroy_all')
-      system_confirm_modal
-      system_wait_for_flash_message
+      handle_confirm do
+        click_on t(:'ez_on_rails.destroy_all')
+        system_wait_for_flash_message
+      end
 
       expect(page).to have_text t(:'ez_on_rails.nil_owners_success')
       expect(page).not_to have_css 'td', text: /\A#{anonymous_first_record.id}\z/

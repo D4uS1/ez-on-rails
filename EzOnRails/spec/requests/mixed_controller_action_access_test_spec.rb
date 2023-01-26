@@ -4,7 +4,7 @@ require 'rails_helper'
 
 # Spec for testing the access for protected controllers that contain actions that
 # also has protection rules.
-RSpec.describe 'mixed_controller_action_access_test', type: :request do
+RSpec.describe 'MixedControllerActionAccessTestController' do
   let(:andrew) { create(:andrew) }
   let(:john) { create(:john) }
   let(:admin) { User.super_admin }

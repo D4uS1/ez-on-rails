@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe EzOnRails::Group, type: :model do
+RSpec.describe EzOnRails::Group do
   let(:group_attributes) do
     {
       name: 'Testgroup',

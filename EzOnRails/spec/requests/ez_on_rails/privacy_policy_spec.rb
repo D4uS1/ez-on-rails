@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 # Spec for testing the index action of the privacy policy controller.
-RSpec.describe 'ez_on_rails/privacy_policy', type: :request do
+RSpec.describe 'PrivacyPolicyController' do
   context 'when not logged in' do
     it 'can get index' do
       get privacy_policy_url

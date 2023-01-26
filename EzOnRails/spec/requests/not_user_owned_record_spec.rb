@@ -5,7 +5,7 @@ require 'cancan/matchers'
 
 # Spec for testing the access system for default resources, that are no ownership infos but has the owner field.
 # Everyone should be able to do anything with those resources, independent of the creator of the resource.
-describe 'Not user owned record access', type: :request do
+describe 'NotUserOwnedRecordsController' do
   let(:andrew) { create(:andrew) }
   let(:john) { create(:john) }
   let(:admin) { User.super_admin }

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe EzOnRails::OwnershipInfo, type: :model do
+RSpec.describe EzOnRails::OwnershipInfo do
   let(:ownership_info_attributes) do
     {
       resource: 'EzOnRails::Group',

@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 # Spec for testing the access for protected actions in one controller.
-RSpec.describe 'access_test', type: :request do
+RSpec.describe 'AssocTestsController' do
   let(:testgroup) { create(:testgroup) }
   let(:andrew) { create(:andrew) }
   let(:john) { create(:john) }

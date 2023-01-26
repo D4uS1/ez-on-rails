@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe EzOnRails::UserGroupAssignment, type: :model do
+RSpec.describe EzOnRails::UserGroupAssignment do
   let(:user) do
     create(:user)
   end

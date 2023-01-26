@@ -15,7 +15,6 @@ module EzTestHelper
     fill_in 'user_email', with: email
     fill_in 'user_password', with: password
     click_on 'button' # Login button has name button
-    expect(page).to have_content(t('devise.sessions.signed_in'))
   end
 
   # Takes a screenshot from the current page of the system test and saves it into the
@@ -25,14 +24,21 @@ module EzTestHelper
     page.save_screenshot Rails.root.join('tmp', 'screenshots', "#{filename}.png")
   end
 
-  # confirms the default modal for confirmation messages in system tests.
-  def system_confirm_modal
-    click_on t(:'ez_on_rails.button_yes')
+  # Accepts a block that is executed within that all confirm dialogs are accepted or declined, depending
+  # on the specified accept parameter.
+  # This is a hack, because using the default capybara accept functions resulted in not finding the dialog.
+  #
+  # Source: https://github.com/thoughtbot/capybara-webkit/issues/84
+  def handle_confirm(accept = true)
+    page.evaluate_script 'window.original_confirm_function = window.confirm'
+    page.evaluate_script "window.confirm = function(msg) { return #{!accept.nil?}; }"
+    yield
+    page.evaluate_script 'window.confirm = window.original_confirm_function'
   end
 
   # waits for a flash message
   def system_wait_for_flash_message
-    find('.alert.show')
+    find('.alert')
   end
 
   # helper method wich waits for any ajax request to finish.

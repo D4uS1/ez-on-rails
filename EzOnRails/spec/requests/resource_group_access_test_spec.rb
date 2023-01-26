@@ -4,7 +4,7 @@ require 'rails_helper'
 require 'cancan/matchers'
 
 # Spec for testing the access system for resource groups.
-describe 'Resource group access test', type: :request do
+describe 'ResourceGroupAccessTestsController' do
   let(:ownership_info) { create(:eor_ownership_info, resource: 'ResourceGroupAccessTest') }
   let(:group) { create(:eor_group, resource_group: true) }
   let(:resource) { create(:resource_group_access_test) }

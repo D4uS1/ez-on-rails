@@ -9,7 +9,7 @@ require 'cancan/matchers'
 # This spec also tests whether some not logged in user is not be able to access any of
 # this resources.
 # This spec also tests whether the admin can access all resources.
-describe 'User owned record access', type: :request do
+describe 'UserOwnedRecordsController' do
   let(:andrew) { create(:andrew) }
   let(:john) { create(:john) }
   let(:admin) { User.super_admin }

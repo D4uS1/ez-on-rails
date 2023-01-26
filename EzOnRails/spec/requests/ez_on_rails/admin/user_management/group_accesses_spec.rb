@@ -10,7 +10,7 @@ require 'rails_helper'
 # Testing whether admin can get the actions, because the access is granted.
 # This spec also tests the basic CRUD functionality of the actions which should Create, Update or Destroy
 # ActiveRecord instance.
-RSpec.describe 'ez_on_rails/admin/user_management/group_accesses', type: :request do
+RSpec.describe 'EzOnRails::Admin::UserManagement::GroupAccessesController' do
   # users
   let(:andrew) { create(:andrew) }
   let(:admin) { User.super_admin }
@@ -314,7 +314,7 @@ RSpec.describe 'ez_on_rails/admin/user_management/group_accesses', type: :reques
     it 'can destroy selections' do
       delete destroy_selections_ez_on_rails_group_accesses_url
 
-      expect(response).to redirect_to(ez_on_rails_group_accesses_url)
+      expect(response).to have_http_status(:success)
     end
   end
 end

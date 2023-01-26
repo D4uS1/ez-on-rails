@@ -16,9 +16,6 @@ class EzOnRails::Api::ResourceController < EzOnRails::Api::BaseController
     handle_api_error EzOnRails::ResourceNotFoundError.new(message: 'resource not found')
   end
 
-  # GET show action to get an existing single resource instance.
-  def show; end
-
   # GET index action to get all existing resource instances.
   def index
     @resource_objs = model_class.accessible_by(
@@ -26,6 +23,9 @@ class EzOnRails::Api::ResourceController < EzOnRails::Api::BaseController
       :show
     ).order(default_order)
   end
+
+  # GET show action to get an existing single resource instance.
+  def show; end
 
   # GET search action to search for existing resourcey by matching attributes.
   def search

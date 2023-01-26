@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe EzOnRails::ResourceDestroyAccess, type: :model do
+RSpec.describe EzOnRails::ResourceDestroyAccess do
   let(:sharable_resource) do
     create(:sharable_resource)
   end

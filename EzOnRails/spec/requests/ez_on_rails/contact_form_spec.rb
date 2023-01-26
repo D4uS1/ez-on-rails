@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 # Spec for testing the index and submit action of the contact form.
-RSpec.describe 'contact_form', type: :request do
+RSpec.describe 'ContactFormController' do
   context 'when not logged in' do
     it 'can get index' do
       get contact_form_url

@@ -81,7 +81,7 @@ RSpec/MultipleMemoizedHelpers:
 RSpec/NestedGroups:
   Max: 6 # example too shallow require big chunks of code duplication
 RSpec/VariableName:
-  IgnoredPatterns:
+  AllowedPatterns:
     - api-version # ez_on_rails api version http header
     - Accept # Accept http header
     - access-token # ez_on_rails access-token http header

@@ -109,6 +109,7 @@ RSpec/DescribeClass:
   Exclude:
     - 'spec/integration/api/**/*_spec.rb' # integration tests of api use rswag, which uses a special dsl
     - 'lib/generators/ez_on_rails/ezapi/templates/spec/integration/api/**/*_spec.rb' # integration tests of api use rswag, which uses a special dsl
+    - 'spec/system/**/*_spec.rb' # The system specs do not have corresponding classes
 RSpec/BeforeAfterAll:
   Exclude:
     - '**/*/unattached_files_spec.rb' # atfer :all is used here to delete uploaded files

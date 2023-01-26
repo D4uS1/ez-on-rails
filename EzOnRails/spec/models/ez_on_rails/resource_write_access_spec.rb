@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe EzOnRails::ResourceWriteAccess, type: :model do
+RSpec.describe EzOnRails::ResourceWriteAccess do
   let(:sharable_resource) do
     create(:sharable_resource)
   end

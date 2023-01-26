@@ -7,7 +7,7 @@ require 'rails_helper'
 # Testing whether some non admin logged in user (called andrew here) can not get any action,
 # because the access can be denied.
 # Testing whether admin can get the actions, because the access is granted.
-RSpec.describe 'ez_on_rails/active_storage/blobs', type: :request do
+RSpec.describe 'EzOnRails::ActiveStorage::BlobsController' do
   # users
   let(:andrew) { create(:andrew) }
   let(:admin) { User.super_admin }

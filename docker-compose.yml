@@ -16,10 +16,10 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - SELENIUM_URL=http://chrome:4444/wd/hub
+      - SELENIUM_URL=http://selenium:4444/wd/hub
     depends_on:
       - db
-  chrome:
-    image: selenium/standalone-chrome:latest
-    volumes:
-      - /dev/shm:/dev/shm
+  selenium:
+    image: selenium/standalone-firefox-debug:latest
+    ports:
+      - "4444:4444"

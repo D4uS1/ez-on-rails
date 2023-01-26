@@ -4,7 +4,7 @@ require 'rails_helper'
 
 # Spec for testing the behavior of the broom closets unattached files capabilities.
 # Testing if the admin is able to see and delete file blobs, which are not attached to any record.
-RSpec.describe 'User management user view', type: :system do
+RSpec.describe 'User management user view' do
   # users
   let(:john) { create(:john) }
   let(:andrew) { create(:andrew) }

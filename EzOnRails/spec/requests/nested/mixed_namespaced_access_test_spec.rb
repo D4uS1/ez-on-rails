@@ -4,7 +4,7 @@ require 'rails_helper'
 
 # Spec for testing the access for protected namespaces that contains
 # nested namespaces that has also protection rules.
-RSpec.describe 'nested/namespaced/mixed_namespace_access_test', type: :request do
+RSpec.describe 'Nested::MixedNamespaceAccessTestController' do
   let(:andrew) { create(:andrew) }
   let(:john) { create(:john) }
   let(:admin) { User.super_admin }

@@ -10,7 +10,7 @@ require 'cancan/matchers'
 # A user with shared read access (christoph here), will have to show the resource.
 # A user with shared write access (john here), will have to update the resource.
 # A user with shared destroy access (florian here), will have to destroy the resource.
-describe 'Sharable resource spec', type: :request do
+describe 'SharableResourcesController' do
   let(:readable_group) do
     create(:eor_group, name: 'Readable')
   end

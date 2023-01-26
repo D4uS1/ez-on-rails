@@ -8,13 +8,12 @@ module DeviseTurboConcern
 
   # The responder class that is used to render html responses for devise controllers.
   class Responder < ActionController::Responder
-
     # The respond method used to render html responses for devise controllers.
     def to_turbo_stream
       controller.render(options.merge(formats: :html))
-    rescue ActionView::MissingTemplate => error
+    rescue ActionView::MissingTemplate => e
       if get?
-        raise error
+        raise e
       elsif has_errors? && default_action
         render rendering_options.merge(formats: :html, status: :unprocessable_entity)
       else

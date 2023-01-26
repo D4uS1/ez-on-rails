@@ -4,7 +4,7 @@ require 'rails_helper'
 
 # Spec for testing the access for protected namespaces that contains
 # controllers that has also protection rules.
-RSpec.describe 'namespaced/mixed_controller_access_test', type: :request do
+RSpec.describe 'Namespaced::MixedControllerTwoAccessTestController' do
   let(:andrew) { create(:andrew) }
   let(:john) { create(:john) }
   let(:admin) { User.super_admin }

@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 # Spec for testing the index action of the imprint.
-RSpec.describe 'ez_on_rails/imprint', type: :request do
+RSpec.describe 'ImprintController' do
   context 'when not logged in' do
     it 'can get index' do
       get imprint_url

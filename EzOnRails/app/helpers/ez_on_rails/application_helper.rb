@@ -2,5 +2,4 @@
 
 # Application helper of the EzOnRails engine.
 module EzOnRails::ApplicationHelper
-
 end
