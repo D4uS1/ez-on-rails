@@ -42,7 +42,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'nilify_blanks'
   spec.add_dependency 'omniauth-gitlab'
   spec.add_dependency 'omniauth-oauth2'
-  spec.add_dependency 'rails', '~> 7.0.4', '>= 7.0.4'
+  spec.add_dependency 'rails', '~> 7.0.4'
   spec.add_dependency 'ransack'
   spec.add_dependency 'rspec-rails'
   spec.add_dependency 'rswag'
