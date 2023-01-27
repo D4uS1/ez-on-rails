@@ -26,7 +26,6 @@ PATH
       rubocop-rails
       rubocop-rspec
       scoped_search
-      selenium-webdriver
       simple_form
       slim
       sprockets-rails
@@ -343,13 +342,8 @@ GEM
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     ruby2_keywords (0.0.5)
-    rubyzip (2.3.2)
     scoped_search (4.1.10)
       activerecord (>= 4.2.0)
-    selenium-webdriver (4.7.1)
-      rexml (~> 3.2, >= 3.2.5)
-      rubyzip (>= 1.2.2, < 3.0)
-      websocket (~> 1.0)
     simple_form (5.1.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
@@ -392,7 +386,6 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
-    websocket (1.2.9)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)

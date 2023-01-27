@@ -50,7 +50,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rubocop-rails'
   spec.add_dependency 'rubocop-rspec'
   spec.add_dependency 'scoped_search'
-  spec.add_dependency 'selenium-webdriver'
   spec.add_dependency 'simple_form'
   spec.add_dependency 'slim'
   spec.add_dependency 'sprockets-rails'

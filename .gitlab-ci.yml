@@ -1,7 +1,6 @@
 # Defines additional Services used in this ci
 services:
   - postgres:12
-  - selenium/standalone-firefox:latest
 
 # Environment Variables
 variables:
@@ -64,4 +63,3 @@ rspec:
     POSTGRES_DB: ez_on_rails_test_test
     POSTGRES_USER: postgres
     POSTGRES_PASSWORD: postgres
-    SELENIUM_URL: http://selenium__standalone-firefox:4444/wd/hub

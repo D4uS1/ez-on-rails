@@ -40,7 +40,6 @@ rspec:
   # Defines additional Services used in this ci
   services:
     - postgres:12
-    - selenium/standalone-firefox:latest
   # Executed before every script
   before_script:
     - apt-get update -qq
@@ -59,7 +58,6 @@ rspec:
     POSTGRES_DB: <%= plural_name.singularize %>_test
     POSTGRES_USER: postgres
     POSTGRES_PASSWORD: postgres
-    SELENIUM_URL: http://selenium__standalone-firefox:4444/wd/hub
   # Defines the Pathes to cache for furthermore CI Runs, to prevent the CI from
   # Building all again and again and taking a long time to proceed
   cache:
