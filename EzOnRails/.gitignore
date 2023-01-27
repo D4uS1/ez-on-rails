@@ -1,7 +1,6 @@
 .bundle/
 log/*.log
 pkg/
-/node_modules
 public/ez-on-rails-packs
 tmp/cache
 
@@ -13,5 +12,4 @@ spec/dummy/storage/
 spec/dummy/tmp/
 spec/dummy/public/packs-test
 spec/dummy/log
-spec/dummy/node_modules
 .rspec

@@ -48,9 +48,6 @@ rspec:
     - bundle config set path vendor
     - bundle config set without development production
     - bundle install --jobs $(nproc)
-    - apt-get install nodejs -qq
-    - curl -o- -L https://yarnpkg.com/install.sh | bash
-    - export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
     - cp config/database.gitlab-ci.yml config/database.yml
     - cp .rspec.gitlab-ci .rspec
     - bundle exec rails assets:precompile
@@ -69,6 +66,5 @@ rspec:
     key: ${CI_PROJECT_PATH_SLUG}
     paths:
       - vendor/ruby
-      - node_modules
       - tmp/cache/assets
       - public/assets
