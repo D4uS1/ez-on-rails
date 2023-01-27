@@ -27,8 +27,6 @@ Gem::Specification.new do |spec|
   spec.files = Dir['{app,config,db,lib,spec,public}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
 
   spec.add_dependency 'cancancan'
-  spec.add_dependency 'capybara'
-  spec.add_dependency 'capybara-selenium'
   spec.add_dependency 'cocoon'
   spec.add_dependency 'devise'
   spec.add_dependency 'devise_token_auth'

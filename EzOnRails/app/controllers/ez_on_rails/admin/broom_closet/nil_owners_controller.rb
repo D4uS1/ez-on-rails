@@ -20,7 +20,7 @@ class EzOnRails::Admin::BroomCloset::NilOwnersController < EzOnRails::Admin::Bro
   def index
     @subtitle = t(:'ez_on_rails.nil_owners_subtitle')
 
-    # info for search form
+    # info for search form, needed by the views
     @queue_obj = EzOnRails::OwnershipInfo.ransack
     @obj_class = EzOnRails::OwnershipInfo
 

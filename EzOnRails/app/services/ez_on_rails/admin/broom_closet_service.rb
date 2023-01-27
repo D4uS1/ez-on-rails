@@ -30,14 +30,18 @@ class EzOnRails::Admin::BroomClosetService
 
   # Destroys the nil owned resources.
   # The resources_info is expected to be an array of hashes.
-  # Eeach hash contains a :type and an :id field.
+  # Each hash contains a :type and an :id field.
   # The type is the full name of the resource to delete. The id is the active record id
   # of the object to delete.
   # Returns the number of successfully destroyed resources.
   def destroy_nil_owners(resources_info)
     destroyed = 0
 
+    all_nil_owners = nil_owners
     filter_by_resource_info(nil_owners, resources_info).each do |resource|
+      # only destroy if this is a owned record with now owner
+      next unless all_nil_owners.include? resource
+
       destroyed += 1 if resource.destroy
     end
 

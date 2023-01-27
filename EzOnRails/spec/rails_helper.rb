@@ -24,7 +24,6 @@ require 'rspec/rails'
 #
 # Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 
-require 'support/ez_on_rails/capybara_config'
 require 'support/ez_on_rails/ez_on_rails_spec_config'
 require 'support/ez_on_rails/ez_auth_test_helper'
 require 'support/locales_config'

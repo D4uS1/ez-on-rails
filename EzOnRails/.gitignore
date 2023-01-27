@@ -14,5 +14,4 @@ spec/dummy/tmp/
 spec/dummy/public/packs-test
 spec/dummy/log
 spec/dummy/node_modules
-spec/support/ez_on_rails/capybara_config.rb
 .rspec

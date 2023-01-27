@@ -293,13 +293,17 @@ RSpec.describe 'EzOnRails::Admin::UserManagement::UsersController' do
     end
 
     it 'can update password of user' do
+      old_password = andrew.encrypted_password
+
       patch password_reset_ez_on_rails_user_url(andrew), params: {
         user: {
           password: 'andrewsnewpassword'
         }
       }
 
+      andrew.reload
       expect(response.status).to redirect_to(ez_on_rails_user_url(andrew))
+      expect(andrew.encrypted_password).not_to eq(old_password)
     end
 
     it 'can destroy user' do

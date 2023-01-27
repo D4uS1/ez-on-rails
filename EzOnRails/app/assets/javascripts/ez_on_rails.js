@@ -32,21 +32,6 @@ import "ez_on_rails/controllers"
 ActiveStorage.start();
 
 /**
- * set an indicator if some ajax request is running, especially used for capybara tests wo wait for
- * finishing ajax requests
- */
-$(() => {
-  window.ajaxRunning = false;
-  $(document).ajaxStart(() => {
-    window.ajaxRunning = true;
-  });
-
-  $(document).ajaxStop(() => {
-    window.ajaxRunning = false;
-  });
-});
-
-/**
  * The function to call on document ready.
  * Need to wrap this into an extra function because if you need this function not to load in turbolinks
  * page:load event for some readson, you can use it.

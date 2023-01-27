@@ -53,7 +53,6 @@ jobs:
       - run: npm install --global yarn
       - run: cp config/database.github-actions.yml config/database.yml
       - run: cp EzOnRails/github-actions.rspec EzOnRails/.rspec
-      - run: cp EzOnRails/spec/support/ez_on_rails/capybara_config.rb.github-actions EzOnRails/spec/support/ez_on_rails/capybara_config.rb
       - run: bundle exec rails assets:precompile
       - run: rails db:create db:schema:load
       # script

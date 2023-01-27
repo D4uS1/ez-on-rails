@@ -86,15 +86,16 @@ Rails.application.routes.draw do
       end
     end
 
-    # added to make references to users available directly
+    # added to make references to users available directly, this is especially useful for link_to
+    # or url_for methods that try to resolve the path to the user model
     resources :users, only: [:show], controller: 'ez_on_rails/admin/user_management/users'
 
     get 'welcome/', to: 'welcome#index'
     get 'privacy_policy/', to: 'privacy_policy#index'
     get 'imprint/', to: 'imprint#index'
     get 'contact_form/', to: 'contact_form#index'
-    post 'contact_form/submit'
-    get 'contact_form/submit'
+    post 'contact_form/submit', to: 'contact_form#submit'
+    get 'contact_form/submit_success', to: 'contact_form#submit_success'
 
     root 'welcome#index'
   end

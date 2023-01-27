@@ -52,7 +52,6 @@ rspec:
     - curl -o- -L https://yarnpkg.com/install.sh | bash
     - export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
     - cp config/database.gitlab-ci.yml config/database.yml
-    - cp spec/support/capybara_config.rb.gitlab-ci spec/support/capybara_config.rb
     - cp .rspec.gitlab-ci .rspec
     - bundle exec rails assets:precompile
   script:

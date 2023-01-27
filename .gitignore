@@ -35,7 +35,6 @@ yarn-debug.log*
 
 # ignore config files to prevent docker collisions
 config/database.yml
-spec/support/capybara_config.rb
 
 # Rubymine
 .idea/

@@ -35,11 +35,16 @@ class ContactFormController < EzOnRails::ApplicationController
 
       # Do Some Stuff here
       flash[:success] = t(:message_sent_success)
-      render :submit
+      redirect_to contact_form_submit_success_path
     else
       flash[:danger] = t(:message_sent_fail)
-      render :index
+      render :index, status: :unprocessable_entity
     end
+  end
+
+  # Should be redirected to after successful submission of contact form.
+  def submit_success
+    render :submit_success
   end
 
   protected

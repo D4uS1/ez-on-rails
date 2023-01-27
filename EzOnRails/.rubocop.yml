@@ -93,11 +93,6 @@ RSpec/ExampleLength:
   Max: 30
 RSpec/MultipleExpectations:
   Enabled: false # if you test some functionality that has multiple expections, you should not duplicate the whole test having all of its before hooks...
-RSpec/LetSetup:
-  Exclude:
-    - '**/*/restricted_area_with_controller_and_action_spec.rb' # let! is used here to predefine the restricted areas
-    - '**/*/ownership_info_access_spec.rb' # let! is used here to predefine the restricted resources
-    - '**/*/nil_owners_spec.rb' # let! is used here to predefine the restricted resources
 RSpec/EmptyExampleGroup:
   Exclude:
     - 'spec/integration/api/**/*_spec.rb' # integration tests of api use rswag, which uses a special dsl
@@ -112,7 +107,8 @@ RSpec/DescribeClass:
     - 'spec/system/**/*_spec.rb' # The system specs do not have corresponding classes
 RSpec/BeforeAfterAll:
   Exclude:
-    - '**/*/unattached_files_spec.rb' # atfer :all is used here to delete uploaded files
+    - 'spec/requests/ez_on_rails/admin/broom_closet/unattached_files_spec.rb' # atfer :all is used here to delete uploaded files
+    - 'spec/services/ez_on_rails/admin/broom_closet_service_spec.rb' # atfer :all is used here to delete uploaded files
 RSpec/InstanceVariable:
   Exclude:
     - '**/*/registrations_controller_spec.rb' # devise requires using @request instance variable here

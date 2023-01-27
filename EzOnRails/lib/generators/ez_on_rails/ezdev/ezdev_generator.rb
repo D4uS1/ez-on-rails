@@ -15,9 +15,6 @@ module EzOnRails
       copy_file '.rspec.gitlab-ci', '.rspec.gitlab-ci'
       copy_file '.rubocop.yml', '.rubocop.yml'
       copy_file 'database.gitlab-ci.yml', 'config/database.gitlab-ci.yml'
-      copy_file 'capybara_config.rb', 'spec/support/capybara_config.rb'
-      copy_file 'capybara_config.rb.example', 'spec/support/capybara_config.rb.example'
-      copy_file 'capybara_config.rb.gitlab-ci', 'spec/support/capybara_config.rb.gitlab-ci'
 
       template 'database.example.yml.erb', 'config/database.example.yml'
       template 'database.example.yml.erb', 'config/database.yml'
@@ -56,7 +53,6 @@ end
 # EzOnRails injections begin
 # ignore config files to prevent docker collisions
 config/database.yml
-spec/support/capybara_config.rb
 
 # Rubymine
 .idea/

@@ -71,7 +71,7 @@ class EzOnRails::Admin::BroomCloset::UnattachedFilesController < EzOnRails::Admi
     end
 
     # redirect
-    redirect_to action: 'index'
+    render js: "window.location = '#{ez_on_rails_unattached_files_path}'"
   end
 
   protected

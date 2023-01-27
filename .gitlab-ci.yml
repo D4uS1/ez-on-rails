@@ -59,7 +59,6 @@ rspec:
     - export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
     - cp config/database.gitlab-ci.yml config/database.yml
     - cp EzOnRails/gitlab-ci.rspec EzOnRails/.rspec
-    - cp EzOnRails/spec/support/ez_on_rails/capybara_config.rb.gitlab-ci EzOnRails/spec/support/ez_on_rails/capybara_config.rb
     - bundle exec rails assets:precompile
   script:
     - cd EzOnRails/
