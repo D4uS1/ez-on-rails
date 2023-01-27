@@ -13,6 +13,7 @@ require 'rails_helper'
 RSpec.describe 'EzOnRails::Admin::UserManagement::GroupsController' do
   # users
   let(:andrew) { create(:andrew) }
+  let(:john) { create(:john) }
   let(:admin) { User.super_admin }
 
   # for show, update and destroy actions
@@ -283,6 +284,52 @@ RSpec.describe 'EzOnRails::Admin::UserManagement::GroupsController' do
       delete destroy_selections_ez_on_rails_groups_url
 
       expect(response).to have_http_status(:success)
+    end
+  end
+
+  # Exemplary specs for resource controller destroy_selecrions action.
+  context 'when requesting destroy_selections' do
+    it 'destroys selected records' do
+      sign_in admin
+      groups_count = group.class.count
+
+      delete destroy_selections_ez_on_rails_groups_url, params: {
+        selections: ActiveSupport::JSON.encode([{ data: {
+                                                 id: group.id
+                                               } }])
+      }
+
+      expect(response).to have_http_status(:success)
+      expect(group.class.count).to eq(groups_count - 1)
+    end
+
+    it 'does not destroy records without access' do
+      # allow access on action
+      create(:eor_group_access, namespace: EzOnRails::GroupAccess::ADMIN_AREA_NAMESPACE, group: andrew.user_group)
+
+      # make some resources unaccessible or accessible
+      create(:eor_ownership_info,
+             resource: 'EzOnRails::Group')
+      group.update(owner: john)
+      allowed_group = create(:eor_group, name: 'Allowed group', owner: andrew)
+
+      # prepare
+      sign_in andrew
+      groups_count = group.class.count
+
+      delete destroy_selections_ez_on_rails_groups_url, params: {
+        selections: ActiveSupport::JSON.encode([{ data: {
+                                                 id: group.id
+                                               } },
+                                                { data: {
+                                                  id: allowed_group.id
+                                                } }])
+      }
+
+      expect(response).to have_http_status(:success)
+      expect(group.class.count).to eq(groups_count - 1)
+      expect(group.class.find_by(id: group.id)).not_to be_nil
+      expect(group.class.find_by(id: allowed_group.id)).to be_nil
     end
   end
 end

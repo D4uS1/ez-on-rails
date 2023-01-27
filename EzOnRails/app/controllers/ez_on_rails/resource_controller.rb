@@ -105,6 +105,9 @@ class EzOnRails::ResourceController < EzOnRails::ApplicationController
       # Destroy them
       not_destroyable = []
       resources.each do |resource|
+        # security check if anyone passes an unallowed id
+        next unless access_to_destroy_resource? resource
+
         not_destroyable.push resource.id unless resource.destroy
       end
 
