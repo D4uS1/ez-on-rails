@@ -19,7 +19,7 @@
 
     .col
       / Paginator
-      = will_paginate resources, params: { q: @search_params }
+      = will_paginate resources, params: { q: @search_params }, renderer: EzOnRails::EzPaginatorRenderer.new({ class: 'justify-content-end' })
 
     .col-2.d-flex.justify-content-end.align-items-start
       / New button

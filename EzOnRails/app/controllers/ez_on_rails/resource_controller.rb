@@ -19,7 +19,7 @@ class EzOnRails::ResourceController < EzOnRails::ApplicationController
   skip_authorize_resource only: :index
 
   # Constant for maximum Entries for index action per page
-  MAX_INDEX_PAGE_ROWS = 1
+  MAX_INDEX_PAGE_ROWS = 20
 
   # Default index GET action.
   def index
