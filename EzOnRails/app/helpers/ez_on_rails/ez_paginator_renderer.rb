@@ -1,3 +1,5 @@
+require 'will_paginate'
+
 # frozen_string_literal: true
 
 # Render class for will_paginator.
