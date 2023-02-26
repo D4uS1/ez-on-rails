@@ -196,7 +196,12 @@ module EzOnRails
               logic: { type: :string, enum: ['or', 'and'] },
               filters: {
                 type: :array,
-                anyOf: [ { '$ref' => '#/components/schemas/SearchFilter' }, { '$ref' => '#/components/schemas/SearchFilterComposition' } ] }
+                items: {
+                  anyOf: [
+                    { '$ref' => '#/components/schemas/SearchFilter' },
+                    { '$ref' => '#/components/schemas/SearchFilterComposition' }
+                  ]
+                }
             },
             required: ['logic', 'filters']
           },"
