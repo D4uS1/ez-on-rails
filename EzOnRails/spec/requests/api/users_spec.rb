@@ -59,7 +59,7 @@ RSpec.describe 'Api::UsersController' do
     it 'returns username and email and no avatar if no avatar is given' do
       get api_users_me_url, headers: auth_headers_andrew
 
-      response_body = JSON.parse(response.body)
+      response_body = response.parsed_body
 
       expect(response_body['email']).to eq(andrew.email)
       expect(response_body['username']).to eq(andrew.username)
@@ -71,7 +71,7 @@ RSpec.describe 'Api::UsersController' do
 
       get api_users_me_url, headers: auth_headers_andrew
 
-      response_body = JSON.parse(response.body)
+      response_body = response.parsed_body
       expect(response_body['email']).to eq(andrew.email)
       expect(response_body['username']).to eq(andrew.username)
       expect(response_body['avatar']['path']).not_to be_nil
@@ -82,7 +82,7 @@ RSpec.describe 'Api::UsersController' do
     it 'does not return password information' do
       get api_users_me_url, headers: auth_headers_andrew
 
-      response_body = JSON.parse(response.body)
+      response_body = response.parsed_body
       expect(response_body['password']).to be_nil
       expect(response_body['password_confirmation']).to be_nil
       expect(response_body['encrypted_password']).to be_nil
@@ -93,7 +93,7 @@ RSpec.describe 'Api::UsersController' do
 
       get api_users_me_url, headers: auth_headers_andrew
 
-      response_body = JSON.parse(response.body)
+      response_body = response.parsed_body
       expect(response_body['unconfirmed_email']).to eq('new_email@address.de')
     end
   end
@@ -131,7 +131,7 @@ RSpec.describe 'Api::UsersController' do
 
       andrew.reload
 
-      response_body = JSON.parse(response.body)
+      response_body = response.parsed_body
       expect(response_body['email']).to eq(old_email)
       expect(response_body['unconfirmed_email']).to eq('new_email@whatever.com')
       expect(response_body['username']).to eq('NewUsername')
@@ -193,7 +193,7 @@ RSpec.describe 'Api::UsersController' do
         }
       }
 
-      response_body = JSON.parse(response.body)
+      response_body = response.parsed_body
       expect(response_body['password']).to be_nil
       expect(response_body['password_confirmation']).to be_nil
       expect(response_body['encrypted_password']).to be_nil
@@ -206,7 +206,7 @@ RSpec.describe 'Api::UsersController' do
         }
       }
 
-      response_body = JSON.parse(response.body)
+      response_body = response.parsed_body
       expect(response_body['unconfirmed_email']).to eq('new_email@address.de')
     end
   end

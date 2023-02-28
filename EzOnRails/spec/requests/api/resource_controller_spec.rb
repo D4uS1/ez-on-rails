@@ -33,7 +33,7 @@ RSpec.describe 'EzOnRails::ResourceController' do
            headers: auth_headers_admin,
            params: { filter: nil }
 
-      response_body = JSON.parse(response.body)
+      response_body = response.parsed_body
 
       expect(response).to have_http_status(:success)
       expect(response_body['results'].length).to eq(2)
@@ -47,7 +47,7 @@ RSpec.describe 'EzOnRails::ResourceController' do
            headers: auth_headers_admin,
            params: { filter: { field: 'id', operator: 'eq', value: record_two.id } }
 
-      response_body = JSON.parse(response.body)
+      response_body = response.parsed_body
 
       expect(response).to have_http_status(:success)
       expect(response_body['results'].length).to eq(1)
@@ -69,7 +69,7 @@ RSpec.describe 'EzOnRails::ResourceController' do
              }
            }
 
-      response_body = JSON.parse(response.body)
+      response_body = response.parsed_body
 
       expect(response).to have_http_status(:success)
       expect(response_body['results'].length).to eq(1)
@@ -83,7 +83,7 @@ RSpec.describe 'EzOnRails::ResourceController' do
            headers: auth_headers_admin,
            params: { page: 1, page_size: 1 }
 
-      response_body = JSON.parse(response.body)
+      response_body = response.parsed_body
 
       expect(response).to have_http_status(:success)
       expect(response_body['results'].length).to eq(1)
@@ -99,7 +99,7 @@ RSpec.describe 'EzOnRails::ResourceController' do
            headers: auth_headers_admin,
            params: { page: 1, page_size: 2 }
 
-      response_body = JSON.parse(response.body)
+      response_body = response.parsed_body
 
       expect(response).to have_http_status(:success)
       expect(response_body['pages_count']).to eq(2)
@@ -110,7 +110,7 @@ RSpec.describe 'EzOnRails::ResourceController' do
            headers: auth_headers_admin,
            params: { order: 'created_at', order_direction: 'desc' }
 
-      response_body = JSON.parse(response.body)
+      response_body = response.parsed_body
 
       expect(response).to have_http_status(:success)
       expect(response_body['results'][0]['id']).to eq(record_two.id)
@@ -122,7 +122,7 @@ RSpec.describe 'EzOnRails::ResourceController' do
            headers: auth_headers_admin,
            params: {}
 
-      response_body = JSON.parse(response.body)
+      response_body = response.parsed_body
 
       expect(response).to have_http_status(:success)
       expect(response_body['results'][0]['id']).to eq(record_one.id)
@@ -143,7 +143,7 @@ RSpec.describe 'EzOnRails::ResourceController' do
              filter: { field: 'number', operator: 'eq', value: 1 }
            }
 
-      response_body = JSON.parse(response.body)
+      response_body = response.parsed_body
 
       expect(response).to have_http_status(:success)
       expect(response_body['pages_count']).to eq(2)

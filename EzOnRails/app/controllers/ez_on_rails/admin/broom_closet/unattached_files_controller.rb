@@ -19,8 +19,8 @@ class EzOnRails::Admin::BroomCloset::UnattachedFilesController < EzOnRails::Admi
     @subtitle = t(:'ez_on_rails.unattached_files_subtitle')
 
     # info for search form
-    @queue_obj = ActiveStorage::Blob.ransack params[:q]
-    @obj_class = ActiveStorage::Blob
+    @queue_obj = EzOnRails::ActiveStorageRansackBlob.ransack params[:q]
+    @obj_class = EzOnRails::ActiveStorageRansackBlob
 
     # resources
     @unattached_files = @service.unattached_files.ransack(params[:q]).result.paginate(

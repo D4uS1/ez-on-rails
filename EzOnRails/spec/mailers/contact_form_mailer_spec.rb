@@ -46,7 +46,7 @@ RSpec.describe ContactFormMailer do
       expect(decoded_body).to include('This is awesome')
       expect(decoded_body).to include('Thank you for this awesome framework.')
       expect(decoded_body).to include(
-        'Wir bemühen uns Ihnen mit bestem Wissen und Gewissen so schnell wie möglich zu antworten'
+        'We will answer as soon as possible ;).'
       )
     end
   end

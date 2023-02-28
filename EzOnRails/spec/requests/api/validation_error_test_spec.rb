@@ -33,7 +33,7 @@ RSpec.describe 'Api::ValidationErrorTestsController' do
            headers: auth_headers_admin,
            params: invalid_params
 
-      response_body = JSON.parse(response.body)
+      response_body = response.parsed_body
 
       expect(response).to have_http_status(:unprocessable_entity)
       expect(ValidationErrorTest.count).to eq(objs_count)
@@ -49,7 +49,7 @@ RSpec.describe 'Api::ValidationErrorTestsController' do
            headers: auth_headers_admin,
            params: valid_params
 
-      response_body = JSON.parse(response.body)
+      response_body = response.parsed_body
 
       expect(response).to have_http_status(:success)
       expect(ValidationErrorTest.count).to eq(objs_count + 1)
@@ -68,7 +68,7 @@ RSpec.describe 'Api::ValidationErrorTestsController' do
           headers: auth_headers_admin,
           params: invalid_params
 
-      response_body = JSON.parse(response.body)
+      response_body = response.parsed_body
 
       expect(response).to have_http_status(:unprocessable_entity)
       expect(response_body['error']).to include('validation failed:')
@@ -81,7 +81,7 @@ RSpec.describe 'Api::ValidationErrorTestsController' do
           headers: auth_headers_admin,
           params: valid_params
 
-      response_body = JSON.parse(response.body)
+      response_body = response.parsed_body
 
       expect(response).to have_http_status(:success)
       expect(response_body).to eq(
@@ -101,7 +101,7 @@ RSpec.describe 'Api::ValidationErrorTestsController' do
              headers: auth_headers_admin,
              params: valid_params
 
-      response_body = JSON.parse(response.body)
+      response_body = response.parsed_body
 
       expect(response).to have_http_status(:unprocessable_entity)
       expect(response_body['error']).to include('validation failed:')
@@ -127,7 +127,7 @@ RSpec.describe 'Api::ValidationErrorTestsController' do
       get api_validation_error_tests_path,
           headers: auth_headers_admin
 
-      response_body = JSON.parse(response.body)
+      response_body = response.parsed_body
 
       expect(response).to have_http_status(:success)
       expect(response_body.length).to eq(1)
@@ -147,7 +147,7 @@ RSpec.describe 'Api::ValidationErrorTestsController' do
       get api_validation_error_tests_path,
           headers: auth_headers_admin
 
-      response_body = JSON.parse(response.body)
+      response_body = response.parsed_body
 
       expect(response).to have_http_status(:success)
       expect(response_body.length).to eq(3)
@@ -166,7 +166,7 @@ RSpec.describe 'Api::ValidationErrorTestsController' do
              }
            }
 
-      response_body = JSON.parse(response.body)
+      response_body = response.parsed_body
 
       expect(response).to have_http_status(:success)
       expect(response_body['results'].length).to eq(1)
@@ -186,7 +186,7 @@ RSpec.describe 'Api::ValidationErrorTestsController' do
       post search_api_validation_error_tests_path,
            headers: auth_headers_admin
 
-      response_body = JSON.parse(response.body)
+      response_body = response.parsed_body
 
       expect(response).to have_http_status(:success)
       expect(response_body['results'].length).to eq(3)
@@ -201,7 +201,7 @@ RSpec.describe 'Api::ValidationErrorTestsController' do
       get api_validation_error_test_path(validation_error_test_obj),
           headers: auth_headers_admin
 
-      response_body = JSON.parse(response.body)
+      response_body = response.parsed_body
 
       expect(response).to have_http_status(:success)
       expect(response_body).to eq(

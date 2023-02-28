@@ -2,6 +2,7 @@
 
 # User class defining a user of the application.
 class User < ApplicationRecord
+  include EzOnRails::FullRansackSearchableConcern
   include DeviseTokenAuth::Concerns::User
 
   SUPER_ADMIN_USERNAME = 'SuperAdministrator'
