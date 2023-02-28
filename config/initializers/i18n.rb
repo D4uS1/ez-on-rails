@@ -3,4 +3,4 @@
 # Tell rails not only to search in the root directory of the locals. It should
 # also search in all subdirectories.
 Rails.application.config.i18n.load_path += Dir[Rails.root.join('config/locales/**/*.yml')]
-Rails.application.config.i18n.default_locale = :de
+Rails.application.config.i18n.default_locale = :en
