@@ -1,10 +1,51 @@
 # ez-on-rails
-This package provides a set of generators to develop a full backend server in Rails including views for administrators to manage the data and an API to provide that those data to clients.
 
-The generators help creating the application, scaffolds including its administration views and api endpoints.
+EzOnRails provides a rails backend that is ez to use with all your needs to build fast applications having a frontend and a backend.
+It provides many features like a built in permission system, an easy to configure administration view, built in controllers with CRUD functionality, builtin features like searching, generators for your models, generators for your api etc.
 
-The administration view is customizable by a set of partials and the scaffolds render information given by its helpers that are generated automatically.
+Have a look at the [documentation](https://github.com/D4uS1/ez-on-rails/wiki/Documentation) to see the features and concepts.
 
+You can make use of the [ez-on-rails-react](https://github.com/D4uS1/ez-on-rails-react) package to interact with the backend.
+This provides components for user account management, like login, registration, password reset etc.
+It also provides hooks to easily interact with the backend.
+
+## Installation
+It is recommended to install ez-on-rails only on new rails systems.
+This gem was not yet tested on already existing systems.
+
+### 1. Insert the gem to the Gemfile
+```
+gem 'ez_on_rails',
+    '>=0.8.0',
+    git: 'https://github.com/D4uS1/ez-on-rails',
+    glob: 'EzOnRails/ez_on_rails.gemspec',
+    branch: 'v0.8.0'
+```
+
+Version branches start with "v" followed by the gems version number, e.g. "v0.8.0".
+
+### 2. run bundle install...
+...and get some coffee...
+
+### 3. Run the ezapp generator.
+```
+rails generate ez_on_rails:ezapp My-Application-Name
+```
+This copies the necessary files for the ez-on-rails engine.
+
+### 4. Migrate and seed the database
+```
+rails db:migrate
+rails db:seed
+```
+This will create the necessary database tables to get the [permission system](https://github.com/D4uS1/ez-on-rails/wiki/Permission-System) to work. 
+The seeds are provided with default access restrictions to the [adminisration area](https://github.com/D4uS1/ez-on-rails/wiki/Administration-Area)
+
+## Usage
+Coming soon.
+
+
+## Development notes
 Note that the engine is placed in the [EzOnRails](https://github.com/D4uS1/ez-on-rails/tree/main/EzOnRails) Directory of this repository. 
 The root directory contains a test application that can be started via Docker to test the engine.
 The rails way to test the engine using a dummy app did not work here, because there were some issues related to webpacker.
