@@ -57,7 +57,7 @@ rails generate ez_on_rails:ezscaff Article title:string published_at:datetime ma
 ```
 This generates the scaffolds by creating the following things: 
 * the controller having the default CRUD and some useful additional actions
-* the views for those actions
+* the views for those actions, written in [slim](https://github.com/slim-template/slim)
 * the routes for those actions,
 * a helper with a special render_info function to customize the appearance of the fields in this views
 * json builders using [jb](https://github.com/amatsuda/jb)
