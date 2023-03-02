@@ -50,7 +50,13 @@ The default credentials were created in the seeds. Normally those are
 * password: 1replace_me3_after3_install7
 
 ## Usage
-Coming soon.
+### 1. Generate some scaffolds
+### 2. Add them scaffolds to the main menu
+### 3. Restrict access to pages
+### 4. Restrict access to persons hwo own the records
+### 5. Change administration view
+### 6. Generate the api 
+### 7. Test everything
 
 
 ## Development notes
