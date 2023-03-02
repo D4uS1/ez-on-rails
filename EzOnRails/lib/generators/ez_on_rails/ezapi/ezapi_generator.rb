@@ -202,8 +202,9 @@ module EzOnRails
                     { '$ref' => '#/components/schemas/SearchFilterComposition' }
                   ]
                 }
-            },
-            required: ['logic', 'filters']
+              },
+              required: ['logic', 'filters']
+            }
           },"
       end
     end
