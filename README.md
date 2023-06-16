@@ -41,7 +41,10 @@ rails db:seed
 This will create the necessary database tables to get the [permission system](https://github.com/D4uS1/ez-on-rails/wiki/Permission-System) to work. 
 The seeds are provided with default access restrictions to the [adminisration area](https://github.com/D4uS1/ez-on-rails/wiki/Administration-Area)
 
-### 5. Check if it works
+### 5. Restart your server
+This is necessary due to some configurations that needs to be loaded on boot time.
+
+### 6. Check if it works
 Visit your application page in a browser. You should now see the ez-on-rails welcome page.
 You can visit the login page by clicking on the user icon in the top right corner. 
 If you sign in as administrator, an administrator menu will appear.
