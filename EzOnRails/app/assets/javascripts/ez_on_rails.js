@@ -22,7 +22,7 @@ import "ez_on_rails/controllers"
 import "@hotwired/turbo-rails"
 import "bootstrap"
 import "select2"
-import "cocoon"
+import "@nathanvda/cocoon"
 import "@fortawesome/fontawesome-free"
 import * as ActiveStorage from "@rails/activestorage"
 
