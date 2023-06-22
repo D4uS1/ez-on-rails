@@ -32,7 +32,8 @@ end
 
 # Debugging in RubyMine
 group :development, :test do
-  gem 'debase'
+  # TODO: Replace with default entry if https://github.com/ruby-debug/debase/issues/98 is fixed
+  gem 'debase', :git => 'https://github.com/ruby-debug/debase.git', :tag => 'v0.2.5.beta2'
   gem 'ruby-debug-ide'
 end
 

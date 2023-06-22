@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.0.2'
+ruby '3.2.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 7.0.4', '>= 7.0.4'
@@ -61,7 +61,8 @@ gem 'simple_form'
 # Debugging in RubyMine
 group :development, :test do
   gem 'ruby-debug-ide'
-  gem 'debase'
+  # TODO: Replace with default entry if https://github.com/ruby-debug/debase/issues/98 is fixed
+  gem 'debase', :git => 'https://github.com/ruby-debug/debase.git', :tag => 'v0.2.5.beta2'
 end
 
 # Fixes bug due to omniauth 2 in devise, should be deleted if devise gets an update

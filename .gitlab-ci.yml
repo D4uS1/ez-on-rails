@@ -29,7 +29,7 @@ stages:
 # Testing via rubocop
 rubocop:
   stage: lint
-  image: 'ruby:3.0.2'
+  image: 'ruby:3.2.2'
   # Executed before every script
   before_script:
     - apt-get update -qq
@@ -44,7 +44,7 @@ rubocop:
 # Testing via rspec
 rspec:
   stage: test
-  image: 'ruby:3.0.2'
+  image: 'ruby:3.2.2'
   # Executed before every script
   before_script:
     - apt-get update -qq
