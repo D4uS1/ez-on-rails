@@ -11,8 +11,14 @@ window.process = {
   }
 }
 
-// from external resources
-import $ from 'jquery'
+// load this first, because some scripts may use jquery
+import $ from "jquery"
+
+// javascript to own field components
+// This needs to be imported first, because there is a fix for select2 in this file that needs
+// to be loaded before the select2 import occurs
+import "ez_on_rails/controllers"
+
 import "@hotwired/turbo-rails"
 import "bootstrap"
 import "select2"
@@ -24,9 +30,6 @@ import * as ActiveStorage from "@rails/activestorage"
 import "ez_on_rails/shared/_enhanced_table"
 import "ez_on_rails/shared/_flash_messages"
 import "ez_on_rails/shared/_model_form"
-
-// javascript to own field components
-import "ez_on_rails/controllers"
 
 // initializers
 ActiveStorage.start();

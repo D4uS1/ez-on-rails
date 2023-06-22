@@ -46,7 +46,7 @@ module EzOnRails
     initializer 'ez_on_rails.importmap', before: 'importmap' do |app|
       # NOTE: this will add pins from this engine to the main app
       # https://github.com/rails/importmap-rails#composing-import-maps
-      app.config.importmap.paths << root.join('config/importmap.rb')
+      app.config.importmap.paths.unshift(root.join('config/importmap.rb'))
 
       # NOTE: something about cache; I did not look into it.
       # https://github.com/rails/importmap-rails#sweeping-the-cache-in-development-and-test
