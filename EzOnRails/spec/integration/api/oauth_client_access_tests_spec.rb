@@ -22,8 +22,8 @@ describe 'OauthClientAccessTest API' do
   before do
     # restrict access to controllers path
     group = create(:testgroup)
-    create(:eor_group_access, group: group,  namespace: 'api', controller: 'oauth_client_access_tests')
-    create(:eor_user_group_assignment, user: andrew, group: group)
+    create(:eor_group_access, group:,  namespace: 'api', controller: 'oauth_client_access_tests')
+    create(:eor_user_group_assignment, user: andrew, group:)
   end
 
   # GET index action

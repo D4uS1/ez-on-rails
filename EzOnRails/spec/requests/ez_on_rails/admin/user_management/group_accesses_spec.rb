@@ -25,7 +25,7 @@ RSpec.describe 'EzOnRails::Admin::UserManagement::GroupAccessesController' do
            namespace: 'ez_on_rails/admin/broom_closet',
            controller: 'nil_owners',
            action: 'index',
-           group: group)
+           group:)
   end
 
   # for test of create actions

@@ -12,7 +12,7 @@ RSpec.describe EzOnRails::ResourceDestroyAccess do
   let(:resource_destroy_access_attributes) do
     {
       resource: sharable_resource,
-      group: group
+      group:
     }
   end
 

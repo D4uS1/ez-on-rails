@@ -211,7 +211,7 @@ module EzOnRails::EzScaffHelper
                 end
 
       # print the content
-      { content: content }
+      { content: }
     end
 
     # if the table should contain show, edit or destroy link, print it

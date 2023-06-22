@@ -12,7 +12,7 @@ RSpec.describe EzOnRails::ResourceWriteAccess do
   let(:resource_write_access_attributes) do
     {
       resource: sharable_resource,
-      group: group
+      group:
     }
   end
 

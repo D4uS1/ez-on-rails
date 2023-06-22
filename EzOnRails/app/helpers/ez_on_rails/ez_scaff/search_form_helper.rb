@@ -26,8 +26,8 @@ module EzOnRails::EzScaff::SearchFormHelper
   # Renders a container tag holding the attribute of the current form data having the
   # attribute_key and the specified attribute_render_info. The specified block is yielded
   # into the container.
-  def render_attribute_container_search_form(_data, _attribute_key, _attribute_render_info, &block)
-    tag.div class: 'mb-3', &block
+  def render_attribute_container_search_form(_data, _attribute_key, _attribute_render_info, &)
+    tag.div(class: 'mb-3', &)
   end
 
   # Method for rendering an attachment attribute in a search form.

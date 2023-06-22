@@ -130,7 +130,7 @@ class User < ApplicationRecord
     return false unless resource
 
     # group was found and group is resource group but user is not in that group for the resource
-    !user_group_assignments.find_by(group: group, resource: resource).nil?
+    !user_group_assignments.find_by(group:, resource:).nil?
   end
 
   # Assigns the user to the group having the specified group_name.
@@ -142,7 +142,7 @@ class User < ApplicationRecord
     return false unless group
 
     # try to assign
-    user_group_assignment = EzOnRails::UserGroupAssignment.create(user: self, group: group, resource: resource)
+    user_group_assignment = EzOnRails::UserGroupAssignment.create(user: self, group:, resource:)
     user_group_assignment.valid?
   end
 

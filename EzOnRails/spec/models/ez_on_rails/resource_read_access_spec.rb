@@ -12,7 +12,7 @@ RSpec.describe EzOnRails::ResourceReadAccess do
   let(:resource_read_access_attributes) do
     {
       resource: sharable_resource,
-      group: group
+      group:
     }
   end
 

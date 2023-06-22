@@ -22,8 +22,8 @@ describe 'BearerTokenAccessTest API' do
   before do
     # restrict access to controllers path
     group = create(:testgroup)
-    create(:eor_group_access, group: group,  namespace: 'api', controller: 'bearer_token_access_tests')
-    create(:eor_user_group_assignment, user: andrew, group: group)
+    create(:eor_group_access, group:,  namespace: 'api', controller: 'bearer_token_access_tests')
+    create(:eor_user_group_assignment, user: andrew, group:)
   end
 
   # GET index action

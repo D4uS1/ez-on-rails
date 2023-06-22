@@ -119,7 +119,7 @@ module EzOnRails::UserAccessHelper
   def access_denied
     if request.format.json?
       error = EzOnRails::ForbiddenError.new
-      return render 'ez_on_rails/api/error', locals: { error: error }, status: error.http_status
+      return render 'ez_on_rails/api/error', locals: { error: }, status: error.http_status
     end
 
     flash[:alert] = t(:'ez_on_rails.access_denied_message')
@@ -175,12 +175,12 @@ module EzOnRails::UserAccessHelper
   def get_access_groups(namespace, controller, action)
     namespace = namespace.join('/') if namespace.is_a?(Array)
 
-    EzOnRails::GroupAccess.where(namespace: namespace, controller: controller, action: action).map(&:group)
+    EzOnRails::GroupAccess.where(namespace:, controller:, action:).map(&:group)
   end
 
   # returns wether the specified user is in at least one of the specified groups.
   def user_in_groups?(user, groups)
-    EzOnRails::UserGroupAssignment.where(user: user, group: groups).any?
+    EzOnRails::UserGroupAssignment.where(user:, group: groups).any?
   end
 
   # returns wether the specified user can access the defined

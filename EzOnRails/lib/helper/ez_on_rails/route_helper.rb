@@ -141,7 +141,7 @@ module EzOnRails::RouteHelper
   # if json is true, the routes are surrounded by a constraint that only allowes the requests to be
   # in json format.
   def add_routes(routes, namespaces, skip_locale: false, json: false)
-    route routes_rb_lines(routes, namespaces, skip_locale: skip_locale, json: json).join
+    route routes_rb_lines(routes, namespaces, skip_locale:, json:).join
   end
 
   # Returns the active record resource class of the correpsonding

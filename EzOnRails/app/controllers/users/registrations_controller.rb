@@ -66,7 +66,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if resource.save_with_omniauth
       redirect_to params[:redirect_route]
     else
-      render 'users/registrations/omniauth_sign_up/', locals: { resource: resource, redirect_route: redirect_route }
+      render 'users/registrations/omniauth_sign_up/', locals: { resource:, redirect_route: }
     end
   end
 

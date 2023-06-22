@@ -6,7 +6,7 @@ module EzTestHelper
   # The file_path must be relative to the views directory.
   def json_from_view(view_file_path, locals = {})
     # use resource controller here to get helpers like the current_ability in test views
-    JSON.parse(EzOnRails::Api::ResourceController.render(view_file_path, locals: locals))
+    JSON.parse(EzOnRails::Api::ResourceController.render(view_file_path, locals:))
   end
 
   # Removes all uploaded test files from disk.
@@ -26,7 +26,7 @@ module EzTestHelper
     tempfile.write content
     tempfile.rewind
 
-    uploaded_file = Rack::Test::UploadedFile.new(tempfile, content_type, binary, original_filename: original_filename)
+    uploaded_file = Rack::Test::UploadedFile.new(tempfile, content_type, binary, original_filename:)
 
     ObjectSpace.define_finalizer(uploaded_file, uploaded_file.class.finalize(tempfile))
 

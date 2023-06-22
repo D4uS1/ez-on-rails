@@ -107,7 +107,7 @@ module UsersHelper
         }
       },
       privacy_policy_accepted: {
-        label: proc { sanitize(t(:i_accept_privacy_policy, privacy_policy_url: privacy_policy_url)) }
+        label: proc { sanitize(t(:i_accept_privacy_policy, privacy_policy_url:)) }
       }
     }
   end
@@ -157,7 +157,7 @@ module UsersHelper
         type: :hidden
       },
       privacy_policy_accepted: {
-        label: proc { sanitize(t(:i_accept_privacy_policy, privacy_policy_url: privacy_policy_url)) }
+        label: proc { sanitize(t(:i_accept_privacy_policy, privacy_policy_url:)) }
       }
     }
   end

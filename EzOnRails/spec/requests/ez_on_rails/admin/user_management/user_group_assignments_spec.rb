@@ -26,8 +26,8 @@ RSpec.describe 'EzOnRails::Admin::UserManagement::UserGroupAssignmentsController
   end
   let(:user_group_assignment) do
     create(:eor_user_group_assignment,
-           user: user,
-           group: group)
+           user:,
+           group:)
   end
 
   # for create
@@ -43,7 +43,7 @@ RSpec.describe 'EzOnRails::Admin::UserManagement::UserGroupAssignmentsController
   end
   let(:user_group_assignment_create) do
     build(:eor_user_group_assignment,
-          user: user,
+          user:,
           group: group_create)
   end
 

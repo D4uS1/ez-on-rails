@@ -32,7 +32,7 @@ class EzOnRails::Api::BaseController < EzOnRails::ApplicationController
   # Handles the given raised api error.
   # Renders the error json view file having the http status given by the error.
   def handle_api_error(error)
-    render 'ez_on_rails/api/error', locals: { error: error }, status: error.http_status
+    render 'ez_on_rails/api/error', locals: { error: }, status: error.http_status
   end
 
   private

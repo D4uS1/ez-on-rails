@@ -177,7 +177,7 @@ RSpec.describe User do
           end
 
           it 'returns true if user is assigned to the resource with the group' do
-            andrew.user_group_assignments.find_by(group: group).update(resource: resource)
+            andrew.user_group_assignments.find_by(group:).update(resource:)
 
             expect(andrew.in_group?(group.name, resource)).to be(true)
           end
@@ -187,13 +187,13 @@ RSpec.describe User do
           end
 
           it 'returns true if user is assigned to the resource with the group and any was passed' do
-            andrew.user_group_assignments.find_by(group: group).update(resource: resource)
+            andrew.user_group_assignments.find_by(group:).update(resource:)
 
             expect(andrew.in_group?(group.name, :any)).to be(true)
           end
 
           it 'returns false if nil was passed as resource' do
-            andrew.user_group_assignments.find_by(group: group).update(resource: resource)
+            andrew.user_group_assignments.find_by(group:).update(resource:)
 
             expect(andrew.in_group?(group.name)).to be(false)
           end
@@ -234,7 +234,7 @@ RSpec.describe User do
 
         andrew.reload
         expect(result).to be(false)
-        expect(andrew.user_group_assignments.where(group: group).count).to eq(1)
+        expect(andrew.user_group_assignments.where(group:).count).to eq(1)
       end
 
       it 'returns false for adding existing group assignment with resource' do
@@ -245,7 +245,7 @@ RSpec.describe User do
 
         andrew.reload
         expect(result).to be(false)
-        expect(andrew.user_group_assignments.where(group: group).count).to eq(1)
+        expect(andrew.user_group_assignments.where(group:).count).to eq(1)
       end
 
       it 'returns false for non existing group' do

@@ -19,10 +19,10 @@ describe 'ResourceGroupAccessTestsController' do
     ownership_info.update(ownerships: false, resource_groups: true)
 
     # user with group assigned to the resource
-    create(:eor_user_group_assignment, user: andrew, group: group, resource: resource)
+    create(:eor_user_group_assignment, user: andrew, group:, resource:)
 
     # user with group assigned to the other resource
-    create(:eor_user_group_assignment, user: john, group: group, resource: other_resource)
+    create(:eor_user_group_assignment, user: john, group:, resource: other_resource)
   end
 
   context 'when not logged in' do

@@ -93,9 +93,9 @@ module EzOnRails::EzAppHelper
   def modal_yes_no(title, content, target_yes = nil, options = {})
     render partial: 'ez_on_rails/shared/modals/yes_no', locals: {
       id: options[:id] || 'yes_no',
-      title: title,
-      content: content,
-      target_yes: target_yes,
+      title:,
+      content:,
+      target_yes:,
       label_yes: options[:label_yes],
       label_no: options[:label_no]
     }
@@ -114,9 +114,9 @@ module EzOnRails::EzAppHelper
   def modal_ok(title, content, target_ok = nil, options = {})
     render partial: 'ez_on_rails/shared/modals/ok', locals: {
       id: options[:id] || 'ok',
-      title: title,
-      content: content,
-      target_ok: target_ok,
+      title:,
+      content:,
+      target_ok:,
       label_ok: options[:label_ok]
     }
   end
@@ -129,7 +129,7 @@ module EzOnRails::EzAppHelper
   def modal_preview(content, options)
     render partial: 'ez_on_rails/shared/modals/preview', locals: {
       id: options[:id] || 'preview',
-      content: content
+      content:
     }
   end
 
@@ -144,9 +144,9 @@ module EzOnRails::EzAppHelper
   def modal(title, content, buttons, options = {})
     render partial: 'ez_on_rails/shared/modals/modal', locals: {
       id: options[:id] || 'modal',
-      title: title,
-      content: content,
-      buttons: buttons
+      title:,
+      content:,
+      buttons:
     }
   end
 
@@ -157,7 +157,7 @@ module EzOnRails::EzAppHelper
   # Care by using this, it is prefered to target to an extra post action which does not redirect the user.
   def modal_model_form(title, model_form_locals, options = {})
     render partial: 'ez_on_rails/shared/modals/model_form',
-           locals: model_form_locals.merge(id: options[:id] || 'form', title: title)
+           locals: model_form_locals.merge(id: options[:id] || 'form', title:)
   end
 
   # Renders a button targeting a modal.
@@ -205,13 +205,13 @@ module EzOnRails::EzAppHelper
   # The options hash can contain :class_summary and :class_details attributes, which are passed
   # as css classes to the tags.
   # :open can be given the value true, to let the tag be opened at the beginning.
-  def enclose_with_details_if(condition, summary, options = {}, &block)
+  def enclose_with_details_if(condition, summary, options = {}, &)
     # If the condition is not true just print the block
-    return capture(&block) unless condition.call
+    return capture(&) unless condition.call
 
     # Otherwise return the details tag
     tag.details(
-      tag.summary(summary, class: options[:class_summary]) + capture(&block),
+      tag.summary(summary, class: options[:class_summary]) + capture(&),
       class: options[:class_details],
       open: options[:open]
     )

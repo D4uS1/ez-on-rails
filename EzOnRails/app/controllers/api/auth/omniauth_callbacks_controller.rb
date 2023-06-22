@@ -35,7 +35,7 @@ class Api::Auth::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallback
       redirect_to redirect_route
     # if user does not exists, redirect to page to accept privacy policy
     else
-      render 'users/registrations/omniauth_sign_up/', locals: { resource: @user, redirect_route: redirect_route }
+      render 'users/registrations/omniauth_sign_up/', locals: { resource: @user, redirect_route: }
     end
   end
 

@@ -72,7 +72,7 @@ module EzOnRails::EzScaff::IndexHelper
 
     # return the info hash for selectable table
     {
-      actions: actions
+      actions:
     }
   end
 end

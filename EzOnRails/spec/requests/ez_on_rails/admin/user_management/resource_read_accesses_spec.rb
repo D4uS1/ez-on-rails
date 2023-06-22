@@ -23,8 +23,8 @@ RSpec.describe 'EzOnRails::Admin::UserManagement::ResourceReadAccessesController
   let(:resource) { create(:user_owned_record, owner: andrew) }
   let(:resource_read_access) do
     create(:eor_resource_read_access,
-           group: group,
-           resource: resource)
+           group:,
+           resource:)
   end
 
   # for test of create actions

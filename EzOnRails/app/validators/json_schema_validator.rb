@@ -33,7 +33,7 @@ class JsonSchemaValidator < ActiveModel::EachValidator
 
     # append every error
     errors.each do |error|
-      record.errors.add(attribute, error['details'], value: value)
+      record.errors.add(attribute, error['details'], value:)
     end
   end
 

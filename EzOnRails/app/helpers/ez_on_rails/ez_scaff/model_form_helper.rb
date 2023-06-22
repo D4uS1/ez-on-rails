@@ -21,8 +21,8 @@ module EzOnRails::EzScaff::ModelFormHelper
   # Renders a container tag holding the attribute of the current form object having the
   # attribute_key and the specified attribute_render_info. The specified block is yielded
   # into the container.
-  def render_attribute_container_model_form(_form, _attribute_key, _attribute_render_info, &block)
-    tag.div class: 'mb-3', &block
+  def render_attribute_container_model_form(_form, _attribute_key, _attribute_render_info, &)
+    tag.div(class: 'mb-3', &)
   end
 
   # Method for rendering a attribute whose method to the correspoinding attribute
@@ -126,7 +126,7 @@ module EzOnRails::EzScaff::ModelFormHelper
     html_options[:class] = "#{html_options[:class]} combobox" if display_type == :combobox
 
     form.association attribute_key,
-                     label_method: label_method,
+                     label_method:,
                      as: (display_type == :combobox ? :select : display_type),
                      input_html: html_options
   end
@@ -402,11 +402,11 @@ module EzOnRails::EzScaff::ModelFormHelper
       invalid_format_error: t(:'ez_on_rails.fields.active_storage_upload_field.default_invalid_format_error'),
       multiple: options[:multiple],
       max_files: options[:max_files],
-      max_size: max_size,
+      max_size:,
       accept: options[:accept],
       input_name: name_for(form, attribute_key, attribute_render_info),
       input_id: id_for(form, attribute_key, attribute_render_info),
-      existing_files: existing_files
+      existing_files:
     }
   end
 
@@ -423,8 +423,8 @@ module EzOnRails::EzScaff::ModelFormHelper
     render partial: 'ez_on_rails/shared/fields/duration_field', locals: {
       id: id_for(form, attribute_key, attribute_render_info),
       name: name_for(form, attribute_key, attribute_render_info),
-      default_value: default_value,
-      max_years: max_years,
+      default_value:,
+      max_years:,
       label_years: t(:years),
       label_months: t(:months),
       label_weeks: t(:weeks),

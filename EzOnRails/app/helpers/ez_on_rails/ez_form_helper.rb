@@ -5,8 +5,8 @@ module EzOnRails::EzFormHelper
   # Renders a container tag holding the attribute of the current form object having the
   # attribute_key and the specified attribute_render_info. The specified block is yielded
   # into the container.
-  def render_attribute_container_form(_data, _attribute_key, _attribute_render_info, &block)
-    tag.div class: 'mb-3', &block
+  def render_attribute_container_form(_data, _attribute_key, _attribute_render_info, &)
+    tag.div(class: 'mb-3', &)
   end
 
   # Default render function for an ezform active model attribute with
