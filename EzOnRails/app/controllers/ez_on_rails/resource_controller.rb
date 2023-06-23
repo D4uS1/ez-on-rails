@@ -65,7 +65,7 @@ class EzOnRails::ResourceController < EzOnRails::ApplicationController
       redirect_to after_create_path
     else
       flash[:danger] = t(:'ez_on_rails.invalid_inputs_message')
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -78,7 +78,7 @@ class EzOnRails::ResourceController < EzOnRails::ApplicationController
     else
       flash[:danger] = @resource_obj.errors[:base].first unless @resource_obj.errors[:base].empty?
       flash[:danger] = t(:'ez_on_rails.invalid_inputs_message') if @resource_obj.errors[:base].empty?
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -156,7 +156,7 @@ class EzOnRails::ResourceController < EzOnRails::ApplicationController
     # NASTY HACK: Only fetch the different ids, to simulate a distinct, this is needed
     # because if the model contains json fields distinct is not possible on postgres databases.
     # Even if you would use jsonb, sorting by associations would not be possible with distinct.
-    resource_objs_query = @queue_obj.result.includes(includes_associations).accessible_by(
+    resource_objs_query = @queue_obj.result.accessible_by(
       current_ability,
       :show
     )
@@ -200,11 +200,6 @@ class EzOnRails::ResourceController < EzOnRails::ApplicationController
   end
 
   protected
-
-  # Returns the association that should be included on selection using the active records includes method.
-  def includes_associations
-    []
-  end
 
   # Returns the path the user is redirected to after a resource has been successfully created.
   def after_create_path
