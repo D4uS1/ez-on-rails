@@ -212,23 +212,23 @@ module EzOnRails::EzScaff::ShowHelper
   # Renders some active record relation of the specified atribute_key in the specified object model
   # using the specified render_info.
   def render_active_record_relation(obj, attribute_key, attribute_render_info)
-    # if no label method is specified, show the id
-    label_method = get_label_method(attribute_render_info)
-
     # if this is as relation to many objects
     rel_objects = if obj.send(attribute_key).is_a? ActiveRecord::Associations::CollectionProxy
                     obj.send(attribute_key).map do |rel_object|
                       {
                         obj: rel_object,
-                        label: rel_object.send(label_method)
+                        label: get_association_label(rel_object, attribute_render_info)
                       }
                     end
+
+                  # if this is a relation to only one object
                   else
-                    # if this is a relation to only one object
+                    assoc_object = obj.send(attribute_key)
+
                     [
                       {
-                        obj: obj.send(attribute_key),
-                        label: obj.send(attribute_key)&.send(label_method)
+                        obj: assoc_object,
+                        label: assoc_object ? get_association_label(assoc_object, attribute_render_info) : nil
                       }
                     ]
                   end
@@ -277,5 +277,21 @@ module EzOnRails::EzScaff::ShowHelper
 
     # Return a details summary tag
     (elements_html + tag.details(tag.summary(t(:'ez_on_rails.show_all'), class: 'mt-2 mb-1') + detailed_elements_html))
+  end
+
+  # Returns the association label from the render info.
+  # If a association_show_label exists in the attribute_render_info, those label will be used.
+  # If this is a block, the block will be executed by passing the object as parameter, and the blocks
+  # result will be used as label.
+  # If no association_label is provided, the default label_method will be used to identify the label.
+  def get_association_label(obj, attr_render_info)
+    if attr_render_info[:association_show_label]
+      return attr_render_info[:association_show_label] if attr_render_info[:association_show_label].is_a?(String)
+
+      return attr_render_info[:association_show_label].call(obj)
+    end
+
+    # execute the label_method as default value
+    obj.send(get_label_method(attr_render_info))
   end
 end
