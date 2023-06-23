@@ -156,7 +156,7 @@ class EzOnRails::ResourceController < EzOnRails::ApplicationController
     # NASTY HACK: Only fetch the different ids, to simulate a distinct, this is needed
     # because if the model contains json fields distinct is not possible on postgres databases.
     # Even if you would use jsonb, sorting by associations would not be possible with distinct.
-    resource_objs_query = @queue_obj.result.accessible_by(
+    resource_objs_query = @queue_obj.result.includes(includes_associations).accessible_by(
       current_ability,
       :show
     )
@@ -200,6 +200,11 @@ class EzOnRails::ResourceController < EzOnRails::ApplicationController
   end
 
   protected
+
+  # Returns the association that should be included on selection using the active records includes method.
+  def includes_associations
+    []
+  end
 
   # Returns the path the user is redirected to after a resource has been successfully created.
   def after_create_path

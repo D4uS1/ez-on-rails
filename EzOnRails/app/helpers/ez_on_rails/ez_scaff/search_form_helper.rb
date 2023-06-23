@@ -161,15 +161,27 @@ module EzOnRails::EzScaff::SearchFormHelper
   end
 
   # Returns the attribute key for the search form of the given attribute_key, which is an association.
-  # If no :search_method key is specified in the render_info, :cont will be used.
+  # If association_search_attributes is defined, a search key having those attributes being combined
+  # with or and using the cont search method will be used.
+  # Otherwise the default label method will be combined with a search_method that can also be defined
+  # in the render info. if no :search_method key is specified in the render_info, :cont will be used.
   def search_association_key(attribute_key, attribute_render_info)
-    # first specify the label method
+    search_method = attribute_render_info[:search_method]
+
+    # if association_search_attributes is defined, just use them
+    target_attributes = attribute_render_info[:association_search_attributes]&.map(&:to_s)
+    if target_attributes
+      join_str = "_or_#{attribute_key}_"
+      return "#{attribute_key}_#{target_attributes.join(join_str)}_#{search_method || 'cont'}".to_sym
+    end
+
+    # otherwise, first specify the label method
     label_method = get_label_method(attribute_render_info)
 
     # if the label method is id, use eq
-    return "#{attribute_key}_id_#{attribute_render_info[:search_method] || 'eq'}".to_sym if label_method == :id
+    return "#{attribute_key}_id_#{search_method || 'eq'}".to_sym if label_method == :id
 
     # otherwise the label_method to specify the key
-    "#{attribute_key}_#{label_method}_#{attribute_render_info[:search_method] || 'cont'}".to_sym
+    "#{attribute_key}_#{label_method}_#{search_method || 'cont'}".to_sym
   end
 end
