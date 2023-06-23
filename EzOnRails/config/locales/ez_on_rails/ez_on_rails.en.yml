@@ -50,3 +50,9 @@ en:
       x_seconds:
         one: 'One second'
         other: '%{count} seconds'
+      less_than_x_minutes:
+        one: 'Less than %{count} minute'
+        other: 'Less than %{count} minutes'
+      about_x_years:
+        one: 'About %{count} year'
+        other: 'About %{count} years'

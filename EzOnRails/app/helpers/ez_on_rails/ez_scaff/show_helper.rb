@@ -162,7 +162,9 @@ module EzOnRails::EzScaff::ShowHelper
     duration = obj.send(attribute_key)
     return '' unless duration
 
-    distance_of_time_in_words(duration)
+    duration.parts.map do |key, value|
+      I18n.t(:"datetime.distance_in_words.x_#{key}.#{value == 1 ? 'one' : 'other'}", count: value)
+    end.join(', ')
   end
 
   private
