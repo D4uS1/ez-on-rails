@@ -40,6 +40,12 @@ module EzOnRails::EzScaff::ShowHelper
     render_active_record_relation obj, attribute_key, attribute_render_info
   end
 
+  # renders the association attribute of the specified object using the specified
+  # render_info for the show partial.
+  def render_polymorphic_association_show(obj, attribute_key, attribute_render_info)
+    render_active_record_relation obj, attribute_key, attribute_render_info
+  end
+
   # renders the nested_form attribute of the specified object using the specified
   # render_info for the show partial.
   def render_nested_form_show(obj, attribute_key, attribute_render_info)

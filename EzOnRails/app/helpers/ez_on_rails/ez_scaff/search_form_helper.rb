@@ -96,6 +96,14 @@ module EzOnRails::EzScaff::SearchFormHelper
     text_field + boolean_field
   end
 
+  # Method for rendering a polymorphic association attribute in a search form.
+  # data expects the :form, :search_method and :obj_class.
+  # :obj_class is the class of the active record which contains the attribute :attribute_key.
+  # :form is the search form builder.
+  def render_polymorphic_association_search_form(data, attribute_key, attribute_render_info)
+    render_association_search_form(data, attribute_key, attribute_render_info)
+  end
+
   # Method for rendering an nested form association in as search form.
   # data expects the :form, :search_method and :obj_class.
   # :obj_class is the class of the active record which contains the attribute :attribute_key.

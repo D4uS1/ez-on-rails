@@ -109,6 +109,8 @@ class EzOnRails::ApplicationController < ApplicationController
       render_info.keys.map { |key| { key.to_s.to_sym => [] } } +
       # needed for single references
       render_info.keys.map { |key| "#{key}_id".to_sym } +
+      # needed for single polymorphic references
+      render_info.keys.map { |key| "#{key}_type".to_sym } +
       # needed for has_many references
       render_info.keys.map { |key| { "#{key.to_s.singularize}_ids".to_sym => [] } }
   end

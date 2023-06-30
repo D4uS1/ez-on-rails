@@ -1,0 +1,25 @@
+.polymorphic-association-field-container [
+  data-controller="polymorphic-association-field"
+  data-polymorphic-association-field-records-data=(records_data.to_json)
+  data-polymorphic-association-field-default-value-type=(default_value_type)
+  data-polymorphic-association-field-default-value-id=(default_value_id)
+  data-polymorphic-association-field-nullable="#{nullable}"]
+  /record type
+  .polymorphic-association-field-type-container
+    select.polymorphic-association-field-select [
+      data-action="polymorphic-association-field#onChangeRecordType"
+      data-polymorphic-association-field-target="typeTypeField"
+      id="#{id}_type"
+      name=(name.clone.insert(name.length - 1, "_type"))]
+      - (records_data).each do |record_type, record_type_data|
+        option.polymorphic-association-field-select-option value="#{record_type}" selected=(default_value_type == record_type)
+          = record_type_data[:type_label]
+
+  /record id
+  .polymorphic-association-field-id-container
+    select.polymorphic-association-field-select [
+      data-action="polymorphic-association-field#onChangeRecordId"
+      data-polymorphic-association-field-target="recordIdField"
+      id="#{id}_id"
+      name=(name.clone.insert(name.length - 1, "_id"))]
+

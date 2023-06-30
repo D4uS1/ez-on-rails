@@ -132,6 +132,12 @@ module EzOnRails::EzScaff::ModelFormHelper
                      collection: attribute_render_info[:data] || nil
   end
 
+  # Renders the polymorphic association attribute of the specified form builder using the
+  # specified render_info for the model_form partial.
+  def render_polymorphic_association_model_form(form, attribute_key, attribute_render_info)
+    render_polymorphic_association_field(form, attribute_key, attribute_render_info)
+  end
+
   # renders the nested_form attribute of the specified form builder using the specified
   # render_info for the model_form partial.
   def render_nested_form_model_form(form, attribute_key, attribute_render_info)
@@ -422,8 +428,10 @@ module EzOnRails::EzScaff::ModelFormHelper
     end
 
     render partial: 'ez_on_rails/shared/fields/duration_field', locals: {
-      id: id_for(form, attribute_key, attribute_render_info),
-      name: name_for(form, attribute_key, attribute_render_info),
+      # base_id is extended by _id and _type in the view
+      base_id: id_for(form, attribute_key, attribute_render_info),
+      # base_name is changed to type and id in the view
+      base_name: name_for(form, attribute_key, attribute_render_info),
       default_value:,
       max_years:,
       label_years: t(:years),
@@ -433,6 +441,53 @@ module EzOnRails::EzScaff::ModelFormHelper
       label_hours: t(:hours),
       label_minutes: t(:minutes),
       label_seconds: t(:seconds)
+    }
+  end
+
+  # Renders a field for selecting some polymorphic association record.
+  def render_polymorphic_association_field(form, attribute_key, attribute_render_info)
+    # identify the label method for the record selection
+    label_method = get_label_method(attribute_render_info)
+
+    # identify the current value
+    default_value = form.object.send(attribute_key)
+
+    # create the data needed by the javascript controller, holding labels and record ids etc.
+    records_data = {}.tap do |record_data_hash|
+      attribute_render_info[:data].each do |key, value|
+        record_type_class = Class.const_get key.to_s.singularize.camelize
+        record_type_string = record_type_class.to_s
+
+        # the type is the key here, this makes it easy to access the data in the javscript
+        record_data_hash[record_type_string] = {}
+
+        # get the translated label for the record type
+        record_data_hash[record_type_string][:type_label] = record_type_class.model_name.human
+
+        # get the records that should be selectable
+        record_data_hash[record_type_string][:records] = value.map do |record|
+          { id: record.id, label: record.send(label_method) }
+        end
+      end
+    end
+
+    # indicate whether this is an optional relation
+    relation_reflection = form.object.class.reflect_on_association(attribute_key)
+    nullable = if relation_reflection.options.key?(:optional)
+                 relation_reflection.options[:optional]
+               elsif relation_reflection.options.key?(:required)
+                 !relation_reflection.options[:required]
+               else
+                 false
+               end
+
+    render partial: 'ez_on_rails/shared/fields/polymorphic_association_field', locals: {
+      id: id_for(form, attribute_key, attribute_render_info),
+      name: name_for(form, attribute_key, attribute_render_info),
+      records_data:,
+      default_value_type: default_value&.class&.to_s,
+      default_value_id: default_value&.id,
+      nullable:
     }
   end
 end

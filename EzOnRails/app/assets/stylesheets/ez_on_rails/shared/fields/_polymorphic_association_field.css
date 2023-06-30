@@ -1,0 +1,11 @@
+.polymorphic-association-field-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.polymorphic-association-field-select {
+    min-width: 3em;
+}
