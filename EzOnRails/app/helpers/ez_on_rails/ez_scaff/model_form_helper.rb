@@ -128,7 +128,8 @@ module EzOnRails::EzScaff::ModelFormHelper
     form.association attribute_key,
                      label_method:,
                      as: (display_type == :combobox ? :select : display_type),
-                     input_html: html_options
+                     input_html: html_options,
+                     collection: attribute_render_info[:data] || nil
   end
 
   # renders the nested_form attribute of the specified form builder using the specified
