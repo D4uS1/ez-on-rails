@@ -125,11 +125,15 @@ module EzOnRails::EzScaff::ModelFormHelper
     html_options = html_options_model_form form, attribute_key, attribute_render_info
     html_options[:class] = "#{html_options[:class]} combobox" if display_type == :combobox
 
+    options = {
+      label_method:,
+      as: (display_type == :combobox ? :select : display_type),
+      input_html: html_options
+    }
+    options[:collection] = attribute_render_info[:data] if attribute_render_info[:data]
+
     form.association attribute_key,
-                     label_method:,
-                     as: (display_type == :combobox ? :select : display_type),
-                     input_html: html_options,
-                     collection: attribute_render_info[:data] || nil
+                     **options
   end
 
   # Renders the polymorphic association attribute of the specified form builder using the
