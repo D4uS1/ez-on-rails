@@ -4,3 +4,4 @@
 * Added __association_search_attributes__ to render_info. Have a look at the "Customize Search" section in the [render info](https://github.com/D4uS1/ez-on-rails/wiki/Render-Info) documentation for details.
 * Added possibility to define association collections using the __data__ attribute in the render info
 * Added __polymorphic_association__ as field type to the render info. Have a look at the "Polymorphic associations" section in the [render info](https://github.com/D4uS1/ez-on-rails/wiki/Render-Info) documentation for details.
+* Added possibility to use stimulus controllers. Have a look at the sections for model_forms in the  [partials](https://github.com/D4uS1/ez-on-rails/wiki/Partials) documentation for details.
