@@ -154,6 +154,11 @@ end
 "
     end
 
+    # Generates the javascript stimulus controller.
+    def generate_javascript
+      template 'javascript_controller.js.erb', File.join('app/javascript/controllers', class_path, "#{plural_file_name}_controller.js")
+    end
+
     # Generates the spec files.
     def generate_specs
       template 'model_spec.rb.erb', File.join('spec/models', class_path, "#{file_name}_spec.rb")
