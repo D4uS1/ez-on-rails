@@ -432,10 +432,8 @@ module EzOnRails::EzScaff::ModelFormHelper
     end
 
     render partial: 'ez_on_rails/shared/fields/duration_field', locals: {
-      # base_id is extended by _id and _type in the view
-      base_id: id_for(form, attribute_key, attribute_render_info),
-      # base_name is changed to type and id in the view
-      base_name: name_for(form, attribute_key, attribute_render_info),
+      id: id_for(form, attribute_key, attribute_render_info),
+      name: name_for(form, attribute_key, attribute_render_info),
       default_value:,
       max_years:,
       label_years: t(:years),
@@ -486,8 +484,10 @@ module EzOnRails::EzScaff::ModelFormHelper
                end
 
     render partial: 'ez_on_rails/shared/fields/polymorphic_association_field', locals: {
-      id: id_for(form, attribute_key, attribute_render_info),
-      name: name_for(form, attribute_key, attribute_render_info),
+      # base_id is extended by _id and _type in the view
+      base_id: id_for(form, attribute_key, attribute_render_info),
+      # base_name is changed to type and id in the view
+      base_name: name_for(form, attribute_key, attribute_render_info),
       records_data:,
       default_value_type: default_value&.class&.to_s,
       default_value_id: default_value&.id,

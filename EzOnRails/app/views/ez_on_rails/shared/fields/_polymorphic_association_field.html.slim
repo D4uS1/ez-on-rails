@@ -9,8 +9,8 @@
     select.polymorphic-association-field-select [
       data-action="polymorphic-association-field#onChangeRecordType"
       data-polymorphic-association-field-target="typeTypeField"
-      id="#{id}_type"
-      name=(name.clone.insert(name.length - 1, "_type"))]
+      id="#{base_id}_type"
+      name=(base_name.clone.insert(base_name.length - 1, "_type"))]
       - (records_data).each do |record_type, record_type_data|
         option.polymorphic-association-field-select-option value="#{record_type}" selected=(default_value_type == record_type)
           = record_type_data[:type_label]
@@ -20,6 +20,6 @@
     select.polymorphic-association-field-select [
       data-action="polymorphic-association-field#onChangeRecordId"
       data-polymorphic-association-field-target="recordIdField"
-      id="#{id}_id"
-      name=(name.clone.insert(name.length - 1, "_id"))]
+      id="#{base_id}_id"
+      name=(base_name.clone.insert(base_name.length - 1, "_id"))]
 
