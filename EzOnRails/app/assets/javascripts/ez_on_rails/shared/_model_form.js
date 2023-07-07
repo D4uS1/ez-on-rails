@@ -21,6 +21,16 @@ const onDocumentReady = () => {
       tags: hasTags
     });
   });
+
+  /**
+   * Fires native javascript events if the select2 selection changed.
+   * This is necessary because select2 uses its own event framework.
+   * See https://psmy.medium.com/rails-6-stimulus-and-select2-de4a4d2b59e4 for details.
+   */
+  $(".combobox").on('select2:select', function () {
+    let event = new Event('change', { bubbles: true })
+    this.dispatchEvent(event);
+  });
 };
 
 // The turbolinks ready handler for page load.
