@@ -9,14 +9,13 @@ export default class extends Controller {
     /**
      * Constructor.
      */
-    connect() {
-    }
+    connect() { }
 
     <%- attributes.each_with_index do |attr, i| -%>
     /**
      * Called if the <%= attr.name %> in the <%= class_name %> form was changed.
      */
-    onChange<%= attr.name.camelize(:uper) %>() { }
+    onChange<%= attr.name.camelize(:upper) %>() { }
 
     <%- end -%>
 }
