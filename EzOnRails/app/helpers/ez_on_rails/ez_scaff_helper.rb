@@ -307,15 +307,10 @@ module EzOnRails::EzScaffHelper
     attribute_render_info[:data] || attribute_key.to_s
   end
 
-  # Returns the stimulus controller name for the specified active record obj.
-  # If the local_assigns contains the :stimulus_controller value, those will be used.
-  # Otherwise the name will be generated from the objects class. It is expected to have the underscored
-  # pluarlized name of the object class.
-  # The controller is expected to be inside the javascript/controllers/ folder. If the object is in some
-  # namespace, a subfolder for that namespace is expected.
-  def get_stimulus_controller_name(obj, local_assigns)
-    return local_assigns[:stimulus_controller] if local_assigns[:stimulus_controller]
-
-    obj.class.to_s.pluralize.underscore.gsub '/', '--'
+  # Returns the stimulus controller name for the current controller.
+  # The controller is expected to be inside the javascript/controllers/ folder. It is expected
+  # to have the same path like the rails controller, including its namespace folders.
+  def get_stimulus_controller_name
+    controller_path.gsub('/', '--')
   end
 end

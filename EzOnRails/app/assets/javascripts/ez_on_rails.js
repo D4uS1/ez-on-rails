@@ -25,6 +25,7 @@ import "select2"
 import "@nathanvda/cocoon"
 import "@fortawesome/fontawesome-free"
 import * as ActiveStorage from "@rails/activestorage"
+import Rails from '@rails/ujs';
 
 // from own scripts
 import "ez_on_rails/shared/_enhanced_table"
@@ -33,6 +34,10 @@ import "ez_on_rails/shared/_model_form"
 
 // initializers
 ActiveStorage.start();
+Rails.start();
+
+// This enables calling Rails.ajax requests in stimulus
+window.Rails = Rails;
 
 /**
  * The function to call on document ready.

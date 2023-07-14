@@ -337,7 +337,10 @@ module EzOnRails::EzScaff::ModelFormHelper
   def html_options_model_form(form, attribute_key, attribute_render_info)
     # set the default options
     default_options = {
-      class: "form-control #{'is-invalid' unless form.object.errors[attribute_key].empty?}"
+      class: "form-control #{'is-invalid' unless form.object.errors[attribute_key].empty?}",
+      data: {
+        action: "#{get_stimulus_controller_name}#onChange#{attribute_key.to_s.camelize(:upper)}"
+      }
     }
 
     # Set the default value, if available

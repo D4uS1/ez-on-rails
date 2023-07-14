@@ -25,6 +25,7 @@ const onDocumentReady = () => {
   /**
    * Fires native javascript events if the select2 selection changed.
    * This is necessary because select2 uses its own event framework.
+   * Without this, stimulus onChange actions on select2 fields will not be called.
    * See https://psmy.medium.com/rails-6-stimulus-and-select2-de4a4d2b59e4 for details.
    */
   $(".combobox").on('select2:select', function () {
