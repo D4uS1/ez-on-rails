@@ -339,7 +339,7 @@ module EzOnRails::EzScaff::ModelFormHelper
     default_options = {
       class: "form-control #{'is-invalid' unless form.object.errors[attribute_key].empty?}",
       data: {
-        action: "#{get_stimulus_controller_name}#onChange#{attribute_key.to_s.camelize(:upper)}"
+        action: "#{stimulus_controller_name}#onChange#{attribute_key.to_s.camelize(:upper)}"
       }
     }
 

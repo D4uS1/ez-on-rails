@@ -310,7 +310,7 @@ module EzOnRails::EzScaffHelper
   # Returns the stimulus controller name for the current controller.
   # The controller is expected to be inside the javascript/controllers/ folder. It is expected
   # to have the same path like the rails controller, including its namespace folders.
-  def get_stimulus_controller_name
+  def stimulus_controller_name
     controller_path.gsub('/', '--')
   end
 end

@@ -15,7 +15,7 @@ export default class extends Controller {
     /**
      * Called if the <%= attr.name %> in the <%= class_name %> form was changed.
      */
-    onChange<%= attr.name.camelize(:upper) %>() { }
+    onChange<%= attr.name.camelize(:upper) %>(event) { }
 
     <%- end -%>
 }
