@@ -335,13 +335,16 @@ module EzOnRails::EzScaff::ModelFormHelper
   # partial. If some additional html_options are defined in the given render_info
   # they are added to the result. The given options will be priorizes, due to conflicts.
   def html_options_model_form(form, attribute_key, attribute_render_info)
-    # set the default options
+    js_controller_name = stimulus_controller_name
+
+    # set the default options, including stimulus actions and targets for javascript controller
     default_options = {
       class: "form-control #{'is-invalid' unless form.object.errors[attribute_key].empty?}",
       data: {
-        action: "#{stimulus_controller_name}#onChange#{attribute_key.to_s.camelize(:upper)}"
+        action: "#{js_controller_name}#onChange#{attribute_key.to_s.camelize(:upper)}"
       }
     }
+    default_options[:data][:"#{js_controller_name}-target"] = "#{attribute_key.to_s.camelize(:lower)}Field"
 
     # Set the default value, if available
     if attribute_render_info[:default_value]

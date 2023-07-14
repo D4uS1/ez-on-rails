@@ -4,7 +4,9 @@ import { Controller } from "@hotwired/stimulus"
  * Stimulus controller for <%= class_name %> actions.
  */
 export default class extends Controller {
-    static targets = []
+    static targets = [<%- attributes.each_with_index do |attr, i| -%>
+<%= "'#{attr.name.camelize(:lower)}Field'#{ i == attributes.length - 1 ? '' : ', '}" -%>
+    <%- end -%>]
 
     /**
      * Constructor.
