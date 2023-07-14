@@ -1,11 +1,11 @@
-.duration-field-container data-controller="duration-field"
+.duration-field-container data-controller="duration-field" name="#{id}_duration_field_container"
   input type="hidden" data-duration-field-target="valueField" id="#{id}" name="#{name}" value="#{default_value}"
 
   /years
   .duration-field-select-container
     label.duration-field-select-label
       = "#{label_years}:"
-    select.duration-field-select data-action="duration-field#onChangeYears" data-duration-field-target="yearsField"
+    select.duration-field-select data-action="duration-field#onChangeYears" data-duration-field-target="yearsField" name="durationYearsField"
       - (0...max_years).each do |years|
         option.duration-field-select-option value="#{years}"
           = years
@@ -14,7 +14,7 @@
   .duration-field-select-container
     label.duration-field-select-label
       = "#{label_months}:"
-    select.duration-field-select data-action="duration-field#onChangeMonths" data-duration-field-target="monthsField"
+    select.duration-field-select data-action="duration-field#onChangeMonths" data-duration-field-target="monthsField" name="durationMonthsField"
       - (0...12).each do |months|
         option.duration-field-select-option value="#{months}"
           = months
@@ -23,7 +23,7 @@
   .duration-field-select-container
     label.duration-field-select-label
       = "#{label_weeks}:"
-    select.duration-field-select data-action="duration-field#onChangeWeeks" data-duration-field-target="weeksField"
+    select.duration-field-select data-action="duration-field#onChangeWeeks" data-duration-field-target="weeksField" name="durationWeeksField"
       - (0...5).each do |weeks|
         option.duration-field-select-option value="#{weeks}"
           = weeks
@@ -32,7 +32,7 @@
   .duration-field-select-container
     label.duration-field-select-label
       = "#{label_days}:"
-    select.duration-field-select data-action="duration-field#onChangeDays" data-duration-field-target="daysField"
+    select.duration-field-select data-action="duration-field#onChangeDays" data-duration-field-target="daysField" name="durationDaysField"
       - (0...7).each do |days|
         option.duration-field-select-option value="#{days}"
           = days
@@ -41,7 +41,7 @@
   .duration-field-select-container
     label.duration-field-select-label
       = "#{label_hours}:"
-    select.duration-field-select data-action="duration-field#onChangeHours" data-duration-field-target="hoursField"
+    select.duration-field-select data-action="duration-field#onChangeHours" data-duration-field-target="hoursField" name="durationHoursField"
       - (0...24).each do |hours|
         option.duration-field-select-option value="#{hours}"
           = hours
@@ -50,7 +50,7 @@
   .duration-field-select-container
     label.duration-field-select-label
       = "#{label_minutes}:"
-    select.duration-field-select data-action="duration-field#onChangeMinutes" data-duration-field-target="minutesField"
+    select.duration-field-select data-action="duration-field#onChangeMinutes" data-duration-field-target="minutesField" name="durationMinutesField"
       - (0...60).each do |minutes|
         option.duration-field-select-option value="#{minutes}"
           = minutes
@@ -59,7 +59,7 @@
   .duration-field-select-container
     label.duration-field-select-label
       = "#{label_seconds}:"
-    select.duration-field-select data-action="duration-field#onChangeSeconds" data-duration-field-target="secondsField"
+    select.duration-field-select data-action="duration-field#onChangeSeconds" data-duration-field-target="secondsField" name="durationSecondsField"
       - (0...60).each do |seconds|
         option.duration-field-select-option value="#{seconds}"
           = seconds
