@@ -13,7 +13,7 @@ class EzOnRails::Api::ResourceController < EzOnRails::Api::BaseController
 
   # needed because cancancan tries to access the resources with "find"
   rescue_from ActiveRecord::RecordNotFound do
-    handle_api_error EzOnRails::ResourceNotFoundError.new(message: 'resource not found')
+    handle_error EzOnRails::ResourceNotFoundError.new(message: 'resource not found')
   end
 
   # GET index action to get all existing resource instances.

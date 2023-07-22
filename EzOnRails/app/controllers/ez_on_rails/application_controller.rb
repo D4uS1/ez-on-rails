@@ -27,6 +27,25 @@ class EzOnRails::ApplicationController < ApplicationController
     authenticate_user!
   end
 
+  rescue_from EzOnRails::Error, with: proc { |error| handle_error(error) }
+
+  # Returns true if the current request is a json request.
+  def json_request?
+    request.format.json?
+  end
+
+  # Returns true if the current request is a html request.
+  def html_request?
+    request.format.html?
+  end
+
+  # Skips the current request and returns status code 406 for not acceptable
+  # request type. This is for instance called by a filter that checks wether
+  # the request was send in json or not.
+  def invalid_request_type
+    raise EzOnRails::InvalidRequestTypeError
+  end
+
   protected
 
   # Sets the breadcrumb to the root page. Executed before every action.
@@ -119,5 +138,24 @@ class EzOnRails::ApplicationController < ApplicationController
   # engines ability class.
   def current_ability
     @current_ability ||= EzOnRails::Ability.new(current_user)
+  end
+
+  # Handles the given raised api error.
+  # Renders the error json view file having the http status given by the error.
+  def handle_error(error)
+    return render 'ez_on_rails/api/error', locals: { error: }, status: error.http_status if json_request?
+
+    case error.http_status
+    when :unauthorized
+      render 'ez_on_rails/errors/401', status: error.http_status
+    when :forbidden
+      render 'ez_on_rails/errors/403', status: error.http_status
+    when :not_found
+      render 'ez_on_rails/errors/404', status: error.http_status
+    when :internal_server_error
+      render 'ez_on_rails/errors/500', status: error.http_status
+    else
+      render 'ez_on_rails/errors/some_error', status: error.http_status
+    end
   end
 end

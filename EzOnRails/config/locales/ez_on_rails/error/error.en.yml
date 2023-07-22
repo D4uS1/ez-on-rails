@@ -5,3 +5,4 @@ en:
     not_authenticated: "Not authentificated."
     page_not_found: "Page not found."
     internal_server_error: "Internal server error."
+    some_error_occurred: "Some error occured."

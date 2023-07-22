@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Error class to describe an unknown validation failed error.
-class EzOnRails::ValidationFailedError < EzOnRails::ApiError
+class EzOnRails::ValidationFailedError < EzOnRails::Error
   # Constructor passes the message and http_status to the base constructor.
   def initialize(record)
     super(message: "validation failed: #{error_messages(record)}", http_status: :unprocessable_entity)
