@@ -3,7 +3,7 @@
 / whether the method is defined. Hence passing nil as option will resolve in the wrong method.
 - form_options = { url: get_post_url(obj, local_assigns) }
 - form_options[:method] = local_assigns[:post_method] if local_assigns[:post_method]
-- form_options[:data] = { controller: stimulus_controller_name }
+- form_options[:data] = stimulus_data_hash(local_assigns)
 
 = simple_form_for obj, form_options do |form|
 

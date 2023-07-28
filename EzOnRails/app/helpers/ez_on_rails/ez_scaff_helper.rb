@@ -313,4 +313,20 @@ module EzOnRails::EzScaffHelper
   def stimulus_controller_name
     controller_path.gsub('/', '--')
   end
+
+  # Returns the data hash that is used to initialize the stimulus controller in the view.
+  # If the local_assigns contains the "stimulus_values" attribute, that is expected to be a hash of
+  # key value pairs, those values are passed to the stimulus controller as initial values.
+  # The keys are automaticly dasherized, hence they can be passed as  default underscored keys.
+  def stimulus_data_hash(local_assigns)
+    js_controller_name = stimulus_controller_name
+
+    values = (local_assigns[:stimulus_values] || {}).transform_keys do |key|
+      "#{js_controller_name}-#{key.to_s.dasherize}"
+    end
+
+    {
+      controller: js_controller_name
+    }.merge(values)
+  end
 end
