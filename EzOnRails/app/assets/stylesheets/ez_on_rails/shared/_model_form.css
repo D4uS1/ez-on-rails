@@ -1,5 +1,5 @@
 /* disable extra labels of simple_form assocication fields */
-label.select.optional {
+.select > label.form-label {
   display: none;
 }
 
