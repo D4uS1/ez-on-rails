@@ -1,0 +1,5 @@
+de:
+  activerecord:
+    errors:
+      messages:
+        required: "Fehlende Angabe."
