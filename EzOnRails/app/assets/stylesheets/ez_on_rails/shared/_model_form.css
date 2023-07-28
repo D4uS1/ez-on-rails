@@ -12,3 +12,7 @@
 .select2-selection {
   border-color: #ced4da !important;
 }
+
+.form-label {
+  font-weight: 500;
+}

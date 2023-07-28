@@ -22,7 +22,7 @@ module EzOnRails::EzScaff::ModelFormHelper
   # attribute_key and the specified attribute_render_info. The specified block is yielded
   # into the container.
   def render_attribute_container_model_form(_form, _attribute_key, _attribute_render_info, &)
-    tag.div(class: 'mb-3', &)
+    tag.div(class: 'mb-4 mt-1', &)
   end
 
   # Method for rendering a attribute whose method to the correspoinding attribute

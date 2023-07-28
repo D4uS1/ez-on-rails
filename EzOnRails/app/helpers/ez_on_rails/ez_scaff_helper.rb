@@ -70,8 +70,12 @@ module EzOnRails::EzScaffHelper
     # call the proc if this is a custom label
     return label.call if label.is_a? Proc
 
-    # print default label, because it semes to be a string
-    tag.label label, class: attribute_render_info[:label_class]
+    # print default label, because it seems to be a string
+    if attribute_render_info[:type] == :nested_form
+      tag.h5 label, class: "#{attribute_render_info[:label_class]} pt-4"
+    else
+      tag.label label, class: attribute_render_info[:label_class]
+    end
   end
 
   # Renders the search_label given by the attribute_render_info.
