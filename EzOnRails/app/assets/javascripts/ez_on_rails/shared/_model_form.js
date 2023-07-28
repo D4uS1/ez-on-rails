@@ -36,3 +36,6 @@ const onDocumentReady = () => {
 
 // The turbolinks ready handler for page load.
 $(document).on('turbo:load', onDocumentReady);
+
+// this is needed for eg form submission, because tubo:load will not trigger here.
+$(document).on('turbo:render', onDocumentReady);
