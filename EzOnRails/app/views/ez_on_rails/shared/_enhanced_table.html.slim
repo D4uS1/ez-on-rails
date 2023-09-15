@@ -22,7 +22,8 @@
               = header[:content]
       tbody
         - table_rows.each do |row|
-          tr id=(row[:id] || '') *(row[:data]&.map { |key, value| { "data-#{key}": value } }&.inject(:update))
+          // || [] is needed at the end of the line to prevent a nil error if data is not given
+          tr id=(row[:id] || '') *((row[:data]&.map { |key, value| { "data-#{key}": value } }&.inject(:update)) || [])
             - row[:cols].each do |col|
               td class="#{col[:col_class]}"
                 = col[:content]
