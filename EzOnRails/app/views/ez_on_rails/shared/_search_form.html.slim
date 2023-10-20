@@ -7,7 +7,7 @@
                             class_details: '',
                             open: (print_details_tag == :open)) do
     .mb-2.mt-2
-      = search_form_for queue_obj, url: get_search_url(obj_class, local_assigns), html: { method: :post } do |form|
+      = search_form_for queue_obj, url: get_search_url(obj_class, local_assigns), html: { method: :post }, data: { turbo: false } do |form|
 
         /Filter attributes we should / can not see
         - filter_attributes! :search_form, obj_class, render_info
