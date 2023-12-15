@@ -125,7 +125,7 @@ class EzOnRails::ApplicationController < ApplicationController
   def render_info_permit_params(render_info)
     render_info.keys +
       # needed for :attachments
-      render_info.keys.map { |key| { key.to_s.to_sym => [] } } +
+      render_info.keys.map { |key| { key.to_s.to_sym => (render_info[key][:type] == :json ? {} : []) } } +
       # needed for single references
       render_info.keys.map { |key| "#{key}_id".to_sym } +
       # needed for single polymorphic references
