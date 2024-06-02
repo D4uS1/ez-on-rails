@@ -55,7 +55,7 @@ class EzOnRails::Admin::BroomClosetService
     purged = 0
     unattached = unattached_files
 
-    ActiveStorage::Blob.where(id: blob_ids).each do |blob|
+    ActiveStorage::Blob.where(id: blob_ids).find_each do |blob|
       purged += 1 if unattached.any? { |unattached_blob| unattached_blob.id == blob.id } && blob.purge
     end
 

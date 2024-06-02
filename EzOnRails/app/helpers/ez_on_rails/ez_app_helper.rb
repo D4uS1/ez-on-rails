@@ -73,7 +73,7 @@ module EzOnRails::EzAppHelper
     link_to options[:label],
             options[:target],
             data: {
-              turbo_method: (options[:method] || :get),
+              turbo_method: options[:method] || :get,
               'bs-dismiss': 'modal'
             },
             class: "btn btn-#{options[:type] || 'secondary'}",

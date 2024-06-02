@@ -10,7 +10,7 @@ class EzOnRails::Admin::BroomCloset::UnattachedFilesController < EzOnRails::Admi
 
   # Constructor.
   def initialize
-    super()
+    super
     @service = EzOnRails::Admin::BroomClosetService.new
   end
 

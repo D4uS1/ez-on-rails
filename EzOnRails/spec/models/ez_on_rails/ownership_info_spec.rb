@@ -16,17 +16,17 @@ RSpec.describe EzOnRails::OwnershipInfo do
     end
 
     it 'requires resource' do
-      expect(described_class.create(ownership_info_attributes.merge(resource: nil))).to be_invalid
+      expect(described_class.create(ownership_info_attributes.merge(resource: nil))).not_to be_valid
     end
 
     it 'has unique resource' do
       described_class.create(ownership_info_attributes)
 
-      expect(described_class.create(ownership_info_attributes)).to be_invalid
+      expect(described_class.create(ownership_info_attributes)).not_to be_valid
     end
 
     it 'rejects not existing resource' do
-      expect(described_class.create(resource: 'NonExisting')).to be_invalid
+      expect(described_class.create(resource: 'NonExisting')).not_to be_valid
     end
   end
 

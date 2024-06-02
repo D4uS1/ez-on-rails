@@ -57,6 +57,7 @@ gem 'nyan-cat-formatter'
 gem 'devise'
 gem 'rswag'
 gem 'simple_form'
+gem 'rubocop'
 
 # Debugging in RubyMine
 group :development, :test do

@@ -83,7 +83,7 @@ module EzOnRails::EzScaff::SearchFormHelper
                                           class: attribute_classes_search_form(attribute_render_info)
 
     # field for existence
-    existence_search_key = "#{attribute_key}_id_null".to_sym
+    existence_search_key = :"#{attribute_key}_id_null"
     boolean_field = data[:form].select existence_search_key,
                                        options_for_select([
                                                             ['', ''],
@@ -165,7 +165,7 @@ module EzOnRails::EzScaff::SearchFormHelper
   # Returns the attribute key for the search form of the given attribute_key.
   # If no :search_method key is specified in the render_info, :cont will be used.
   def search_attribute_key(attribute_key, attribute_render_info)
-    "#{attribute_key}_#{attribute_render_info[:search_method] || 'cont'}".to_sym
+    :"#{attribute_key}_#{attribute_render_info[:search_method] || 'cont'}"
   end
 
   # Returns the attribute key for the search form of the given attribute_key, which is an association.
@@ -180,16 +180,16 @@ module EzOnRails::EzScaff::SearchFormHelper
     target_attributes = attribute_render_info[:association_search_attributes]&.map(&:to_s)
     if target_attributes
       join_str = "_or_#{attribute_key}_"
-      return "#{attribute_key}_#{target_attributes.join(join_str)}_#{search_method || 'cont'}".to_sym
+      return :"#{attribute_key}_#{target_attributes.join(join_str)}_#{search_method || 'cont'}"
     end
 
     # otherwise, first specify the label method
     label_method = get_label_method(attribute_render_info)
 
     # if the label method is id, use eq
-    return "#{attribute_key}_id_#{search_method || 'eq'}".to_sym if label_method == :id
+    return :"#{attribute_key}_id_#{search_method || 'eq'}" if label_method == :id
 
     # otherwise the label_method to specify the key
-    "#{attribute_key}_#{label_method}_#{search_method || 'cont'}".to_sym
+    :"#{attribute_key}_#{label_method}_#{search_method || 'cont'}"
   end
 end
