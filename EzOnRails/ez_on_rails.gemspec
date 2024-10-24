@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.summary     = 'Application generator for manageable API backends.'
   spec.description = 'Application generator for manageable API backends.'
   spec.license     = 'MIT'
-  spec.required_ruby_version = '>=3.3.2'
+  spec.required_ruby_version = '>=3.3.5'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
@@ -42,10 +42,10 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'nilify_blanks', '~> 1.4.0'
   spec.add_dependency 'omniauth-gitlab', '~> 2.0.0'
   spec.add_dependency 'omniauth-oauth2', '~> 1.7.3'
-  spec.add_dependency 'rails', '~> 7.1.3'
-  spec.add_dependency 'ransack', '~> 4.0.0'
+  spec.add_dependency 'rails', '~> 7.2.1'
+  spec.add_dependency 'ransack', '~> 4.2.1'
   spec.add_dependency 'rspec-rails', '~> 6.0.1'
-  spec.add_dependency 'rswag', '~> 2.13.0'
+  spec.add_dependency 'rswag', '~> 2.15.0'
   spec.add_dependency 'rubocop', '~> 1.64.1'
   spec.add_dependency 'rubocop-rails', '~> 2.25.0'
   spec.add_dependency 'rubocop-rspec', '~> 2.29.2'

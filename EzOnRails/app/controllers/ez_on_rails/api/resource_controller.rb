@@ -74,8 +74,6 @@ class EzOnRails::Api::ResourceController < EzOnRails::Api::BaseController
     render status: :not_found if @resource_obj.nil?
 
     raise EzOnRails::ValidationFailedError, @resource_obj unless @resource_obj.destroy
-
-    render status: :no_content
   end
 
   # Class Variable setter method for the resource class, resource symbol and pluralized resource symbol.
