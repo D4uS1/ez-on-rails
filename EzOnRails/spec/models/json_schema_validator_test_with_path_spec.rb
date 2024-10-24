@@ -28,7 +28,7 @@ RSpec.describe JsonSchemaValidatorTestWithPath do
       it 'does not accept invalid record' do
         expect(
           described_class.create(test: { 'nullable_string' => 'test' })
-        ).to be_invalid
+        ).not_to be_valid
       end
     end
   end

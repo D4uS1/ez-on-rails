@@ -28,19 +28,19 @@ RSpec.describe EzOnRails::ResourceReadAccess do
     it 'requires resource' do
       expect(described_class.create(resource_read_access_attributes.merge(
                                       resource: nil
-                                    ))).to be_invalid
+                                    ))).not_to be_valid
     end
 
     it 'requires group' do
       expect(described_class.create(resource_read_access_attributes.merge(
                                       group: nil
-                                    ))).to be_invalid
+                                    ))).not_to be_valid
     end
 
     it 'does not accept resourced that are not user owned' do
       EzOnRails::OwnershipInfo.find_by(resource: 'SharableResource').destroy!
 
-      expect(described_class.create(resource_read_access_attributes)).to be_invalid
+      expect(described_class.create(resource_read_access_attributes)).not_to be_valid
     end
 
     it 'does not accept resources that are not sharable' do
@@ -48,7 +48,7 @@ RSpec.describe EzOnRails::ResourceReadAccess do
         sharable: false
       )
 
-      expect(described_class.create(resource_read_access_attributes)).to be_invalid
+      expect(described_class.create(resource_read_access_attributes)).not_to be_valid
     end
   end
 end

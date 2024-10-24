@@ -171,8 +171,8 @@ class EzOnRails::ResourceController < EzOnRails::ApplicationController
   def set_resource_obj
     @resource_obj = model_class.find(
       params[:id] ||
-      params["#{resource_symbol}_id".to_sym] ||
-      params["#{non_namespaced_resource_symbol}_id".to_sym]
+      params[:"#{resource_symbol}_id"] ||
+      params[:"#{non_namespaced_resource_symbol}_id"]
     )
   end
 

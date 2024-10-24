@@ -182,11 +182,11 @@ module EzOnRails::EzScaffHelper
     end
 
     return :attachment if obj_class.reflect_on_all_associations.any? do |association|
-      association.name == "#{attribute_key}_attachment".to_sym
+      association.name == :"#{attribute_key}_attachment"
     end
 
     return :attachments if obj_class.reflect_on_all_associations.any? do |association|
-      association.name == "#{attribute_key}_attachments".to_sym
+      association.name == :"#{attribute_key}_attachments"
     end
 
     obj_class.columns_hash[attribute_key.to_s].type

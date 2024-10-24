@@ -20,19 +20,19 @@ RSpec.describe EzOnRails::GroupAccess do
     it 'requires group' do
       expect(described_class.create(
                group_access_attributes.merge(group_id: nil)
-             )).to be_invalid
+             )).not_to be_valid
     end
 
     it 'is unique access' do
       described_class.create(group_access_attributes)
 
-      expect(described_class.create(group_access_attributes)).to be_invalid
+      expect(described_class.create(group_access_attributes)).not_to be_valid
     end
 
     it 'rejects invalid route' do
       expect(described_class.create(
                group_access_attributes.merge(controller: 'not_dashboard')
-             )).to be_invalid
+             )).not_to be_valid
     end
 
     it 'accepts namespace only' do
@@ -56,7 +56,7 @@ RSpec.describe EzOnRails::GroupAccess do
     it 'rejects action only' do
       expect(described_class.create(
                group_access_attributes.merge(namespace: nil, controller: nil, action: 'index')
-             )).to be_invalid
+             )).not_to be_valid
     end
 
     it 'accepts namespace and controller only' do
@@ -68,19 +68,19 @@ RSpec.describe EzOnRails::GroupAccess do
     it 'does not accept action and namespace only' do
       expect(described_class.create(
                group_access_attributes.merge(namespace: 'ez_on_rails/admin', controller: nil, action: 'index')
-             )).to be_invalid
+             )).not_to be_valid
     end
 
     it 'does not accept namespaces in action' do
       expect(described_class.create(
                group_access_attributes.merge(namespace: 'ez_on_rails', controller: 'admin', action: 'dashboard/index')
-             )).to be_invalid
+             )).not_to be_valid
     end
 
     it 'does not accept namespaces in controller' do
       expect(described_class.create(
                group_access_attributes.merge(namespace: 'ez_on_rails', controller: 'admin/dashboard', action: 'index')
-             )).to be_invalid
+             )).not_to be_valid
     end
   end
 

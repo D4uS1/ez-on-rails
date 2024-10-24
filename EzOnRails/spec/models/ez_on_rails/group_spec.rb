@@ -16,13 +16,13 @@ RSpec.describe EzOnRails::Group do
     end
 
     it 'requires name' do
-      expect(described_class.create(group_attributes.merge(name: nil))).to be_invalid
+      expect(described_class.create(group_attributes.merge(name: nil))).not_to be_valid
     end
 
     it 'has unique name' do
       described_class.create(group_attributes)
 
-      expect(described_class.create(group_attributes)).to be_invalid
+      expect(described_class.create(group_attributes)).not_to be_valid
     end
 
     it 'name must match user_group_name of user if user exists' do
@@ -39,17 +39,17 @@ RSpec.describe EzOnRails::Group do
 
     it 'does not create if resource_read is set but resource_group is not set' do
       expect(described_class.create(group_attributes.merge({ resource_group: false,
-                                                             resource_read: true }))).to be_invalid
+                                                             resource_read: true }))).not_to be_valid
     end
 
     it 'does not create if resource_write is set but resource_group is not set' do
       expect(described_class.create(group_attributes.merge({ resource_group: false,
-                                                             resource_write: true }))).to be_invalid
+                                                             resource_write: true }))).not_to be_valid
     end
 
     it 'does not create if resource_destroy is set but resource_group is not set' do
       expect(described_class.create(group_attributes.merge({ resource_group: false,
-                                                             resource_destroy: true }))).to be_invalid
+                                                             resource_destroy: true }))).not_to be_valid
     end
 
     it 'creates if resource access flag is set and resource_group is set' do

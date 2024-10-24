@@ -25,19 +25,19 @@ RSpec.describe EzOnRails::UserGroupAssignment do
     it 'user required' do
       expect(described_class.create(
                user_group_assignment_attributes.merge(user_id: nil)
-             )).to be_invalid
+             )).not_to be_valid
     end
 
     it 'group required' do
       expect(described_class.create(
                user_group_assignment_attributes.merge(group_id: nil)
-             )).to be_invalid
+             )).not_to be_valid
     end
 
     it 'does not create if group was already assigned to the user without resource' do
       described_class.create(user_group_assignment_attributes)
 
-      expect(described_class.create(user_group_assignment_attributes)).to be_invalid
+      expect(described_class.create(user_group_assignment_attributes)).not_to be_valid
     end
 
     it 'does not create if group was already assigned to the user with resource' do
@@ -51,7 +51,7 @@ RSpec.describe EzOnRails::UserGroupAssignment do
       expect(described_class.create(user_group_assignment_attributes.merge({
                                                                              resource_type: resource.class.to_s,
                                                                              resource_id: resource.id
-                                                                           }))).to be_invalid
+                                                                           }))).not_to be_valid
     end
 
     it 'creates if user was already assigned to the group with other resource' do
@@ -72,7 +72,7 @@ RSpec.describe EzOnRails::UserGroupAssignment do
     it 'does not create if resource is assigned but group is not flagged as resource group' do
       testgroup.update(resource_group: false)
 
-      expect(described_class.create(user_group_assignment_attributes.merge({ resource: }))).to be_invalid
+      expect(described_class.create(user_group_assignment_attributes.merge({ resource: }))).not_to be_valid
     end
 
     it 'creates if resource is assigned and group is flagged as resource group' do

@@ -12,7 +12,7 @@ class EzOnRails::Admin::BroomCloset::NilOwnersController < EzOnRails::Admin::Bro
 
   # Constructor.
   def initialize
-    super()
+    super
     @service = EzOnRails::Admin::BroomClosetService.new
   end
 

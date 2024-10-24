@@ -104,13 +104,13 @@ class User < ApplicationRecord
   # Overwrites the as_json method by calling super and appending the avatar_url to
   # provide the avatar image after login.
   def as_json(options)
-    super(options).merge({
-                           avatar_url: if avatar.attached?
-                                         Rails.application.routes.url_helpers.rails_blob_url(
-                                           avatar, only_path: true
-                                         )
-                                       end
-                         })
+    super.merge({
+                  avatar_url: if avatar.attached?
+                                Rails.application.routes.url_helpers.rails_blob_url(
+                                  avatar, only_path: true
+                                )
+                              end
+                })
   end
 
   # Returns whether the user is assigned to the group having the specified group_name or not.

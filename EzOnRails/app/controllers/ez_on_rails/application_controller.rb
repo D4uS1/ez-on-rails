@@ -115,7 +115,7 @@ class EzOnRails::ApplicationController < ApplicationController
       # add id to identify existing nested attributes in update actions
       nested_permit_params += %i[id _destroy]
 
-      result.push("#{attr_key}_attributes".to_sym => nested_permit_params)
+      result.push("#{attr_key}_attributes": nested_permit_params)
     end
 
     result
@@ -127,11 +127,11 @@ class EzOnRails::ApplicationController < ApplicationController
       # needed for :attachments
       render_info.keys.map { |key| { key.to_s.to_sym => (render_info[key][:type] == :json ? {} : []) } } +
       # needed for single references
-      render_info.keys.map { |key| "#{key}_id".to_sym } +
+      render_info.keys.map { |key| :"#{key}_id" } +
       # needed for single polymorphic references
-      render_info.keys.map { |key| "#{key}_type".to_sym } +
+      render_info.keys.map { |key| :"#{key}_type" } +
       # needed for has_many references
-      render_info.keys.map { |key| { "#{key.to_s.singularize}_ids".to_sym => [] } }
+      render_info.keys.map { |key| { "#{key.to_s.singularize}_ids": [] } }
   end
 
   # overwrites the ability class name of cancancan to the namespaced

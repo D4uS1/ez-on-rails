@@ -276,7 +276,7 @@ module EzOnRails::EzScaff::ModelFormHelper
   def render_collection_select_model_form(form, attribute_key, attribute_render_info)
     tag.p do
       form.collection_check_boxes(
-        "#{attribute_key.to_s.singularize}_ids".to_sym,
+        :"#{attribute_key.to_s.singularize}_ids",
         attribute_render_info[:data][:items],
         :id,
         attribute_render_info[:data][:label_method] || :id,
