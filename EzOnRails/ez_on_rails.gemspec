@@ -31,7 +31,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'devise', '~> 4.9.0'
   spec.add_dependency 'devise_token_auth', '~> 1.2.1'
   spec.add_dependency 'doorkeeper', '~> 5.6.5'
-  spec.add_dependency 'factory_bot_rails', '~> 6.2.0'
+  spec.add_dependency 'factory_bot_rails', '~> 6.4.4'
   spec.add_dependency 'faker', '~> 3.1.1'
   spec.add_dependency 'image_processing', '~> 1.12.2'
   spec.add_dependency 'importmap-rails', '~> 1.1.5'
