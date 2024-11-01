@@ -16,10 +16,10 @@ This gem was not yet tested on already existing systems.
 ### 1. Insert the gem to the Gemfile
 ```
 gem 'ez_on_rails',
-    '>=0.8.0',
+    '>=0.9.0',
     git: 'https://github.com/D4uS1/ez-on-rails',
     glob: 'EzOnRails/ez_on_rails.gemspec',
-    branch: 'v0.8.0'
+    branch: 'v0.9.0'
 ```
 
 Version branches start with "v" followed by the gems version number, e.g. "v0.8.0".
