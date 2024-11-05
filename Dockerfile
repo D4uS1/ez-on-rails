@@ -4,4 +4,6 @@ RUN apt-get install -y vim
 RUN mkdir /EzOnRailsTest
 WORKDIR /EzOnRailsTest
 COPY . /EzOnRailsTest
+
+RUN gem install bundler # needed by rubymine
 RUN bundle install
