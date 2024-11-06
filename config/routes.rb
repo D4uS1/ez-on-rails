@@ -1,219 +1,120 @@
-Rails.application.routes.draw do
+EzOnRails::Engine.routes.draw do
+  scope '(:locale)', locale: /en|de/ do
+    namespace :ez_on_rails do
+      scope module: 'admin', path: 'admin' do
+        get 'dashboard/', to: 'dashboard#index'
 
-  scope '(:locale)', locale: /en|de/ do
-    resources :resource_group_access_tests do
-      collection do
-        match 'search' => 'resource_group_access_tests#search', via: %i[get post], as: :search
-        delete :destroy_selections
+        scope module: 'broom_closet', path: 'broom_closet' do
+          get 'dashboard/', to: 'dashboard#index'
+          get 'nil_owners/', to: 'nil_owners#index'
+          post 'nil_owners/search'
+          get 'nil_owners/search'
+          delete 'nil_owners/destroy_all'
+          delete 'nil_owners/destroy_selections'
+          get 'unattached_files/', to: 'unattached_files#index'
+          post 'unattached_files/search'
+          get 'unattached_files/search'
+          delete 'unattached_files/destroy_all'
+          delete 'unattached_files/destroy_selections'
+        end
+
+        scope module: 'user_management', path: 'user_management' do
+          get 'dashboard/', to: 'dashboard#index'
+          resources :groups do
+            collection do
+              match 'search' => 'groups#search', via: %i[get post], as: :search
+              delete 'destroy_selections'
+            end
+          end
+          resources :user_group_assignments do
+            collection do
+              match 'search' => 'user_group_assignments#search', via: %i[get post], as: :search
+              delete 'destroy_selections'
+            end
+          end
+          resources :group_accesses do
+            collection do
+              match 'search' => 'group_accesses#search', via: %i[get post], as: :search
+              delete 'destroy_selections'
+            end
+          end
+          resources :resource_read_accesses do
+            collection do
+              match 'search' => 'resource_read_accesses#search', via: %i[get post], as: :search
+              delete 'destroy_selections'
+            end
+          end
+          resources :resource_write_accesses do
+            collection do
+              match 'search' => 'resource_write_accesses#search', via: %i[get post], as: :search
+              delete 'destroy_selections'
+            end
+          end
+          resources :resource_destroy_accesses do
+            collection do
+              match 'search' => 'resource_destroy_accesses#search', via: %i[get post], as: :search
+              delete 'destroy_selections'
+            end
+          end
+          resources :users do
+            member do
+              get 'password_reset', to: 'users#password_reset'
+              patch 'password_reset', to: 'users#update_password'
+            end
+            collection do
+              match 'search' => 'users#search', via: %i[get post], as: :search
+              delete 'destroy_selections'
+            end
+          end
+          resources :ownership_infos do
+            collection do
+              match 'search' => 'ownership_infos#search', via: %i[get post], as: :search
+              delete 'destroy_selections'
+            end
+          end
+        end
+      end
+
+      namespace :active_storage do
+        resources :blobs, param: :signed_id, only: [:destroy] do
+          collection do
+            post 'create_direct_upload'
+          end
+        end
       end
     end
+
+    # added to make references to users available directly, this is especially useful for link_to
+    # or url_for methods that try to resolve the path to the user model
+    resources :users, only: [:show], controller: 'ez_on_rails/admin/user_management/users'
+
+    get 'welcome/', to: 'welcome#index'
+    get 'privacy_policy/', to: 'privacy_policy#index'
+    get 'imprint/', to: 'imprint#index'
+    get 'contact_form/', to: 'contact_form#index'
+    post 'contact_form/submit', to: 'contact_form#submit'
+    get 'contact_form/submit_success', to: 'contact_form#submit_success'
+
+    root 'welcome#index'
   end
-  scope '(:locale)', locale: /en|de/ do
-    resources :properties_tests do
-      collection do
-        match 'search' => 'properties_tests#search', via: %i[get post], as: :search
-        delete :destroy_selections
-      end
-    end
-  end
-  scope '(:locale)', locale: /en|de/ do
-    resources :assoc_tests do
-      collection do
-        match 'search' => 'assoc_tests#search', via: %i[get post], as: :search
-        delete :destroy_selections
-      end
-    end
-  end
-  scope '(:locale)', locale: /en|de/ do
-    resources :nested_form_tests do
-      collection do
-        match 'search' => 'nested_form_tests#search', via: %i[get post], as: :search
-        delete :destroy_selections
-      end
-    end
-  end
-  scope '(:locale)', locale: /en|de/ do
-    resources :parent_form_tests do
-      collection do
-        match 'search' => 'parent_form_tests#search', via: %i[get post], as: :search
-        delete :destroy_selections
-      end
-    end
-  end
+
   namespace :api do
-    resources :validation_error_tests, except: %i[new edit] do
-      collection do
-        post :search
+    # for oauth_provider
+    namespace :auth do
+      get 'email_users/profile', to: 'email_users#profile'
+    end
+
+    # for users
+    get 'users/me', to: 'users#me'
+    patch 'users/me', to: 'users#update_me'
+
+    # for active storage additional actions
+    namespace :active_storage do
+      resources :blobs, param: :signed_id, only: [:destroy] do
+        collection do
+          post 'create_direct_upload'
+        end
       end
     end
   end
-  scope '(:locale)', locale: /en|de/ do
-    resources :validation_error_tests do
-      collection do
-        match 'search' => 'validation_error_tests#search', via: %i[get post], as: :search
-        delete :destroy_selections
-      end
-    end
-  end
-  ## The following routes were generated by ez_on_rails:ezapp.
-  scope '(:locale)', locale: /en|de/ do
-    devise_for :users, controllers: {
-        confirmations: 'users/confirmations',
-        passwords: 'users/passwords',
-        registrations: 'users/registrations',
-        sessions: 'users/sessions',
-        unlocks: 'users/unlocks'
-    }, skip: [:omniauth_callbacks]
-
-    devise_scope :user do
-      post 'users/omniauth_sign_up', to: 'users/registrations#omniauth_create'
-    end
-  end
-
-  # needed here because the omniauth callbacks do not support scopes
-  devise_for :users, controllers: {
-      omniauth_callbacks: 'users/omniauth_callbacks'
-  }, skip: %i[confirmations passwords registrations sessions unlocks]
-
-  namespace :api do
-    mount_devise_token_auth_for 'User', at: 'auth', controllers: {
-        omniauth_callbacks: 'api/auth/omniauth_callbacks'
-    }
-  end
-
-  use_doorkeeper
-
-  scope ActiveStorage.routes_prefix do
-    get '/blobs/redirect/:signed_id/*filename' => 'active_storage/blobs/redirect#show', as: :rails_service_blob
-    # get '/blobs/proxy/:signed_id/*filename' => 'active_storage/blobs/proxy#show', as: :rails_service_blob_proxy
-    get '/blobs/:signed_id/*filename' => 'active_storage/blobs/redirect#show'
-
-    # get '/representations/redirect/:signed_blob_id/:variation_key/*filename' => 'active_storage/representations/redirect#show', as: :rails_blob_representation
-    # get '/representations/proxy/:signed_blob_id/:variation_key/*filename' => 'active_storage/representations/proxy#show', as: :rails_blob_representation_proxy
-    # get '/representations/:signed_blob_id/:variation_key/*filename' => 'active_storage/representations/redirect#show'
-
-    unless Rails.env.production?
-      get  '/disk/:encoded_key/*filename' => 'active_storage/disk#show', as: :rails_disk_service
-      put  '/disk/:encoded_token' => 'active_storage/disk#update', as: :update_rails_disk_service
-    end
-    # post '/direct_uploads' => 'active_storage/direct_uploads#create', as: :rails_direct_uploads
-  end
-
-  # direct :rails_representation do |representation, options|
-  #    route_for(ActiveStorage.resolve_model_to_route, representation, options)
-  # end
-
-  # resolve('ActiveStorage::Variant') { |variant, options| route_for(ActiveStorage.resolve_model_to_route, variant, options) }
-  # resolve('ActiveStorage::VariantWithRecord') { |variant, options| route_for(ActiveStorage.resolve_model_to_route, variant, options) }
-  # resolve('ActiveStorage::Preview') { |preview, options| route_for(ActiveStorage.resolve_model_to_route, preview, options) }
-
-  direct :rails_blob do |blob, options|
-    route_for(ActiveStorage.resolve_model_to_route, blob, options)
-  end
-
-  resolve('ActiveStorage::Blob')       { |blob, options| route_for(ActiveStorage.resolve_model_to_route, blob, options) }
-  resolve('ActiveStorage::Attachment') { |attachment, options| route_for(ActiveStorage.resolve_model_to_route, attachment.blob, options) }
-
-  # direct :rails_storage_proxy do |model, options|
-  #   if model.respond_to?(:signed_id)
-  #     route_for(:rails_service_blob_proxy, model.signed_id, model.filename, options)
-  #   else
-  #     route_for(:rails_blob_representation_proxy, model.blob.signed_id, model.variation.key, model.blob.filename, options)
-  #   end
-  # end
-
-  direct :rails_storage_redirect do |model, options|
-    if model.respond_to?(:signed_id)
-      route_for(:rails_service_blob, model.signed_id, model.filename, options)
-    else
-      route_for(:rails_blob_representation, model.blob.signed_id, model.variation.key, model.blob.filename, options)
-    end
-  end
-  ## End of ez_on_rails:ezapp routes
-
-  mount Rswag::Ui::Engine => '/api-docs'
-  mount Rswag::Api::Engine => '/api-docs'
-  
-  namespace :api do
-    resources :bearer_token_access_tests, except: %i[new edit] do
-      collection do
-        post :search
-      end
-    end
-  end
-  scope '(:locale)', locale: /en|de/ do
-    resources :bearer_token_access_tests do
-      collection do
-        match 'search' => 'bearer_token_access_tests#search', via: %i[get post], as: :search
-        delete :destroy_selections
-      end
-    end
-  end
-  namespace :api do
-    resources :oauth_client_access_tests, except: %i[new edit] do
-      collection do
-        post :search
-      end
-    end
-  end
-  scope '(:locale)', locale: /en|de/ do
-    resources :oauth_client_access_tests do
-      collection do
-        match 'search' => 'oauth_client_access_tests#search', via: %i[get post], as: :search
-        delete :destroy_selections
-      end
-    end
-  end
-  scope '(:locale)', locale: /en|de/ do
-    resources :sharable_resources do
-      collection do
-        match 'search' => 'sharable_resources#search', via: %i[get post], as: :search
-        delete :destroy_selections
-      end
-    end
-  end
-  scope '(:locale)', locale: /en|de/ do
-    resources :not_user_owned_records do
-      collection do
-        match 'search' => 'not_user_owned_records#search', via: %i[get post], as: :search
-        delete :destroy_selections
-      end
-    end
-  end
-  scope '(:locale)', locale: /en|de/ do
-    resources :user_owned_records do
-      collection do
-        match 'search' => 'user_owned_records#search', via: %i[get post], as: :search
-        delete :destroy_selections
-      end
-    end
-  end
-  namespace :nested do
-    get 'mixed_namespace_access_test/some_action'
-  end
-  namespace :namespaced do
-    get 'mixed_action_access_test/namespace_protected'
-    get 'mixed_action_access_test/action_protected'
-  end
-  namespace :namespaced do
-    get 'mixed_controller_two_access_test/some_action'
-  end
-  namespace :namespaced do
-    get 'mixed_controller_one_access_test/some_action'
-  end
-  get 'mixed_controller_action_access_test/controller_protected'
-  get 'mixed_controller_action_access_test/action_protected'
-  namespace :nested do
-    namespace :namespaced do
-      get 'access_test/some_action'
-    end
-  end
-  namespace :namespaced do
-    get 'access_test/some_action'
-  end
-  get 'controller_access_test/some_action'
-  get 'access_test/public_action'
-  get 'access_test/private_action'
-
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
