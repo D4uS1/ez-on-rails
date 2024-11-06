@@ -1,4 +1,7 @@
-EzOnRails::Engine.routes.draw do
+# This should be normally EzOnRails::Engine.routes.draw for the engine, but if we would
+# do this, the root url would not be overwritten. Since we want ez-on-rails to be directly available,
+# we must draw the application routes here.
+Rails.application.routes.draw do
   scope '(:locale)', locale: /en|de/ do
     namespace :ez_on_rails do
       scope module: 'admin', path: 'admin' do
