@@ -5,6 +5,7 @@ require 'slim'
 require 'importmap-rails'
 require 'jb'
 require 'json_schemer'
+require 'rack/cors'
 require 'ransack'
 require 'will_paginate'
 require 'scoped_search'
@@ -27,7 +28,9 @@ module EzOnRails
 
   # Base Engine class.
   class Engine < ::Rails::Engine
-    isolate_namespace EzOnRails
+    # We do not to have the namespace isolated, because some features should be available
+    # without namespace (like eg. the sessions management, users controller or the active storage blobs controller)
+    # isolate_namespace EzOnRails
 
     config.generators do |g|
       g.test_framework :rspec

@@ -7,3 +7,5 @@ COPY . /ez-on-rails
 
 RUN gem install bundler # needed by rubymine
 RUN bundle install
+
+WORKDIR /ez-on-rails/test/dummy

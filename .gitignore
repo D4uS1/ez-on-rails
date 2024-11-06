@@ -9,6 +9,9 @@
 /test/dummy/storage/
 /test/dummy/tmp/
 
+# rails credentials
+master.key
+
 # Rubymine
 .idea/
 
