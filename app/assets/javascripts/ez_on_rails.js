@@ -17,7 +17,7 @@ import $ from "jquery"
 // javascript to own field components
 // This needs to be imported first, because there is a fix for select2 in this file that needs
 // to be loaded before the select2 import occurs
-import "controllers"
+import "ez_on_rails/controllers"
 
 import "@hotwired/turbo-rails"
 import "bootstrap"
@@ -28,9 +28,9 @@ import * as ActiveStorage from "@rails/activestorage"
 import Rails from '@rails/ujs';
 
 // from own scripts
-import "shared/_enhanced_table"
-import "shared/_flash_messages"
-import "shared/_model_form"
+import "ez_on_rails/shared/_enhanced_table"
+import "ez_on_rails/shared/_flash_messages"
+import "ez_on_rails/shared/_model_form"
 
 // initializers
 ActiveStorage.start();
@@ -55,5 +55,3 @@ const onDocumentReady = () => {
 
 // The turbolinks ready handler for page load.
 $(document).on('turbo:load', onDocumentReady);
-
-
