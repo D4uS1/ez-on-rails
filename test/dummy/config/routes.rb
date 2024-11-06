@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  mount EzOnRails::Engine => "/ez_on_rails"
-
   scope '(:locale)', locale: /en|de/ do
     resources :resource_group_access_tests do
       collection do
