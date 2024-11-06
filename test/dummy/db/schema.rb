@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_16_174333) do
+ActiveRecord::Schema[7.2].define(version: 2023_01_16_174333) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -143,7 +143,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_16_174333) do
     t.datetime "updated_at", precision: nil, null: false
     t.index ["group_id"], name: "index_eor_user_group_assignments_on_group_id"
     t.index ["owner_id"], name: "index_eor_user_group_assignments_on_owner_id"
-    t.index ["resource_type", "resource_id"], name: "index_eor_user_group_assignments_on_resource"
+    t.index ["resource_type", "resource_id"], name: "eor_user_group_assignments_resource_index"
     t.index ["user_id", "group_id", "resource_type", "resource_id"], name: "eor_user_group_assignments_index", unique: true
     t.index ["user_id"], name: "index_eor_user_group_assignments_on_user_id"
   end
