@@ -4,7 +4,7 @@
 class EzOnRails::OwnershipInfo < EzOnRails::AdminRecord
   self.table_name = "#{EzOnRails::ApplicationRecord::TABLE_PREFIX}ownership_infos"
 
-  enum on_owner_destroy: { resource_nullify: 0, resource_destroy: 1, resource_delete: 2 }
+  enum :on_owner_destroy, { resource_nullify: 0, resource_destroy: 1, resource_delete: 2 }
 
   belongs_to :owner, class_name: 'User', optional: true
 
