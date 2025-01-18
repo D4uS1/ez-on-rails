@@ -1,8 +1,0 @@
-test:
-  adapter: postgresql
-  encoding: unicode
-  host: localhost
-  database: ez_on_rails_test_test
-  username: postgres
-  password: postgres
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
