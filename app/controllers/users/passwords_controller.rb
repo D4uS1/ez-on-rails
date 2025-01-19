@@ -2,9 +2,6 @@
 
 # Controller for passwords managed by devise.
 class Users::PasswordsController < Devise::PasswordsController
-  # TODO: delete after devise update for Rails 7
-  include DeviseTurboConcern
-
   respond_to :json
 
   # GET /users/password/new

@@ -2,9 +2,6 @@
 
 # Controller for unlocks managed by devise.
 class Users::UnlocksController < Devise::UnlocksController
-  # TODO: delete after devise update for Rails 7
-  include DeviseTurboConcern
-
   respond_to :json
 
   # GET /resource/unlock?unlock_token=abcdef
