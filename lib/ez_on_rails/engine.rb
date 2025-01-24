@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'cancancan'
 require 'loaf'
 require 'devise'

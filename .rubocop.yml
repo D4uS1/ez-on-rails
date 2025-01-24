@@ -97,7 +97,7 @@ RSpec/MultipleExpectations:
   Enabled: false # if you test some functionality that has multiple expections, you should not duplicate the whole test having all of its before hooks...
 RSpec/EmptyExampleGroup:
   Exclude:
-    - 'spec/integration/api/**/*_spec.rb' # integration tests of api use rswag, which uses a special dsl
+    - 'spec/integration/**/*_spec.rb' # integration tests of api use rswag, which uses a special dsl
     - 'lib/generators/ez_on_rails/ezapi/templates/spec/integration/api/**/*_spec.rb' # integration tests of api use rswag, which uses a special dsl
 RSpec/DescribedClass:
   Exclude:

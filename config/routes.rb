@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This should be normally EzOnRails::Engine.routes.draw for the engine, but if we would
 # do this, the root url would not be overwritten. Since we want ez-on-rails to be directly available,
 # we must draw the application routes here.

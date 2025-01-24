@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module EzOnRails
   class ApplicationRecord < ActiveRecord::Base
     include EzOnRails::FullRansackSearchableConcern

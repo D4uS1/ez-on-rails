@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'lib/ez_on_rails/version'
 
 Gem::Specification.new do |spec|
