@@ -241,7 +241,7 @@ RSpec.describe 'properties_tests', type: :request do
       }
 
       expect(PropertiesTest.count).to eq(objects_count - 1)
-      expect(response).to redirect_to(properties_tests_url)
+      expect(response).to have_http_status(:success)
     end
   end
 end

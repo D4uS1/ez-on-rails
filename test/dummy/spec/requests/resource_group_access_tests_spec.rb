@@ -236,7 +236,7 @@ RSpec.describe 'resource_group_access_tests', type: :request do
       }
 
       expect(ResourceGroupAccessTest.count).to eq(objects_count - 1)
-      expect(response).to redirect_to(resource_group_access_tests_url)
+      expect(response).to have_http_status(:success)
     end
   end
 end

@@ -5,6 +5,6 @@ FactoryBot.define do
     test_string { 'test string' }
     test_int { 1 }
     test_bool { true }
-    parent_form_test { 'parent form test string' }
+    parent_form_test
   end
 end

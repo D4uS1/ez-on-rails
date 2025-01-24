@@ -3,7 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe NestedFormTest, type: :model do
-  let(:valid_attributes) { attributes_for(:nested_form_test) }
+  let(:parent_form_test) { create(:parent_form_test) }
+  let(:valid_attributes) { attributes_for(:nested_form_test, parent_form_test_id: parent_form_test.id) }
 
   context 'when validating' do
     it 'creates a valid record' do

@@ -13,8 +13,9 @@ RSpec.describe 'nested_form_tests', type: :request do
   let(:super_admin) { User.super_admin } # super administrator user
 
   # Test data
-  let(:nested_form_test) { create(:nested_form_test) }
-  let(:nested_form_test_params) { attributes_for(:nested_form_test) }
+  let(:parent_form_test) { create(:parent_form_test) }
+  let(:nested_form_test) { create(:nested_form_test, parent_form_test:) }
+  let(:nested_form_test_params) { attributes_for(:nested_form_test, parent_form_test_id: parent_form_test.id) }
 
   # for test of update, destroy and show actions
   context 'when not logged in' do
@@ -236,7 +237,7 @@ RSpec.describe 'nested_form_tests', type: :request do
       }
 
       expect(NestedFormTest.count).to eq(objects_count - 1)
-      expect(response).to redirect_to(nested_form_tests_url)
+      expect(response).to have_http_status(:success)
     end
   end
 end

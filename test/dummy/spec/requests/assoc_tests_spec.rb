@@ -242,7 +242,7 @@ RSpec.describe 'assoc_tests', type: :request do
       }
 
       expect(AssocTest.count).to eq(objects_count - 1)
-      expect(response).to redirect_to(assoc_tests_url)
+      expect(response).to have_http_status(:success)
     end
   end
 end

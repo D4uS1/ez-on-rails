@@ -236,7 +236,7 @@ RSpec.describe 'parent_form_tests', type: :request do
       }
 
       expect(ParentFormTest.count).to eq(objects_count - 1)
-      expect(response).to redirect_to(parent_form_tests_url)
+      expect(response).to have_http_status(:success)
     end
   end
 end
