@@ -1,4 +1,4 @@
-require "ez_on_rails/engine"
+require 'ez_on_rails/engine'
 
 module EzOnRails
 end

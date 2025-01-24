@@ -81,7 +81,7 @@ RSpec.describe 'nested_form_tests', type: :request do
       objects_count = nested_form_test.class.count
 
       delete destroy_selections_nested_form_tests_url, params: {
-          selections: ActiveSupport::JSON.encode([{ data: { id: nested_form_test.id }}])
+        selections: ActiveSupport::JSON.encode([{ data: { id: nested_form_test.id } }])
       }
 
       expect(NestedFormTest.count).to eq(objects_count)
@@ -156,7 +156,7 @@ RSpec.describe 'nested_form_tests', type: :request do
       objects_count = nested_form_test.class.count
 
       delete destroy_selections_nested_form_tests_url, params: {
-          selections: ActiveSupport::JSON.encode([{ data: { id: nested_form_test.id }}])
+        selections: ActiveSupport::JSON.encode([{ data: { id: nested_form_test.id } }])
       }
 
       expect(NestedFormTest.count).to eq(objects_count)
@@ -233,7 +233,7 @@ RSpec.describe 'nested_form_tests', type: :request do
       objects_count = nested_form_test.class.count
 
       delete destroy_selections_nested_form_tests_url, params: {
-          selections: ActiveSupport::JSON.encode([{ data: { id: nested_form_test.id }}])
+        selections: ActiveSupport::JSON.encode([{ data: { id: nested_form_test.id } }])
       }
 
       expect(NestedFormTest.count).to eq(objects_count - 1)

@@ -1,11 +1,11 @@
-require_relative "lib/ez_on_rails/version"
+require_relative 'lib/ez_on_rails/version'
 
 Gem::Specification.new do |spec|
   spec.name        = 'ez_on_rails'
   spec.version     = EzOnRails::VERSION
   spec.authors     = ['Andreas Dausenau']
-  spec.email       = [ "hello@dausenau.pro" ]
-  spec.homepage    = "https://dausenau.pro"
+  spec.email       = ['hello@dausenau.pro']
+  spec.homepage    = 'https://dausenau.pro'
   spec.summary     = 'Application generator for manageable API backends.'
   spec.description = 'Application generator for manageable API backends.'
   spec.license     = 'MIT'
@@ -13,14 +13,14 @@ Gem::Specification.new do |spec|
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the "allowed_push_host"
   # to allow pushing to a single host or delete this section to allow pushing to any host.
-  spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
+  spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com'"
 
-  spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "TODO: Put your gem's public repo URL here."
-  spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
+  spec.metadata['homepage_uri'] = spec.homepage
+  spec.metadata['source_code_uri'] = "TODO: Put your gem's public repo URL here."
+  spec.metadata['changelog_uri'] = "TODO: Put your gem's CHANGELOG.md URL here."
 
   spec.files = Dir.chdir(File.expand_path(__dir__)) do
-    Dir["{app,config,db,lib,spec}/**/*", "LICENSE", "Rakefile", "README.md"]
+    Dir['{app,config,db,lib,spec}/**/*', 'LICENSE', 'Rakefile', 'README.md']
   end
 
   spec.add_dependency 'cancancan', '~> 3.4.0'
@@ -61,6 +61,7 @@ Gem::Specification.new do |spec|
     spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com'"
   else
     raise 'RubyGems 2.0 or newer is required to protect against ' \
-            'public gem pushes.'
+          'public gem pushes.'
   end
+  spec.metadata['rubygems_mfa_required'] = 'true'
 end

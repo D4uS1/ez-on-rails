@@ -86,7 +86,7 @@ RSpec.describe 'assoc_tests', type: :request do
       objects_count = assoc_test.class.count
 
       delete destroy_selections_assoc_tests_url, params: {
-        selections: ActiveSupport::JSON.encode([{ data: { id: assoc_test.id }}])
+        selections: ActiveSupport::JSON.encode([{ data: { id: assoc_test.id } }])
       }
 
       expect(AssocTest.count).to eq(objects_count)
@@ -161,7 +161,7 @@ RSpec.describe 'assoc_tests', type: :request do
       objects_count = assoc_test.class.count
 
       delete destroy_selections_assoc_tests_url, params: {
-        selections: ActiveSupport::JSON.encode([{ data: { id: assoc_test.id }}])
+        selections: ActiveSupport::JSON.encode([{ data: { id: assoc_test.id } }])
       }
 
       expect(AssocTest.count).to eq(objects_count)
@@ -238,7 +238,7 @@ RSpec.describe 'assoc_tests', type: :request do
       objects_count = assoc_test.class.count
 
       delete destroy_selections_assoc_tests_url, params: {
-        selections: ActiveSupport::JSON.encode([{ data: { id: assoc_test.id }}])
+        selections: ActiveSupport::JSON.encode([{ data: { id: assoc_test.id } }])
       }
 
       expect(AssocTest.count).to eq(objects_count - 1)

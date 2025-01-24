@@ -2,9 +2,9 @@
 
 pin 'ez_on_rails'
 pin_all_from File.expand_path('../app/assets/javascripts', __dir__)
-pin "@hotwired/turbo", to: "https://ga.jspm.io/npm:@hotwired/turbo@8.0.12/dist/turbo.es2017-esm.js"
-pin "@rails/actioncable/src", to: "https://ga.jspm.io/npm:@rails/actioncable@7.2.201/src/index.js"
-pin "@hotwired/turbo-rails", to: "https://ga.jspm.io/npm:@hotwired/turbo-rails@8.0.12/app/javascript/turbo/index.js"
+pin '@hotwired/turbo', to: 'https://ga.jspm.io/npm:@hotwired/turbo@8.0.12/dist/turbo.es2017-esm.js'
+pin '@rails/actioncable/src', to: 'https://ga.jspm.io/npm:@rails/actioncable@7.2.201/src/index.js'
+pin '@hotwired/turbo-rails', to: 'https://ga.jspm.io/npm:@hotwired/turbo-rails@8.0.12/app/javascript/turbo/index.js'
 pin '@hotwired/stimulus', to: 'stimulus.min.js', preload: true
 pin '@hotwired/stimulus-loading', to: 'stimulus-loading.js', preload: true
 pin 'jquery', to: 'https://ga.jspm.io/npm:jquery@3.6.3/dist/jquery.js', preload: true

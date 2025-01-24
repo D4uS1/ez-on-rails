@@ -62,7 +62,8 @@ RSpec.describe 'resource_group_access_tests', type: :request do
     end
 
     it 'can not update resource_group_access_test' do
-      patch resource_group_access_test_url(id: resource_group_access_test.id), params: { resource_group_access_test: resource_group_access_test_params }
+      patch resource_group_access_test_url(id: resource_group_access_test.id),
+            params: { resource_group_access_test: resource_group_access_test_params }
 
       expect(response).to redirect_to(new_user_session_path)
     end
@@ -80,7 +81,7 @@ RSpec.describe 'resource_group_access_tests', type: :request do
       objects_count = resource_group_access_test.class.count
 
       delete destroy_selections_resource_group_access_tests_url, params: {
-        selections: ActiveSupport::JSON.encode([{ data: { id: resource_group_access_test.id }}])
+        selections: ActiveSupport::JSON.encode([{ data: { id: resource_group_access_test.id } }])
       }
 
       expect(ResourceGroupAccessTest.count).to eq(objects_count)
@@ -137,7 +138,8 @@ RSpec.describe 'resource_group_access_tests', type: :request do
     end
 
     it 'can not update resource_group_access_test' do
-      patch resource_group_access_test_url(id: resource_group_access_test.id), params: { resource_group_access_test: resource_group_access_test_params }
+      patch resource_group_access_test_url(id: resource_group_access_test.id),
+            params: { resource_group_access_test: resource_group_access_test_params }
 
       expect(response).to have_http_status(:forbidden)
     end
@@ -155,7 +157,7 @@ RSpec.describe 'resource_group_access_tests', type: :request do
       objects_count = resource_group_access_test.class.count
 
       delete destroy_selections_resource_group_access_tests_url, params: {
-        selections: ActiveSupport::JSON.encode([{ data: { id: resource_group_access_test.id }}])
+        selections: ActiveSupport::JSON.encode([{ data: { id: resource_group_access_test.id } }])
       }
 
       expect(ResourceGroupAccessTest.count).to eq(objects_count)
@@ -213,7 +215,8 @@ RSpec.describe 'resource_group_access_tests', type: :request do
     end
 
     it 'can update resource_group_access_test' do
-      patch resource_group_access_test_url(id: resource_group_access_test.id), params: { resource_group_access_test: resource_group_access_test_params }
+      patch resource_group_access_test_url(id: resource_group_access_test.id),
+            params: { resource_group_access_test: resource_group_access_test_params }
 
       expect(response).to redirect_to(resource_group_access_test_path(resource_group_access_test))
     end
@@ -232,7 +235,7 @@ RSpec.describe 'resource_group_access_tests', type: :request do
       objects_count = resource_group_access_test.class.count
 
       delete destroy_selections_resource_group_access_tests_url, params: {
-        selections: ActiveSupport::JSON.encode([{ data: { id: resource_group_access_test.id }}])
+        selections: ActiveSupport::JSON.encode([{ data: { id: resource_group_access_test.id } }])
       }
 
       expect(ResourceGroupAccessTest.count).to eq(objects_count - 1)

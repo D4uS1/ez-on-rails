@@ -25,7 +25,6 @@ require 'stimulus-rails'
 
 # Base Engine module.
 module EzOnRails
-
   # Base Engine class.
   class Engine < ::Rails::Engine
     # We do not to have the namespace isolated, because some features should be available
