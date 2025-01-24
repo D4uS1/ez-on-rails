@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe ResourceGroupAccessTest, type: :model do
+RSpec.describe ResourceGroupAccessTest do
   let(:valid_attributes) { attributes_for(:resource_group_access_test) }
 
   context 'when validating' do

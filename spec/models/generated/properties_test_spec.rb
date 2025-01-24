@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe PropertiesTest, type: :model do
+RSpec.describe PropertiesTest do
   let(:valid_attributes) do
     attributes_for(
       :properties_test,

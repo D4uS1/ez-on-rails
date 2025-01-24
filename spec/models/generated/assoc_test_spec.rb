@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe AssocTest, type: :model do
+RSpec.describe AssocTest do
   let(:valid_attributes) do
     attributes_for(
       :assoc_test,

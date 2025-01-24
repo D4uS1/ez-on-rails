@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe ParentFormTest, type: :model do
+RSpec.describe ParentFormTest do
   let(:valid_attributes) { attributes_for(:parent_form_test) }
 
   context 'when validating' do

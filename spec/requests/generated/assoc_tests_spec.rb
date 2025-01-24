@@ -7,7 +7,7 @@ require 'rails_helper'
 # Testing whether some non super admin logged in user (called andrew here) can not get any action,
 # because the access should be denied.
 # Testing whether some super_admin can get the actions, because the access is granted.
-RSpec.describe 'assoc_tests', type: :request do
+RSpec.describe 'AssocTests' do
   # users
   let(:andrew) { create(:andrew) } # non admin user
   let(:super_admin) { User.super_admin } # super administrator user

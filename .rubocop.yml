@@ -101,16 +101,15 @@ RSpec/EmptyExampleGroup:
     - 'lib/generators/ez_on_rails/ezapi/templates/spec/integration/api/**/*_spec.rb' # integration tests of api use rswag, which uses a special dsl
 RSpec/DescribedClass:
   Exclude:
-    - 'spec/models/user_spec.rb' # cop  overwrites EzOnRails::Group with described_class for some reason...
+    - 'spec/models/user_spec.rb' # cop overwrites EzOnRails::Group with described_class for some reason...
 RSpec/DescribeClass:
   Exclude:
-    - 'spec/integration/api/**/*_spec.rb' # integration tests of api use rswag, which uses a special dsl
+    - 'spec/integration/**/*_spec.rb' # integration tests of api use rswag, which uses a special dsl
     - 'lib/generators/ez_on_rails/ezapi/templates/spec/integration/api/**/*_spec.rb' # integration tests of api use rswag, which uses a special dsl
-    - 'spec/system/**/*_spec.rb' # The system specs do not have corresponding classes
 RSpec/BeforeAfterAll:
   Exclude:
-    - 'spec/requests/ez_on_rails/admin/broom_closet/unattached_files_spec.rb' # atfer :all is used here to delete uploaded files
-    - 'spec/services/ez_on_rails/admin/broom_closet_service_spec.rb' # atfer :all is used here to delete uploaded files
+    - 'spec/requests/core/ez_on_rails/admin/broom_closet/unattached_files_spec.rb' # atfer :all is used here to delete uploaded files
+    - 'spec/services/core/ez_on_rails/admin/broom_closet_service_spec.rb' # atfer :all is used here to delete uploaded files
 RSpec/InstanceVariable:
   Exclude:
     - '**/*/registrations_controller_spec.rb' # devise requires using @request instance variable here

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe NestedFormTest, type: :model do
+RSpec.describe NestedFormTest do
   let(:parent_form_test) { create(:parent_form_test) }
   let(:valid_attributes) { attributes_for(:nested_form_test, parent_form_test_id: parent_form_test.id) }
 
