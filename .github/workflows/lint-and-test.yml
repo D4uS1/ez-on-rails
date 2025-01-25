@@ -1,10 +1,6 @@
 name: lint-and-test
 on:
   push:
-    branches:
-      - dev-test
-      - staging
-      - main
 
 jobs:
   # lint ruby code
