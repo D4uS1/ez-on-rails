@@ -115,6 +115,8 @@ GEM
     bcrypt (3.1.20)
     benchmark (0.3.0)
     bigdecimal (3.1.8)
+    brakeman (7.0.0)
+      racc
     builder (3.3.0)
     cancancan (3.4.0)
     cocoon (1.2.15)
@@ -444,6 +446,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  brakeman
   ez_on_rails!
   nyan-cat-formatter
   pg (~> 1.1)
