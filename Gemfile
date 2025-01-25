@@ -24,5 +24,5 @@ group :test do
   gem 'nyan-cat-formatter'
 
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
-  gem "brakeman", require: false
+  gem 'brakeman', require: false
 end
