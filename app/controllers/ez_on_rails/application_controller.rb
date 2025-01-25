@@ -120,6 +120,29 @@ class EzOnRails::ApplicationController < ApplicationController
     result
   end
 
+  # Returns the permitted parameters for the search form defined by the given render info
+  # hash. This hash is returned by any helper created by ez_on_rails:ezscaff.
+  # It will return an array of symbols, containing the keys of the attributes defined
+  # in the render info, appneded with the keywords that can be used for the search methods ( like
+  # eq, cont, null etc.).
+  def default_search_params(render_info)
+    matchers = # List from https://activerecord-hackery.github.io/ransack/getting-started/search-matches/
+      %w[_eq _not_eq _matches _does_not_match _matches_any _matches_all _does_not_match_any _does_not_match_all _lt
+         _lteq _gt _gteq _present _blank _null _not_null _in _not_in _lt_any _lteq_any _gt_any _gteq_any _lt_all
+         _lteq_all _gt_all _gteq_all _not_eq_all _start _not_start _start_any _start_all _not_start_any
+         _not_start_all _end _not_end _end_any _end_all _not_end_any _not_end_all _cont _cont_any
+         _cont_all _not_cont _not_cont_any _not_cont_all _i_cont _i_cont_any _i_cont_all _not_i_cont _not_i_cont_any
+         _not_i_cont_all _true _false]
+
+    result = []
+
+    render_info.each_key do |attr_key|
+      result << matchers.map { |matcher| :"#{attr_key}#{matcher}" }
+    end
+
+    result.flatten
+  end
+
   # returns the default permitted parameters by its render_info hash.
   def render_info_permit_params(render_info)
     render_info.keys +

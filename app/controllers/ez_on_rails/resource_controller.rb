@@ -186,7 +186,7 @@ class EzOnRails::ResourceController < EzOnRails::ApplicationController
   end
 
   def search_params
-    params[:q]&.permit!
+    params.require(:q).permit(default_search_params(send(permit_render_info)))
   end
 
   # returns the symbol of this resource class.
