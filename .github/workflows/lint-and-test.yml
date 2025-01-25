@@ -23,6 +23,7 @@ jobs:
     env:
       RAILS_ENV: test
       DATABASE_URL: postgres://postgres:freshd@localhost:5432/ez_on_rails_test
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
     services:
       postgres:
         image: postgres
