@@ -52,18 +52,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /users/omniauth_sign_up
   #
   # Saves the user having the omniauth data to the database.
-  # This create action is expected to be called after the user accepted the privacy policy after a successfull login
+  # This create action is expected to be called after the user accepted the privacy policy after a successful login
   # via omniauth happened. If it is not possible to save the resource, the user will be redirected to the accepting
-  # page again. Otherwise it will be saved and he will be redirected to the redirect_route, that was passed through
-  # from the omniauth callbacks over the form to this action.
+  # page again. Otherwise it will be saved and he will be redirected to the redirect_route for the successful
+  # login that is given via devise omniauth.
   def omniauth_create
     build_resource(devise_parameter_sanitizer.sanitize(:omniauth_sign_up))
-    redirect_route = params[:redirect_route]
+
+    # omniauth provider needed to identify the redirect route for successful login
+    provider = params[:provider]
 
     if resource.save_with_omniauth
-      redirect_to params[:redirect_route]
+      redirect_to "omniauth/#{provider}/callback"
     else
-      render 'users/registrations/omniauth_sign_up/', locals: { resource:, redirect_route: }
+      render 'users/registrations/omniauth_sign_up/', locals: { resource:, provider: }
     end
   end
 

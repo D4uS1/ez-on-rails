@@ -4,13 +4,12 @@
 #
 # Overwrites the default behavior of devise_token_auth because we want the user to accept
 # the privacy policy before its user is created.
-# First the action reads all nessecary information and saves it to session variables.
+# First the action reads all necessary information and saves it to session variables.
 # If the user already exists, the redirect to the success callback will be done directly.
 # Otherwise the user object is only build and the action will render the view to accept the privacy policy.
-# The redirect route to the successfull login is saved to the form in this case.
-# If the user submits the form, an action in the registration_controller will be called that checks wether
+# If the user submits the form, an action in the registration_controller will be called that checks whether
 # the privacy policy was accepted. if not he will stay on the form page. Otherwise, he will be redirected to
-# the successfull callback that was passed through over the form before.
+# the successful callback that is given via devise omniauth.
 class Api::Auth::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksController
   # Called after the user did successfully sign in into some omniauth provider.
   # Checks wether the user exists. If yes, he will be redirected to the successfull callback.
@@ -19,8 +18,8 @@ class Api::Auth::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallback
   def redirect_callbacks
     # derive target redirect route from 'resource_class' param, which was set
     # before authentication.
-    devise_mapping = get_devise_mapping
-    redirect_route = get_redirect_route(devise_mapping)
+    provider = params[:provider] # omniauth provider needed to identify the redirect route for successful login
+    redirect_route = "omniauth/#{provider}/callback"
 
     ## preserve omniauth info for success route. ignore 'extra' in twitter
     ## auth response to avoid CookieOverflow.
