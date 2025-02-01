@@ -1,6 +1,10 @@
-# Add your own tasks in files placed in lib/tasks ending in .rake,
-# for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
+# frozen_string_literal: true
 
-require_relative 'config/application'
+require 'bundler/setup'
 
-Rails.application.load_tasks
+APP_RAKEFILE = File.expand_path('test/dummy/Rakefile', __dir__)
+load 'rails/tasks/engine.rake'
+
+load 'rails/tasks/statistics.rake'
+
+require 'bundler/gem_tasks'

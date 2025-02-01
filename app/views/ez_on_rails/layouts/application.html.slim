@@ -1,0 +1,29 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    title
+      = Rails.application.class.module_parent
+    = csrf_meta_tags
+    = csp_meta_tag
+    = yield :head
+
+    = stylesheet_link_tag "ez_on_rails", "data-turbo-track": "reload"
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+
+    /# This loads/imports main app `ez_on_rails.js` and all the pins from
+    /# the main app and from the engine (because we set it up in the engine.rb).
+    = javascript_importmap_tags
+
+    /# To add engine's javascript functionality we have to load the
+    /# entrypoint here or `import` it in the main app `ez_on_rails.js`
+    = javascript_import_module_tag "ez_on_rails"
+  body
+    .container-fluid
+      - unless Rails.env.production?
+        = render 'ez_on_rails/shared/environment'
+      = render 'ez_on_rails/shared/flash_messages'
+      = render 'ez_on_rails/shared/header'
+      = render 'ez_on_rails/shared/title'
+      = render 'ez_on_rails/shared/main_content'
+      = render 'ez_on_rails/shared/footer'

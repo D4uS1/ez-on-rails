@@ -1,0 +1,75 @@
+name: lint-and-test
+on:
+  push:
+
+jobs:
+  # lint ruby code
+  rubocop:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+      - name: rubocop
+        run: bin/rubocop -f github
+
+  # Run tests
+  rspec:
+    runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: postgres://postgres:freshd@localhost:5432/ez_on_rails_test
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: freshd
+        ports:
+          - 5432:5432
+        options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=3
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+      - name: Setup database schema
+        run: bin/rails db:create db:schema:load
+      - name: rspec
+        run: bundle exec rspec --require spec_helper
+
+  # Scan for common Rails security vulnerabilities using static analysis
+  brakeman:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+      - name: brakeman
+        run: bundle exec brakeman --no-pager -i .brakeman.ignore
+
+  # Scan for security vulnerabilities in JavaScript dependencies
+  scan_js:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+      - name: importmap audit
+        run: bin/importmap audit

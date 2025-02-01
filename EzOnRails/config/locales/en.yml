@@ -1,5 +1,0 @@
-en:
-  activerecord:
-    errors:
-      messages:
-        required: "must exist."
