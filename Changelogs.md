@@ -11,5 +11,6 @@
 ## 0.9.0
 * Updated rails dependency to be at least 7.2.1
 
-## 0.9.1
+## 1.0.0
 * Updated engine structure including its test application to match the rails recommended way
+* The Gem can now be fetched via bundler without defining a glob to a subfolder of this repository
