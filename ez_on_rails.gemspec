@@ -37,7 +37,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'jb', '~> 0.8.0'
   spec.add_dependency 'json_schemer', '~> 0.2.24'
   spec.add_dependency 'loaf', '~> 0.10.0'
-  spec.add_dependency 'mini_magick', '~> 4.12.0'
+  spec.add_dependency 'mini_magick', '>= 4.12', '< 5.2'
   spec.add_dependency 'nilify_blanks', '~> 1.4.0'
   spec.add_dependency 'omniauth-gitlab', '~> 4.1.0'
   spec.add_dependency 'omniauth-oauth2', '~> 1.8.0'
