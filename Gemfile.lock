@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ez_on_rails (0.9.1)
+    ez_on_rails (1.0.0)
       cancancan (~> 3.4.0)
       cocoon (~> 1.2.15)
       devise (~> 4.9.0)
