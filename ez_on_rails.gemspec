@@ -46,7 +46,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'ransack', '~> 4.2.1'
   spec.add_dependency 'rspec-rails', '~> 7.0.1'
   spec.add_dependency 'rswag', '~> 2.15.0'
-  spec.add_dependency 'rubocop', '~> 1.64.1'
+  spec.add_dependency 'rubocop', '>= 1.64.1', '< 1.72.0'
   spec.add_dependency 'rubocop-rails', '~> 2.25.0'
   spec.add_dependency 'rubocop-rspec', '~> 2.29.2'
   spec.add_dependency 'scoped_search', '~> 4.1.10'
