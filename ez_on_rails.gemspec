@@ -53,7 +53,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'simple_form', '~> 5.2.0'
   spec.add_dependency 'slim', '~> 5.0.0'
   spec.add_dependency 'sprockets-rails', '~> 3.4.2'
-  spec.add_dependency 'stimulus-rails', '~> 1.2.1'
+  spec.add_dependency 'stimulus-rails', '>= 1.2.1', '< 1.4.0'
   spec.add_dependency 'turbo-rails', '~> 1.4.0'
   spec.add_dependency 'will_paginate', '~> 3.3.1'
 
