@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Note that you need to install the omniauth packages of the providers you want to use.
 Rails.application.config.middleware.use OmniAuth::Builder do
   #  provider :gitlab,
   #           Rails.application.credentials.omniauth[:gitlab][:uid],

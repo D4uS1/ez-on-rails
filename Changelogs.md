@@ -14,3 +14,8 @@
 ## 1.0.0
 * Updated engine structure including its test application to match the rails recommended way
 * The Gem can now be fetched via bundler without defining a glob to a subfolder of this repository
+
+## 1.1.0
+* Updated rails to 8.0.1 and update dependencies to newest versions
+* Removed image_processing and mini_magick dependency, since it should be installed by the host application if needed
+* Removed omniauth-gitlab dependency, since it should be installed by the host application if needed

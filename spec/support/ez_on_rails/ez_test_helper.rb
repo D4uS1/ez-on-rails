@@ -15,21 +15,9 @@ module EzTestHelper
     Rails.root.join('tmp/storage').mkdir
   end
 
-  # Temporary fix for: https://github.com/rails/rails/issues/41991
-  # TODO: Remove if not necessary anymore
-  def self.upload_file(src, content_type, binary: false)
-    path = Rails.root.join(src)
-    original_filename = ::File.basename(path)
-
-    content = File.read(path)
-    tempfile = Tempfile.open(original_filename)
-    tempfile.write content
-    tempfile.rewind
-
-    uploaded_file = Rack::Test::UploadedFile.new(tempfile, content_type, binary, original_filename:)
-
-    ObjectSpace.define_finalizer(uploaded_file, uploaded_file.class.finalize(tempfile))
-
-    uploaded_file
+  # Uploads a file for testing purposes to the active storage.
+  # This is a helper to have a more readable way to upload a file for testing.
+  def self.upload_file(src, content_type)
+    Rack::Test::UploadedFile.new(Rails.root.join(src), content_type)
   end
 end
