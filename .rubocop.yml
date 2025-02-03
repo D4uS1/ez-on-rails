@@ -91,10 +91,6 @@ Layout/LineLength:
 Style/StringConcatenation:
   Exclude:
     - app/helpers/ez_on_rails/ez_scaff/model_form_helper.rb # we need to concat with + here because the tag helpers do not sanatize the content with interpolation
-Rails/StrongParametersExpect:
-  Exclude:
-    - app/controllers/ez_on_rails/resource_controller.rb # we need to require separate here, because the symbol to require is passed as parameter
-    - app/controllers/ez_on_rails/api/resource_controller.rb # we need to require separate here, because the symbol to require is passed as parameter
 RSpec/ExampleLength:
   Max: 30
 RSpec/MultipleExpectations:

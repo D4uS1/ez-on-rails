@@ -109,7 +109,7 @@ class EzOnRails::Api::ResourceController < EzOnRails::Api::BaseController
   # Only allow a trusted parameter "white list" through.
   # This method allows parameters passed with or without namespace prefixes.
   def resource_params
-    params.require(resource_params_name).permit(default_permit_params(send(render_info_name)))
+    params.expect(resource_params_name => default_permit_params(send(render_info_name)))
   end
 
   # Returns the name of the render info this resource_controller belongs to.
