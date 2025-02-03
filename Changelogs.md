@@ -16,6 +16,7 @@
 * The Gem can now be fetched via bundler without defining a glob to a subfolder of this repository
 
 ## 1.1.0
+* Updated ruby version to 3.3.7
 * Updated rails to 8.0.1 and update dependencies to newest versions
 * Removed image_processing and mini_magick dependency, since it should be installed by the host application if needed
 * Removed omniauth-gitlab dependency, since it should be installed by the host application if needed
