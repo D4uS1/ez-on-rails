@@ -60,6 +60,6 @@ class EzOnRails::Admin::UserManagement::UsersController <
 
   # Only allow a trusted parameter "white list" through.
   def password_reset_params
-    params.require(:user).permit(default_permit_params(render_info_password_reset))
+    params.expect(user: default_permit_params(render_info_password_reset))
   end
 end

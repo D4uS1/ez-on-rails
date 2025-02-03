@@ -71,6 +71,6 @@ class ContactFormController < EzOnRails::ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def contact_form_params
-    params.require(:contact_form).permit(render_info_contact_form.keys)
+    params.expect(contact_form: render_info_contact_form.keys)
   end
 end
