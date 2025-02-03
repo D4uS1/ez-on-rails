@@ -32,7 +32,7 @@ module ActiveStorage::BlobsControllerConcern
 
   # Permits blob args.
   def blob_args
-    params.require(:blob).permit(:filename, :byte_size, :checksum, :content_type, metadata: {}).to_h.symbolize_keys
+    params.expect(blob: [:filename, :byte_size, :checksum, :content_type, { metadata: {} }]).to_h.symbolize_keys
   end
 
   # Returns the json for direct upload behaviors

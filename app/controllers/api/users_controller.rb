@@ -26,6 +26,6 @@ class Api::UsersController < EzOnRails::Api::BaseController
 
   # Whitelisting parameters to update the own user profile.
   def update_me_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :username, :avatar)
+    params.expect(user: %i[email password password_confirmation username avatar])
   end
 end

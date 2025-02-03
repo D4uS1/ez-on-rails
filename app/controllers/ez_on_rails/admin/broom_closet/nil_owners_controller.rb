@@ -105,6 +105,6 @@ class EzOnRails::Admin::BroomCloset::NilOwnersController < EzOnRails::Admin::Bro
   def q_params
     return {} unless params['q']
 
-    params.require(:q).permit(:id_cont, :clazz_cont)
+    params.expect(q: %i[id_cont clazz_cont])
   end
 end
