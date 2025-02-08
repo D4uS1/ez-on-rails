@@ -48,7 +48,7 @@ class <%= class_name %>Controller < EzOnRails::ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def <%= "#{singular_table_name}_params" %>
-    params.require(:<%= singular_table_name %>).permit(render_info_<%= singular_table_name %>.keys)
+    params.expect(<%= singular_table_name %>: render_info_<%= singular_table_name %>.keys)
   end
 end
 <% end -%>

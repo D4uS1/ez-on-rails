@@ -24,7 +24,7 @@ class Api::<%= @resource ? class_name.pluralize : class_name %>Controller < EzOn
 
   # Returns permitted parameters for the actions of this api class.
   def <%= file_name %>_params
-    params.require(:<%= file_name %>).permit
+    params.expect(<%= file_name %>: [])
   end
 <%- end -%>
 end
