@@ -270,8 +270,8 @@ end
     # with the uncommented version.
     def modify_rails_spec_helper
       gsub_file 'spec/rails_helper.rb',
-                "# Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }",
-                "Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }"
+                "# Rails.root.glob('spec/support/**/*.rb').sort_by(&:to_s).each { |f| require f }",
+                "Rails.root.glob('spec/support/**/*.rb').sort_by(&:to_s).each { |f| require f }"
     end
 
     # Copy the support spec files of ez_on_rails.
