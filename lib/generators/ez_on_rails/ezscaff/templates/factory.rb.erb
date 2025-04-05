@@ -12,7 +12,9 @@ FactoryBot.define do
 
     <%- end -%>
     <%- if association_attrs.length > 0 -%>
-    <%= association_attributes(class_name, attributes).join("\n    ") %>
+    <%-association_attrs.each_with_index do |attribute, _index| -%>
+    <%= attribute %> factory: :<%= @namespace_prefix %><%= attribute %>
+    <%- end -%>
     <%- end -%>
   end
 end

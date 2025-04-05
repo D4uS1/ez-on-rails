@@ -20,7 +20,7 @@ RSpec.describe '<%= class_path.length > 0 ? "#{class_path.join('/')}/" : '' %><%
     attributes_for(
       :<%= @namespace_prefix %><%= file_name %>,
       <%-association_attrs.each_with_index do |attribute, index| -%>
-      <%= attribute %>_id: create(:<%= attribute %>).id<%= index < association_attrs.length - 1 ? ',' : '' %>
+      <%= attribute %>_id: create(:<%= @namespace_prefix %><%= attribute %>).id<%= index < association_attrs.length - 1 ? ',' : '' %>
       <%- end -%>
     )
   end

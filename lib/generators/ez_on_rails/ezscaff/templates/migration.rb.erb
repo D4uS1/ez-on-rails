@@ -12,7 +12,7 @@ class Create<%= "#{@namespace_prefix}#{plural_file_name}".camelize %> < ActiveRe
       <%- elsif attribute.token? -%>
       t.string :<%= attribute.name %><%= attribute.inject_options %>
       <%- else -%>
-      t.<%= attribute.type %> :<%= attribute.name %><%= attribute.inject_options %>
+      t.<%= attribute.type %> :<%= attribute.name %><%= attribute.inject_options.sub('foreign_key: true', "foreign_key: { to_table: :#{@namespace_prefix + attribute.name.to_s.pluralize }}") %>
       <%- end -%>
       <%- end -%>
       t.belongs_to :owner, index: true, null: true, foreign_key: { to_table: :users }
