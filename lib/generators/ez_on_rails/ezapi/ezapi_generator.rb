@@ -23,12 +23,12 @@ module EzOnRails
     # Extracts the given options from the command lien arguments and saves them to instance variables.
     def set_options
       @resource = options['resource']&.gsub('/', '::')
-      @resource_namespace = @resource.split('::')[0...-1].join('::') if @resource
-      @resource_namespace_path = "#{@resource_namespace.underscore}/"  if @resource_namespace
-      @resource_namespace_prefix = "#{@resource_namespace.gsub('::', '_').underscore}_"   if @resource_namespace
-      @resource_underscored = @resource.split('::')[-1].underscore if @resource
-      @resource_path = @resource.gsub('::', '/').underscore if @resource
-      @resource_path_underscored = @resource_path.gsub('/', '_') if @resource
+      @resource_namespace = @resource.split('::')[0...-1].join('::') unless @resource.blank?
+      @resource_namespace_path = "#{@resource_namespace.underscore}/"  unless @resource_namespace.blank?
+      @resource_namespace_prefix = "#{@resource_namespace.gsub('::', '_').underscore}_"   unless @resource_namespace.blank?
+      @resource_underscored = @resource.split('::')[-1].underscore unless @resource.blank?
+      @resource_path = @resource.gsub('::', '/').underscore unless @resource.blank?
+      @resource_path_underscored = @resource_path.gsub('/', '_') unless @resource.blank?
       @authenticable = options['authenticable'] ? options['authenticable'].to_sym : nil
     end
 
@@ -247,6 +247,13 @@ module EzOnRails
             ]
           },"
       end
+    end
+
+    # Fix for https://github.com/rswag/rswag/issues/60 .
+    def uncomment_infer_spec_type_from_file_location
+      gsub_file 'spec/rails_helper.rb',
+                "# config.infer_spec_type_from_file_location!",
+                "config.infer_spec_type_from_file_location!"
     end
 
     # Generates integration and request spec.

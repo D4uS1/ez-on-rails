@@ -6,7 +6,7 @@ module EzTestHelper
   # The file_path must be relative to the views directory.
   def json_from_view(view_file_path, locals = {})
     # use resource controller here to get helpers like the current_ability in test views
-    JSON.parse(EzOnRails::Api::ResourceController.render(view_file_path, locals:))
+    JSON.parse(EzOnRails::Api::ResourceController.render(view_file_path, locals:, formats: [:json]))
   end
 
   # Removes all uploaded test files from disk.
