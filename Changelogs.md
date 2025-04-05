@@ -20,3 +20,6 @@
 * Updated rails to 8.0.1 and update dependencies to newest versions
 * Removed image_processing and mini_magick dependency, since it should be installed by the host application if needed
 * Removed omniauth-gitlab dependency, since it should be installed by the host application if needed
+
+## 1.1.1
+* Removed sprockets dependency and added propshaft as dependency for asset pipeline
