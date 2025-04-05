@@ -9,8 +9,6 @@ gem 'puma'
 
 gem 'sqlite3'
 
-gem 'sprockets-rails'
-
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
 

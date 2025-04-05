@@ -19,6 +19,7 @@ en:
     yes_or_no: "Yes or no"
     files: "Files"
     id: "ID"
+    owner: "Owner"
     created_at: "Created at"
   years: "Years"
   months: "Months"

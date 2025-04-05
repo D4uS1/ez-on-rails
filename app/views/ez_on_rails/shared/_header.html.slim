@@ -1,8 +1,6 @@
 .row.header-row style="background-color: #{header_background_color};color: #{header_text_color}"
   .col-1.d-flex.justify-center.align-items-center.p-2
-    - begin
-      = link_to image_tag('logos/logo_menu.png', alt: 'logo', class: 'img-fluid'), root_path
-    - rescue Sprockets::Rails::Helper::AssetNotFound
+    = link_to image_tag('logos/logo_menu.png', alt: 'logo', class: 'img-fluid'), root_path
   .col-11
     .d-flex.flex-column.justify-content-between.h-100
       = render 'ez_on_rails/shared/userbar'

@@ -117,6 +117,11 @@ end
       template 'helpers/ez_on_rails/layout_helper.rb', 'app/helpers/ez_on_rails/layout_helper.rb'
     end
 
+    # Copies all files from the assets directory to the host application.
+    def generate_asset_files
+      directory 'assets', 'app/assets'
+    end
+
     # Writes data to config.
     def generate_config
       directory 'config', 'config'
