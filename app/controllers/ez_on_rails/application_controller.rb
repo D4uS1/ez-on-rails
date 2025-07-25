@@ -117,7 +117,7 @@ class EzOnRails::ApplicationController < ApplicationController
       # this is necessary for the params.expect function, because it expects
       # attributes of arrays in an additional array for type safety
       # The default behavior for nested forms is multiple, hence the check is only done if it is not nil.
-      multiple = attr_render_info[:data][:multiple].nil? || attr_render_info[:data][:multiple] == false
+      multiple = attr_render_info[:data][:multiple].nil? || attr_render_info[:data][:multiple] == true
       nested_permit_params = [nested_permit_params] if multiple
 
       result.push("#{attr_key}_attributes": nested_permit_params)
