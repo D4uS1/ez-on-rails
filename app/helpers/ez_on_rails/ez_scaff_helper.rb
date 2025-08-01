@@ -308,7 +308,7 @@ module EzOnRails::EzScaffHelper
   # If no enum name is specified in the data property of the given attribute_render_info,
   # the enum is expcected to have to have the same name as the attribute_key.
   def enum_name(attribute_key, attribute_render_info)
-    attribute_render_info[:data] || attribute_key.to_s
+    attribute_render_info.dig(:data, :enum_name) || attribute_key.to_s
   end
 
   # Returns the stimulus controller name for the current controller.

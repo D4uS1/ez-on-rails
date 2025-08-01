@@ -12,4 +12,10 @@ en:
         date_value: "Date value"
         datetime_value: "Datetime value"
         boolean_value: "Boolean value"
+        enum_value: "Enum value"
         assoc_test: "Assoc test"
+    enums:
+      properties_test:
+        enum_value:
+          enum_value_one: 'Enum value one'
+          enum_value_two: 'Enum value two'

@@ -6,6 +6,8 @@ class PropertiesTest < EzOnRails::ApplicationRecord
 
   scoped_search on: self::search_keys
 
+  enum :enum_value, [:enum_value_one, :enum_value_two]
+
   belongs_to :assoc_test, required: true
   belongs_to :owner, class_name: 'User', optional: true
 end

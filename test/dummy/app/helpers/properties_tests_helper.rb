@@ -23,6 +23,13 @@ module PropertiesTestsHelper
       boolean_value: {
         label: PropertiesTest.human_attribute_name(:boolean_value)
       },
+      enum_value: {
+        type: :enum,
+        data: {
+          nullable: true
+        },
+        label: PropertiesTest.human_attribute_name(:enum_value)
+      },
       assoc_test: {
         label: PropertiesTest.human_attribute_name(:assoc_test)
       }

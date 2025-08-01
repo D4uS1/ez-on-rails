@@ -12,6 +12,7 @@ class CreatePropertiesTests < ActiveRecord::Migration[6.1]
       t.date :date_value
       t.datetime :datetime_value
       t.boolean :boolean_value
+      t.integer :enum_value
       t.belongs_to :assoc_test, null: false, foreign_key: true
       t.belongs_to :owner, index: true, null: true, foreign_key: { to_table: :users }
 

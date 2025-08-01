@@ -265,7 +265,9 @@ module EzOnRails::EzScaff::ModelFormHelper
                            lambda { |key|
                              human_enum_name form.object.class.to_s, enum_name, key.first
                            },
-                           {},
+                           {
+                             include_blank: attribute_render_info.dig(:data, :nullable) || false
+                           },
                            html_options
   end
 

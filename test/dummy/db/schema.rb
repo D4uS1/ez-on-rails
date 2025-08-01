@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2023_01_16_174333) do
+ActiveRecord::Schema[8.0].define(version: 2023_01_16_174333) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension "pg_catalog.plpgsql"
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -242,6 +242,7 @@ ActiveRecord::Schema[7.2].define(version: 2023_01_16_174333) do
     t.date "date_value"
     t.datetime "datetime_value", precision: nil
     t.boolean "boolean_value"
+    t.integer "enum_value"
     t.bigint "assoc_test_id", null: false
     t.bigint "owner_id"
     t.datetime "created_at", null: false

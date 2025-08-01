@@ -23,3 +23,8 @@
 
 ## 1.1.1
 * Removed sprockets dependency and added propshaft as dependency for asset pipeline
+
+## 1.1.2
+* Changed data field in the attribute_render_info for enum_fields to be an optional object
+* Added possibility to make enums nullable by adding __nullable: true__ to the :data objet in its attribute_render_info
+* Moved alternative enum_name field from :data to a field of the :data object, called :enum_name, in the attribute_render_info of the enum_field
