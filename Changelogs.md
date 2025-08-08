@@ -28,3 +28,6 @@
 * Changed data field in the attribute_render_info for enum_fields to be an optional object
 * Added possibility to make enums nullable by adding __nullable: true__ to the :data objet in its attribute_render_info
 * Moved alternative enum_name field from :data to a field of the :data object, called :enum_name, in the attribute_render_info of the enum_field
+
+## 1.1.3
+* Changed flag in language switcher for english to the flag of the European Union
