@@ -31,3 +31,6 @@
 
 ## 1.1.3
 * Changed flag in language switcher for english to the flag of the European Union
+
+## 1.1.4
+* Added optional "search all" field in search form

@@ -3,4 +3,4 @@ de:
     search: "Suchen"
     association_exists: "vorhanden"
     association_exists_not: "nicht vorhanden"
-
+    search_all_label: "Alles durchsuchen"

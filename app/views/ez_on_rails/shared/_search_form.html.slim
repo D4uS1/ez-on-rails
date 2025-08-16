@@ -1,5 +1,6 @@
 - fields_per_row ||= EzOnRails::EzScaff::SearchFormHelper::FIELDS_PER_ROW
 - print_details_tag = false unless defined?(print_details_tag)
+- print_search_all_field = false unless defined?(print_search_all_field)
 
 - if print_details_tag
   = enclose_with_details_if(proc { true },
@@ -11,6 +12,14 @@
 
         /Filter attributes we should / can not see
         - filter_attributes! :search_form, obj_class, render_info
+
+        /Render search all field
+        - if print_search_all_field
+          .row
+            .col-12
+              .mb-2
+                = render_search_all_label
+                = render_search_all_field form, render_info
 
         /Render each field
         - render_info.each_slice(fields_per_row) do |row|
@@ -26,7 +35,6 @@
                                      { form: form, obj_class: obj_class },
                                      attribute_key,
                                      attribute_render_info
-
         .row
           .col-12
             = form.button :button, type: 'submit', class:'btn btn-secondary' do

@@ -6,7 +6,8 @@ module PropertiesTestsHelper
   def render_info_properties_test
     {
       string_value: {
-        label: PropertiesTest.human_attribute_name(:string_value)
+        label: PropertiesTest.human_attribute_name(:string_value),
+        search_all: true
       },
       integer_value: {
         label: PropertiesTest.human_attribute_name(:integer_value)

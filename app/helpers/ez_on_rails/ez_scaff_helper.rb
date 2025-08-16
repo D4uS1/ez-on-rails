@@ -78,6 +78,25 @@ module EzOnRails::EzScaffHelper
     end
   end
 
+  # Renders the label for the search all field.
+  def render_search_all_label
+    tag.label t(:'ez_on_rails.search_all'), class: 'form-label'
+  end
+
+  # Renders a search all field in the specified form for the attributes defined by the
+  # specified render_info. All fields having the :search_all flag set to true will be included in the field.
+  # Note that the field only uses the "cont" condition. Hence you must take care that the field you define
+  # :search_all on supports the :cont search.
+  def render_search_all_field(form, render_info)
+    search_all_keys = render_info.map do |key, attribute_render_info|
+      next key if attribute_render_info[:search_all]
+    end.compact
+
+    return nil if search_all_keys.empty?
+
+    form.search_field "#{search_all_keys.join('_or_')}_cont", class: 'form-control'
+  end
+
   # Renders the search_label given by the attribute_render_info.
   # Inspecting the :search_label value of the render_info.
   # If this is nil, label will be printed.

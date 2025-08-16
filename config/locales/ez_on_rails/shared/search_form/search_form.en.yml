@@ -3,3 +3,4 @@ en:
     search: "Search"
     association_exists: "Exists"
     association_exists_not: "Exists not"
+    search_all_label: "Search all"
