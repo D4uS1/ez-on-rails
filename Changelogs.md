@@ -34,3 +34,7 @@
 
 ## 1.1.4
 * Added optional "search all" field in search form
+
+## 1.1.5
+* Added go-to links for nested objects in the show action
+  * Can be disabled by passing __hide_nested_goto: true__ to the data of the field holding the nested object in the __render_info__

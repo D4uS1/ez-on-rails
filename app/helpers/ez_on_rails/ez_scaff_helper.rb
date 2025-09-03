@@ -97,6 +97,12 @@ module EzOnRails::EzScaffHelper
     form.search_field "#{search_all_keys.join('_or_')}_cont", class: 'form-control'
   end
 
+  # Renders a link to navigate to a nested objects show action.
+  # This is meant to be used only in a read only view like the show action and not used in a nested form.
+  def render_nested_goto_link(obj)
+    link_to t(:'ez_on_rails.go_to_nested_obj', nested_model: obj.class.to_s), obj
+  end
+
   # Renders the search_label given by the attribute_render_info.
   # Inspecting the :search_label value of the render_info.
   # If this is nil, label will be printed.

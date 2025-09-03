@@ -1,3 +1,5 @@
+- hide_nested_goto = false unless defined?(hide_nested_goto)
+
 div
   /Filter attributes we should / can not see
   - filter_attributes! :show, obj.class, render_info
@@ -12,3 +14,8 @@ div
       div class="#{label ? 'col-lg-9' : 'col-12'}"
         = render_attribute :show, obj, attribute_key, attribute_render_info
 
+  /Render go-to button if not hidden
+  - unless hide_nested_goto
+    .row.pt-2
+      .col
+        = render_nested_goto_link obj

@@ -12,9 +12,10 @@ module ParentFormTestsHelper
         type: :nested_form,
         label_method: :test_string,
         data: {
-          render_info: render_info_nested_form_test
+          render_info: render_info_nested_form_test,
+          hide_nested_goto: false
         },
-        label: ParentFormTest.human_attribute_name(:nested_form_tests)
+        label: ParentFormTest.human_attribute_name(:nested_form_tests),
       },
       test_bool: {
         label: ParentFormTest.human_attribute_name(:test_bool)

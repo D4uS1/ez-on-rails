@@ -1,0 +1,3 @@
+de:
+  ez_on_rails:
+    go_to_nested_obj: "Zu %{nested_model} gehen"

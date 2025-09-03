@@ -66,7 +66,8 @@ module EzOnRails::EzScaff::ShowHelper
       render partial: 'ez_on_rails/shared/nested_show', locals: {
         render_info: filter_attributes_nested_show!(nested_obj.class, attribute_render_info[:data][:render_info]),
         obj: nested_obj,
-        print_controls: false
+        print_controls: false,
+        hide_nested_goto: attribute_render_info[:data][:hide_nested_goto]
       }
     end
 
