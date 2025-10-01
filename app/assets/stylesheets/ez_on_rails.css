@@ -3,21 +3,16 @@
 @import url('https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css');
 @import url('https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css');
 
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+/* Local engine styles */
+@import url('./ez_on_rails/shared/fields/_active_storage_upload_field.css');
+@import url('./ez_on_rails/shared/fields/_duration_field.css');
+@import url('./ez_on_rails/shared/fields/_polymorphic_association_field.css');
+@import url('./ez_on_rails/shared/_dashboard.css');
+@import url('./ez_on_rails/shared/_flash_messages.css');
+@import url('./ez_on_rails/shared/_header.css');
+@import url('./ez_on_rails/shared/_index.css');
+@import url('./ez_on_rails/shared/_model_form.css');
+@import url('./ez_on_rails/shared/_table.css');
 
 /*
   needed to get sure the footer is on the bottom of the screen
