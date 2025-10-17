@@ -65,7 +65,7 @@ class EzOnRails::ResourceController < EzOnRails::ApplicationController
       redirect_to after_create_path
     else
       flash[:danger] = t(:'ez_on_rails.invalid_inputs_message')
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -78,7 +78,7 @@ class EzOnRails::ResourceController < EzOnRails::ApplicationController
     else
       flash[:danger] = @resource_obj.errors[:base].first unless @resource_obj.errors[:base].empty?
       flash[:danger] = t(:'ez_on_rails.invalid_inputs_message') if @resource_obj.errors[:base].empty?
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

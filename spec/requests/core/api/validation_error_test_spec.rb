@@ -35,7 +35,7 @@ RSpec.describe 'Api::ValidationErrorTestsController' do
 
       response_body = response.parsed_body
 
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
       expect(ValidationErrorTest.count).to eq(objs_count)
       expect(response_body['error']).to include('validation failed:')
       expect(response_body['error']).to include('name')
@@ -70,7 +70,7 @@ RSpec.describe 'Api::ValidationErrorTestsController' do
 
       response_body = response.parsed_body
 
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
       expect(response_body['error']).to include('validation failed:')
       expect(response_body['error']).to include('name')
       expect(response_body['error']).to include('number')
@@ -103,7 +103,7 @@ RSpec.describe 'Api::ValidationErrorTestsController' do
 
       response_body = response.parsed_body
 
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
       expect(response_body['error']).to include('validation failed:')
       expect(response_body['error']).to include('name')
     end

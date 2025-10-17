@@ -4,7 +4,7 @@
 class EzOnRails::ValidationFailedError < EzOnRails::Error
   # Constructor passes the message and http_status to the base constructor.
   def initialize(record)
-    super(message: "validation failed: #{error_messages(record)}", http_status: :unprocessable_entity)
+    super(message: "validation failed: #{error_messages(record)}", http_status: :unprocessable_content)
   end
 
   private

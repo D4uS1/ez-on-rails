@@ -38,7 +38,7 @@ class ContactFormController < EzOnRails::ApplicationController
       redirect_to contact_form_submit_success_path
     else
       flash[:danger] = t(:message_sent_fail)
-      render :index, status: :unprocessable_entity
+      render :index, status: :unprocessable_content
     end
   end
 

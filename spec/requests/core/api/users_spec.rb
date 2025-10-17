@@ -166,7 +166,7 @@ RSpec.describe 'Api::UsersController' do
       }
 
       andrew.reload
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
       expect(andrew.encrypted_password).to eq(old_password)
     end
 
