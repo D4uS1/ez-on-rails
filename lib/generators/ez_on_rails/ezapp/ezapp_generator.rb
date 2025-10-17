@@ -46,8 +46,10 @@ module EzOnRails
                "db/migrate/#{now_string + '08'}_create_resource_write_accesses.rb"
       template 'db/migrate/create_resource_destroy_accesses.rb.erb',
                "db/migrate/#{now_string + '09'}_create_resource_destroy_accesses.rb"
+      template 'db/migrate/create_api_keys.rb.erb',
+               "db/migrate/#{now_string + '10'}_create_api_keys.rb"
       copy_file 'db/migrate/create_doorkeeper_tables.rb',
-                "db/migrate/#{now_string + '10'}_create_doorkeeper_tables.rb"
+                "db/migrate/#{now_string + '11'}_create_doorkeeper_tables.rb"
     end
 
     # Appends the seeds fo the user management.
@@ -59,6 +61,9 @@ super_admin_group = EzOnRails::Group.find_or_create_by! name: EzOnRails::Group::
 end
 member_group = EzOnRails::Group.find_or_create_by! name: EzOnRails::Group::MEMBER_GROUP_NAME do |group|
   group.name = EzOnRails::Group::MEMBER_GROUP_NAME
+end
+api_key_group = EzOnRails::Group.find_or_create_by! name: EzOnRails::Group::API_KEY_GROUP_NAME do |group|
+  group.name = EzOnRails::Group::API_KEY_GROUP_NAME
 end
 
 # initial admin user

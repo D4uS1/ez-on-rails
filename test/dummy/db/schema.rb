@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2023_01_16_174333) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_17_124432) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -59,6 +59,16 @@ ActiveRecord::Schema[8.0].define(version: 2023_01_16_174333) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["owner_id"], name: "index_bearer_token_access_tests_on_owner_id"
+  end
+
+  create_table "eor_api_keys", force: :cascade do |t|
+    t.string "api_key", null: false
+    t.datetime "expires_at"
+    t.bigint "owner_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["api_key"], name: "index_eor_api_keys_on_api_key"
+    t.index ["owner_id"], name: "index_eor_api_keys_on_owner_id"
   end
 
   create_table "eor_group_accesses", force: :cascade do |t|
@@ -314,6 +324,7 @@ ActiveRecord::Schema[8.0].define(version: 2023_01_16_174333) do
   add_foreign_key "assoc_tests", "parent_form_tests"
   add_foreign_key "assoc_tests", "users", column: "owner_id"
   add_foreign_key "bearer_token_access_tests", "users", column: "owner_id"
+  add_foreign_key "eor_api_keys", "users", column: "owner_id"
   add_foreign_key "eor_group_accesses", "eor_groups", column: "group_id"
   add_foreign_key "eor_group_accesses", "users", column: "owner_id"
   add_foreign_key "eor_groups", "users"

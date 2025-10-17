@@ -6,6 +6,7 @@ class EzOnRails::Group < EzOnRails::AdminRecord
 
   SUPER_ADMIN_GROUP_NAME = 'SuperAdmin'
   MEMBER_GROUP_NAME = 'Member'
+  API_KEY_GROUP_NAME = 'ApiKey'
 
   has_many :user_group_assignments,
            class_name: 'EzOnRails::UserGroupAssignment',
@@ -49,6 +50,11 @@ class EzOnRails::Group < EzOnRails::AdminRecord
     name == MEMBER_GROUP_NAME
   end
 
+  # Returns whether this is the api_key group.
+  def api_key_group?
+    name == API_KEY_GROUP_NAME
+  end
+
   # Returns the admin group.
   def self.super_admin_group
     find_by(name: SUPER_ADMIN_GROUP_NAME)
@@ -59,6 +65,11 @@ class EzOnRails::Group < EzOnRails::AdminRecord
     find_by(name: MEMBER_GROUP_NAME)
   end
 
+  # Returns the api_key group.
+  def self.api_key_group
+    find_by(name: API_KEY_GROUP_NAME)
+  end
+
   private
 
   # Validates if this resource is destroyable.
@@ -67,6 +78,11 @@ class EzOnRails::Group < EzOnRails::AdminRecord
   def validate_destroy
     if member_group?
       errors.add(:base, I18n.t(:'ez_on_rails.member_group_not_destroyable'))
+      throw(:abort)
+    end
+
+    if api_key_group?
+      errors.add(:base, I18n.t(:'ez_on_rails.api_key_group_not_destroyable'))
       throw(:abort)
     end
 
@@ -86,6 +102,11 @@ class EzOnRails::Group < EzOnRails::AdminRecord
   def validate_update
     if name_was == MEMBER_GROUP_NAME && name != MEMBER_GROUP_NAME
       errors.add(:base, I18n.t(:'ez_on_rails.member_group_not_updatable'))
+      throw(:abort)
+    end
+
+    if name_was == API_KEY_GROUP_NAME && name != API_KEY_GROUP_NAME
+      errors.add(:base, I18n.t(:'ez_on_rails.api_key_group_not_updatable'))
       throw(:abort)
     end
 

@@ -38,3 +38,35 @@
 ## 1.1.5
 * Added go-to links for nested objects in the show action
   * Can be disabled by passing __hide_nested_goto: true__ to the data of the field holding the nested object in the __render_info__
+
+
+# Update Steps
+## From 1.1.x to 1.2.0
+1. Create migration file to generate api_keys, having the followung content
+```
+class CreateApiKeys < ActiveRecord::Migration[8.0]
+  def change
+    create_table :eor_api_keys do |t|
+      t.string :api_key, index: true, null: false
+      t.datetime :expires_at
+
+      t.belongs_to :owner, index: true, null: true, foreign_key: { to_table: :users }
+
+      t.timestamps
+    end
+  end
+end
+```
+
+2. Add the creation of the group to use api keys to the seeds. You can add it beyond the creation of the member_group.
+```
+api_key_group = EzOnRails::Group.find_or_create_by! name: EzOnRails::Group::API_KEY_GROUP_NAME do |group|
+  group.name = EzOnRails::Group::API_KEY_GROUP_NAME
+end
+```
+
+3. Migrate the database and seed
+```
+rails db:migrate
+rails db:seed
+```

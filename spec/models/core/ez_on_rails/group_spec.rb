@@ -62,12 +62,20 @@ RSpec.describe EzOnRails::Group do
       expect(described_class.member_group.update(name: group_attributes[:name])).to be(false)
     end
 
+    it 'can not update api_key group' do
+      expect(described_class.api_key_group.update(name: group_attributes[:name])).to be(false)
+    end
+
     it 'can not update admin group' do
       expect(described_class.super_admin_group.update(name: group_attributes[:name])).to be(false)
     end
 
     it 'can not destroy member group' do
       expect(described_class.member_group.destroy).to be(false)
+    end
+
+    it 'can not destroy api_key group' do
+      expect(described_class.api_key_group.destroy).to be(false)
     end
 
     it 'can not destroy admin group' do

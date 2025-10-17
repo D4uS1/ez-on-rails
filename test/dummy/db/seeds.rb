@@ -13,6 +13,9 @@ end
 member_group = EzOnRails::Group.find_or_create_by! name: EzOnRails::Group::MEMBER_GROUP_NAME do |group|
   group.name = EzOnRails::Group::MEMBER_GROUP_NAME
 end
+api_key_group = EzOnRails::Group.find_or_create_by! name: EzOnRails::Group::API_KEY_GROUP_NAME do |group|
+  group.name = EzOnRails::Group::API_KEY_GROUP_NAME
+end
 
 # initial admin user
 super_admin_user = User.find_or_create_by! username: User::SUPER_ADMIN_USERNAME do |user|

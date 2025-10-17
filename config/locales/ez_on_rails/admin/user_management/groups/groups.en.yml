@@ -19,6 +19,8 @@ en:
     super_admin_group_not_updatable: "The admin group can not be changed."
     member_group_not_destroyable: "The member group can not be destroyed."
     member_group_not_updatable: "The member group can not be changed."
+    api_key_group_not_destroyable: "The api_key group can not be destroyed."
+    api_key_group_not_updatable: "The api_key group can not be changed."
     user_group_not_destroyable: "User groups can not be destroyed."
     user_does_not_exist: "There is no user having this name"
     username_does_not_match: "The username must match the name."
