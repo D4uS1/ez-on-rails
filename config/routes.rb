@@ -77,6 +77,12 @@ Rails.application.routes.draw do
               delete 'destroy_selections'
             end
           end
+          resources :api_keys do
+            collection do
+              match 'search' => 'api_keys#search', via: %i[get post], as: :search
+              delete 'destroy_selections'
+            end
+          end
         end
       end
 

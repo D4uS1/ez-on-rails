@@ -280,6 +280,29 @@ RSpec.describe 'EzOnRails::Admin::UserManagement::GroupsController' do
       expect(EzOnRails::Group.find_by(id: group.id)).not_to be_nil
     end
 
+    it 'can not destroy group of api_keys' do
+      group = EzOnRails::Group.api_key_group
+
+      delete ez_on_rails_group_url(group)
+
+      expect(EzOnRails::Group.find_by(id: group.id)).not_to be_nil
+    end
+
+    it 'can not update group of api_keys' do
+      group = EzOnRails::Group.api_key_group
+
+      patch ez_on_rails_group_url(group), params: {
+        group: {
+          name: 'UpdateShallNotWork',
+          owner_id: group.owner_id
+        }
+      }
+
+      updated_obj = EzOnRails::Group.find group.id
+      expect(updated_obj.name).to eql(group.name)
+      expect(updated_obj.name).not_to eql('UpdateShallNotWork')
+    end
+
     it 'can destroy selections' do
       delete destroy_selections_ez_on_rails_groups_url
 
