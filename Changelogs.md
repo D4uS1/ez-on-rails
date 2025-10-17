@@ -39,6 +39,8 @@
 * Added go-to links for nested objects in the show action
   * Can be disabled by passing __hide_nested_goto: true__ to the data of the field holding the nested object in the __render_info__
 
+## 1.2.0
+* Added possibility to create api keys to grant access to restricted resources without the need of user accounts
 
 # Update Steps
 ## From 1.1.x to 1.2.0

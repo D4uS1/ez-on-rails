@@ -30,6 +30,15 @@ module EzOnRails::Admin::UserManagement::DashboardHelper
             icon: 'users',
             controller: 'ez_on_rails/admin/user_management/groups',
             action: 'index'
+          },
+          {
+            label: EzOnRails::ApiKey.model_name.human(count: 2),
+            background_color: '#008B8B',
+            text_color: '#FFFFFF',
+            text: t(:'ez_on_rails.api_keys_description'),
+            icon: 'users',
+            controller: 'ez_on_rails/admin/user_management/api_keys',
+            action: 'index'
           }
         ]
       },

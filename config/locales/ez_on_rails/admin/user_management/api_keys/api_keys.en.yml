@@ -1,12 +1,13 @@
-de:
+en:
   activerecord:
     models:
       ez_on_rails/api_key:
-        one: "API-Key"
-        other: "API-Keys"
+        one: "API key"
+        other: "API keys"
     attributes:
       ez_on_rails/api_key:
         api_key: "Key"
         expires_at: "Expiration date"
   ez_on_rails:
     api_keys_description: "API keys to define access rights."
+    api_key_field_help: "Leave blank to automatically generate an api key."

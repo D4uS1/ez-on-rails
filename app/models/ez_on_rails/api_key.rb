@@ -8,4 +8,15 @@ class EzOnRails::ApiKey < EzOnRails::AdminRecord
 
   validates :api_key, presence: true
   validates :api_key, uniqueness: true
+
+  before_validation :generate_api_key
+
+  protected
+
+  # Generates a new api key if it is not set.
+  def generate_api_key
+    return unless api_key.blank?
+
+    self.api_key = SecureRandom.base58(64)
+  end
 end

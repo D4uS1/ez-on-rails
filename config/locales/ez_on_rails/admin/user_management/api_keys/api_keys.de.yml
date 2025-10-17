@@ -10,3 +10,4 @@ de:
         expires_at: "Ablaufdatum"
   ez_on_rails:
     api_keys_description: "API-Keys zur Vergabe von Zugriffsrechten"
+    api_key_field_help: "Leer lasse um automatisch einen API-Key zu erstellen."
