@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_17_124432) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_17_195717) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -40,6 +40,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_17_124432) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "api_key_tests", force: :cascade do |t|
+    t.string "test"
+    t.bigint "owner_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_id"], name: "index_api_key_tests_on_owner_id"
   end
 
   create_table "assoc_tests", force: :cascade do |t|
@@ -320,6 +328,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_17_124432) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "api_key_tests", "users", column: "owner_id"
   add_foreign_key "assoc_tests", "bearer_token_access_tests"
   add_foreign_key "assoc_tests", "parent_form_tests"
   add_foreign_key "assoc_tests", "users", column: "owner_id"

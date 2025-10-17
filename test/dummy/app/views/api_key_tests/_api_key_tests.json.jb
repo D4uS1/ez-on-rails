@@ -1,0 +1,5 @@
+# frozen_string_literal: true
+
+render partial: 'api_key_tests/api_key_test',
+       collection: api_key_tests,
+       as: :api_key_test

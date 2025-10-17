@@ -1,0 +1,9 @@
+en:
+  activerecord:
+    models:
+      api_key_test:
+        one:  "Api key test"
+        other: "Api key tests"
+    attributes:
+      api_key_test:
+        test: "Test"

@@ -1,0 +1,4 @@
+# frozen_string_literal: true
+
+render partial: 'api_key_tests/api_key_test',
+       locals: { api_key_test: @resource_obj }

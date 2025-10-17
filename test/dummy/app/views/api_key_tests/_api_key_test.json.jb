@@ -1,0 +1,8 @@
+# frozen_string_literal: true
+
+{
+  id: api_key_test.id,
+  test: api_key_test.test,
+  created_at: api_key_test.created_at,
+  updated_at: api_key_test.updated_at
+}
