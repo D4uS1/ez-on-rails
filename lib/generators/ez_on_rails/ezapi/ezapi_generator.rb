@@ -295,7 +295,7 @@ module EzOnRails
       append_to_file 'db/seeds.rb', "
 # Restrict access to manage #{class_name.pluralize} API
 EzOnRails::GroupAccess.find_or_create_by! group: member_group, namespace: '#{ class_path.length > 0 ? (['api'] + class_path).join('/') : 'api' }', controller: '#{@resource ? plural_file_name : file_name}' do |access|
-  access.group = member_group
+  access.group = #{@authenticable == 'api-key' ? 'api_key_group' : 'member_group' }
   access.namespace = '#{ class_path.length > 0 ? (['api'] + class_path).join('/') : 'api' }'
   access.controller = '#{@resource ? plural_file_name : file_name}'
 end

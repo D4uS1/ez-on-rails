@@ -4,8 +4,13 @@ require 'swagger_helper'
 
 describe '<%= class_name %> API' do
 <%-  if @authenticable -%>
+  <%- if @authenticabkle == 'api-key' -%>
+  let(:api_key) { create(:eor_api_key) }
+  let(:auth_header_info) { api_key_header_info(api_key) }
+  <%- else -%>
   let(:andrew) { create(:andrew) }
   let(:auth_header_info) { authorization_header_info(andrew) }
+  <%- end -%>
 <%- end -%>
 <%- if @resource  -%>
   <%- association_attrs = association_attributes(@resource, nil) -%>
@@ -31,7 +36,11 @@ describe '<%= class_name %> API' do
     get 'Retrieves all <%= @resource_path_underscored.pluralize %>' do
       tags '<%= @resource.pluralize %>'
       <%- if @authenticable -%>
+        <%- if @authenticable == 'api-key' -%>
+      security [{ 'api-key': [] }]
+        <%- else -%>
       security [{ access_token: [], client: [], uid: [] }]
+        <% end -%>
       <%- end -%>
       produces 'application/json'
       parameter name: :'api-version', in: :header, type: :string, default: API_VERSION
@@ -41,9 +50,13 @@ describe '<%= class_name %> API' do
                items: { '$ref' => '#/components/schemas/<%= @resource.gsub('::', '') %>' }
 
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
         let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { API_VERSION }
 
@@ -52,9 +65,13 @@ describe '<%= class_name %> API' do
 
       response '406', 'unsupported accept header' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
         let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { API_VERSION }
         let(:'Accept') { 'application/html' }
@@ -64,9 +81,13 @@ describe '<%= class_name %> API' do
 
       response '410', 'invalid api version' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
         let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { 'invalid' }
 
@@ -75,9 +96,13 @@ describe '<%= class_name %> API' do
 
       response '410', 'no api version' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
         let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { nil }
 
@@ -87,9 +112,13 @@ describe '<%= class_name %> API' do
 
       response '401', 'invalid auth token' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
-        let(:'access-token')  { 'invalid'}
+        let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { API_VERSION }
 
@@ -98,9 +127,13 @@ describe '<%= class_name %> API' do
 
       response '401', 'no auth token' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
-        let(:'access-token')  { nil }
+        let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { API_VERSION }
 
@@ -114,9 +147,13 @@ describe '<%= class_name %> API' do
   path '/api/<%= file_path.pluralize %>/search' do
     post 'Searches for <%= @resource_path_underscored.pluralize %>' do
       tags '<%= @resource.pluralize %>'
-      <%- if @authenticable -%>
+        <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+      security [{ 'api-key': [] }]
+          <%- else -%>
       security [{ access_token: [], client: [], uid: [] }]
-      <%- end -%>
+          <% end -%>
+        <%- end -%>
       produces 'application/json'
       consumes 'application/json'
       parameter name: :'api-version', in: :header, type: :string, default: API_VERSION
@@ -148,9 +185,13 @@ describe '<%= class_name %> API' do
                }
 
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
         let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { API_VERSION }
         let(:params) {
@@ -168,9 +209,13 @@ describe '<%= class_name %> API' do
 
       response '406', 'unsupported accept header' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
         let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { API_VERSION }
         let(:'Accept') { 'application/html' }
@@ -189,9 +234,13 @@ describe '<%= class_name %> API' do
 
       response '410', 'invalid api version' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
         let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { 'invalid' }
         let(:params) {
@@ -209,9 +258,13 @@ describe '<%= class_name %> API' do
 
       response '410', 'no api version' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
         let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { nil }
         let(:params) {
@@ -230,9 +283,13 @@ describe '<%= class_name %> API' do
 
       response '401', 'invalid auth token' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
-        let(:'access-token')  { 'invalid'}
+        let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { API_VERSION }
         let(:params) {
@@ -250,9 +307,13 @@ describe '<%= class_name %> API' do
 
       response '401', 'no auth token' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
-        let(:'access-token')  { nil }
+        let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { API_VERSION }
         let(:params) {
@@ -275,9 +336,13 @@ describe '<%= class_name %> API' do
   path '/api/<%= file_path.pluralize %>/{id}' do
     get 'Retrieves a <%= @resource_path_underscored %>' do
       tags '<%= @resource.pluralize %>'
-      <%- if @authenticable -%>
+        <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+      security [{ 'api-key': [] }]
+          <%- else -%>
       security [{ access_token: [], client: [], uid: [] }]
-      <%- end -%>
+          <% end -%>
+        <%- end -%>
       produces 'application/json'
       parameter name: :'api-version', in: :header, type: :string, default: API_VERSION
       parameter name: :id, in: :path, type: :integer
@@ -286,9 +351,13 @@ describe '<%= class_name %> API' do
         schema '$ref' => '#/components/schemas/<%= @resource.gsub('::', '') %>'
 
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
         let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { API_VERSION }
         let(:id) { <%= @resource_path_underscored %>_obj.id }
@@ -298,9 +367,13 @@ describe '<%= class_name %> API' do
 
       response '404', '<%= @resource_underscored %> not found' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
         let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { API_VERSION }
         let(:id) { 'invalid' }
@@ -310,9 +383,13 @@ describe '<%= class_name %> API' do
 
       response '406', 'unsupported accept header' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
         let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { API_VERSION }
         let(:id) { <%= @resource_path_underscored %>_obj.id }
@@ -323,9 +400,13 @@ describe '<%= class_name %> API' do
 
       response '410', 'invalid api version' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
         let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { 'invalid' }
         let(:id) { <%= @resource_path_underscored %>_obj.id }
@@ -335,9 +416,13 @@ describe '<%= class_name %> API' do
 
       response '410', 'no api version' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
         let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { nil }
         let(:id) { <%= @resource_path_underscored %>_obj.id }
@@ -348,9 +433,13 @@ describe '<%= class_name %> API' do
 
       response '401', 'invalid auth token' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
-        let(:'access-token')  { 'invalid'}
+        let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { API_VERSION }
         let(:id) { <%= @resource_path_underscored %>_obj.id }
@@ -360,9 +449,13 @@ describe '<%= class_name %> API' do
 
       response '401', 'no auth token' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
-        let(:'access-token')  { nil }
+        let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { API_VERSION }
         let(:id) { <%= @resource_path_underscored %>_obj.id }
@@ -377,9 +470,13 @@ describe '<%= class_name %> API' do
   path '/api/<%= file_path.pluralize %>' do
     post 'Creates a <%= @resource_path_underscored %>' do
       tags '<%= @resource.pluralize %>'
-      <%- if @authenticable -%>
+        <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+      security [{ 'api-key': [] }]
+          <%- else -%>
       security [{ access_token: [], client: [], uid: [] }]
-      <%- end -%>
+          <% end -%>
+        <%- end -%>
       consumes 'application/json'
       produces 'application/json'
       parameter name: :'api-version', in: :header, type: :string, default: API_VERSION
@@ -391,9 +488,13 @@ describe '<%= class_name %> API' do
         schema '$ref' => '#/components/schemas/<%= @resource.gsub('::', '') %>'
 
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
         let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { API_VERSION }
         let(:<%= @resource_path_underscored %>) { <%= @resource_path_underscored %>_param }
@@ -403,9 +504,13 @@ describe '<%= class_name %> API' do
 
       response '406', 'unsupported accept header' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
         let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { API_VERSION }
         let(:'Accept') { 'application/html' }
@@ -416,9 +521,13 @@ describe '<%= class_name %> API' do
 
       response '410', 'invalid api version' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
         let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { 'invalid' }
         let(:<%= @resource_path_underscored %>) { <%= @resource_path_underscored %>_param }
@@ -428,9 +537,13 @@ describe '<%= class_name %> API' do
 
       response '410', 'no api version' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
         let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { nil }
         let(:<%= @resource_path_underscored %>) { <%= @resource_path_underscored %>_param }
@@ -441,9 +554,13 @@ describe '<%= class_name %> API' do
 
       response '401', 'invalid auth token' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
-        let(:'access-token')  { 'invalid'}
+        let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { API_VERSION }
         let(:<%= @resource_path_underscored %>) { <%= @resource_path_underscored %>_param }
@@ -453,9 +570,13 @@ describe '<%= class_name %> API' do
 
       response '401', 'no auth token' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
-        let(:'access-token')  { nil }
+        let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { API_VERSION }
         let(:<%= @resource_path_underscored %>) { <%= @resource_path_underscored %>_param }
@@ -470,9 +591,13 @@ describe '<%= class_name %> API' do
   path '/api/<%= file_path.pluralize %>/{id}' do
     patch 'Updates a <%= @resource_path_underscored %>' do
       tags '<%= @resource.pluralize %>'
-      <%- if @authenticable -%>
+        <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+      security [{ 'api-key': [] }]
+          <%- else -%>
       security [{ access_token: [], client: [], uid: [] }]
-      <%- end -%>
+          <% end -%>
+        <%- end -%>
       consumes 'application/json'
       produces 'application/json'
       parameter name: :'api-version', in: :header, type: :string, default: API_VERSION
@@ -485,9 +610,13 @@ describe '<%= class_name %> API' do
         schema '$ref' => '#/components/schemas/<%= @resource.gsub('::', '') %>'
 
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
         let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { API_VERSION }
         let(:id) { <%= @resource_path_underscored %>_obj.id }
@@ -498,9 +627,13 @@ describe '<%= class_name %> API' do
 
       response '406', 'unsupported accept header' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
         let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { API_VERSION }
         let(:id) { <%= @resource_path_underscored %>_obj.id }
@@ -512,9 +645,13 @@ describe '<%= class_name %> API' do
 
       response '410', 'invalid api version' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
         let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { 'invalid' }
         let(:id) { <%= @resource_path_underscored %>_obj.id }
@@ -525,9 +662,13 @@ describe '<%= class_name %> API' do
 
       response '410', 'no api version' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
         let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { nil }
         let(:id) { <%= @resource_path_underscored %>_obj.id }
@@ -539,9 +680,13 @@ describe '<%= class_name %> API' do
 
       response '401', 'invalid auth token' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
-        let(:'access-token')  { 'invalid'}
+        let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { API_VERSION }
         let(:id) { <%= @resource_path_underscored %>_obj.id }
@@ -552,9 +697,13 @@ describe '<%= class_name %> API' do
 
       response '401', 'no auth token' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
-        let(:'access-token')  { nil }
+        let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { API_VERSION }
         let(:id) { <%= @resource_path_underscored %>_obj.id }
@@ -570,9 +719,13 @@ describe '<%= class_name %> API' do
   path '/api/<%= file_path.pluralize %>/{id}' do
     delete 'Destroys a <%= @resource %>' do
       tags '<%= @resource.pluralize %>'
-      <%- if @authenticable -%>
+        <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+      security [{ 'api-key': [] }]
+          <%- else -%>
       security [{ access_token: [], client: [], uid: [] }]
-      <%- end -%>
+          <% end -%>
+        <%- end -%>
       consumes 'application/json'
       produces 'application/json'
       parameter name: :'api-version', in: :header, type: :string, default: API_VERSION
@@ -580,9 +733,13 @@ describe '<%= class_name %> API' do
 
       response '204', '<%= @resource_path_underscored %> destroyed' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
         let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { API_VERSION }
         let(:id) { <%= @resource_path_underscored %>_obj.id }
@@ -592,9 +749,13 @@ describe '<%= class_name %> API' do
 
       response '406', 'unsupported accept header' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
         let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { API_VERSION }
         let(:'Accept') { 'application/html' }
@@ -605,9 +766,13 @@ describe '<%= class_name %> API' do
 
       response '410', 'invalid api version' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
         let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { 'invalid' }
         let(:id) { <%= @resource_path_underscored %>_obj.id }
@@ -617,9 +782,13 @@ describe '<%= class_name %> API' do
 
       response '410', 'no api version' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
         let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { nil }
         let(:id) { <%= @resource_path_underscored %>_obj.id }
@@ -630,9 +799,13 @@ describe '<%= class_name %> API' do
 
       response '401', 'invalid auth token' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
-        let(:'access-token')  { 'invalid'}
+        let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { API_VERSION }
         let(:id) { <%= @resource_path_underscored %>_obj.id }
@@ -642,9 +815,13 @@ describe '<%= class_name %> API' do
 
       response '401', 'no auth token' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
-        let(:'access-token')  { nil }
+        let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { API_VERSION }
         let(:id) { <%= @resource_path_underscored %>_obj.id }
@@ -660,9 +837,13 @@ describe '<%= class_name %> API' do
   path '/api/<%= file_path %>/<%= action %>' do
     get 'receive <%= action %>' do
       tags '<%= class_name.pluralize %>'
-      <%- if @authenticable -%>
+        <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+      security [{ 'api-key': [] }]
+          <%- else -%>
       security [{ access_token: [], client: [], uid: [] }]
-      <%- end -%>
+          <% end -%>
+        <%- end -%>
       produces 'application/json'
       parameter name: :'api-version', in: :header, type: :string, default: API_VERSION
 
@@ -671,9 +852,13 @@ describe '<%= class_name %> API' do
                properties: { result: { type: :string } }
 
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
         let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { API_VERSION }
 
@@ -682,9 +867,13 @@ describe '<%= class_name %> API' do
 
       response '406', 'unsupported accept header' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
         let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'Accept') { 'application/html' }
         let(:'api-version') { API_VERSION }
@@ -694,9 +883,13 @@ describe '<%= class_name %> API' do
 
       response '410', 'invalid api version' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
         let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { 'invalid' }
 
@@ -705,9 +898,13 @@ describe '<%= class_name %> API' do
 
       response '410', 'no api version' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
         let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { nil }
 
@@ -716,10 +913,14 @@ describe '<%= class_name %> API' do
       <%- if @authenticable -%>
 
       response '401', 'invalid auth token' do
-        <%- if @authenticable  -%>
+        <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
-        let(:'access-token')  { 'invalid'}
+        let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { API_VERSION }
 
@@ -728,9 +929,13 @@ describe '<%= class_name %> API' do
 
       response '401', 'no auth token' do
         <%- if @authenticable -%>
+          <%- if @authenticable == 'api-key' -%>
+        let(:'api-key') { auth_header_info[:api_key] }
+          <%- else -%>
         let(:'uid') { auth_header_info[:uid] }
-        let(:'access-token')  { nil }
+        let(:'access-token')  { auth_header_info[:token] }
         let(:'client') { auth_header_info[:client] }
+          <% end -%>
         <%- end -%>
         let(:'api-version') { API_VERSION }
 

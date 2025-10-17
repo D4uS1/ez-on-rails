@@ -15,4 +15,11 @@ module EzAuthTestHelper
       uid: headers_raw['uid']
     }
   end
+
+  # Returns the needed header information to authorize the next request using the specified api_ley.
+  def api_key_header_info(api_key)
+    {
+      api_key: api_key
+    }
+  end
 end

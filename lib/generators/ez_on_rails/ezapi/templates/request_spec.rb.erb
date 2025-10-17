@@ -28,17 +28,29 @@ RSpec.describe '<%= class_path.length > 0 ? "#{([ 'api'] + class_path).join('/')
 <%- end -%>
 
     <%- if @resource && @authenticable -%>
+      <%- if @authenticable == 'api-key' -%>
+  # api key
+  let(:api_key) { create(:eor_api_key) } # non admin user
+  let(:auth_headers) do
+    auth_header_data = api_key_header_info(api_key)
+
+    default_headers.merge({
+                            'api-key': auth_header_data[:api_key],
+                          })
+  end
+      <%- else -%>
   # users
   let(:andrew) { create(:andrew) } # non admin user
   let(:auth_headers) do
     auth_header_data = authorization_header_info(andrew)
 
     default_headers.merge({
-      uid: auth_header_data[:uid],
-      'access-token': auth_header_data[:token],
-      client: auth_header_data[:client]
-    })
+                            uid: auth_header_data[:uid],
+                            'access-token': auth_header_data[:token],
+                            client: auth_header_data[:client]
+                          })
   end
+      <%- end -%>
 
   context 'when not logged in' do
     it 'can not get index' do
@@ -332,6 +344,17 @@ RSpec.describe '<%= class_path.length > 0 ? "#{([ 'api'] + class_path).join('/')
     end
   end
   <%- elsif @authenticable -%>
+    <%- if @authenticable == 'api-key' %>
+  # api key
+  let(:api_key) { create(:eor_api_key) } # non admin user
+  let(:auth_headers) do
+    auth_header_data = api_key_header_info(api_key)
+
+    default_headers.merge({
+                            'api-key': auth_header_data[:api_key],
+                          })
+  end
+    <%- else -%>
   # users
   let(:andrew) { create(:andrew) } # non admin user
   let(:auth_headers) do
@@ -343,6 +366,7 @@ RSpec.describe '<%= class_path.length > 0 ? "#{([ 'api'] + class_path).join('/')
                             client: auth_header_data[:client]
                           })
   end
+    <%- end -%>
 
   context 'when not logged in' do
     <%- actions.each do |action| -%>
