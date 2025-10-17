@@ -183,11 +183,33 @@ module EzOnRails::UserAccessHelper
     EzOnRails::UserGroupAssignment.where(user:, group: groups).any?
   end
 
+  # Returns whether the specified api_key is valid.
+  # The api_key is valid if there exists an api_key that is not yet expired.
+  def valid_api_key?(api_key)
+    api_key_obj = EzOnRails::ApiKey.find_by(api_key:)
+    return false unless api_key_obj
+
+    # no expiration date given, hence it is valid because it was found
+    return true unless api_key_obj.expires_at
+
+    Time.zone.now < api_key_obj.expires_at
+  end
+
   # returns wether the specified user can access the defined
   # This method only returns only if the user can access the specified combination of namespace,
   # controller and action. Hence, this method only should be used by internal proposes.
   def user_can_access?(user, namespace, controller, action)
-    user_in_groups?(user, get_access_groups(namespace, controller, action))
+    access_groups = get_access_groups(namespace, controller, action)
+
+    # If a user is present, we check the access via the user itself
+    if user
+      user_in_groups?(user, access_groups)
+    else
+      # if we have no user and the access to the resource is granted via api_key, check the api key
+      return false unless access_groups.any?(:api_key_group?)
+
+      valid_api_key?(request.headers['x-api-key'])
+    end
   end
 
   # returns the top namespace of the specified controller path.
