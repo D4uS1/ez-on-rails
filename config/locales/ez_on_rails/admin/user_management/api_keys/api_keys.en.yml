@@ -1,0 +1,12 @@
+de:
+  activerecord:
+    models:
+      ez_on_rails/api_key:
+        one: "API-Key"
+        other: "API-Keys"
+    attributes:
+      ez_on_rails/api_key:
+        api_key: "Key"
+        expires_at: "Expiration date"
+  ez_on_rails:
+    api_keys_description: "API keys to define access rights."

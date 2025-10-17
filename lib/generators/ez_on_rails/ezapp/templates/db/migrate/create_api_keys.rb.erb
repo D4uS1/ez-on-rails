@@ -8,5 +8,11 @@ class CreateApiKeys < ActiveRecord::Migration[8.0]
 
       t.timestamps
     end
+
+
+    add_index :<%= EzOnRails::ApplicationRecord::TABLE_PREFIX %>api_keys,
+              [:api_key],
+              unique: true,
+              name: '<%= EzOnRails::ApplicationRecord::TABLE_PREFIX %>api_keys_index'
   end
 end

@@ -67,7 +67,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_17_124432) do
     t.bigint "owner_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["api_key"], name: "index_eor_api_keys_on_api_key"
+    t.index ["api_key"], name: "eor_api_keys_index", unique: true
     t.index ["owner_id"], name: "index_eor_api_keys_on_owner_id"
   end
 
