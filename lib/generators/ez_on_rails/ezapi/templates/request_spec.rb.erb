@@ -30,7 +30,7 @@ RSpec.describe '<%= class_path.length > 0 ? "#{([ 'api'] + class_path).join('/')
     <%- if @resource && @authenticable -%>
       <%- if @authenticable == :'api-key' -%>
   # api key
-  let(:api_key) { create(:eor_api_key) } # non admin user
+  let(:api_key) { create(:eor_api_key) }
   let(:auth_headers) do
     auth_header_data = api_key_header_info(api_key)
 
@@ -397,7 +397,7 @@ RSpec.describe '<%= class_path.length > 0 ? "#{([ 'api'] + class_path).join('/')
   <%- elsif @authenticable -%>
     <%- if @authenticable == :'api-key' %>
   # api key
-  let(:api_key) { create(:eor_api_key) } # non admin user
+  let(:api_key) { create(:eor_api_key) }
   let(:auth_headers) do
     auth_header_data = api_key_header_info(api_key)
 

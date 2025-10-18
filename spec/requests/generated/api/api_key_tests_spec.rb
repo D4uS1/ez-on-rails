@@ -13,7 +13,7 @@ RSpec.describe 'api_key_tests', type: :request do
   let(:api_key_test_params) { attributes_for(:api_key_test) }
 
   # api key
-  let(:api_key) { create(:eor_api_key) } # non admin user
+  let(:api_key) { create(:eor_api_key) }
   let(:auth_headers) do
     auth_header_data = api_key_header_info(api_key)
 
