@@ -34,7 +34,7 @@ describe 'ApiKeyTests API' do
                  type: :object, properties: api_keys_test_properties.merge(
                    {
                      id: { type: :integer },
-                     owner_id: { type: :integer}
+                     owner_id: { type: :integer }
                    }
                  )
                }
@@ -48,7 +48,7 @@ describe 'ApiKeyTests API' do
       response '406', 'unsupported accept header' do
         let(:'api-key') { auth_header_info[:api_key] }
         let(:'api-version') { API_VERSION }
-        let(:'Accept') { 'application/html' }
+        let(:Accept) { 'application/html' }
 
         run_test!
       end
@@ -98,13 +98,13 @@ describe 'ApiKeyTests API' do
             oneOf: [
               { '$ref' => '#/components/schemas/SearchFilter' },
               { '$ref' => '#/components/schemas/SearchFilterComposition' },
-              { type: 'null' },
+              { type: 'null' }
             ]
           },
           page: { type: :integer, nullable: true },
           page_size: { type: :integer, nullable: true },
           order: { type: :string, nullable: true },
-          order_direction: { type: :string, enum: ['asc', 'desc'], nullable: true }
+          order_direction: { type: :string, enum: %w[asc desc], nullable: true }
         }
       }
 
@@ -115,12 +115,12 @@ describe 'ApiKeyTests API' do
                    type: :array,
                    items: { type: :object, properties: api_keys_test_properties }
                  },
-                 pages_count: { type: :integer, nullable: true  }
+                 pages_count: { type: :integer, nullable: true }
                }
 
         let(:'api-key') { auth_header_info[:api_key] }
         let(:'api-version') { API_VERSION }
-        let(:params) {
+        let(:params) do
           {
             filter: { field: 'id', operator: 'eq', value: api_key_test_obj.id },
             page: 0,
@@ -128,7 +128,7 @@ describe 'ApiKeyTests API' do
             order: 'created_at',
             order_direction: 'desc'
           }
-        }
+        end
 
         run_test!
       end
@@ -136,8 +136,8 @@ describe 'ApiKeyTests API' do
       response '406', 'unsupported accept header' do
         let(:'api-key') { auth_header_info[:api_key] }
         let(:'api-version') { API_VERSION }
-        let(:'Accept') { 'application/html' }
-        let(:params) {
+        let(:Accept) { 'application/html' }
+        let(:params) do
           {
             filter: { field: 'id', operator: 'eq', value: api_key_test_obj.id },
             page: 0,
@@ -145,7 +145,7 @@ describe 'ApiKeyTests API' do
             order: 'created_at',
             order_direction: 'desc'
           }
-        }
+        end
 
         run_test!
       end
@@ -153,7 +153,7 @@ describe 'ApiKeyTests API' do
       response '410', 'invalid api version' do
         let(:'api-key') { auth_header_info[:api_key] }
         let(:'api-version') { 'invalid' }
-        let(:params) {
+        let(:params) do
           {
             filter: { field: 'id', operator: 'eq', value: api_key_test_obj.id },
             page: 0,
@@ -161,7 +161,7 @@ describe 'ApiKeyTests API' do
             order: 'created_at',
             order_direction: 'desc'
           }
-        }
+        end
 
         run_test!
       end
@@ -169,7 +169,7 @@ describe 'ApiKeyTests API' do
       response '410', 'no api version' do
         let(:'api-key') { auth_header_info[:api_key] }
         let(:'api-version') { nil }
-        let(:params) {
+        let(:params) do
           {
             filter: { field: 'id', operator: 'eq', value: api_key_test_obj.id },
             page: 0,
@@ -177,7 +177,7 @@ describe 'ApiKeyTests API' do
             order: 'created_at',
             order_direction: 'desc'
           }
-        }
+        end
 
         run_test!
       end
@@ -185,7 +185,7 @@ describe 'ApiKeyTests API' do
       response '401', 'invalid api key' do
         let(:'api-key') { 'invalid' }
         let(:'api-version') { API_VERSION }
-        let(:params) {
+        let(:params) do
           {
             filter: { field: 'id', operator: 'eq', value: api_key_test_obj.id },
             page: 0,
@@ -193,7 +193,7 @@ describe 'ApiKeyTests API' do
             order: 'created_at',
             order_direction: 'desc'
           }
-        }
+        end
 
         run_test!
       end
@@ -201,7 +201,7 @@ describe 'ApiKeyTests API' do
       response '401', 'no api key' do
         let(:'api-key') { nil }
         let(:'api-version') { API_VERSION }
-        let(:params) {
+        let(:params) do
           {
             filter: { field: 'id', operator: 'eq', value: api_key_test_obj.id },
             page: 0,
@@ -209,7 +209,7 @@ describe 'ApiKeyTests API' do
             order: 'created_at',
             order_direction: 'desc'
           }
-        }
+        end
 
         run_test!
       end
@@ -228,9 +228,9 @@ describe 'ApiKeyTests API' do
       response '200', 'api_key_test found' do
         schema type: :object,
                properties: api_keys_test_properties.merge({
-                id: { type: :integer },
-                owner_id: { type: :integer}
-              })
+                                                            id: { type: :integer },
+                                                            owner_id: { type: :integer }
+                                                          })
 
         let(:'api-key') { auth_header_info[:api_key] }
         let(:'api-version') { API_VERSION }
@@ -251,7 +251,7 @@ describe 'ApiKeyTests API' do
         let(:'api-key') { auth_header_info[:api_key] }
         let(:'api-version') { API_VERSION }
         let(:id) { api_key_test_obj.id }
-        let(:'Accept') { 'application/html' }
+        let(:Accept) { 'application/html' }
 
         run_test!
       end
@@ -305,9 +305,9 @@ describe 'ApiKeyTests API' do
       response '201', 'api_key_test created' do
         schema type: :object,
                properties: api_keys_test_properties.merge({
-                 id: { type: :integer },
-                 owner_id: { type: :integer}
-               })
+                                                            id: { type: :integer },
+                                                            owner_id: { type: :integer }
+                                                          })
 
         let(:'api-key') { auth_header_info[:api_key] }
         let(:'api-version') { API_VERSION }
@@ -319,7 +319,7 @@ describe 'ApiKeyTests API' do
       response '406', 'unsupported accept header' do
         let(:'api-key') { auth_header_info[:api_key] }
         let(:'api-version') { API_VERSION }
-        let(:'Accept') { 'application/html' }
+        let(:Accept) { 'application/html' }
         let(:api_key_test) { api_key_test_param }
 
         run_test!
@@ -374,9 +374,9 @@ describe 'ApiKeyTests API' do
 
       response '200', 'api_key_test updated' do
         schema type: :object, properties: api_keys_test_properties.merge({
-                 id: { type: :integer },
-                 owner_id: { type: :integer}
-               })
+                                                                           id: { type: :integer },
+                                                                           owner_id: { type: :integer }
+                                                                         })
 
         let(:'api-key') { auth_header_info[:api_key] }
         let(:'api-version') { API_VERSION }
@@ -391,7 +391,7 @@ describe 'ApiKeyTests API' do
         let(:'api-version') { API_VERSION }
         let(:id) { api_key_test_obj.id }
         let(:api_key_test) { api_key_test_param }
-        let(:'Accept') { 'application/html' }
+        let(:Accept) { 'application/html' }
 
         run_test!
       end
@@ -455,7 +455,7 @@ describe 'ApiKeyTests API' do
       response '406', 'unsupported accept header' do
         let(:'api-key') { auth_header_info[:api_key] }
         let(:'api-version') { API_VERSION }
-        let(:'Accept') { 'application/html' }
+        let(:Accept) { 'application/html' }
         let(:id) { api_key_test_obj.id }
 
         run_test!

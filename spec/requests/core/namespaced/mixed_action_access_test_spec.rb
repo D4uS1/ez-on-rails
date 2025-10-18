@@ -130,7 +130,7 @@ RSpec.describe 'Namespaced::MixedActionAccessTestController' do
       auth_header_data = api_key_header_info(api_key)
 
       {
-        'api-key': auth_header_data[:api_key],
+        'api-key': auth_header_data[:api_key]
       }
     end
 
@@ -200,13 +200,15 @@ RSpec.describe 'Namespaced::MixedActionAccessTestController' do
         end
 
         it 'can not access namespace action' do
-          get '/namespaced/mixed_action_access_test/namespace_protected', headers: auth_headers.merge({ 'api-key': 'invalid'})
+          get '/namespaced/mixed_action_access_test/namespace_protected',
+              headers: auth_headers.merge({ 'api-key': 'invalid' })
 
           expect(response).to redirect_to(new_user_session_path)
         end
 
         it 'can not access action in namespace' do
-          get '/namespaced/mixed_action_access_test/action_protected', headers: auth_headers.merge({ 'api-key': 'invalid'})
+          get '/namespaced/mixed_action_access_test/action_protected',
+              headers: auth_headers.merge({ 'api-key': 'invalid' })
 
           expect(response).to redirect_to(new_user_session_path)
         end
@@ -225,13 +227,15 @@ RSpec.describe 'Namespaced::MixedActionAccessTestController' do
         end
 
         it 'can not access namespace action' do
-          get '/namespaced/mixed_action_access_test/namespace_protected', headers: auth_headers.merge({ 'api-key': 'invalid'})
+          get '/namespaced/mixed_action_access_test/namespace_protected',
+              headers: auth_headers.merge({ 'api-key': 'invalid' })
 
           expect(response).to redirect_to(new_user_session_path)
         end
 
         it 'can not access action in namespace' do
-          get '/namespaced/mixed_action_access_test/action_protected', headers: auth_headers.merge({ 'api-key': 'invalid'})
+          get '/namespaced/mixed_action_access_test/action_protected',
+              headers: auth_headers.merge({ 'api-key': 'invalid' })
 
           expect(response).to redirect_to(new_user_session_path)
         end

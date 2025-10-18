@@ -18,7 +18,7 @@ RSpec.describe 'api_key_tests', type: :request do
     auth_header_data = api_key_header_info(api_key)
 
     default_headers.merge({
-                            'api-key': auth_header_data[:api_key],
+                            'api-key': auth_header_data[:api_key]
                           })
   end
 
@@ -126,67 +126,67 @@ RSpec.describe 'api_key_tests', type: :request do
 
       get api_api_key_tests_url, headers: auth_headers
 
-      response_body = JSON.parse(response.body)
+      response_body = response.parsed_body
 
       expect(response).to have_http_status(:success)
       expect(response_body).to eq(json_from_view('api_key_tests/_api_key_tests', {
-        api_key_tests: [api_key_test]
-      }))
+                                                   api_key_tests: [api_key_test]
+                                                 }))
     end
 
     context 'when request search' do
       it 'only returns filtered results' do
         create(:api_key_test)
-          api_key_test
+        api_key_test
 
         post search_api_api_key_tests_url,
              params: { filter: { field: 'id', operator: 'eq', value: api_key_test.id } },
              headers: auth_headers
 
-        response_body = JSON.parse(response.body)
+        response_body = response.parsed_body
 
         expect(response).to have_http_status(:success)
         expect(response_body['results']).to eq(
           json_from_view('api_key_tests/_api_key_tests', {
-            api_key_tests: [api_key_test]
-          })
+                           api_key_tests: [api_key_test]
+                         })
         )
       end
 
       it 'only returns results for specified page' do
         create(:api_key_test)
-          api_key_test
+        api_key_test
 
         post search_api_api_key_tests_url,
              params: { page: 1, page_size: 1 },
              headers: auth_headers
 
-        response_body = JSON.parse(response.body)
+        response_body = response.parsed_body
 
         expect(response).to have_http_status(:success)
         expect(response_body['results']).to eq(
           json_from_view('api_key_tests/_api_key_tests', {
-            api_key_tests: [api_key_test]
-          })
+                           api_key_tests: [api_key_test]
+                         })
         )
         expect(response_body['pages_count']).to eq(2)
       end
 
       it 'returns results with specified order and order_direction' do
         second_record = create(:api_key_test)
-          api_key_test
+        api_key_test
 
         post search_api_api_key_tests_url,
              params: { order: 'created_at', order_direction: 'desc' },
              headers: auth_headers
 
-        response_body = JSON.parse(response.body)
+        response_body = response.parsed_body
 
         expect(response).to have_http_status(:success)
         expect(response_body['results']).to eq(
           json_from_view('api_key_tests/_api_key_tests', {
-            api_key_tests: [api_key_test, second_record]
-          })
+                           api_key_tests: [api_key_test, second_record]
+                         })
         )
       end
     end
@@ -194,12 +194,12 @@ RSpec.describe 'api_key_tests', type: :request do
     it 'can show api_key_test' do
       get api_api_key_test_url(id: api_key_test.id), headers: auth_headers
 
-      response_body = JSON.parse(response.body)
+      response_body = response.parsed_body
 
       expect(response).to have_http_status(:success)
       expect(response_body).to eq(json_from_view('api_key_tests/_api_key_test', {
-        api_key_test: api_key_test
-      }))
+                                                   api_key_test: api_key_test
+                                                 }))
     end
 
     it 'can create api_key_test' do
@@ -210,13 +210,13 @@ RSpec.describe 'api_key_tests', type: :request do
            headers: auth_headers
       created_object = ApiKeyTest.last
 
-      response_body = JSON.parse(response.body)
+      response_body = response.parsed_body
 
       expect(response).to have_http_status(:success)
       expect(ApiKeyTest.count).to eq(records_count + 1)
       expect(response_body).to eq(json_from_view('api_key_tests/_api_key_test', {
-        api_key_test: created_object
-      }))
+                                                   api_key_test: created_object
+                                                 }))
     end
 
     it 'can update api_key_test' do
@@ -224,13 +224,13 @@ RSpec.describe 'api_key_tests', type: :request do
             params: { api_key_test: api_key_test_params },
             headers: auth_headers
 
-      response_body = JSON.parse(response.body)
+      response_body = response.parsed_body
       api_key_test.reload
 
       expect(response).to have_http_status(:success)
       expect(response_body).to eq(json_from_view('api_key_tests/_api_key_test', {
-        api_key_test: api_key_test
-      }))
+                                                   api_key_test: api_key_test
+                                                 }))
     end
 
     it 'can destroy api_key_test' do

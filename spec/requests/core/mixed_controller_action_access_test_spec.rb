@@ -129,7 +129,7 @@ RSpec.describe 'MixedControllerActionAccessTestController' do
       auth_header_data = api_key_header_info(api_key)
 
       {
-        'api-key': auth_header_data[:api_key],
+        'api-key': auth_header_data[:api_key]
       }
     end
 
@@ -202,13 +202,15 @@ RSpec.describe 'MixedControllerActionAccessTestController' do
         end
 
         it 'can not access controller protected action' do
-          get '/mixed_controller_action_access_test/controller_protected', headers: auth_headers.merge({ 'api-key': 'invalid' })
+          get '/mixed_controller_action_access_test/controller_protected',
+              headers: auth_headers.merge({ 'api-key': 'invalid' })
 
           expect(response).to redirect_to(new_user_session_path)
         end
 
         it 'can not access action protected action' do
-          get '/mixed_controller_action_access_test/action_protected', headers: auth_headers.merge({ 'api-key': 'invalid' })
+          get '/mixed_controller_action_access_test/action_protected',
+              headers: auth_headers.merge({ 'api-key': 'invalid' })
 
           expect(response).to redirect_to(new_user_session_path)
         end
@@ -228,13 +230,15 @@ RSpec.describe 'MixedControllerActionAccessTestController' do
         end
 
         it 'can not access controller protected action' do
-          get '/mixed_controller_action_access_test/controller_protected', headers: auth_headers.merge({ 'api-key': 'invalid' })
+          get '/mixed_controller_action_access_test/controller_protected',
+              headers: auth_headers.merge({ 'api-key': 'invalid' })
 
           expect(response).to redirect_to(new_user_session_path)
         end
 
         it 'can not access action protected action' do
-          get '/mixed_controller_action_access_test/action_protected', headers: auth_headers.merge({ 'api-key': 'invalid' })
+          get '/mixed_controller_action_access_test/action_protected',
+              headers: auth_headers.merge({ 'api-key': 'invalid' })
 
           expect(response).to redirect_to(new_user_session_path)
         end

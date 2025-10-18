@@ -15,7 +15,7 @@ class EzOnRails::ApiKey < EzOnRails::AdminRecord
 
   # Generates a new api key if it is not set.
   def generate_api_key
-    return unless api_key.blank?
+    return if api_key.present?
 
     self.api_key = SecureRandom.base58(64)
   end

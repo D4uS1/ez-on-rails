@@ -57,7 +57,7 @@ RSpec.describe 'EzOnRails::Admin::UserManagement::ApiKeysController' do
       post ez_on_rails_api_keys_url, params: {
         api_key: {
           api_key: api_key_create.api_key,
-          expires_at: api_key_create.expires_at,
+          expires_at: api_key_create.expires_at
         }
       }
 
@@ -133,7 +133,7 @@ RSpec.describe 'EzOnRails::Admin::UserManagement::ApiKeysController' do
       post ez_on_rails_api_keys_url, params: {
         api_key: {
           api_key: api_key_create.api_key,
-          expires_at: api_key_create.expires_at,
+          expires_at: api_key_create.expires_at
         }
       }
 
@@ -209,7 +209,7 @@ RSpec.describe 'EzOnRails::Admin::UserManagement::ApiKeysController' do
       post ez_on_rails_api_keys_url, params: {
         api_key: {
           api_key: api_key_create.api_key,
-          expires_at: api_key_create.expires_at,
+          expires_at: api_key_create.expires_at
         }
       }
 

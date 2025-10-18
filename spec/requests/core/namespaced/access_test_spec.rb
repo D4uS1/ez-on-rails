@@ -70,7 +70,7 @@ RSpec.describe 'Namespaced::AccessTestController' do
       auth_header_data = api_key_header_info(api_key)
 
       {
-        'api-key': auth_header_data[:api_key],
+        'api-key': auth_header_data[:api_key]
       }
     end
 

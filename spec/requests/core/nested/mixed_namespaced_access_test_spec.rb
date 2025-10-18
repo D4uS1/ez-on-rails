@@ -18,7 +18,6 @@ RSpec.describe 'Nested::MixedNamespaceAccessTestController' do
     let(:admin) { User.super_admin }
     let(:bob) { create(:bob) }
 
-
     before do
       create(:eor_group_access,
              group: namespace_group,
@@ -127,7 +126,7 @@ RSpec.describe 'Nested::MixedNamespaceAccessTestController' do
       auth_header_data = api_key_header_info(api_key)
 
       {
-        'api-key': auth_header_data[:api_key],
+        'api-key': auth_header_data[:api_key]
       }
     end
 

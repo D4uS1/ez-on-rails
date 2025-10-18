@@ -80,7 +80,7 @@ RSpec.describe 'api_key_tests', type: :request do
       objects_count = api_key_test.class.count
 
       delete destroy_selections_api_key_tests_url, params: {
-        selections: ActiveSupport::JSON.encode([{ data: { id: api_key_test.id }}])
+        selections: ActiveSupport::JSON.encode([{ data: { id: api_key_test.id } }])
       }
 
       expect(ApiKeyTest.count).to eq(objects_count)
@@ -155,7 +155,7 @@ RSpec.describe 'api_key_tests', type: :request do
       objects_count = api_key_test.class.count
 
       delete destroy_selections_api_key_tests_url, params: {
-        selections: ActiveSupport::JSON.encode([{ data: { id: api_key_test.id }}])
+        selections: ActiveSupport::JSON.encode([{ data: { id: api_key_test.id } }])
       }
 
       expect(ApiKeyTest.count).to eq(objects_count)
@@ -232,7 +232,7 @@ RSpec.describe 'api_key_tests', type: :request do
       objects_count = api_key_test.class.count
 
       delete destroy_selections_api_key_tests_url, params: {
-        selections: ActiveSupport::JSON.encode([{ data: { id: api_key_test.id }}])
+        selections: ActiveSupport::JSON.encode([{ data: { id: api_key_test.id } }])
       }
 
       expect(ApiKeyTest.count).to eq(objects_count - 1)

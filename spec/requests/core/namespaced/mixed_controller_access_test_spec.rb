@@ -127,7 +127,7 @@ RSpec.describe 'Namespaced::MixedControllerTwoAccessTestController' do
       auth_header_data = api_key_header_info(api_key)
 
       {
-        'api-key': auth_header_data[:api_key],
+        'api-key': auth_header_data[:api_key]
       }
     end
 
@@ -194,13 +194,15 @@ RSpec.describe 'Namespaced::MixedControllerTwoAccessTestController' do
         end
 
         it 'can not access action in namespace' do
-          get '/namespaced/mixed_controller_two_access_test/some_action', headers: auth_headers.merge({ 'api-key': 'invalid'})
+          get '/namespaced/mixed_controller_two_access_test/some_action',
+              headers: auth_headers.merge({ 'api-key': 'invalid' })
 
           expect(response).to redirect_to(new_user_session_path)
         end
 
         it 'can not access action in controller' do
-          get '/namespaced/mixed_controller_one_access_test/some_action', headers: auth_headers.merge({ 'api-key': 'invalid'})
+          get '/namespaced/mixed_controller_one_access_test/some_action',
+              headers: auth_headers.merge({ 'api-key': 'invalid' })
 
           expect(response).to redirect_to(new_user_session_path)
         end
@@ -218,13 +220,15 @@ RSpec.describe 'Namespaced::MixedControllerTwoAccessTestController' do
         end
 
         it 'can not access action in namespace' do
-          get '/namespaced/mixed_controller_two_access_test/some_action', headers: auth_headers.merge({ 'api-key': 'invalid'})
+          get '/namespaced/mixed_controller_two_access_test/some_action',
+              headers: auth_headers.merge({ 'api-key': 'invalid' })
 
           expect(response).to redirect_to(new_user_session_path)
         end
 
         it 'can not access action in controller' do
-          get '/namespaced/mixed_controller_one_access_test/some_action', headers: auth_headers.merge({ 'api-key': 'invalid'})
+          get '/namespaced/mixed_controller_one_access_test/some_action',
+              headers: auth_headers.merge({ 'api-key': 'invalid' })
 
           expect(response).to redirect_to(new_user_session_path)
         end
