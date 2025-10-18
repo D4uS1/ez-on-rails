@@ -16,10 +16,11 @@ module EzAuthTestHelper
     }
   end
 
-  # Returns the needed header information to authorize the next request using the specified api_ley.
+  # Returns the needed header information to authorize the next request using the specified api_key.
+  # The api_key is expected to be an EzOnRails::ApiKey record.
   def api_key_header_info(api_key)
     {
-      api_key: api_key
+      api_key: api_key.api_key
     }
   end
 end

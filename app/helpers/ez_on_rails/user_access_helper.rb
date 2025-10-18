@@ -206,7 +206,7 @@ module EzOnRails::UserAccessHelper
       user_in_groups?(user, access_groups)
     else
       # if we have no user and the access to the resource is granted via api_key, check the api key
-      return false unless access_groups.any?(:api_key_group?)
+      return false unless access_groups.any? { |group| group.api_key_group? }
 
       valid_api_key?(request.headers['api-key'])
     end

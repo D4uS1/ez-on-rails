@@ -77,3 +77,17 @@ end
 rails db:migrate
 rails db:seed
 ```
+
+4. Add the api key to the security schemas in __swagger_helper.rb__
+```
+...
+securitySchemes: {
+...
+  api_key: {
+    type: :apiKey,
+    name: 'api-key',
+    in: :header
+  }
+}
+...
+```

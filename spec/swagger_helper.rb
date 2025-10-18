@@ -76,6 +76,11 @@ RSpec.configure do |config|
             type: :apiKey,
             name: 'uid',
             in: :header
+          },
+          api_key: {
+            type: :apiKey,
+            name: 'api-key',
+            in: :header
           }
         }
       }
