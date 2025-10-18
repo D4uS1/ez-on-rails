@@ -3,7 +3,8 @@
 require 'swagger_helper'
 
 # Returns the properties of the OauthClientAccessTest Resource.
-# This is needed because the rswag dsl does not support let for defining purposes.
+# This is needed because the spec was generated in the dummy app, hence the properties
+# are not delivered here, because they are not defined in the correct swagger_helper.
 def oauth_client_access_test_properties
   {
     test: {

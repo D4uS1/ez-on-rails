@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  namespace :api do
+    resources :api_key_tests, except: %i[new edit] do
+      collection do
+        post :search
+      end
+    end
+  end
   scope '(:locale)', locale: /en|de/ do
     resources :api_key_tests do
       collection do

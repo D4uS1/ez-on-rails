@@ -52,7 +52,7 @@ RSpec.describe '<%= class_path.length > 0 ? "#{([ 'api'] + class_path).join('/')
   end
       <%- end -%>
 
-  context 'when not logged in' do
+  context <%= @authenticable == :'api-key' ? "'when using no api key'" : "'when not logged in'" -%> do
     it 'can not get index' do
       get api_<%= namespace_prefix %><%= @resource_underscored.pluralize %>_url, headers: default_headers
 
@@ -100,8 +100,59 @@ RSpec.describe '<%= class_path.length > 0 ? "#{([ 'api'] + class_path).join('/')
       expect(<%= @resource %>.count).to eql(records_count)
     end
   end
+      <%- if @authenticable == :'api-key' -%>
 
-  context 'when logged in as andrew' do
+  context 'when using an invalid api key' do
+    it 'can not get index' do
+      get api_<%= namespace_prefix %><%= @resource_underscored.pluralize %>_url, headers: auth_headers.merge('api-key': 'invalid')
+
+      expect(response).to have_http_status(:unauthorized)
+    end
+
+    it 'can not search' do
+      post search_api_<%= namespace_prefix %><%= @resource_underscored.pluralize %>_url,
+           params: { filter: { field: 'id', operator: 'eq', value: <%= @resource_underscored %>.id } },
+           headers: auth_headers.merge('api-key': 'invalid')
+
+      expect(response).to have_http_status(:unauthorized)
+    end
+
+    it 'can not show <%= @resource_underscored %>' do
+      get api_<%= namespace_prefix %><%= @resource_underscored %>_url(id: <%= @resource_underscored %>.id), headers: auth_headers.merge('api-key': 'invalid')
+
+      expect(response).to have_http_status(:unauthorized)
+    end
+
+    it 'can not create' do
+      records_count = <%= @resource %>.count
+
+      post api_<%= namespace_prefix %><%= @resource_underscored.pluralize %>_url,
+           params: { <%= @resource_underscored %>: <%= @resource_underscored %>_params },
+           headers: auth_headers.merge('api-key': 'invalid')
+
+      expect(response).to have_http_status(:unauthorized)
+      expect(<%= @resource %>.count).to eq(records_count)
+    end
+
+    it 'can not update <%= @resource_underscored %>' do
+      patch api_<%= namespace_prefix %><%= @resource_underscored %>_url(id: <%= @resource_underscored %>.id),
+            params: { <%= @resource_underscored %>: <%= @resource_underscored %>_params },
+            headers: auth_headers.merge('api-key': 'invalid')
+
+      expect(response).to have_http_status(:unauthorized)
+    end
+
+    it 'can not destroy <%= @resource_underscored %>' do
+      records_count = <%= @resource_underscored %>.class.count
+      delete api_<%= namespace_prefix %><%= @resource_underscored %>_url(id: <%= @resource_underscored %>.id), headers: auth_headers.merge('api-key': 'invalid')
+
+      expect(response).to have_http_status(:unauthorized)
+      expect(<%= @resource %>.count).to eql(records_count)
+    end
+  end
+      <%- end -%>
+
+  context <%= @authenticable == :'api-key' ? "'when using a valid api key'" : "'when logged in as andrew'" -%> do
     it 'can get index' do
       <%= @resource_underscored %>
 
@@ -368,7 +419,7 @@ RSpec.describe '<%= class_path.length > 0 ? "#{([ 'api'] + class_path).join('/')
   end
     <%- end -%>
 
-  context 'when not logged in' do
+  context <%= @authenticable == :'api-key' ? "'when using no api key'" : "'when not logged in'" -%> do
     <%- actions.each do |action| -%>
     it 'can not get <%= action %>' do
       get api_<%= namespace_prefix %><%= file_name %>_<%= action %>_url, headers: default_headers
@@ -379,7 +430,7 @@ RSpec.describe '<%= class_path.length > 0 ? "#{([ 'api'] + class_path).join('/')
     <%- end -%>
   end
 
-  context 'when logged as andrew' do
+  context <%= @authenticable == :'api-key' ? "'when using a valid api key'" : "'when logged as andrew'" -%> do
     <%- actions.each do |action| -%>
     it 'can not get <%= action %>' do
       get api_<%= namespace_prefix %><%= file_name %>_<%= action %>_url, headers: auth_headers

@@ -95,3 +95,9 @@ EzOnRails::GroupAccess.find_or_create_by! group: super_admin_group, controller: 
   access.controller = 'api_key_tests'
 end
 
+# Restrict access to manage ApiKeyTests API
+EzOnRails::GroupAccess.find_or_create_by! group: member_group, namespace: 'api', controller: 'api_key_tests' do |access|
+  access.group = api_key_group
+  access.namespace = 'api'
+  access.controller = 'api_key_tests'
+end
