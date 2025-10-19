@@ -120,6 +120,59 @@ RSpec.describe 'api_key_tests', type: :request do
     end
   end
 
+  context 'when using an expired api key' do
+    before do
+      api_key.update(expires_at: 1.day.ago)
+    end
+
+    it 'can not get index' do
+      get api_api_key_tests_url, headers: auth_headers
+
+      expect(response).to have_http_status(:unauthorized)
+    end
+
+    it 'can not search' do
+      post search_api_api_key_tests_url,
+           params: { filter: { field: 'id', operator: 'eq', value: api_key_test.id } },
+           headers: auth_headers
+
+      expect(response).to have_http_status(:unauthorized)
+    end
+
+    it 'can not show api_key_test' do
+      get api_api_key_test_url(id: api_key_test.id), headers: auth_headers
+
+      expect(response).to have_http_status(:unauthorized)
+    end
+
+    it 'can not create' do
+      records_count = ApiKeyTest.count
+
+      post api_api_key_tests_url,
+           params: { api_key_test: api_key_test_params },
+           headers: auth_headers
+
+      expect(response).to have_http_status(:unauthorized)
+      expect(ApiKeyTest.count).to eq(records_count)
+    end
+
+    it 'can not update api_key_test' do
+      patch api_api_key_test_url(id: api_key_test.id),
+            params: { api_key_test: api_key_test_params },
+            headers: auth_headers
+
+      expect(response).to have_http_status(:unauthorized)
+    end
+
+    it 'can not destroy api_key_test' do
+      records_count = api_key_test.class.count
+      delete api_api_key_test_url(id: api_key_test.id), headers: auth_headers
+
+      expect(response).to have_http_status(:unauthorized)
+      expect(ApiKeyTest.count).to eql(records_count)
+    end
+  end
+
   context 'when using a valid api key' do
     it 'can get index' do
       api_key_test

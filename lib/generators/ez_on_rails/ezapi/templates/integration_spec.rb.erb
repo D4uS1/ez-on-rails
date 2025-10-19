@@ -7,6 +7,8 @@ describe '<%= class_name %> API' do
   <%- if @authenticable == :'api-key' -%>
   let(:api_key) { create(:eor_api_key) }
   let(:auth_header_info) { api_key_header_info(api_key) }
+  let(:expired_api_key) { create(:eor_api_key, expires_at: 1.day.ago) }
+  let(:expired_auth_header_info) { api_key_header_info(expired_api_key) }
   <%- else -%>
   let(:andrew) { create(:andrew) }
   let(:auth_header_info) { authorization_header_info(andrew) }
@@ -139,6 +141,15 @@ describe '<%= class_name %> API' do
 
         run_test!
       end
+        <%- if @authenticable == :'api-key' -%>
+
+      response '401', 'expired api key' do
+        let(:'api-key') { expired_auth_header_info[:api_key] }
+        let(:'api-version') { API_VERSION }
+
+        run_test!
+      end
+        <%- end -%>
       <%- end -%>
     end
   end
@@ -329,6 +340,24 @@ describe '<%= class_name %> API' do
         run_test!
       end
       <%- end -%>
+      <%- if @authenticable == :'api-key' -%>
+
+      response '401', 'expired api key' do
+        let(:'api-key') { expired_auth_header_info[:api_key] }
+        let(:'api-version') { API_VERSION }
+        let(:params) {
+          {
+            filter: { field: 'id', operator: 'eq', value: <%= @resource_path_underscored %>_obj.id },
+            page: 0,
+            page_size: 10,
+            order: 'created_at',
+            order_direction: 'desc'
+          }
+        }
+
+        run_test!
+      end
+      <%- end -%>
     end
   end
 
@@ -463,6 +492,16 @@ describe '<%= class_name %> API' do
         run_test!
       end
       <%- end -%>
+      <%- if @authenticable == :'api-key' -%>
+
+      response '401', 'expired api key' do
+        let(:'api-key') { expired_auth_header_info[:api_key] }
+        let(:'api-version') { API_VERSION }
+        let(:id) { <%= @resource_path_underscored %>_obj.id }
+
+        run_test!
+      end
+      <%- end -%>
     end
   end
 
@@ -578,6 +617,16 @@ describe '<%= class_name %> API' do
         let(:'client') { auth_header_info[:client] }
           <% end -%>
         <%- end -%>
+        let(:'api-version') { API_VERSION }
+        let(:<%= @resource_path_underscored %>) { <%= @resource_path_underscored %>_param }
+
+        run_test!
+      end
+      <%- end -%>
+      <%- if @authenticable == :'api-key' -%>
+
+      response '401', 'expired api key' do
+        let(:'api-key') { expired_auth_header_info[:api_key] }
         let(:'api-version') { API_VERSION }
         let(:<%= @resource_path_underscored %>) { <%= @resource_path_underscored %>_param }
 
@@ -712,6 +761,17 @@ describe '<%= class_name %> API' do
         run_test!
       end
       <%- end -%>
+      <%- if @authenticable == :'api-key' -%>
+
+      response '401', 'expired api key' do
+        let(:'api-key') { expired_auth_header_info[:api_key] }
+        let(:'api-version') { API_VERSION }
+        let(:id) { <%= @resource_path_underscored %>_obj.id }
+        let(:<%= @resource_path_underscored %>) { <%= @resource_path_underscored %>_param }
+
+        run_test!
+      end
+      <%- end -%>
     end
   end
 
@@ -828,6 +888,16 @@ describe '<%= class_name %> API' do
 
         run_test!
       end
+      <%- if @authenticable == :'api-key' -%>
+
+      response '401', 'expired api key' do
+        let(:'api-key') { expired_auth_header_info[:api_key] }
+        let(:'api-version') { API_VERSION }
+        let(:id) { <%= @resource_path_underscored %>_obj.id }
+
+        run_test!
+      end
+      <%- end -%>
       <%- end -%>
     end
   end
@@ -937,6 +1007,15 @@ describe '<%= class_name %> API' do
         let(:'client') { auth_header_info[:client] }
           <% end -%>
         <%- end -%>
+        let(:'api-version') { API_VERSION }
+
+        run_test!
+      end
+      <%- end -%>
+      <%- if @authenticable == :'api-key' -%>
+
+      response '401', 'expired api key' do
+        let(:'api-key') { expired_auth_header_info[:api_key] }
         let(:'api-version') { API_VERSION }
 
         run_test!

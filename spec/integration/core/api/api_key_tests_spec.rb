@@ -16,6 +16,8 @@ end
 describe 'ApiKeyTests API' do
   let(:api_key) { create(:eor_api_key) }
   let(:auth_header_info) { api_key_header_info(api_key) }
+  let(:expired_api_key) { create(:eor_api_key, expires_at: 1.day.ago) }
+  let(:expired_auth_header_info) { api_key_header_info(expired_api_key) }
   let(:api_key_test_attributes) { attributes_for(:api_key_test) }
   let(:api_key_test_obj) { create(:api_key_test) }
   let(:api_key_test_param) { api_key_test_attributes }
@@ -69,6 +71,13 @@ describe 'ApiKeyTests API' do
 
       response '401', 'invalid api key' do
         let(:'api-key') { 'invalid' }
+        let(:'api-version') { API_VERSION }
+
+        run_test!
+      end
+
+      response '401', 'expired api key' do
+        let(:'api-key') { expired_auth_header_info[:api_key] }
         let(:'api-version') { API_VERSION }
 
         run_test!
@@ -213,6 +222,22 @@ describe 'ApiKeyTests API' do
 
         run_test!
       end
+
+      response '401', 'expired api key' do
+        let(:'api-key') { expired_auth_header_info[:api_key] }
+        let(:'api-version') { API_VERSION }
+        let(:params) do
+          {
+            filter: { field: 'id', operator: 'eq', value: api_key_test_obj.id },
+            page: 0,
+            page_size: 10,
+            order: 'created_at',
+            order_direction: 'desc'
+          }
+        end
+
+        run_test!
+      end
     end
   end
 
@@ -287,6 +312,14 @@ describe 'ApiKeyTests API' do
 
         run_test!
       end
+
+      response '401', 'expired api key' do
+        let(:'api-key') { expired_auth_header_info[:api_key] }
+        let(:'api-version') { API_VERSION }
+        let(:id) { api_key_test_obj.id }
+
+        run_test!
+      end
     end
   end
 
@@ -351,6 +384,14 @@ describe 'ApiKeyTests API' do
 
       response '401', 'no api key' do
         let(:'api-key') { nil }
+        let(:'api-version') { API_VERSION }
+        let(:api_key_test) { api_key_test_param }
+
+        run_test!
+      end
+
+      response '401', 'expired api key' do
+        let(:'api-key') { expired_auth_header_info[:api_key] }
         let(:'api-version') { API_VERSION }
         let(:api_key_test) { api_key_test_param }
 
@@ -431,6 +472,15 @@ describe 'ApiKeyTests API' do
 
         run_test!
       end
+
+      response '401', 'expired api key' do
+        let(:'api-key') { expired_auth_header_info[:api_key] }
+        let(:'api-version') { API_VERSION }
+        let(:id) { api_key_test_obj.id }
+        let(:api_key_test) { api_key_test_param }
+
+        run_test!
+      end
     end
   end
 
@@ -487,6 +537,14 @@ describe 'ApiKeyTests API' do
 
       response '401', 'no api key' do
         let(:'api-key') { nil }
+        let(:'api-version') { API_VERSION }
+        let(:id) { api_key_test_obj.id }
+
+        run_test!
+      end
+
+      response '401', 'expired api key' do
+        let(:'api-key') { expired_auth_header_info[:api_key] }
         let(:'api-version') { API_VERSION }
         let(:id) { api_key_test_obj.id }
 
