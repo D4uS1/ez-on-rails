@@ -136,6 +136,24 @@ RSpec.describe 'AssocTestsController' do
       end
     end
 
+    context 'when using an expired api key' do
+      before do
+        api_key.update(expires_at: 1.day.ago)
+      end
+
+      it 'can access public action' do
+        get '/access_test/public_action', headers: auth_headers
+
+        expect(response).to have_http_status(:success)
+      end
+
+      it 'can not access private action' do
+        get '/access_test/private_action', headers: auth_headers
+
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+
     context 'when using a valid api key' do
       it 'can access public action' do
         get '/access_test/public_action', headers: auth_headers

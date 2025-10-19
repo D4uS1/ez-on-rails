@@ -226,6 +226,58 @@ RSpec.describe 'Nested::MixedNamespaceAccessTestController' do
       end
     end
 
+    context 'when using an expired api key' do
+      before do
+        api_key.update(expires_at: 1.day.ago)
+      end
+
+      context 'when having namespace api key protected' do
+        before do
+          create(:eor_group_access,
+                 group: EzOnRails::Group.api_key_group,
+                 namespace: 'nested')
+          create(:eor_group_access,
+                 group: nested_namespace_group,
+                 namespace: 'nested/namespaced')
+        end
+
+        it 'can not access namespace action' do
+          get '/nested/mixed_namespace_access_test/some_action', headers: auth_headers
+
+          expect(response).to redirect_to(new_user_session_path)
+        end
+
+        it 'can not access nested namespace action' do
+          get '/nested/namespaced/access_test/some_action', headers: auth_headers
+
+          expect(response).to redirect_to(new_user_session_path)
+        end
+      end
+
+      context 'when having nested namespace api key protected' do
+        before do
+          create(:eor_group_access,
+                 group: namespace_group,
+                 namespace: 'nested')
+          create(:eor_group_access,
+                 group: EzOnRails::Group.api_key_group,
+                 namespace: 'nested/namespaced')
+        end
+
+        it 'can not access namespace action' do
+          get '/nested/mixed_namespace_access_test/some_action', headers: auth_headers
+
+          expect(response).to redirect_to(new_user_session_path)
+        end
+
+        it 'can not access nested namespace action' do
+          get '/nested/namespaced/access_test/some_action', headers: auth_headers
+
+          expect(response).to redirect_to(new_user_session_path)
+        end
+      end
+    end
+
     context 'when using valid api key' do
       context 'when having namespace api key protected' do
         before do

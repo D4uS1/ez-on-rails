@@ -245,6 +245,68 @@ RSpec.describe 'MixedControllerActionAccessTestController' do
       end
     end
 
+    context 'when using an expired api key' do
+      before do
+        api_key.update(expires_at: 1.day.ago)
+      end
+
+      context 'when having controller protected with api key' do
+        before do
+          create(:eor_group_access,
+                 group: EzOnRails::Group.api_key_group,
+                 namespace: nil,
+                 controller: 'mixed_controller_action_access_test')
+          create(:eor_group_access,
+                 group: action_group,
+                 namespace: nil,
+                 controller: 'mixed_controller_action_access_test',
+                 action: 'action_protected')
+        end
+
+        it 'can not access controller protected action' do
+          get '/mixed_controller_action_access_test/controller_protected',
+              headers: auth_headers
+
+          expect(response).to redirect_to(new_user_session_path)
+        end
+
+        it 'can not access action protected action' do
+          get '/mixed_controller_action_access_test/action_protected',
+              headers: auth_headers
+
+          expect(response).to redirect_to(new_user_session_path)
+        end
+      end
+
+      context 'when having action protected with api key' do
+        before do
+          create(:eor_group_access,
+                 group: controller_group,
+                 namespace: nil,
+                 controller: 'mixed_controller_action_access_test')
+          create(:eor_group_access,
+                 group: EzOnRails::Group.api_key_group,
+                 namespace: nil,
+                 controller: 'mixed_controller_action_access_test',
+                 action: 'action_protected')
+        end
+
+        it 'can not access controller protected action' do
+          get '/mixed_controller_action_access_test/controller_protected',
+              headers: auth_headers
+
+          expect(response).to redirect_to(new_user_session_path)
+        end
+
+        it 'can not access action protected action' do
+          get '/mixed_controller_action_access_test/action_protected',
+              headers: auth_headers
+
+          expect(response).to redirect_to(new_user_session_path)
+        end
+      end
+    end
+
     context 'when using valid api key' do
       context 'when having controller protected with api key' do
         before do

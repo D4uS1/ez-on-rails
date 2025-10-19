@@ -100,6 +100,18 @@ RSpec.describe 'ControllerAccessTestController' do
       end
     end
 
+    context 'when using an expired api key' do
+      before do
+        api_key.update(expires_at: 1.day.ago)
+      end
+
+      it 'can not access controller action' do
+        get '/controller_access_test/some_action', headers: auth_headers
+
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+
     context 'when using a valid api key' do
       it 'can not access controller action' do
         get '/controller_access_test/some_action', headers: auth_headers
