@@ -73,7 +73,6 @@ module EzOnRails
     # Adds the schema hash to the components hash of the swagger_helper
     # if not exists yet.
     def prepare_swagger_schemas
-      return #TODO
       return unless @resource
 
       unless File.read('spec/swagger_helper.rb').include? 'components: {'
@@ -98,8 +97,6 @@ module EzOnRails
 
     # Adds the securitySchemes part to the swagger_helper components object.
     def prepare_swagger_security_schemes
-      return #TODO
-
       return if File.read('spec/swagger_helper.rb').include? 'securitySchemes: {'
 
       inject_into_file 'spec/swagger_helper.rb',
@@ -112,8 +109,6 @@ module EzOnRails
 
     # Adds the securitySchemes for authentication to the securitySchemes object.
     def generate_swagger_security_schemes
-      return #TODO
-
       return if File.read('spec/swagger_helper.rb').include? 'access_token: {'
 
       inject_into_file 'spec/swagger_helper.rb',
@@ -145,8 +140,6 @@ module EzOnRails
     # Appends the schema for EzOnRailsRecord to the schemas of swagger_helper
     # if they do not exist yet.
     def generate_swagger_ez_on_rails_schema
-      return #TODO
-
       return unless @resource
       return if File.read('spec/swagger_helper.rb').include? 'EzOnRailsRecord'
 
@@ -186,8 +179,6 @@ module EzOnRails
     # Appends the schema for search requests to the schemas of swagger_helper
     # if they do not exist yet.
     def generate_swagger_search_schemas
-      return #TODO
-
       return unless @resource
       return if File.read('spec/swagger_helper.rb').include? 'SearchFilterComposition'
 
@@ -227,8 +218,6 @@ module EzOnRails
     # for the specified resource. If no resource is given, nothing will be generated here.
     # Adds the schemas to the swagger helper wo make it available in the api-docs.
     def generate_swagger_objects
-      return #TODO
-
       return unless @resource
       return if File.read('spec/swagger_helper.rb').include? @resource
 
@@ -322,8 +311,6 @@ end
 
     # Calls rswag to generate the swagger docs.
     def generate_api_docs
-      return #TODO
-
       rake 'rswag:specs:swaggerize'
     end
   end
