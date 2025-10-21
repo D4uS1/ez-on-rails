@@ -7,7 +7,7 @@ require_dependency '<%= namespaced_path %>/application_controller'
 # Controller class for a <%= class_name %> resource.
 class Api::<%= @resource ? class_name.pluralize : class_name %>Controller < EzOnRails::Api::<%= @resource ? 'ResourceController' : 'BaseController' %>
 <%- if @resource -%>
-  include ::<%= @resource.pluralize %>Helper
+  include <%= @resource.pluralize %>Helper
   load_and_authorize_resource class: <%= @resource %>
 
   self.model_class = <%= @resource %>

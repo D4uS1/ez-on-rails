@@ -227,8 +227,8 @@ module EzOnRails
           attr_sym = attr.to_sym
           type_sym = type.to_sym
 
-          next attrs_hash[attr_sym] = { type: type_sym, format: 'date' } if type_sym == :date
-          next attrs_hash[attr_sym] = { type: type_sym, format: 'date-time' } if type_sym == :datetime
+          next attrs_hash[attr_sym] = { type: :string, format: 'date' } if type_sym == :date
+          next attrs_hash[attr_sym] = { type: :string, format: 'date-time' } if type_sym == :datetime
           next attrs_hash[attr_sym] = { type: :number, format: 'float' } if type_sym == :float
           next attrs_hash[attr_sym] = { type: :number, format: 'float' } if type_sym == :decimal
           next attrs_hash[attr_sym] = { type: :number, format: 'double' } if type_sym == :double
@@ -297,10 +297,11 @@ module EzOnRails
     def add_restrictions_to_seed
       return unless @authenticable
 
+      group_name = @authenticable == :'api-key' ? 'api_key_group' : 'member_group'
       append_to_file 'db/seeds.rb', "
 # Restrict access to manage #{class_name.pluralize} API
-EzOnRails::GroupAccess.find_or_create_by! group: member_group, namespace: '#{ class_path.length > 0 ? (['api'] + class_path).join('/') : 'api' }', controller: '#{@resource ? plural_file_name : file_name}' do |access|
-  access.group = #{@authenticable == :'api-key' ? 'api_key_group' : 'member_group' }
+EzOnRails::GroupAccess.find_or_create_by! group: #{group_name}, namespace: '#{ class_path.length > 0 ? (['api'] + class_path).join('/') : 'api' }', controller: '#{@resource ? plural_file_name : file_name}' do |access|
+  access.group = #{group_name}
   access.namespace = '#{ class_path.length > 0 ? (['api'] + class_path).join('/') : 'api' }'
   access.controller = '#{@resource ? plural_file_name : file_name}'
 end

@@ -44,7 +44,7 @@
 
 # Update Steps
 ## From 1.1.x to 1.2.0
-1. Create migration file to generate api_keys, having the followung content
+1. Create migration file to generate api_keys, having the following content
 ```
 class CreateApiKeys < ActiveRecord::Migration[8.0]
   def change
