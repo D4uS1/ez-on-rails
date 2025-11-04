@@ -4,7 +4,7 @@ require_dependency '<%= namespaced_path %>/application_controller'
 <% end -%>
 
 <%- module_namespacing do -%>
-# Controller class for a <%= class_name %> resource.
+# Controller class for a <%= @resource %> resource.
 class Api::<%= @resource ? class_name.pluralize : class_name %>Controller < EzOnRails::Api::<%= @resource ? 'ResourceController' : 'BaseController' %>
 <%- if @resource -%>
   include <%= @resource.pluralize %>Helper
@@ -13,7 +13,7 @@ class Api::<%= @resource ? class_name.pluralize : class_name %>Controller < EzOn
   self.model_class = <%= @resource %>
 
   # Fixes that rails does not include active storage fields in the parameter wrapper
-  wrap_parameters :<%= file_name %>, include: <%= @resource %>.wrapped_parameter_names
+  wrap_parameters :<%= @resource.underscore %>, include: <%= @resource %>.wrapped_parameter_names
 
     <%- end -%>
 <% actions.each do |action| -%>
