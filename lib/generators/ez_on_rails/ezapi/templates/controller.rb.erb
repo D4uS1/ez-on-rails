@@ -11,7 +11,11 @@ class Api::<%= @resource ? class_name.pluralize : class_name %>Controller < EzOn
   load_and_authorize_resource class: <%= @resource %>
 
   self.model_class = <%= @resource %>
-<%- end -%>
+
+  # Fixes that rails does not include active storage fields in the parameter wrapper
+  wrap_parameters :<%= file_name %>, include: <%= @resource %>.wrapped_parameter_names
+
+    <%- end -%>
 <% actions.each do |action| -%>
   # GET <%= action %> action
   def <%= action %>

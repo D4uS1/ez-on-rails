@@ -98,4 +98,8 @@ securitySchemes: {
 * Removed auto permit of parameters that use the __:json__ type in the render_info
 * Added __active_storage_relation_names__ method to EzOnRails::ApplicationRecord that returns all names of active storage attachment relations
 * Added __wrapped_parameter_names__ method to EzOnRails::ApplicationRecord that can be used to get all parameters that should be wrapped using rails wrap_parameters callback in controllers, including active storage fields.
-  * This helps you to fix the issue that rails does not wrap active storage fields per default
+  * The ezapi generator adds the call for the wrapper automatically, if you want to add it to existing controllers, add the following lines
+```
+  # Fixes that rails does not include active storage fields in the parameter wrapper
+  wrap_parameters :your_record_name_underscored, include: YourModelClass.wrapped_parameter_names
+```
