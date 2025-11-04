@@ -91,3 +91,8 @@ securitySchemes: {
 }
 ...
 ```
+
+## 1.2.1
+* Added methods protected method __additional_permit_params__ to controllers to provide additional parameters that are passed to rails params.expect function
+  * This is useful for eg. json fields having object or array data that needs to be permitted
+* Removed auto permit of parameters that use the __:json__ type in the render_info

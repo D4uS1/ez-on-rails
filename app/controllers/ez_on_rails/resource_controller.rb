@@ -178,9 +178,15 @@ class EzOnRails::ResourceController < EzOnRails::ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def resource_params
-    return params.expect(resource_symbol => default_permit_params(send(permit_render_info))) if params[resource_symbol]
+    if params[resource_symbol]
+      return params.expect(
+        resource_symbol => default_permit_params(send(permit_render_info)) + additional_permit_params
+      )
+    end
 
-    params.expect(non_namespaced_resource_symbol => default_permit_params(send(permit_render_info)))
+    params.expect(
+      non_namespaced_resource_symbol => default_permit_params(send(permit_render_info)) + additional_permit_params
+    )
   end
 
   def search_params

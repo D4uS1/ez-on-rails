@@ -126,6 +126,12 @@ class EzOnRails::ApplicationController < ApplicationController
     result
   end
 
+  # Can be overriden by subclasses to provide additional parameter permits.
+  # Useful for eg. json fields that contain object or array data that needs to be permitted.
+  def additional_permit_params
+    []
+  end
+
   # Returns the permitted parameters for the search form defined by the given render info
   # hash. This hash is returned by any helper created by ez_on_rails:ezscaff.
   # It will return an array of symbols, containing the keys of the attributes defined
@@ -153,7 +159,7 @@ class EzOnRails::ApplicationController < ApplicationController
   def render_info_permit_params(render_info)
     render_info.keys +
       # needed for :attachments
-      render_info.keys.map { |key| { key.to_s.to_sym => (render_info[key][:type] == :json ? {} : []) } } +
+      render_info.keys.map { |key| { key.to_s.to_sym => [] } } +
       # needed for single references
       render_info.keys.map { |key| :"#{key}_id" } +
       # needed for single polymorphic references
