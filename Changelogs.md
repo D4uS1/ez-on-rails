@@ -96,3 +96,6 @@ securitySchemes: {
 * Added methods protected method __additional_permit_params__ to controllers to provide additional parameters that are passed to rails params.expect function
   * This is useful for eg. json fields having object or array data that needs to be permitted
 * Removed auto permit of parameters that use the __:json__ type in the render_info
+* Added __active_storage_relation_names__ method to EzOnRails::ApplicationRecord that returns all names of active storage attachment relations
+* Added __wrapped_parameter_names__ method to EzOnRails::ApplicationRecord that can be used to get all parameters that should be wrapped using rails wrap_parameters callback in controllers, including active storage fields.
+  * This helps you to fix the issue that rails does not wrap active storage fields per default
