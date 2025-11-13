@@ -12,6 +12,8 @@ AllCops:
     - tmp/**/*
     - vendor/**/*
     - config/initializers/**/* # most of the files here are auto generated, we do not want to check this
+Layout/ArgumentAlignment:
+  EnforcedStyle: with_fixed_indentation
 Layout/LineLength:
   Max: 120
   Exclude:
@@ -37,6 +39,9 @@ Metrics/CyclomaticComplexity:
   Max: 15
 Metrics/MethodLength:
   Max: 20
+  AllowedPatterns:
+    - render_info_* # render_info description methods for ez-on-rails are very large, but ez to understand
+    - dash_info_* # dash_info description methods for ez-on-rails are very large, but ez to understand
   Exclude:
     - 'spec/integration/**/*_spec.rb' # Any bug in rswag does not allow to use let for some contexts. Hence EzOnRails uses methods to define the parameters. This can exceed the method length property.
     - app/helpers/ez_on_rails/menu_structure_helper.rb # EzOnRails menu structure is defined in a method that easily exceeds the method length
@@ -84,6 +89,7 @@ RSpec/VariableName:
     - api-version # ez_on_rails api version http header
     - Accept # Accept http header
     - access-token # ez_on_rails access-token http header
+    - api-key # can be used by ez-on-rails for authentication in http headers
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact
   Exclude:
