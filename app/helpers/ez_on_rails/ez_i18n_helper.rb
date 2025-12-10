@@ -11,6 +11,8 @@ module EzOnRails::EzI18nHelper
   #         enum_name:
   #           value_key: "Translated Text"
   def human_enum_name(model_class, enum_name, value_key)
+    return '' unless value_key
+
     I18n.t("activerecord.enums.#{model_class.to_s.underscore}.#{enum_name}.#{value_key}")
   end
 end
