@@ -166,6 +166,14 @@ end
       gsub_file 'config/initializers/devise.rb',
                 "# config.default_scope = :user",
                 "config.default_scope = :user"
+
+      # Fix wrong responses after failed submits with turbo
+      gsub_file 'config/initializers/devise.rb',
+                "# config.responder.error_status = :unprocessable_entity",
+                "config.responder.error_status = :unprocessable_entity"
+      gsub_file 'config/initializers/devise.rb',
+                "# config.responder.redirect_status = :see_other",
+                "config.responder.redirect_status = :see_other"
     end
 
     # Generates the routes for devise, doorkeeper and devise_token_auth, because they will cause
