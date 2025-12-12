@@ -1,0 +1,8 @@
+# frozen_string_literal: true
+
+{
+  id: json_schema_validator_test.id,
+  test: json_schema_validator_test.test,
+  created_at: json_schema_validator_test.created_at,
+  updated_at: json_schema_validator_test.updated_at
+}

@@ -1,0 +1,9 @@
+en:
+  activerecord:
+    models:
+      json_schema_validator_test:
+        one:  "Json schema validator test"
+        other: "Json schema validator tests"
+    attributes:
+      json_schema_validator_test:
+        test: "Test"

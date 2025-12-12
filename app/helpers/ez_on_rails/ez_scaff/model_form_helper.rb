@@ -317,6 +317,12 @@ module EzOnRails::EzScaff::ModelFormHelper
     render_duration_field(form, attribute_key, attribute_render_info)
   end
 
+
+  # Renders an attribute having the type :json.
+  def render_json_model_form(form, attribute_key, attribute_render_info)
+      render_text_model_form(form, attribute_key, attribute_render_info)
+  end
+
   private
 
   # Builds a duration string normed by ISO 8601 specified by the given values.

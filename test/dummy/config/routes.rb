@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  scope '(:locale)', locale: /en|de/ do
+    resources :json_schema_validator_tests do
+      collection do
+        match 'search' => 'json_schema_validator_tests#search', via: %i[get post], as: :search
+        delete :destroy_selections
+      end
+    end
+  end
   namespace :api do
     resources :api_key_tests, except: %i[new edit] do
       collection do

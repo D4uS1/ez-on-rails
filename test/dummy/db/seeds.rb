@@ -101,3 +101,10 @@ EzOnRails::GroupAccess.find_or_create_by! group: member_group, namespace: 'api',
   access.namespace = 'api'
   access.controller = 'api_key_tests'
 end
+
+# Restrict access to manage JsonSchemaValidatorTests
+EzOnRails::GroupAccess.find_or_create_by! group: super_admin_group, controller: 'json_schema_validator_tests' do |access|
+  access.group = super_admin_group
+  access.controller = 'json_schema_validator_tests'
+end
+
