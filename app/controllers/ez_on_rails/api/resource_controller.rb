@@ -140,7 +140,7 @@ class EzOnRails::Api::ResourceController < EzOnRails::Api::BaseController
 
   # Sets the owner of the given resource to the current user.
   def owner(resource)
-    resource.owner = current_user
+    resource.owner = current_user if resource.respond_to?(:owner) && resource.owner.nil?
   end
 
   # overwrites the ability class name of cancancan to the namespaced
