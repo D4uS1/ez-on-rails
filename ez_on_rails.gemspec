@@ -51,7 +51,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'simple_form', '~> 5.3.1'
   spec.add_dependency 'slim', '~> 5.2.1'
   spec.add_dependency 'stimulus-rails', '~> 1.3.4'
-  spec.add_dependency 'turbo-rails', '~> 2.0.11'
+  spec.add_dependency 'turbo-rails', '~> 2.0.23'
   spec.add_dependency 'will_paginate', '~> 4.0.1'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
