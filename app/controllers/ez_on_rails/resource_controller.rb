@@ -221,12 +221,12 @@ class EzOnRails::ResourceController < EzOnRails::ApplicationController
     # no params available
     return unless params[param_root_key]
 
-    # no parsing necessary
-    return unless params[param_root_key].is_a?(String)
-
     # parse each json field
     json_fields.each do |json_field|
       next unless params[param_root_key][json_field]
+
+      # no parsing necessary
+      next unless params[param_root_key][json_field].is_a?(String)
 
       params[param_root_key][json_field] = JSON.parse(params[param_root_key][json_field])
     end
