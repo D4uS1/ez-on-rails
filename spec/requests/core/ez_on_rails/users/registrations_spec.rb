@@ -51,7 +51,7 @@ RSpec.describe 'Users::RegistrationsController' do
       }
 
       andrew.reload
-      expect(response).to have_http_status(:success) # this is not unprocessable_content because of devise default
+      expect(response).to have_http_status(:unprocessable_content)
       expect(andrew.encrypted_password).to eq(old_password)
     end
 

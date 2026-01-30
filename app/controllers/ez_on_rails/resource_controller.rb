@@ -15,6 +15,7 @@ class EzOnRails::ResourceController < EzOnRails::ApplicationController
   include EzOnRails::EzAjaxHelper
 
   before_action :set_resource_obj, only: %i[show edit update destroy]
+  before_action :parse_json_fields, only: %i[create update]
 
   skip_authorize_resource only: :index
 
@@ -204,6 +205,31 @@ class EzOnRails::ResourceController < EzOnRails::ApplicationController
   end
 
   protected
+
+  # Called before the create and update action is processed.
+  # Parses the content of json fields to be real json instead of being passed as text to the database.
+  # This is necessary because we just use a textfield for json fields in forms.
+  # The textfields contents are passed as strings to the controller, hence we need to change it to be json.
+  def parse_json_fields
+    render_info_hash = send(permit_render_info)
+    json_fields = send(permit_render_info).keys.select { |attr| render_info_hash[attr][:type] == :json }
+
+    # find the parameter root
+    param_root_key = resource_symbol
+    param_root_key = non_namespaced_resource_symbol unless params[param_root_key]
+
+    # no params available
+    return unless params[param_root_key]
+
+    # parse each json field
+    json_fields.each do |json_field|
+      next unless params[param_root_key][json_field]
+
+      params[param_root_key][json_field] = JSON.parse(params[param_root_key][json_field])
+    end
+  rescue JSON::ParserError
+    Rails.logger.debug { "JSON parse error for one of the json fields: #{json_fields}" }
+  end
 
   # Returns the path the user is redirected to after a resource has been successfully created.
   def after_create_path

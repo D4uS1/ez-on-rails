@@ -29,7 +29,7 @@ module EzOnRails::FullRansackSearchableConcern
     end
 
     # Needed since version 4 of ransack for whitelisting.
-    def ransackable_scopes(auth_object = nil)
+    def ransackable_scopes(_auth_object = nil)
       []
     end
   end

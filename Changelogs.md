@@ -103,3 +103,8 @@ securitySchemes: {
   # Fixes that rails does not include active storage fields in the parameter wrapper
   wrap_parameters :your_record_name_underscored, include: YourModelClass.wrapped_parameter_names
 ```
+
+## 1.2.2
+* Added lightweight support for json fields in administration views
+  * JSON fields are now rendered as simple text areas, the contents are parsed to json content before being saved
+  * Note that you must provide the protected method __additional_permit_params__ to whitelist the json objects or arrays attributes

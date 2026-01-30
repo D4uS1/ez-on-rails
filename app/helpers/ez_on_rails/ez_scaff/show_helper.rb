@@ -174,6 +174,12 @@ module EzOnRails::EzScaff::ShowHelper
     end.join(', ')
   end
 
+  # Renders an attribute having the type :json.
+  # Expects the attribute to have the ActiveSupport::Duration type.
+  def render_json_show(obj, attribute_key, _attribute_render_info)
+    obj.send(attribute_key).to_json
+  end
+
   private
 
   # Renders a thumbnail of a given image stored in the active storage.

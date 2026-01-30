@@ -22,7 +22,7 @@ class JsonSchemaValidator < ActiveModel::EachValidator
     schema = File.read(schema_path)
 
     # if value is a string containing a ruby hash, deserialize it
-    value = parse_json(value)
+    value = parse_json(record, attribute, value)
 
     # validate the schema
     schemer = JSONSchemer.schema(schema)
@@ -43,11 +43,13 @@ class JsonSchemaValidator < ActiveModel::EachValidator
   # If the value is a string, it will be converted to json.
   # If the string seems to be a serialized ruby hash, it will be converted
   # to json.
-  def parse_json(value)
+  def parse_json(record, attribute, value)
     return value if value.blank?
 
     return value unless value.is_a?(String)
 
     JSON.parse(value)
+  rescue JSON::ParserError
+    record.errors.add(attribute, I18n.t(:'ez_on_rails.validators.json_schema.json_parse_error'), value:)
   end
 end

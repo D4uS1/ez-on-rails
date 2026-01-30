@@ -1,0 +1,5 @@
+en:
+  ez_on_rails:
+    validators:
+      json_schema:
+        json_parse_error: Invalid format. Please provide valid json.

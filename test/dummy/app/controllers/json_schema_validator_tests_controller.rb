@@ -17,4 +17,12 @@ class JsonSchemaValidatorTestsController < EzOnRails::ResourceController
                controller: '/json_schema_validator_tests',
                action: 'index'
   end
+
+  # Overwrites the ez-on-rails method to provide additional permit params.
+  # Used to add the json field content here.
+  def additional_permit_params
+    [
+      test: [:not_nullable_integer, :nullable_string ],
+    ]
+  end
 end
