@@ -1,6 +1,6 @@
 - fields_per_row ||= EzOnRails::EzScaff::SearchFormHelper::FIELDS_PER_ROW
-- print_details_tag = false unless defined?(print_details_tag)
-- print_search_all_field = false unless defined?(print_search_all_field)
+- print_details_tag ||= false
+- print_search_all_field ||= false
 
 - if print_details_tag
   = enclose_with_details_if(proc { true },
