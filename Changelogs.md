@@ -108,3 +108,7 @@ securitySchemes: {
 * Added lightweight support for json fields in administration views
   * JSON fields are now rendered as simple text areas, the contents are parsed to json content before being saved
   * Note that you must provide the protected method __additional_permit_params__ to whitelist the json objects or arrays attributes
+
+## 1.3.0
+* Updated to rails 8.1.2
+* Updated to Ruby 4.0.1

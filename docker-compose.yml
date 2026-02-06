@@ -1,8 +1,8 @@
 services:
   db:
-    image: postgres:13
+    image: postgres
     volumes:
-      - ./tmp/db:/var/lib/postgresql/data
+      - ./tmp/db:/var/lib/postgresql/docker
     environment:
       - POSTGRES_PASSWORD=freshd
     ports:

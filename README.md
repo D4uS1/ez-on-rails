@@ -16,9 +16,9 @@ This gem was not yet tested on already existing systems.
 ### 1. Insert the gem to the Gemfile
 ```
 gem 'ez_on_rails',
-    '>=1.2.2',
+    '>=1.3.0',
     git: 'https://github.com/D4uS1/ez-on-rails',
-    branch: 'v1.2.2'
+    branch: 'v1.3.0'
 ```
 
 Version branches start with "v" followed by the gems version number, e.g. "v1.0.0".

@@ -8,15 +8,19 @@ RSpec.describe EzOnRails::ApplicationRecord do
   context 'when using other methods' do
     context 'when using search_keys' do
       it 'returns all attributes' do
-        expect(BearerTokenAccessTest.search_keys).to eq(%i[id test owner_id created_at updated_at])
+        keys = BearerTokenAccessTest.search_keys
+
+        expect(keys.length).to eq(5)
+        expect(keys).to include(*%i[id test owner_id created_at updated_at])
       end
     end
 
     context 'when using wrapped_parameter_names' do
       it 'returns all attributes and active storage relation names' do
-        expect(BearerTokenAccessTest.wrapped_parameter_names).to eq(
-          %i[id test owner_id created_at updated_at file images]
-        )
+        wrapped_names = BearerTokenAccessTest.wrapped_parameter_names
+
+        expect(wrapped_names.length).to eq(7)
+        expect(wrapped_names).to include(*%i[id test owner_id created_at updated_at file images])
       end
     end
 
