@@ -1,7 +1,7 @@
 # Omakase Ruby styling for Rails
 # inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 
-require:
+plugins:
   - rubocop-rspec
   - rubocop-rails
 AllCops:
@@ -52,6 +52,9 @@ Metrics/AbcSize:
   Enabled: false
 Metrics/ClassLength:
   Max: 200
+Naming/PredicateMethod:
+  AllowedMethods:
+    - add_group # returns a boolean if the process is successfull, since this adds the group and does not only return if it is possible, this is ok
 Rails/EnvironmentVariableAccess:
   Enabled: false # docker needs sometimes environment variables
 Rails/Exit:

@@ -78,7 +78,7 @@ module EzOnRails::EzNavHelper
   def render_main_menu_item(menu_item)
     link_to(menu_item[:label],
             {
-              controller: "#{menu_item[:namespace] ? "/#{menu_item[:namespace]}" : ''}/#{menu_item[:controller]}",
+              controller: "#{"/#{menu_item[:namespace]}" if menu_item[:namespace]}/#{menu_item[:controller]}",
               action: menu_item[:action]
             },
             class: 'nav-link',

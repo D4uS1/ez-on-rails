@@ -281,7 +281,7 @@ module EzOnRails::EzScaff::ShowHelper
     # Split the elements if nessecary
     detailed_elements = []
     detailed_elements = elements[max_count..] if max_count && elements.length > max_count
-    elements = elements[0..max_count - 1] if max_count && elements.length > max_count
+    elements = elements[0..(max_count - 1)] if max_count && elements.length > max_count
 
     # Render the element parts
     elements_html = safe_join(elements, separator)

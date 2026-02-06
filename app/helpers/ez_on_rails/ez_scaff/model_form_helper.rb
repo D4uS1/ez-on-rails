@@ -22,7 +22,7 @@ module EzOnRails::EzScaff::ModelFormHelper
   # attribute_key and the specified attribute_render_info. The specified block is yielded
   # into the container.
   def render_attribute_container_model_form(_form, _attribute_key, attribute_render_info, &)
-    tag.div(class: "mb-4 #{attribute_render_info[:type] == :nested_form ? 'pb-4' : ''}", &)
+    tag.div(class: "mb-4 #{'pb-4' if attribute_render_info[:type] == :nested_form}", &)
   end
 
   # Method for rendering a attribute whose method to the correspoinding attribute
@@ -332,15 +332,15 @@ module EzOnRails::EzScaff::ModelFormHelper
   # Builds a duration string normed by ISO 8601 specified by the given values.
   def build_iso_duration_string(years: 0, months: 0, days: 0, hours: 0, minutes: 0, seconds: 0)
     res = 'P'
-    res = "#{res}#{years.positive? ? "#{years}Y" : ''}"
-    res = "#{res}#{months.positive? ? "#{months}M" : ''}"
-    res = "#{res}#{days.positive? ? "#{days}D" : ''}"
+    res = "#{res}#{"#{years}Y" if years.positive?}"
+    res = "#{res}#{"#{months}M" if months.positive?}"
+    res = "#{res}#{"#{days}D" if days.positive?}"
     return res if hours.zero? && minutes.zero? && seconds.zero?
 
     res = "#{res}T"
-    res = "#{res}#{hours.positive? ? "#{hours}H" : ''}"
-    res = "#{res}#{minutes.positive? ? "#{minutes}M" : ''}"
-    "#{res}#{seconds.positive? ? "#{seconds}S" : ''}"
+    res = "#{res}#{"#{hours}H" if hours.positive?}"
+    res = "#{res}#{"#{minutes}M" if minutes.positive?}"
+    "#{res}#{"#{seconds}S" if seconds.positive?}"
   end
 
   # Returns the default html_options for some attribute in the model_form

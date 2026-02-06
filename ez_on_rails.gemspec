@@ -16,10 +16,10 @@ Gem::Specification.new do |spec|
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the "allowed_push_host"
   # to allow pushing to a single host or delete this section to allow pushing to any host.
   spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com'"
-
   spec.metadata['homepage_uri'] = spec.homepage
   spec.metadata['source_code_uri'] = 'https://github.com/D4uS1/ez-on-rails'
   spec.metadata['changelog_uri'] = 'https://github.com/D4uS1/ez-on-rails/blob/main/Changelogs.md'
+  spec.metadata['rubygems_mfa_required'] = 'true'
 
   spec.files = Dir.chdir(File.expand_path(__dir__)) do
     Dir['{app,config,db,lib,spec}/**/*', 'LICENSE', 'Rakefile', 'README.md']
@@ -38,7 +38,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'loaf', '~> 0.10.0'
   spec.add_dependency 'nilify_blanks', '~> 1.4.0'
   spec.add_dependency 'omniauth-oauth2', '~> 1.9.0'
-  spec.add_dependency 'ostruct', '~> 0.6.3' # needed because it is not standard lib anymore, otherwise booting the engine will fail
+  spec.add_dependency 'ostruct', '~> 0.6.3' # is not standard lib anymore, otherwise booting the engine will fail
   spec.add_dependency 'propshaft', '~> 1.3.1'
   spec.add_dependency 'rack-cors', '~> 3.0.0'
   spec.add_dependency 'rails', '~> 8.1.2'
@@ -54,14 +54,4 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'stimulus-rails', '~> 1.3.4'
   spec.add_dependency 'turbo-rails', '~> 2.0.23'
   spec.add_dependency 'will_paginate', '~> 4.0.1'
-
-  # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
-  # to allow pushing to a single host or delete this section to allow pushing to any host.
-  if spec.respond_to?(:metadata)
-    spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com'"
-  else
-    raise 'RubyGems 2.0 or newer is required to protect against ' \
-          'public gem pushes.'
-  end
-  spec.metadata['rubygems_mfa_required'] = 'true'
 end

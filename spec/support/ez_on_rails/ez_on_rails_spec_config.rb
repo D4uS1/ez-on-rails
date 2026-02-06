@@ -19,7 +19,7 @@ RSpec.configure do |config|
   # initialy remove all old permissions and load new ones.
   config.before :suite do
     # first remove all data
-    puts 'EzOnRails: Removing old permission data from test database.'
+
     EzOnRails::OwnershipInfo.delete_all
     EzOnRails::ResourceReadAccess.delete_all
     EzOnRails::ResourceWriteAccess.delete_all
@@ -30,7 +30,7 @@ RSpec.configure do |config|
     User.delete_all
 
     # load new data
-    puts 'EzOnRails: Loading initial data from seeds.'
+
     Rails.application.load_seed
   end
 

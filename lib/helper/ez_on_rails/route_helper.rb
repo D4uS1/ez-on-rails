@@ -17,7 +17,7 @@ module EzOnRails::RouteHelper
   # Returns the first namespace of the route, if exists. Returns nil otherwise.
   def get_first_namespace(route)
     if route.defaults[:controller]
-      return route.defaults[:controller].split('/').length > 1 ? (route.defaults[:controller].split('/')[0]) : nil
+      return route.defaults[:controller].split('/').length > 1 ? route.defaults[:controller].split('/')[0] : nil
     end
 
     nil
@@ -43,7 +43,7 @@ module EzOnRails::RouteHelper
     routes = []
 
     Rails.application.routes.routes.each do |route|
-      next unless route_is_in_namespace route, namespace
+      next unless route_is_in_namespace? route, namespace
 
       # If the controller has an index action, choose this one
       index_route = get_index_route_entry route.defaults[:controller]
@@ -70,7 +70,7 @@ module EzOnRails::RouteHelper
   end
 
   # Returns if the specified route is in the specified full namespace.
-  def route_is_in_namespace(route, namespace)
+  def route_is_in_namespace?(route, namespace)
     namespaces = namespace.split('/')
     route_namespaces = get_namespaces route
 

@@ -94,7 +94,7 @@ class EzOnRails::ResourceController < EzOnRails::ApplicationController
       if @resource_obj.errors[:base].empty?
         flash[:danger] = t(:'ez_on_rails.not_destroyable', resource_obj: model_class.model_name.human)
       end
-      redirect_back fallback_location: root_path
+      redirect_back_or_to(root_path)
     end
   end
 
