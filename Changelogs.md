@@ -42,7 +42,28 @@
 ## 1.2.0
 * Added possibility to create api keys to grant access to restricted resources without the need of user accounts
 
-# Update Steps
+## 1.2.1
+* Added methods protected method __additional_permit_params__ to controllers to provide additional parameters that are passed to rails params.expect function
+  * This is useful for eg. json fields having object or array data that needs to be permitted
+* Removed auto permit of parameters that use the __:json__ type in the render_info
+* Added __active_storage_relation_names__ method to EzOnRails::ApplicationRecord that returns all names of active storage attachment relations
+* Added __wrapped_parameter_names__ method to EzOnRails::ApplicationRecord that can be used to get all parameters that should be wrapped using rails wrap_parameters callback in controllers, including active storage fields.
+  * The ezapi generator adds the call for the wrapper automatically, if you want to add it to existing controllers, add the following lines
+```
+  # Fixes that rails does not include active storage fields in the parameter wrapper
+  wrap_parameters :your_record_name_underscored, include: YourModelClass.wrapped_parameter_names
+```
+
+## 1.2.2
+* Added lightweight support for json fields in administration views
+  * JSON fields are now rendered as simple text areas, the contents are parsed to json content before being saved
+  * Note that you must provide the protected method __additional_permit_params__ to whitelist the json objects or arrays attributes
+
+## 1.3.0
+* Updated to rails 8.1.2
+* Updated to Ruby 4.0.1
+
+# Special Update Steps
 ## From 1.1.x to 1.2.0
 1. Create migration file to generate api_keys, having the following content
 ```
@@ -92,23 +113,3 @@ securitySchemes: {
 ...
 ```
 
-## 1.2.1
-* Added methods protected method __additional_permit_params__ to controllers to provide additional parameters that are passed to rails params.expect function
-  * This is useful for eg. json fields having object or array data that needs to be permitted
-* Removed auto permit of parameters that use the __:json__ type in the render_info
-* Added __active_storage_relation_names__ method to EzOnRails::ApplicationRecord that returns all names of active storage attachment relations
-* Added __wrapped_parameter_names__ method to EzOnRails::ApplicationRecord that can be used to get all parameters that should be wrapped using rails wrap_parameters callback in controllers, including active storage fields.
-  * The ezapi generator adds the call for the wrapper automatically, if you want to add it to existing controllers, add the following lines
-```
-  # Fixes that rails does not include active storage fields in the parameter wrapper
-  wrap_parameters :your_record_name_underscored, include: YourModelClass.wrapped_parameter_names
-```
-
-## 1.2.2
-* Added lightweight support for json fields in administration views
-  * JSON fields are now rendered as simple text areas, the contents are parsed to json content before being saved
-  * Note that you must provide the protected method __additional_permit_params__ to whitelist the json objects or arrays attributes
-
-## 1.3.0
-* Updated to rails 8.1.2
-* Updated to Ruby 4.0.1
