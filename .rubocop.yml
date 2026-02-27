@@ -10,7 +10,7 @@ AllCops:
     - 'lib/generators/ez_on_rails/**/*/*_generator.rb' # not interested in checking the generators
     - bin/*
     - db/migrate/**/*
-    - db/schema.rb
+    - db/*schema.rb
     - test/**/*
     - tmp/**/*
     - vendor/**/*

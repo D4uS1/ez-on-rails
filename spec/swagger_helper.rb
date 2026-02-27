@@ -48,7 +48,7 @@ RSpec.configure do |config|
             properties: {
               path: { type: :string },
               signed_id: { type: :string },
-              filename: { type: :integer }
+              filename: { type: :string }
             }
           },
           UserProfile: {
