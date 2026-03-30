@@ -1,3 +1,6 @@
+# !!!! IMPORTANT NOTE !!!!
+This repository was moved to [Codeberg](https://codeberg.org/D4uS1/ez-on-rails). The github repository is not maintained anymore.
+
 # ez-on-rails
 
 EzOnRails provides a rails backend that is ez to use with all your needs to build fast applications having a frontend and a backend.
